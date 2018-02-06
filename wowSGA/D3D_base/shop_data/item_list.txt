@@ -1,0 +1,74 @@
+*ITEM_LIST {
+	*ITEM {
+	*ITEM_NAME "롱 소드"
+	*ITEM_NUMBER 0
+	*ITEM_WHERE "EQUIT"
+	*ITEM_TYPE "WEAPON"
+	*ITEM_SUBTEXT "긴 검이다."
+	*ITEM_IMAGE "inv-sword_53.PNG" 
+		*ITEM_OPTION {
+			*ATK 100
+			*DEF 0
+			*ATK_SPEED 0.5
+			*PRICE 20
+			*UPGRADE 0
+		}
+		*STORE_OPTION {
+			*SELL_STORE_NUM 0
+		}
+	}
+	*ITEM {
+	*ITEM_NAME "다른 소드~"
+	*ITEM_NUMBER 1
+	*ITEM_WHERE "EQUIT"
+	*ITEM_TYPE "WEAPON"
+	*ITEM_SUBTEXT "긴 검이다."
+	*ITEM_IMAGE "inv-sword_53.PNG" 
+		*ITEM_OPTION {
+			*ATK 100
+			*DEF 0
+			*ATK_SPEED 0.5
+			*PRICE 20
+			*UPGRADE 0
+		}
+		*STORE_OPTION {
+			*SELL_STORE_NUM 0
+		}
+	}
+	*ITEM {
+	*ITEM_NAME "롱 소드"
+	*ITEM_NUMBER 2
+	*ITEM_WHERE "EQUIT"
+	*ITEM_TYPE "WEAPON"
+	*ITEM_SUBTEXT "긴 검이다."
+	*ITEM_IMAGE "inv-sword_53.PNG" 
+		*ITEM_OPTION {
+			*ATK 100
+			*DEF 0
+			*ATK_SPEED 0.5
+			*PRICE 20
+			*UPGRADE 0
+		}
+		*STORE_OPTION {
+			*SELL_STORE_NUM 0
+		}
+	}
+	*ITEM {
+	*ITEM_NAME "롱 소드"
+	*ITEM_NUMBER 3
+	*ITEM_WHERE "EQUIT"
+	*ITEM_TYPE "WEAPON"
+	*ITEM_SUBTEXT "긴 검이다."
+	*ITEM_IMAGE "inv-sword_53.PNG" 
+		*ITEM_OPTION {
+			*ATK 100
+			*DEF 0
+			*ATK_SPEED 0.5
+			*PRICE 20
+			*UPGRADE 0
+		}
+		*STORE_OPTION {
+			*SELL_STORE_NUM 0
+		}
+	}
+}
