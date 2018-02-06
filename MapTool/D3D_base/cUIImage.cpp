@@ -26,6 +26,8 @@ void cUIImage::SetTexture(IN char * szFullPath)
 
 void cUIImage::Render(LPD3DXSPRITE pSprite)
 {
+
+
 	pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 	pSprite->SetTransform(&m_matWorld);
 	/*RECT rc;*/

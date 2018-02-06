@@ -56,7 +56,6 @@ void cUIObject::Update()
 
 	for each (auto child in m_vecChild)
 	{
-		child->Sethidden(m_isHidden);
 		child->Update();
 	}
 }

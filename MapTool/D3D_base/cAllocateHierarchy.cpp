@@ -3,6 +3,8 @@
 
 
 cAllocateHierarchy::cAllocateHierarchy()
+	:m_vMin(0,0,0),
+	m_vMax(0,0,0)
 {
 }
 
@@ -65,6 +67,25 @@ STDMETHODIMP cAllocateHierarchy::CreateMeshContainer(
 		pMeshData->pMesh->GetFVF(),
 		g_pD3DDevice,
 		&pBoneMesh->pOrigMesh);
+
+	if (pMeshData && pMeshData->pMesh)
+	{
+		D3DXVECTOR3 vMin(0, 0, 0);
+		D3DXVECTOR3 vMax(0, 0, 0);
+
+		LPVOID pV = NULL;
+		pMeshData->pMesh->LockVertexBuffer(0, &pV);
+
+		D3DXComputeBoundingBox((D3DXVECTOR3*)pV,
+			pMeshData->pMesh->GetNumVertices(),
+			D3DXGetFVFVertexSize(pMeshData->pMesh->GetFVF()),
+			&vMin, &vMax);
+
+		D3DXVec3Minimize(&m_vMin, &m_vMin, &vMin);
+		D3DXVec3Maximize(&m_vMax, &m_vMax, &vMax);
+
+		pMeshData->pMesh->UnlockVertexBuffer();
+	}
 
 	DWORD dwNumBones = pSkinInfo->GetNumBones();
 	pBoneMesh->pBoneOffsetMatrixs = new D3DXMATRIX[dwNumBones];

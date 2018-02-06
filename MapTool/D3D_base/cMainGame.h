@@ -1,6 +1,7 @@
 #pragma once
 #include "cGameManager.h"
 #include "cMainLoading.h"
+
 class cCamera;
 class cGrid;
 class cMaptool;
@@ -24,6 +25,7 @@ private:
 	cFrustum* frustum;
 	cSkinnedMesh* m;
 	LPD3DXFRAME f;
+	
 
 public:
 	cMainGame();

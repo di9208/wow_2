@@ -1,5 +1,6 @@
 #pragma once
 
+
 struct ST_BONE_MESH : public D3DXMESHCONTAINER
 {
 	std::vector<D3DMATERIAL9>		vecMtl;
@@ -16,6 +17,8 @@ class cAllocateHierarchy : public ID3DXAllocateHierarchy
 protected:
 	SYNTHESIZE(std::string, m_sFolder, Folder);
 
+	SYNTHESIZE(D3DXVECTOR3, m_vMin, Min);
+	SYNTHESIZE(D3DXVECTOR3, m_vMax, Max);
 public:
 	cAllocateHierarchy();
 	virtual ~cAllocateHierarchy();

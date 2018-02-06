@@ -4,6 +4,10 @@
 
 cSkyBox::cSkyBox()
 {
+	for (int i = 0; i < 6; i++)
+	{
+		m_skytex[i] = NULL;
+	}
 }
 
 
@@ -16,16 +20,8 @@ cSkyBox::~cSkyBox()
 void cSkyBox::Setup()
 {
 	cCubePTN::Setup();
-
-	m_skytex[0] = g_pTextureManager->GetTexture("Map/front.png");
-	m_skytex[1] = g_pTextureManager->GetTexture("Map/back.png");
-	m_skytex[2] = g_pTextureManager->GetTexture("Map/left.png");
-	m_skytex[3] = g_pTextureManager->GetTexture("Map/right.png");
-	m_skytex[4] = g_pTextureManager->GetTexture("Map/top.png");
-	m_skytex[5] = g_pTextureManager->GetTexture("Map/bottom.png");
-
-	SetTexture();
-
+	//SetTexture("SkyBox/Sky1/sky1.png");
+	SetUV();
 	g_pD3DDevice->CreateVertexBuffer(m_vecVertex.size() * sizeof(ST_PTN_VERTEX), 0, ST_PTN_VERTEX::FVF, D3DPOOL_MANAGED, &m_vb, nullptr);
 
 	void * v;
@@ -36,7 +32,12 @@ void cSkyBox::Setup()
 	m_vb->Unlock();
 }
 
-void cSkyBox::SetTexture()
+void cSkyBox::Update()
+{
+
+}
+
+void cSkyBox::SetUV()
 {
 	//front
 	m_vecVertex[0].t = D3DXVECTOR2(1, 1);
@@ -88,6 +89,38 @@ void cSkyBox::SetTexture()
 
 }
 
+void cSkyBox::SetTexture(std::string t)
+{
+	if (t == "")
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			m_skytex[i] = NULL;
+		}
+		return;
+	}
+	t.pop_back();
+	t.pop_back();
+	t.pop_back();
+	t.pop_back();
+
+	m_8Way.front = t + std::string("front.png");
+	m_8Way.back = t + std::string("back.png");
+	m_8Way.left = t + std::string("left.png");
+	m_8Way.right = t + std::string("right.png");
+	m_8Way.top = t + std::string("top.png");
+	m_8Way.bottom = t + std::string("bottom.png");
+
+	m_skytex[0] = g_pTextureManager->GetTexture(m_8Way.front);
+	m_skytex[1] = g_pTextureManager->GetTexture(m_8Way.back);
+	m_skytex[2] = g_pTextureManager->GetTexture(m_8Way.left);
+	m_skytex[3] = g_pTextureManager->GetTexture(m_8Way.right);
+	m_skytex[4] = g_pTextureManager->GetTexture(m_8Way.top);
+	m_skytex[5] = g_pTextureManager->GetTexture(m_8Way.bottom);
+}
+
+
+
 void cSkyBox::Render(D3DXVECTOR3 camera)
 {
 
@@ -95,11 +128,13 @@ void cSkyBox::Render(D3DXVECTOR3 camera)
 	D3DXVECTOR3 a;
 
 	D3DXMatrixTranslation(&matW, camera.x, camera.y, camera.z);
-	D3DXMatrixScaling(&matS, 200, 200, 200);
+	D3DXMatrixScaling(&matS, 100, 100, 100);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &(matS*matW));
 	g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, false);
+	
 	g_pD3DDevice->SetFVF(ST_PTN_VERTEX::FVF);
 	g_pD3DDevice->SetStreamSource(0, m_vb, 0, sizeof(ST_PTN_VERTEX));
 	
@@ -108,8 +143,14 @@ void cSkyBox::Render(D3DXVECTOR3 camera)
 		g_pD3DDevice->SetTexture(0, m_skytex[i]);
 		g_pD3DDevice->DrawPrimitive(D3DPT_TRIANGLELIST, i * 6, 2);
 	}
-	//cCubePTN::Render();
+
 	g_pD3DDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	g_pD3DDevice->SetRenderState(D3DRS_ZENABLE, true);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 
+	g_pD3DDevice->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+	g_pD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+	g_pD3DDevice->SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+	g_pD3DDevice->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_CLAMP);
+	g_pD3DDevice->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);
 }

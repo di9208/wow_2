@@ -3,6 +3,7 @@
 #include <bitset>
 
 #define g_pKeyManager keyManager::GetInstance()
+
 #define KEYMAX 256
 
 class keyManager 

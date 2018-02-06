@@ -198,9 +198,6 @@
     <ClInclude Include="cMaptool.h">
       <Filter>mapTool</Filter>
     </ClInclude>
-    <ClInclude Include="cGameManager.h">
-      <Filter>gameManager</Filter>
-    </ClInclude>
     <ClInclude Include="cUnit.h">
       <Filter>unit</Filter>
     </ClInclude>
@@ -237,12 +234,6 @@
     <ClInclude Include="cSkinnedMeshManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="loading.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cMainLoading.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cSceneManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -250,6 +241,21 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cSkyBox.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkyBox1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cMapToolObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cGameManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cMainLoading.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="loading.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -365,9 +371,6 @@
     <ClCompile Include="cMaptool.cpp">
       <Filter>mapTool</Filter>
     </ClCompile>
-    <ClCompile Include="cGameManager.cpp">
-      <Filter>gameManager</Filter>
-    </ClCompile>
     <ClCompile Include="cUnit.cpp">
       <Filter>unit</Filter>
     </ClCompile>
@@ -404,12 +407,6 @@
     <ClCompile Include="cSkinnedMeshManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="loading.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cMainLoading.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cSceneManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -417,6 +414,21 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cSkyBox.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkyBox1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cMapToolObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cGameManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cMainLoading.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="loading.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

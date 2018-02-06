@@ -8,6 +8,8 @@
 #include "cCube.h"
 #include "cSkinnedMesh.h"
 #include "cSkyBox.h"
+#include "cSkyBox1.h"
+
 
 cTesting::cTesting()
 	: m_pCamera(NULL)
@@ -23,7 +25,7 @@ cTesting::~cTesting()
 	SAFE_DELETE(m_pGrid);
 	SAFE_DELETE(m_maptool);
 	SAFE_RELEASE(m_pSprite);
-	SAFE_DELETE(m_sky);
+
 }
 
 void cTesting::SetLight()
@@ -63,8 +65,10 @@ void cTesting::Setup()
 
 	frustum = new cFrustum;
 
+
 	m_sky = new cSkyBox;
 	m_sky->Setup();
+
 }
 
 void cTesting::Destroy()
@@ -84,6 +88,7 @@ void cTesting::Update()
 
 	if (frustum)
 		frustum->SetupVertex();
+
 }
 
 void cTesting::Render()
@@ -96,18 +101,22 @@ void cTesting::Render()
 
 	g_pD3DDevice->BeginScene();
 
-	if (m_sky)
-		m_sky->Render(m_pCamera->GetEye());
 
-	if (m_pGrid)
-	m_pGrid->Render();
+	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
-	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	/*if (g_pKeyManager->isToggleKey('Q'))
+		m_sky->Render(m_pCamera->GetEye());*/
+
+
+	/*if (m_pGrid)
+		m_pGrid->Render();*/
+	
 	if (m_maptool)
 	{
-	m_maptool->Draw(frustum);
-	m_maptool->Render(m_pSprite);
+		m_maptool->Draw(frustum);
+		m_maptool->Render(m_pSprite, m_pCamera->GetEye());
 	}
+	
 	
 	//D3DXMATRIXA16 matW, matS;
 	//D3DXMatrixScaling(&matS, 10.0f, 10.0f, 10.0f);

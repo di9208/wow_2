@@ -2,19 +2,27 @@
 #include "cUIButton.h"
 #include "cUIText.h"
 #include "cRay.h"
-#include "ZQuadTree.h"
+#include "cSkinnedMesh.h"
+#include "cObjLoader.h"
+#include "cGroup.h"
+#include "cMapToolObject.h"
 
 class cFrustum;
 class cUIObject;
 class cQuadTree;
 class cMapTool_UI;
+class cSkyBox;
 
 class cMaptool
 {
 private:
 	cUIObject * Heightmap;
 	cQuadTree * m_QuadTree;
-
+	cSkyBox* m_SkyBox;
+	std::vector<cMapToolObject*> m_vecOB;
+	cMapToolObject* m_player;
+	bool m_isPlayerExist;
+	bool m_playerTranslation;
 private:
 	int _col ; //Column
 	int _row ; //Row
@@ -35,14 +43,21 @@ private:
 	std::vector<int> vecindex;				//Clone Index 
 	int m_polygon;							//Current Culled Polygon
 
-	LPDIRECT3DTEXTURE9 m_tex;
+	LPDIRECT3DTEXTURE9 m_tex1;
+	std::string m_stex;
 	D3DMATERIAL9 m_mt;
+	
+
+	float m_LandControl;
 private:
 	std::vector<int> vecCulIndex;			//No More using This Vector
 
 private:
 	cMapTool_UI * m_UI;
 
+private:
+	std::vector<cGroup*> vecGroup;
+	cObjLoader* Tree;
 public:
 	cMaptool();
 	~cMaptool();
@@ -52,11 +67,12 @@ public:
 	void SetupQuad(); //Setup QuadTree
 	void SetupCircle(); 
 	void SetupControl();
+	void SetTexture(std::string t);
 
 	void Update();
 	void UpdateCircle(); //Update Circle Height
 	
-	void Render(LPD3DXSPRITE pSprite);
+	void Render(LPD3DXSPRITE pSprite, D3DXVECTOR3 camera);
 	void RenderMap(); //Tilemap Render
 	void RenderCircle(); 
 
@@ -70,6 +86,9 @@ public:
 	void SetMaterial();
 	void SAVE();
 	void LOAD();
-
+	void LandScaping();
+	void SkyBoxT();
+	void Terrain();
+	void Object();
 };
 

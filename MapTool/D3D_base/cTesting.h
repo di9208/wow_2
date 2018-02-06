@@ -18,7 +18,8 @@ private:
 	cGrid*		m_pGrid;
 	cMaptool*	m_maptool;
 	cCube* m_cube;
-	cSkyBox* m_sky;
+	cSkyBox * m_sky;
+
 	// sprite
 	LPD3DXSPRITE				m_pSprite;
 

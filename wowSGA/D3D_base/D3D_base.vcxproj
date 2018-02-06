@@ -175,6 +175,7 @@
     <ClInclude Include="cGroup.h" />
     <ClInclude Include="cHeightMap.h" />
     <ClInclude Include="cMainGame.h" />
+    <ClInclude Include="cMainLoading.h" />
     <ClInclude Include="cMap.h" />
     <ClInclude Include="cMaptool.h" />
     <ClInclude Include="cMtlTex.h" />
@@ -192,6 +193,8 @@
     <ClInclude Include="cPlayer_Enemy.h" />
     <ClInclude Include="cQuadTree.h" />
     <ClInclude Include="cRay.h" />
+    <ClInclude Include="cScene1.h" />
+    <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkinnedMeshManager.h" />
     <ClInclude Include="cStage1.h" />
@@ -210,6 +213,7 @@
     <ClInclude Include="item_class.h" />
     <ClInclude Include="item_loader.h" />
     <ClInclude Include="keyManager.h" />
+    <ClInclude Include="loading.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="shop_class.h" />
     <ClInclude Include="shop_TEST_CLASS.h" />
@@ -251,6 +255,7 @@
     <ClCompile Include="cGroup.cpp" />
     <ClCompile Include="cHeightMap.cpp" />
     <ClCompile Include="cMainGame.cpp" />
+    <ClCompile Include="cMainLoading.cpp" />
     <ClCompile Include="cMap.cpp" />
     <ClCompile Include="cMaptool.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
@@ -268,6 +273,8 @@
     <ClCompile Include="cPlayer_Enemy.cpp" />
     <ClCompile Include="cQuadTree.cpp" />
     <ClCompile Include="cRay.cpp" />
+    <ClCompile Include="cScene1.cpp" />
+    <ClCompile Include="cSceneManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkinnedMeshManager.cpp" />
     <ClCompile Include="cStage1.cpp" />
@@ -286,6 +293,7 @@
     <ClCompile Include="item_class.cpp" />
     <ClCompile Include="item_loader.cpp" />
     <ClCompile Include="keyManager.cpp" />
+    <ClCompile Include="loading.cpp" />
     <ClCompile Include="shop_class.cpp" />
     <ClCompile Include="shop_TEST_CLASS.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -1,0 +1,108 @@
+#
+# mtl file for blacksmith.obj obj file
+#
+
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_blacksmithwindow01.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_blacksmithbrick01.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_blacksmithwood01.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_furnace hole.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_gypsyhandle01.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_blacksmithbrick03.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_blacksmithmetal01.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_ogremoundstone01.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_blacksmithwood05.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_furnaceend01.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_blacksmithdoor01.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_blacksmith roof.png
+newmtl world/azeroth/elwynn/buildings/blacksmith/blacksmith.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd blacksmith_blacksmithwood04.png

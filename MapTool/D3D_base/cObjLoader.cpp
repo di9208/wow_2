@@ -16,6 +16,7 @@ cObjLoader::~cObjLoader()
 void cObjLoader::Load(OUT std::vector<cGroup*>& vecGroup,
 	IN char * szFolder, IN char * szFile)
 {
+	bool isTex = false;
 	std::vector<ST_PTN_VERTEX> vecVertex;
 	std::vector<D3DXVECTOR3> vecV;
 	std::vector<D3DXVECTOR2> vecVT;
@@ -69,9 +70,10 @@ void cObjLoader::Load(OUT std::vector<cGroup*>& vecGroup,
 			}
 			else if (szTemp[1] == 't')
 			{
+				isTex = true;
 				float u, v;
 				sscanf_s(szTemp, "%*s %f %f %*f", &u, &v);
-				vecVT.push_back(D3DXVECTOR2(u, v));
+				vecVT.push_back(D3DXVECTOR2(u, 1.0f-v));
 			}
 			else if (szTemp[1] == 'n')
 			{
@@ -89,20 +91,40 @@ void cObjLoader::Load(OUT std::vector<cGroup*>& vecGroup,
 		}
 		else if (szTemp[0] == 'f')
 		{
-			int nIndex[3][3];
-			sscanf_s(szTemp, "%*s %d/%d/%d %d/%d/%d %d/%d/%d",
-				&nIndex[0][0], &nIndex[0][1], &nIndex[0][2],
-				&nIndex[1][0], &nIndex[1][1], &nIndex[1][2],
-				&nIndex[2][0], &nIndex[2][1], &nIndex[2][2]);
-
-			for (int i = 0; i < 3; i++)
+			if (isTex)
 			{
-				ST_PTN_VERTEX v;
-				v.p = vecV[nIndex[i][0] - 1];	// 정점
-				v.t = vecVT[nIndex[i][1] - 1];	// 텍스처
-				v.n = vecVN[nIndex[i][2] - 1];	// 노말
+				int nIndex[3][3];
+				sscanf_s(szTemp, "%*s %d/%d/%d %d/%d/%d %d/%d/%d",
+					&nIndex[0][0], &nIndex[0][1], &nIndex[0][2],
+					&nIndex[1][0], &nIndex[1][1], &nIndex[1][2],
+					&nIndex[2][0], &nIndex[2][1], &nIndex[2][2]);
 
-				vecVertex.push_back(v);
+				for (int i = 0; i < 3; i++)
+				{
+					ST_PTN_VERTEX v;
+					v.p = vecV[nIndex[i][0] - 1];	// 정점
+					v.t = vecVT[nIndex[i][1] - 1];	// 텍스처
+					v.n = vecVN[nIndex[i][2] - 1];	// 노말
+
+					vecVertex.push_back(v);
+				}
+			}
+			else
+			{
+				int nIndex[3][2];
+				sscanf_s(szTemp, "%*s %d//%d %d//%d %d//%d",
+					&nIndex[0][0], &nIndex[0][1],
+					&nIndex[1][0], &nIndex[1][1],
+					&nIndex[2][0], &nIndex[2][1]);
+
+				for (int i = 0; i < 3; i++)
+				{
+					ST_PTN_VERTEX v;
+					v.p = vecV[nIndex[i][0] - 1];	// 정점
+					v.n = vecVN[nIndex[i][1] - 1];	// 노말
+
+					vecVertex.push_back(v);
+				}
 			}
 		}
 	}
