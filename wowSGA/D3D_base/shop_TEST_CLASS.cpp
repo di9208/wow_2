@@ -136,6 +136,7 @@ void shop_TEST_CLASS::Update()
 
 void shop_TEST_CLASS::Render()
 {
+	
 	if (_npc)
 		_npc->render();
 

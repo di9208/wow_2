@@ -49,6 +49,7 @@ void cPlayer_Enemy::Render()
 {
 	if (m_Player)
 		m_Player->Render();
+
 	if (m_EnemyControl)
 		m_EnemyControl->Render();
 	//if (m_Stage1)

@@ -88,6 +88,7 @@ void cScene1::Render()
 	if (m_Player_Enemy)
 		m_Player_Enemy->Render();
 
+
 	if (m_shop_TEST_CLASS)
 		m_shop_TEST_CLASS->Render();
 
