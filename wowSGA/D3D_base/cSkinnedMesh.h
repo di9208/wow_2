@@ -11,7 +11,7 @@ protected:
 	UINT							m_AnimNum;
 	typedef std::map< std::string, LPD3DXANIMATIONSET >			MAP_ANIMSET;
 	typedef std::vector< LPD3DXANIMATIONSET >					VEC_ANIMSET;
-	MAP_ANIMSET						m_mapAnimSet;
+	SYNTHESIZE(MAP_ANIMSET, m_mapAnimSet, mapAnimSet);
 	VEC_ANIMSET						m_vecAnimSet;
 	LPD3DXANIMATIONSET				m_pNowPlayAnimationSet;		// Current Animation set
 	D3DXTRACK_DESC					m_Track_Desc_0;				// Current Track
@@ -29,6 +29,21 @@ protected:
 
 	SYNTHESIZE(D3DXVECTOR3, m_vMin, Min);
 	SYNTHESIZE(D3DXVECTOR3, m_vMax, Max);
+
+private:
+	//거미
+	float	fx, fy, fz;
+	int		m_changeTime;
+	bool	bi;
+
+	//움직여보자
+	SYNTHESIZE(float, m_fRotY, fRotY);
+	SYNTHESIZE(D3DXVECTOR3, m_vPos, Position);
+	SYNTHESIZE(D3DXVECTOR3, m_vDir, Direction);
+	SYNTHESIZE(D3DXVECTOR3, m_vPlayerPos, PlayerPos);
+
+	SYNTHESIZE_REF(D3DXMATRIXA16, m_wrold, wrold);
+
 public:
 	cSkinnedMesh();
 	~cSkinnedMesh();
@@ -62,5 +77,7 @@ public:
 	ST_BONE* GetFindBONE(std::string boneName);
 	cSkinnedMesh* GetFindSkinedMesh(std::string boneName);
 	void updateSetting(LPD3DXFRAME pFrame, D3DXMATRIXA16* m_Word);
+
+	void addMonsterPos(D3DXMATRIXA16* m_Word, float x, float y, float z, float size);
 };
 

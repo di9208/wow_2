@@ -21,6 +21,14 @@ cSkinnedMesh::~cSkinnedMesh()
 	SAFE_RELEASE(m_pAnimationController);
 }
 
+void cSkinnedMesh::addMonsterPos(D3DXMATRIXA16* m_Word, float x, float y, float z, float size){
+	fx = fy = fz = size;
+	m_vPos.x = x;
+	m_vPos.y = y;
+	m_vPos.z = z;
+	D3DXMatrixIdentity(m_Word);
+}
+
 void cSkinnedMesh::Setup(IN char * szFolder, IN char * szFile)
 {
 	std::string sFullPath(szFolder);
@@ -96,34 +104,34 @@ void cSkinnedMesh::Update()
 
 void cSkinnedMesh::Update(float timeDelta)
 {
-		LPD3DXANIMATIONSET aaa;
-		m_pAnimationController->GetTrackDesc(0, &m_Track_Desc_0);
-		m_pAnimationController->GetTrackAnimationSet(0, &aaa);
-		m_AnimationPlayFactor = m_Track_Desc_0.Position / aaa->GetPeriod();
+	LPD3DXANIMATIONSET aaa;
+	m_pAnimationController->GetTrackDesc(0, &m_Track_Desc_0);
+	m_pAnimationController->GetTrackAnimationSet(0, &aaa);
+	m_AnimationPlayFactor = m_Track_Desc_0.Position / aaa->GetPeriod();
 
-		if (m_AnimationPlayFactor >= 0.9f)
-		{
-			if (this->m_bLoop == false) {
+	if (m_AnimationPlayFactor >= 0.9f)
+	{
+		if (this->m_bLoop == false) {
 
-				if (this->m_pPrevPlayAnimationSet != NULL)
-				{
-					m_fCrossFadeTime = m_fOutCrossFadeTime;
-					m_fLeftCrossFadeTime = m_fOutCrossFadeTime;
-					m_bLoop = true;
-					m_bCheck = true;
-					SetAnimation(aaa);
-					this->m_pPrevPlayAnimationSet = NULL;
+			if (this->m_pPrevPlayAnimationSet != NULL)
+			{
+				m_fCrossFadeTime = m_fOutCrossFadeTime;
+				m_fLeftCrossFadeTime = m_fOutCrossFadeTime;
+				m_bLoop = true;
+				m_bCheck = true;
+				SetAnimation(aaa);
+				this->m_pPrevPlayAnimationSet = NULL;
 
-				}
-				else
-				{
-					m_bCheck = true;
-					this->Stop();
-				}
+			}
+			else
+			{
+				m_bCheck = true;
+				this->Stop();
 			}
 		}
-		m_AnimationPlayFactor = m_AnimationPlayFactor - (int)m_AnimationPlayFactor;
-	
+	}
+	m_AnimationPlayFactor = m_AnimationPlayFactor - (int)m_AnimationPlayFactor;
+
 
 	if (m_bPlay)
 	{

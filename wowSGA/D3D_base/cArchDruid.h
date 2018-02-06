@@ -1,13 +1,13 @@
 #pragma once
 #include "cUnit.h"
 
-class cEnemySkinnedMesh;
+class cSkinnedMesh;
 
 class cArchDruid : public cUnit
 {
 	struct EnemySkinnedMesh
 	{
-		cEnemySkinnedMesh* m;
+		cSkinnedMesh* m;
 		MONSTER_STATUS	ENUM_MONSTER;
 		MONSTER_KIND	ENUM_MONSTER_KIND;
 
@@ -20,9 +20,11 @@ class cArchDruid : public cUnit
 		float		range;
 		float		MaxRange;
 		bool		death;
-		bool		bi;
 		int			time;
 		int			deathTime;
+		int			attackTime;
+		int			termCount;
+		int			RunCount;
 
 		//몬스터 인식용
 		D3DXVECTOR3		m_vPos;
@@ -52,7 +54,7 @@ class cArchDruid : public cUnit
 private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
 	D3DXMATRIXA16	m_matWorld;
-	
+	EnemySkinnedMesh Monster;
 
 	//몬스터 스탯
 	int			nXAlpha;
