@@ -11,6 +11,7 @@ private:
 public:
 	LPDIRECT3DTEXTURE9 GetTexture(std::string sFullPath);
 	LPDIRECT3DTEXTURE9 GetTexture(std::string sFullPath, D3DXIMAGE_INFO* pImageInfo);
+	LPDIRECT3DTEXTURE9 GetTexture(std::string KeyName, std::string sFullPath, D3DXIMAGE_INFO* pImageInfo);
 
 	void Destroy();
 };

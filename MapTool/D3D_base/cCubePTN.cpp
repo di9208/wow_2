@@ -38,7 +38,7 @@ void cCubePTN::Setup()
 	vecIndex.push_back(0);
 	vecIndex.push_back(2);
 	vecIndex.push_back(3);
-
+	//
 	vecIndex.push_back(4);
 	vecIndex.push_back(6);
 	vecIndex.push_back(5);
@@ -46,7 +46,7 @@ void cCubePTN::Setup()
 	vecIndex.push_back(4);
 	vecIndex.push_back(7);
 	vecIndex.push_back(6);
-
+	//
 	vecIndex.push_back(4);
 	vecIndex.push_back(5);
 	vecIndex.push_back(1);
@@ -54,7 +54,7 @@ void cCubePTN::Setup()
 	vecIndex.push_back(4);
 	vecIndex.push_back(1);
 	vecIndex.push_back(0);
-
+	//
 	vecIndex.push_back(3);
 	vecIndex.push_back(2);
 	vecIndex.push_back(6);
@@ -62,6 +62,7 @@ void cCubePTN::Setup()
 	vecIndex.push_back(3);
 	vecIndex.push_back(6);
 	vecIndex.push_back(7);
+	//
 
 	vecIndex.push_back(1);
 	vecIndex.push_back(5);
@@ -71,6 +72,7 @@ void cCubePTN::Setup()
 	vecIndex.push_back(6);
 	vecIndex.push_back(2);
 
+	//
 	vecIndex.push_back(4);
 	vecIndex.push_back(0);
 	vecIndex.push_back(3);

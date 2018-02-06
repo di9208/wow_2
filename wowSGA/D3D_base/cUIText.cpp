@@ -29,7 +29,7 @@ void cUIText::SetupText(std::string write, ST_SIZE write_size, cFontManager::eFo
 
 void cUIText::Render(LPD3DXSPRITE pSprite)
 {
-	if (!m_isHidden) return;
+	if (m_isHidden) return;
 
 	LPD3DXFONT pFont = g_pFontManager->GetFont(m_eFontType);
 

@@ -3,14 +3,21 @@
 #include "cUIButton.h"
 #include "cQuadTree.h"
 #include "cMapTool_UI.h"
+#include "cSkyBox.h"
+
 
 cMaptool::cMaptool()
 	:Heightmap(nullptr)
 	, m_radius(1.0f)
 	, m_QuadTree(nullptr)
-	,_col(129)
-	,_row(129)
+	, _col(5)
+	, _row(5)
+	, m_LandControl(0)
+	, m_tex1(nullptr)
+	, m_playerTranslation(false)
+	, m_isPlayerExist(false)
 {
+	
 }
 
 
@@ -19,7 +26,7 @@ cMaptool::~cMaptool()
 	
 	Heightmap->Destroy();
 	SAFE_DELETE(m_QuadTree);
-	SAFE_RELEASE(m_tex);
+	SAFE_RELEASE(m_tex1);
 	SAFE_RELEASE(m_vb);
 	SAFE_RELEASE(m_ib);
 	SAFE_DELETE(m_UI);
@@ -35,6 +42,9 @@ void cMaptool::Setup()
 	m_QuadTree = new cQuadTree(_col, _row);
 	m_UI = new cMapTool_UI;
 	m_UI->Setup();
+	m_SkyBox = new cSkyBox;
+	m_SkyBox->Setup();
+	
 	Setupmap();
 	SetupQuad();
 	SetupCircle();
@@ -56,7 +66,7 @@ void cMaptool::Setupmap()
 			Mapvertex[i] = v;
 		}
 	
-	m_tex = g_pTextureManager->GetTexture("Map/selectblend.png");
+	
 
 	g_pD3DDevice->CreateVertexBuffer(_col*_row * sizeof(ST_PTN_VERTEX), 0, ST_PTN_VERTEX::FVF, D3DPOOL_DEFAULT, &m_vb, 0);
 	
@@ -65,9 +75,8 @@ void cMaptool::Setupmap()
 	memcpy(vp, Mapvertex,
 		_col*_row * sizeof(ST_PTN_VERTEX));
 	m_vb->Unlock();
-	
-	g_pD3DDevice->CreateIndexBuffer((_col - 1)* (_row - 1) * 2 * sizeof(ST_INDEX), 0, D3DFMT_INDEX32, D3DPOOL_DEFAULT, &m_ib, 0);
 
+	g_pD3DDevice->CreateIndexBuffer((_col - 1)* (_row - 1) * 2 * sizeof(ST_INDEX), 0, D3DFMT_INDEX32, D3DPOOL_DEFAULT, &m_ib, 0);
 
 }
 
@@ -96,6 +105,17 @@ void cMaptool::SetupCircle()
 void cMaptool::SetupControl()
 {
 	
+}
+
+void cMaptool::SetTexture(std::string t)
+{
+	if (t == "")
+	{
+		m_tex1 = NULL;
+		return;
+	}
+	m_tex1 = g_pTextureManager->GetTexture(t);
+	return;
 }
 
 bool cMaptool::GetCircleHeight(float x, float &y, float z)
@@ -194,39 +214,51 @@ void cMaptool::Update()
 	
 	r = cRay::RayAtWorldSpace(p.x, p.y);
 	
+	if (m_UI->Getupthow() || m_UI->Getdownthow() || m_UI->Getflat()||m_playerTranslation)
+	{
 		for (int i = 0; i < vecindex.size(); i += 3)
 		{
-			
+
 			if (r.IsPicked(Mapvertex[vecindex[i]].p, Mapvertex[vecindex[i + 1]].p, Mapvertex[vecindex[i + 2]].p, d1))
 			{
-				if (g_pKeyManager->isStayKeyDown(VK_RBUTTON))
+				if (!m_playerTranslation)
 				{
-			
-				for (int j = 0; j < vecindex.size(); j++)
-				{
-					D3DXVECTOR3 v1 = Mapvertex[vecindex[j]].p;
-					D3DXVECTOR3 v2 = d1;
-					//v1.y = 0;
-					//v2.y = 0;
-					float a = D3DXVec3Length(&(v1 - v2));
-
-					if (a <= m_radius)
+					if (g_pKeyManager->isStayKeyDown(VK_RBUTTON))
 					{
-						Mapvertex[vecindex[j]].p.y += 0.05f;
+
+						for (int j = 0; j < vecindex.size(); j++)
+						{
+							D3DXVECTOR3 v1 = Mapvertex[vecindex[j]].p;
+							D3DXVECTOR3 v2 = d1;
+							//v1.y = 0;
+							//v2.y = 0;
+							float a = D3DXVec3Length(&(v1 - v2));
+
+							if (a <= m_radius)
+							{
+								if (m_UI->Getflat())
+								{
+									Mapvertex[vecindex[j]].p.y = 0;
+								}
+								else
+									Mapvertex[vecindex[j]].p.y += m_LandControl;
+							}
+						}
+						SetNormal();
+						void* vp;
+						m_vb->Lock(0, _col*_row * sizeof(ST_PTN_VERTEX), (void**)&vp, 0);
+						memcpy(vp, Mapvertex,
+							_col*_row * sizeof(ST_PTN_VERTEX));
+						m_vb->Unlock();
+
+						break;
 					}
 				}
-				SetNormal();
-				void* vp;
-				m_vb->Lock(0, _col*_row * sizeof(ST_PTN_VERTEX), (void**)&vp, 0);
-				memcpy(vp, Mapvertex,
-					_col*_row * sizeof(ST_PTN_VERTEX));
-				m_vb->Unlock();
-
-				break;
 			}
 		}
-	}
 
+		UpdateCircle();
+	}
 	if (g_pKeyManager->isOnceKeyDown(VK_ADD))
 	{
 		m_radius += 0.1f;
@@ -236,10 +268,14 @@ void cMaptool::Update()
 		m_radius -= 0.1f;
 	}
 
-	UpdateCircle();
+	
 	m_UI->Update();
 	SAVE();
 	LOAD();
+	LandScaping();
+	SkyBoxT();
+	Terrain();
+	Object();
 }
 
 void cMaptool::UpdateCircle()
@@ -263,13 +299,40 @@ void cMaptool::UpdateCircle()
 void cMaptool::RenderMap()
 {
 	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetMaterial(&m_mt);
 	g_pD3DDevice->SetFVF(ST_PTN_VERTEX::FVF);
 	g_pD3DDevice->SetStreamSource(0, m_vb, 0, sizeof(ST_PTN_VERTEX));
 	g_pD3DDevice->SetIndices(m_ib);
-	g_pD3DDevice->SetTexture(0, m_tex);
+	g_pD3DDevice->SetTexture(0, m_tex1);
 	g_pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, (_col*_row), 0, m_polygon);
+	
+	if (g_pKeyManager->isOnceKeyDown('M') && m_isPlayerExist)
+	{
+		if (!m_playerTranslation)
+		{
+			m_playerTranslation = true;
+			return;
+		}
+		if (m_playerTranslation)
+		{
+			m_playerTranslation = false;
+			return;
+		}
+	}
+	if (m_playerTranslation && m_isPlayerExist)
+	{
+		
+		D3DXMATRIXA16 matT;
+		D3DXMatrixTranslation(&matT, d1.x, d1.y, d1.z);
+		m_player->Gettt() = matT;
+	}
+	if (m_isPlayerExist)
+	{
+		m_player->Render();
+	}
+
+
 
 }
 void cMaptool::RenderCircle()
@@ -280,12 +343,27 @@ void cMaptool::RenderCircle()
 		&ve[0],
 		sizeof(ST_PC_VERTEX));
 }
-void cMaptool::Render(LPD3DXSPRITE pSprite)
+void cMaptool::Render(LPD3DXSPRITE pSprite,D3DXVECTOR3 camera)
 {
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	m_SkyBox->Render(camera);
+	D3DXMATRIXA16	matWorld;
+	D3DXMatrixIdentity(&matWorld);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	RenderMap();
-	RenderCircle();
+	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	
+	
+	if (m_UI->Getupthow() || m_UI->Getdownthow() || m_UI->Getflat())
+		RenderCircle();
+
 	m_UI->Render(pSprite);
+	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	D3DXMATRIXA16 matS, matT;
+	D3DXMatrixTranslation(&matT, -20, 0, 0);
+	D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
+	matWorld = matS * matT;
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+
 }
 
 
@@ -571,17 +649,19 @@ void cMaptool::SAVE()
 		memset(&ope, 0, sizeof(OPENFILENAME));
 		ope.lStructSize = sizeof(OPENFILENAME);
 		ope.hwndOwner = GetConsoleWindow();
-		ope.lpstrFilter = TEXT("All Files(*.*)\0*.*\0");
+		ope.lpstrFilter = TEXT("TEXT Files(*.txt)\0*.txt\0");
 		ope.lpstrFile = str;
 		ope.nMaxFile = 1024;
-		//ope.lpstrDefExt = TEXT("txt");
+		ope.lpstrDefExt = TEXT("txt");
 		GetSaveFileName(&ope);
 		std::string strings = std::string(ope.lpstrFile);
+		
 		if (strings == "")
 		{
 			m_UI->Setsave(false);
 			return;
 		}
+
 		FILE* fp;
 		fp = fopen(strings.c_str(), "w");
 
@@ -597,8 +677,20 @@ void cMaptool::SAVE()
 		//fprintf(fp, "%s \n", "t");
 		for (int i = 0; i < _col*_row; i++)
 		fprintf(fp, "%f %f\n", Mapvertex[i].t.x, Mapvertex[i].t.y);
+
+		///char str[1024];
+		//std::string asd = std::string("asaa");
+		fprintf(fp, "%s\n", m_SkyBox->Get8Way().front.c_str());
+		fprintf(fp, "%s\n", m_SkyBox->Get8Way().back.c_str());
+		fprintf(fp, "%s\n", m_SkyBox->Get8Way().left.c_str());
+		fprintf(fp, "%s\n", m_SkyBox->Get8Way().right.c_str());
+		fprintf(fp, "%s\n", m_SkyBox->Get8Way().top.c_str());
+		fprintf(fp, "%s\n", m_SkyBox->Get8Way().bottom.c_str());
+		fprintf(fp, "%s\n", m_stex.c_str());
+
 		fclose(fp);
 		m_UI->Setsave(false);
+		
 	}
 }
 
@@ -640,7 +732,30 @@ void cMaptool::LOAD()
 		{
 			fscanf(fp, "%f %f\n", &Mapvertex[i].t.x, &Mapvertex[i].t.y);
 		}
+		std::string tex;
 
+		char astr[1024];
+		fscanf(fp, "%s\n", astr);
+		tex = std::string(astr);
+		m_SkyBox->setTex(g_pTextureManager->GetTexture(tex), 0);
+		fscanf(fp, "%s\n", astr);
+		tex = std::string(astr);
+		m_SkyBox->setTex(g_pTextureManager->GetTexture(tex), 1);
+		fscanf(fp, "%s\n", astr);
+		tex = std::string(astr);
+		m_SkyBox->setTex(g_pTextureManager->GetTexture(tex), 2);
+		fscanf(fp, "%s\n", astr);
+		tex = std::string(astr);
+		m_SkyBox->setTex(g_pTextureManager->GetTexture(tex), 3);
+		fscanf(fp, "%s\n", astr);
+		tex = std::string(astr);
+		m_SkyBox->setTex(g_pTextureManager->GetTexture(tex), 4);
+		fscanf(fp, "%s\n", astr);
+		tex = std::string(astr);
+		m_SkyBox->setTex(g_pTextureManager->GetTexture(tex), 5);
+		fscanf(fp, "%s\n", astr);
+		tex = std::string(astr);
+		SetTexture(tex);
 		fclose(fp);
 
 		void* vp;
@@ -650,5 +765,92 @@ void cMaptool::LOAD()
 		m_vb->Unlock();
 		m_UI->Setload(false);
 	}
+}
+
+void cMaptool::LandScaping()
+{
+	if (m_UI->Getdownthow())
+	{
+		m_LandControl = -0.05f;
+	}
+	if (m_UI->Getupthow())
+	{
+		m_LandControl = 0.05f;
+	}
+	if (m_UI->Getflat())
+	{
+		m_LandControl = 0;
+	}
+}
+
+void cMaptool::SkyBoxT()
+{
+	if (m_UI->Getskybox())
+	{
+		TCHAR str[1024] = TEXT("");
+		OPENFILENAME ope;
+		memset(&ope, 0, sizeof(OPENFILENAME));
+		ope.lStructSize = sizeof(OPENFILENAME);
+		ope.hwndOwner = g_hWnd;
+		ope.lpstrFilter = TEXT("All Files(*.*)\0*.*\0");
+		ope.lpstrFile = str;
+		ope.nMaxFile = 1024;
+		//ope.lpstrDefExt = TEXT("txt");
+		GetOpenFileName(&ope);
+	
+		std::string strings = std::string(ope.lpstrFile);
+
+		m_SkyBox->SetTexture(strings);
+
+		//delete str;
+		m_UI->Setskybox(false);
+	}
+}
+
+void cMaptool::Terrain()
+{
+	if (m_UI->Getterrain())
+	{
+		TCHAR str[1024] = TEXT("");
+		OPENFILENAME ope;
+		memset(&ope, 0, sizeof(OPENFILENAME));
+		ope.lStructSize = sizeof(OPENFILENAME);
+		ope.hwndOwner = GetConsoleWindow();
+		ope.lpstrFilter = TEXT("All Files(*.*)\0*.*\0");
+		ope.lpstrFile = str;
+		ope.nMaxFile = 1024;
+		//ope.lpstrDefExt = TEXT("txt");
+		GetOpenFileName(&ope);
+		m_stex = std::string(str);
+
+		this->SetTexture(m_stex);
+
+		m_UI->Setterrain(false);
+	}
+}
+
+void cMaptool::Object()
+{
+	if (m_UI->Getobject())
+	{
+		if (g_pKeyManager->isOnceKeyDown('P'))
+		{
+			if(!m_isPlayerExist)
+				m_player = new cMapToolObject;
+
+			m_isPlayerExist = true;
+			m_playerTranslation = true;
+			m_player->Setup();
+			D3DXMATRIXA16 matT,matS,matR, matW;
+			D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+			D3DXMatrixScaling(&matS, 0.05f, 0.05f, 0.05f);
+			D3DXMatrixTranslation(&matT, 0, 0, 0);
+			matW = matS * matR*matT;
+			m_player->Getmm() = matW;
+			m_UI->Setobject(false);
+		}
+
+	}
+
 }
 

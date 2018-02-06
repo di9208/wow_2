@@ -165,6 +165,7 @@ void shop_class::rebuy(IN int nums, OUT float & money, OUT item_class* buyitem)
 void shop_class::setting_UI_frame()
 {
 	Shop_UI = new cUIObject;
+	Shop_UI->Sethidden(true);
 
 	//image
 
@@ -205,7 +206,7 @@ void shop_class::setting_UI_frame()
 
 	cUIImage* cui_I08;
 	cui_I08 = new cUIImage;
-	cui_I08->SetTexture("shop_data/TemporaryPortrait-Male-Goblin.PNG");
+	cui_I08->SetTexture("shop_data/TEMPORARYPORTRAIT-MALE-TAUREN.PNG");
 	cui_I08->SetPos(D3DXVECTOR3(12, 15, 0));
 	cui_I08->SetScal(D3DXVECTOR3(0.8, 0.8, 0));
 
@@ -265,7 +266,7 @@ void shop_class::setting_UI_frame()
 
 	cUIText* cui_T01;
 	cui_T01 = new cUIText;
-	cui_T01->SetupText("고블린 상점", ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
+	cui_T01->SetupText("타우렌 상점", ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
 	cui_T01->SetPos(D3DXVECTOR3(145, 17, 0));
 
 	cUIText* cui_T02;

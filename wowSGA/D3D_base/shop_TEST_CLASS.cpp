@@ -9,11 +9,13 @@
 #include "cUIText.h"
 #include "wordManager.h"
 #include "cNpc.h"
+#include "inventory.h"
 
 shop_TEST_CLASS::shop_TEST_CLASS()
 	: _shops(NULL)
 	, WM_MANAGER(NULL)
 	, _npc(NULL)
+	, _invens(NULL)
 {
 	Pt.x = Pt.y = 0;
 	cursor_text = false;
@@ -33,6 +35,7 @@ shop_TEST_CLASS::~shop_TEST_CLASS()
 	shop_inven_UI.clear();
 	SAFE_DELETE(WM_MANAGER);
 	SAFE_DELETE(_npc);
+	SAFE_DELETE(_invens);
 }
 
 void shop_TEST_CLASS::Setup()
@@ -45,14 +48,11 @@ void shop_TEST_CLASS::Setup()
 	_shops = new shop_class;
 	_shops->Setup();
 
+	_invens = new inventory;
+	_invens->Setup();
+
 	WM_MANAGER = new wordManager;
 	WM_MANAGER->SetFont();
-
-	cUIImage* _UIinventory;
-	_UIinventory = new cUIImage;
-	_UIinventory->SetPos(D3DXVECTOR3(1000, 100, 0));
-	_UIinventory->SetTexture("shop_data/UI-BackpackBackground.PNG");
-	_inventory = _UIinventory;
 
 	cUIImage* _UImouse;
 	_UImouse = new cUIImage;
@@ -79,10 +79,10 @@ void shop_TEST_CLASS::Update()
 	if (_npc)
 		_npc->update();
 
-
 	if (_npc->GetM_info().bIsPicked)
 	{
-		_shops->GetSHOP()->Sethidden(true);
+		_shops->GetSHOP()->Sethidden(false);
+		_invens->GetINVEN()->Sethidden(false);
 	}
 
 	if (g_pKeyManager->isOnceKeyDown('M'))
@@ -131,7 +131,7 @@ void shop_TEST_CLASS::Update()
 
 	_mouse->Update();
 	_shops->update();
-	_inventory->Update();
+	_invens->Update();
 }
 
 void shop_TEST_CLASS::Render()
@@ -142,8 +142,8 @@ void shop_TEST_CLASS::Render()
 
 	UI_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
-	_inventory->Render(UI_sprite);
 	_shops->render(UI_sprite);
+	_invens->Render(UI_sprite);
 
 	if (!cursor_text)
 	{
@@ -165,7 +165,7 @@ void  shop_TEST_CLASS::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 	{
 	case WM_SETCURSOR:
 		SetCursor(NULL);
-		ShowCursor(false);
+		ShowCursor(true);
 		break;
 	}
 }

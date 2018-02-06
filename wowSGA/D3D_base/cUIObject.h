@@ -4,7 +4,7 @@
 class cUIObject :public cObject
 {
 protected:
-	std::vector<cUIObject*>		m_vecChild;
+	SYNTHESIZE_REF(std::vector<cUIObject*>, m_vecChild, Child);
 	D3DXMATRIXA16				m_matWorld;
 
 	SYNTHESIZE(D3DXVECTOR3, m_vPos, Pos);

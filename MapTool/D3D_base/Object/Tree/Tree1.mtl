@@ -1,0 +1,52 @@
+#
+# mtl file for Tree1.obj obj file
+#
+
+newmtl world/azeroth/duskwood/passivedoodads/trees/duskwoodspookytree01.m2_Geoset_000_Lum
+illum 2
+Kd 0.000000 0.000000 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd Tree1_duskwoodeyes01.png
+newmtl world/azeroth/duskwood/passivedoodads/trees/duskwoodspookytree01.m2_Geoset_000_Lum
+illum 2
+Kd 0.000000 0.000000 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd Tree1_duskwoodeyes01.png
+newmtl world/azeroth/duskwood/passivedoodads/trees/duskwoodspookytree01.m2_Geoset_000_Dbl
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd Tree1_duskwoodspookytree01_webs.png
+newmtl world/azeroth/duskwood/passivedoodads/trees/duskwoodspookytree01.m2_Geoset_000_Lum
+illum 2
+Kd 0.000000 0.000000 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd Tree1_duskwoodeyes01.png
+newmtl world/azeroth/duskwood/passivedoodads/trees/duskwoodspookytree01.m2_Geoset_000_Dbl
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd Tree1_duskwoodspookytree01_branch.png
+newmtl world/azeroth/duskwood/passivedoodads/trees/duskwoodspookytree01.m2_Geoset_000
+illum 2
+Kd 1.000000 1.000000 1.000000
+Ka 0.250000 0.250000 0.250000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ns 0.000000
+map_Kd Tree1_duskwoodspookytree01_trunk.png

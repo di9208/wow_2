@@ -4,6 +4,7 @@ class item_class;
 class cUIObject;
 class wordManager;
 class cNpc;
+class inventory;
 
 class shop_TEST_CLASS
 {
@@ -16,11 +17,10 @@ class shop_TEST_CLASS
 
 private:
 	shop_class* _shops;
+	inventory* _invens;
 
 	cUIObject* _UIob;
 	cUIObject* _mouse;
-
-	cUIObject* _inventory;
 
 	cNpc* _npc;
 

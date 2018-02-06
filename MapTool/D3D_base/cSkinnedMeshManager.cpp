@@ -17,7 +17,6 @@ void cSkinnedMeshManager::Setup(std::string  Name, IN char * szFolder, IN char *
 	if (m_mapSkinnedMesh.find(Name) == m_mapSkinnedMesh.end())
 	{
 		m_mapSkinnedMesh[Name] = new cSkinnedMesh();
-		
 		m_mapSkinnedMesh[Name]->Setup(szFolder, szFile);
 
 	}

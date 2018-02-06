@@ -30,6 +30,22 @@ void cUIButton::SetTexture(IN char * szUp, IN char * szOver, IN char * szDown)
 	m_stSize.nHeight = stImageInfo.Height;
 }
 
+void cUIButton::SetTexture(IN std::string keyname, IN char * szUp, IN char * szOver, IN char * szDown)
+{
+	D3DXIMAGE_INFO	stImageInfo;
+	std::string sUp = std::string(szUp);
+	std::string sOver = std::string(szOver);
+	std::string sDown = std::string(szDown);
+	std::string sKeyup = keyname + std::string("up");
+	std::string sKeyover = keyname + std::string("over");
+	std::string sKeydown = keyname + std::string("down");
+	m_pTextures[BTN_UP] = g_pTextureManager->GetTexture(sKeyup, sUp, &stImageInfo);
+	m_pTextures[BTN_OVER] = g_pTextureManager->GetTexture(sKeyover, sOver, &stImageInfo);
+	m_pTextures[BTN_DOWN] = g_pTextureManager->GetTexture(sKeydown, sDown, &stImageInfo);
+	m_stSize.nWidth = stImageInfo.Width;
+	m_stSize.nHeight = stImageInfo.Height;
+}
+
 void cUIButton::Update()
 {
 	if (m_isHidden) return;
@@ -51,6 +67,7 @@ void cUIButton::Update()
 			if (m_eButtonState == BTN_OVER)
 			{
 				m_eButtonState = BTN_DOWN;
+				m_isclick = true;
 			}
 		}
 		else
@@ -58,7 +75,9 @@ void cUIButton::Update()
 			if (m_eButtonState == BTN_DOWN)
 			{
 				if (m_pDelegate)
+				{
 					m_pDelegate->OnClick(this);
+				}
 			}
 			m_eButtonState = BTN_OVER;
 		}
@@ -66,6 +85,7 @@ void cUIButton::Update()
 	else
 	{
 		m_eButtonState = BTN_UP;
+		m_isclick = false;
 	}
 
 	cUIObject::Update();

@@ -159,3 +159,4 @@ struct ST_BONE : public D3DXFRAME
 #include "cFontManager.h"
 #include "keyManager.h"
 #include "cSkinnedMeshManager.h"
+#include "cSceneManager.h"
