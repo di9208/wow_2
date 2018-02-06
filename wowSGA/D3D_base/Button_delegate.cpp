@@ -9,6 +9,6 @@ void Button_delegate::OnClick(cUIButton * pSender)
 	}
 	else if (pSender->GetTag() == 1)
 	{
-		pSender->GetParent()->Sethidden(false);
+		pSender->GetParent()->Sethidden(true);
 	}
 }

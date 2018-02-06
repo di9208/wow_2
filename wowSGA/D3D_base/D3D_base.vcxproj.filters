@@ -91,6 +91,9 @@
     <Filter Include="unit\enemyManager\boss\ragnaros">
       <UniqueIdentifier>{d903471f-8937-4683-b51e-db86f47ae225}</UniqueIdentifier>
     </Filter>
+    <Filter Include="inventory">
+      <UniqueIdentifier>{5226ea2d-be00-489e-8bac-39a811f97004}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -315,6 +318,9 @@
     <ClInclude Include="cNpcInfo.h">
       <Filter>unit\npc</Filter>
     </ClInclude>
+    <ClInclude Include="inventory.h">
+      <Filter>inventory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -529,6 +535,9 @@
     </ClCompile>
     <ClCompile Include="cNpcInfo.cpp">
       <Filter>unit\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

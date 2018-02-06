@@ -26,7 +26,7 @@ void cUIImage::SetTexture(IN char * szFullPath)
 
 void cUIImage::Render(LPD3DXSPRITE pSprite)
 {
-	if (!m_isHidden) return;
+	if (m_isHidden) return;
 
 	pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 	pSprite->SetTransform(&m_matWorld);

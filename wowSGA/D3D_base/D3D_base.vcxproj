@@ -206,6 +206,7 @@
     <ClInclude Include="D3D_base.h" />
     <ClInclude Include="DragAndDrob.h" />
     <ClInclude Include="iMap.h" />
+    <ClInclude Include="inventory.h" />
     <ClInclude Include="item_class.h" />
     <ClInclude Include="item_loader.h" />
     <ClInclude Include="keyManager.h" />
@@ -281,6 +282,7 @@
     <ClCompile Include="D3D_base.cpp" />
     <ClCompile Include="DragAndDrob.cpp" />
     <ClCompile Include="iMap.cpp" />
+    <ClCompile Include="inventory.cpp" />
     <ClCompile Include="item_class.cpp" />
     <ClCompile Include="item_loader.cpp" />
     <ClCompile Include="keyManager.cpp" />

@@ -72,8 +72,8 @@ void cNpc::render()
 	if (m_npc_info)
 		m_npc_info->render();
 
-	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matworld);
-	m_mesh->DrawSubset(0);
-	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matworld);
+	//m_mesh->DrawSubset(0);
+	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 }

@@ -45,7 +45,7 @@ void cUIButton::SetTexture(IN std::string keyname, IN char * szUp, IN char * szO
 
 void cUIButton::Update()
 {
-	if (!m_isHidden) return;
+	if (m_isHidden) return;
 
 	POINT pt;
 	GetCursorPos(&pt);
@@ -88,7 +88,7 @@ void cUIButton::Update()
 
 void cUIButton::Render(LPD3DXSPRITE pSprite)
 {
-	if (!m_isHidden) return;
+	if (m_isHidden) return;
 
 	pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 	pSprite->SetTransform(&m_matWorld);

@@ -34,7 +34,7 @@ void cUIObject::Destroy()
 
 void cUIObject::Update()
 {
-	if (!m_isHidden)	return;
+	if (m_isHidden)	return;
 
 	D3DXMatrixIdentity(&m_matWorld);
 	m_matWorld._11 = MatS.x;
@@ -63,7 +63,7 @@ void cUIObject::Update()
 
 void cUIObject::Render(LPD3DXSPRITE pSprite)
 {
-	if (!m_isHidden)	return;
+	if (m_isHidden)	return;
 
 	for each (auto child in m_vecChild)
 	{
