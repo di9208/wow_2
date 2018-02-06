@@ -4,20 +4,22 @@
 #include "cGrid.h"
 #include "cPlayer_Enemy.h"
 #include "shop_TEST_CLASS.h"
-
+#include "cStage1.h"
+#include "cFrustum.h"
 
 cScene1::cScene1()
 	: m_pCamera(NULL)
 	, m_pGrid(NULL)
 	, m_Player_Enemy(NULL)
-	, m_shop_TEST_CLASS(NULL)
+	, m_shop_TEST_CLASS(NULL)	
+	, m_Stage1(NULL)
+	, m_Frustum(NULL)
 {
 }
 
 
 cScene1::~cScene1()
 {
-	
 }
 
 void cScene1::SetLight()
@@ -51,6 +53,10 @@ void cScene1::Setup()
 	m_shop_TEST_CLASS = new shop_TEST_CLASS;
 	m_shop_TEST_CLASS->Setup();
 
+	m_Stage1 = new cStage1();
+	m_Stage1->Setup();
+
+	m_Frustum = new cFrustum();
 }
 
 void cScene1::Destroy()
@@ -59,7 +65,8 @@ void cScene1::Destroy()
 	SAFE_DELETE(m_pGrid);
 	SAFE_DELETE(m_Player_Enemy);
 	SAFE_DELETE(m_shop_TEST_CLASS);
-
+	SAFE_DELETE(m_Stage1);
+	SAFE_DELETE(m_Frustum);
 	g_pFontManager->Destroy();
 	g_pTextureManager->Destroy();
 	g_pDeviceManager->Destroy();
@@ -77,6 +84,8 @@ void cScene1::Update()
 
 	if (m_shop_TEST_CLASS)
 		m_shop_TEST_CLASS->Update();
+
+	m_Frustum->SetupVertex();
 }
 
 void cScene1::Render()
@@ -92,6 +101,8 @@ void cScene1::Render()
 	if (m_shop_TEST_CLASS)
 		m_shop_TEST_CLASS->Render();
 
+	if (m_Stage1)
+		m_Stage1->Draw(m_Frustum);
 
 	///////////////////////////////////////////
 }
