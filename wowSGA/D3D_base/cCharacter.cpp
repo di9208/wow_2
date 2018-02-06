@@ -81,7 +81,10 @@ void cCharacter::Update(iMap* pMap, bool animCheck)
 	{
 		if (pMap->GetHeight(vTempPos.x, vTempPos.y, vTempPos.z))
 		{
-			m_vPos = vTempPos;
+			if (m_chractor_condition != JUMP_START && m_chractor_condition != JUMP_ING && m_chractor_condition != JUMP_DOWN)
+			{
+				m_vPos = vTempPos;
+			}
 		}
 	}
 	else

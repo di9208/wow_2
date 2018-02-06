@@ -80,7 +80,7 @@ void cScene1::Update()
 		m_pCamera->Update();
 
 	if (m_Player_Enemy)
-		m_Player_Enemy->Update();
+		m_Player_Enemy->Update(m_Stage1);
 
 	if (m_shop_TEST_CLASS)
 		m_shop_TEST_CLASS->Update();

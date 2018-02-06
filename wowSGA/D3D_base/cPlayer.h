@@ -7,7 +7,7 @@ class cPlayerSkill;
 class cWeapon;
 class cPlayerInFo;
 class cOBB;
-
+class iMap;
 class cPlayer :public cCharacter
 {
 	cPlayerAniController*	m_playerAnimController;
@@ -23,7 +23,7 @@ public:
 	~cPlayer();
 
 	void Setup();
-	void Update();
+	void Update(iMap* pMap);
 	void Render();
 
 	void setEnemyPos(D3DXVECTOR3 EnemyPos) { m_EnemyPos = EnemyPos; }
