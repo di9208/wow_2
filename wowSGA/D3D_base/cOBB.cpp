@@ -525,13 +525,12 @@ void cOBB::Render_Debug(D3DCOLOR c, D3DXMATRIXA16* playerWorld, D3DXMATRIXA16* W
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &m_matWorldTM);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetFVF(ST_PC_VERTEX::FVF);
-	//g_pD3DDevice->DrawIndexedPrimitiveUP(D3DPT_LINELIST,
-	//	0, 8, 24,
-	//	&vecIndex[0], D3DFMT_D16, &vecVertex[0], sizeof(ST_PC_VERTEX));
-	g_pD3DDevice->DrawPrimitiveUP(D3DPT_LINELIST,
-		m_vecVertex.size() ,
+	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	g_pD3DDevice->DrawPrimitiveUP(D3DPT_TRIANGLELIST,
+		m_vecVertex.size() / 3,
 		&m_vecVertex[0],
 		sizeof(ST_PC_VERTEX));
+	g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	RenderFont(vecVertex);
 }

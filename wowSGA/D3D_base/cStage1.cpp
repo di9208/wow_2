@@ -3,6 +3,7 @@
 #include "cQuadTree.h"
 
 cStage1::cStage1()
+	: m_pTexture(NULL)
 {
 }
 
@@ -12,6 +13,7 @@ cStage1::~cStage1()
 	SAFE_RELEASE(m_vb);
 	SAFE_RELEASE(m_ib);
 	SAFE_DELETE(m_QuadTree);
+	SAFE_RELEASE(m_pTexture);
 }
 
 void cStage1::Setup()
@@ -26,6 +28,7 @@ void cStage1::SetMap()
 	int size;
 	FILE * fp;
 	fp = fopen("Stage1.txt", "r");
+	m_pTexture = g_pTextureManager->GetTexture("HeightMapData/selectblend.png");
 
 	fscanf(fp, "%d", &size);
 
@@ -54,7 +57,8 @@ void cStage1::SetMap()
 	fclose(fp);
 
 	
-	g_pD3DDevice->CreateVertexBuffer(size * sizeof(ST_PTN_VERTEX),0,ST_PTN_VERTEX::FVF,D3DPOOL_DEFAULT,&m_vb,nullptr);
+	g_pD3DDevice->CreateVertexBuffer(size * sizeof(ST_PTN_VERTEX), 0, ST_PTN_VERTEX::FVF, D3DPOOL_DEFAULT, &m_vb, nullptr);
+	g_pD3DDevice->CreateIndexBuffer((m_col - 1)* (m_row - 1) * 2 * sizeof(ST_INDEX), 0, D3DFMT_INDEX32, D3DPOOL_DEFAULT, &m_ib, 0);
 
 	void* vp;
 	m_vb->Lock(0, size * sizeof(ST_PTN_VERTEX), &vp, 0);
@@ -95,11 +99,14 @@ void cStage1::Draw(cFrustum * f)
 
 void cStage1::Render()
 {
+	D3DXMATRIXA16 WOLRD;
 	SetMaterial();
+	D3DXMatrixIdentity(&WOLRD);
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &WOLRD);
 	g_pD3DDevice->SetFVF(ST_PTN_VERTEX::FVF);
 	g_pD3DDevice->SetStreamSource(0, m_vb, 0, sizeof(ST_PTN_VERTEX));
 	g_pD3DDevice->SetIndices(m_ib);
-	g_pD3DDevice->SetTexture(0,NULL);
+	g_pD3DDevice->SetTexture(0, m_pTexture);
 	g_pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, (m_col*m_row), 0, m_Polygon);
 
 }
