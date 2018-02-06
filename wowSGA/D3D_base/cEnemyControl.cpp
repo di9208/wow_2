@@ -240,31 +240,45 @@ void cEnemyControl::BossPlayerCheck()
 		for (size_t i = 0; i < m_vecBoss.size(); i++)
 		{
 			m_vecBoss[i].m_vPos = m_pBossAniController->GetvBossPos();
-			if (m_vPlayerPos < m_vecBoss[i].m_vPos)
-			{
-				m_vecBoss[i].pb = m_vecBoss[i].m_vPos - m_vPlayerPos;
-			}
-			else
-			{
-				m_vecBoss[i].pb = m_vPlayerPos - m_vecBoss[i].m_vPos;
-				m_vecBoss[i].dist = D3DXVec3Length(&m_vecBoss[i].pb);
-			}
+			
+			
+			m_vecBoss[i].pb = m_vPlayerPos - m_vecBoss[i].m_vPos;
+			m_vecBoss[i].dist = D3DXVec3Length(&m_vecBoss[i].pb);
+			
 
-			if (m_vecBoss[i].dist < 7.f)
+			if (m_vecBoss[i].dist <= 7.f)
 			{
 				m_vecBoss[i].count++;
 				if (m_vecBoss[i].count > 100)
 				{
-					m_vecBoss[i].chk = true;
+					m_vecBoss[i].chk = true;	
+					
 					m_vecBoss[i].e_boss_state = E_BOSS_WALK;
 				}
 			}
-			else m_vecBoss[i].chk = false;
+			else
+			{
+				if (m_vecBoss[i].chk)
+				{
+					D3DXVec3Normalize(&v, &m_vecBoss[i].pb);
+				}
+				m_vecBoss[i].chk = false;
+				m_vecBoss[i].chkDist = false;
+			}
+			if (!m_vecBoss[i].chk)
+			{
+				if (m_vecBoss[i].chkDist)
+				{
+					m_pBossAniController->SetBossDir(v);
+					return; 
+				}
 
+			}
 			if (m_vecBoss[i].chk)
 			{
 				if (!m_vecBoss[i].chk) return;
 
+				m_vecBoss[i].chkDist = true;
 				D3DXMATRIXA16 matT, matR;
 				D3DXMatrixIdentity(&matT);
 				D3DXMatrixIdentity(&matR);
@@ -278,7 +292,7 @@ void cEnemyControl::BossPlayerCheck()
 
 				float fDot = D3DXVec3Dot(&vDir, &m_vecBoss[i].m_vDir);
 
-				if (m_vecBoss[i].dist <= 3.f)
+				if (m_vecBoss[i].dist <= 2.f)
 				{
 					m_vecBoss[i].count = 0;
 					skillDelay++;
@@ -376,7 +390,7 @@ void cEnemyControl::BossRagPlayerCheck()
 				m_vecBoss_rag[i].dist = D3DXVec3Length(&m_vecBoss_rag[i].pb);
 			}
 
-			if (m_vecBoss_rag[i].dist < 5.f)
+			if (m_vecBoss_rag[i].dist < 4.f)
 			{
 				m_vecBoss_rag[i].count++;
 				if (m_vecBoss_rag[i].count > 100)

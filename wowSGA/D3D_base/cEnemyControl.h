@@ -18,6 +18,7 @@ struct stBoss
 	float					dist;
 	int						count;				// 보스접근후 모션쓰기위한 카운트
 	bool					chk;				// 접근했는지 안했는지
+	bool					chkDist;			// 거리관련 불값
 	E_BOSS_STATE			e_boss_state;		// 보스 상태
 	E_BOSS_RAG_STATE		e_boss_rag_state;	// 라그 상태
 	stBoss()
@@ -26,6 +27,7 @@ struct stBoss
 		, pb(0, 0, 0)
 		, dist(0.f)
 		, count(0)
+		, chkDist(false)
 	{}											//구조체 초기화
 };
 struct stBoss_rag
@@ -63,6 +65,9 @@ private:
 	SYNTHESIZE(std::vector<stBoss_rag>, m_vecBoss_rag, vecBoss_rag);
 	stBoss_rag			stBoss_rag;
 	D3DXMATRIXA16		matragR;
+	
+	//보스 거리 조절용 벡터
+	D3DXVECTOR3 v;
 
 	//폰트
 	LPD3DXFONT	m_pFont;
