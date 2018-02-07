@@ -7,13 +7,13 @@
 #include <sstream>
 #include "cOBB.h"
 
-
-std::string Convert(float number) {
-	std::ostringstream buff;
-	buff << number;
-	return buff.str();
-
-}
+//
+//std::string Convert(float number) {
+//	std::ostringstream buff;
+//	buff << number;
+//	return buff.str();
+//
+//}
 cWeapon::cWeapon()
 	: m_pSkinnedMesh(NULL)
 	, m_hand(NULL)
@@ -194,18 +194,18 @@ void cWeapon::RenderFont()
 {
 	if (m_pFont)
 	{
-		std::string sText = Convert(m_hp);
-		//sprintf(sText, "%f", (PlayerInFo.HP));
+		//std::string sText = Convert(m_hp);
+		////sprintf(sText, "%f", (PlayerInFo.HP));
 
-		RECT rc;
-		SetRect(&rc, 100, 100, 300, 200);
+		//RECT rc;
+		//SetRect(&rc, 100, 100, 300, 200);
 
-		m_pFont->DrawText(NULL,
-			sText.c_str(),
-			sText.length(),
-			&rc,
-			DT_LEFT | DT_TOP | DT_NOCLIP,
-			D3DCOLOR_XRGB(255, 255, 0));
+		//m_pFont->DrawText(NULL,
+		//	sText.c_str(),
+		//	sText.length(),
+		//	&rc,
+		//	DT_LEFT | DT_TOP | DT_NOCLIP,
+		//	D3DCOLOR_XRGB(255, 255, 0));
 	}
 }
 
