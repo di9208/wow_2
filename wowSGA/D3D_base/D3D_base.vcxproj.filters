@@ -94,9 +94,6 @@
     <Filter Include="inventory">
       <UniqueIdentifier>{5226ea2d-be00-489e-8bac-39a811f97004}</UniqueIdentifier>
     </Filter>
-    <Filter Include="unit\enemyManager\boss\arthas">
-      <UniqueIdentifier>{a6b8fa49-0f44-46a2-9b8c-9a9dfd4662f6}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -240,6 +237,9 @@
     <ClInclude Include="cPlayerSkill.h">
       <Filter>unit\player</Filter>
     </ClInclude>
+    <ClInclude Include="cBossAniController.h">
+      <Filter>unit\enemyManager\boss</Filter>
+    </ClInclude>
     <ClInclude Include="cBossSkill.h">
       <Filter>unit\enemyManager\boss</Filter>
     </ClInclude>
@@ -327,15 +327,11 @@
     <ClInclude Include="cScene1.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="cBossAniController.h">
-      <Filter>unit\enemyManager\boss\arthas</Filter>
-    </ClInclude>
-    <ClInclude Include="cArthasOBB.h">
-      <Filter>헤더 파일</Filter>
-=======
     <ClInclude Include="item_class.h">
       <Filter>ITEM</Filter>
+    </ClInclude>
+    <ClInclude Include="cBoneGuardFel.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cLightningWorg.h">
       <Filter>unit\enemyManager\쫄몹</Filter>
@@ -345,7 +341,6 @@
     </ClInclude>
     <ClInclude Include="cParticle.h">
       <Filter>unit\enemyManager\쫄몹</Filter>
->>>>>>> 72f066e32ec4f392b2344dba91c114e0d9747132
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -478,6 +473,9 @@
     <ClCompile Include="cPlayerAniController.cpp">
       <Filter>unit\player</Filter>
     </ClCompile>
+    <ClCompile Include="cBossAniController.cpp">
+      <Filter>unit\enemyManager\boss</Filter>
+    </ClCompile>
     <ClCompile Include="cBossSkill.cpp">
       <Filter>unit\enemyManager\boss</Filter>
     </ClCompile>
@@ -568,15 +566,11 @@
     <ClCompile Include="cScene1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="cBossAniController.cpp">
-      <Filter>unit\enemyManager\boss\arthas</Filter>
-    </ClCompile>
-    <ClCompile Include="cArthasOBB.cpp">
-      <Filter>소스 파일</Filter>
-=======
     <ClCompile Include="item_class.cpp">
       <Filter>ITEM</Filter>
+    </ClCompile>
+    <ClCompile Include="cBoneGuardFel.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cLightningWorg.cpp">
       <Filter>unit\enemyManager\쫄몹</Filter>
@@ -586,7 +580,6 @@
     </ClCompile>
     <ClCompile Include="cParticle.cpp">
       <Filter>unit\enemyManager\쫄몹</Filter>
->>>>>>> 72f066e32ec4f392b2344dba91c114e0d9747132
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
