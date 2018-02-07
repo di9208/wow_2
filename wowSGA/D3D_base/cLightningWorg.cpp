@@ -65,15 +65,14 @@ void cLightningWorg::addMonster(float x, float y, float z){
 	Monster.Particle = new cMonsterParticle(512);
 	Monster.Particle->init("UI/sword.png");
 
-	D3DXMATRIXA16	World, matS, matR, matT;
-	D3DXMatrixRotationX(&matR, D3DX_PI * 1.5);
-	D3DXMatrixScaling(&matS, 0.14, 0.14, 0.14);
-	D3DXMatrixIdentity(&matT);
-	D3DXMatrixTranslation(&matT, (Monster.m_vPos.x / 100) - 5, (Monster.m_vPos.y / 100) - 7.5, (Monster.m_vPos.z / 100) + 4);
-	World = matS * matR * matT;
+	D3DXMATRIXA16	matS;
+	D3DXMatrixIdentity(&Monster.matWorld);
+	D3DXMatrixScaling(&matS, 0.4, 0.4, 0.4);
+	Monster.matWorld = matS;
+	
 
 	Monster.MonsterOBB = new cOBB;
-	Monster.MonsterOBB->Setup(Monster.m, &World);
+	Monster.MonsterOBB->Setup(Monster.m, &Monster.matWorld);
 
 	ZeroMemory(&Monster.m_stMtlNone, sizeof(D3DMATERIAL9));
 	Monster.m_stMtlNone.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
@@ -138,7 +137,7 @@ void cLightningWorg::Render(){
 		m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
 		//m_vecSkinnedMesh[i].Particle->render();
 		D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
+		//m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
 
 		SphereRender(i, m_vecSkinnedMesh[i].matWorld);
 		if (m_vecSkinnedMesh[i].death){
@@ -243,7 +242,7 @@ void cLightningWorg::SetupUI(size_t i, size_t a){
 			&m_vecSkinnedMesh[i].m_StItemSprite.m_stImageInfo,
 			NULL,
 			&m_vecSkinnedMesh[i].m_StItemSprite.m_pTexture);
-		
+
 		m_vecSkinnedMesh[i].m_ItemSprite.push_back(m_vecSkinnedMesh[i].m_StItemSprite);
 	}
 }

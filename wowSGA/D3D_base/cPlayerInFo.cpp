@@ -26,7 +26,6 @@ cPlayerInFo::cPlayerInFo()
 		m_stats_UI[i].m_EquipUI = NULL;
 		m_skill_UI[i].m_EquipUI = NULL;
 		m_stats[i] = NULL;
-		m_coolTime_UI[i].m_EquipUI = NULL;
 	}
 	Pt.x = 0;
 	Pt.y = 0;
@@ -46,7 +45,6 @@ cPlayerInFo::~cPlayerInFo()
 		SAFE_RELEASE(m_stats_UI[i].m_EquipUI);
 		SAFE_RELEASE(m_skill_UI[i].m_EquipUI);
 		SAFE_RELEASE(m_stats[i]);
-		SAFE_RELEASE(m_coolTime_UI[i].m_EquipUI);
 	}
 	SAFE_DELETE(m_playerOBB);
 }
@@ -134,37 +132,7 @@ void cPlayerInFo::RenderUI()
 		&D3DXVECTOR3(m_PlayerUI_backinfo.Width / 2.0f + 50, m_PlayerUI_backinfo.Height / 2.0 + 50, 0),
 		&D3DXVECTOR3(m_PlayerUI_backinfo.Width / 2.0f + 50, m_PlayerUI_backinfo.Height / 2.0 + 50, 0.2f),
 		D3DCOLOR_ARGB(255, 255, 255, 255));
-
-	for (int i = 0; i < 5; i++)
-	{
-
-		m_pSprite->Draw(m_skill_UI[i].m_EquipUI,
-			NULL, //&rc,
-			&D3DXVECTOR3(
-				m_skill_UI[i].m_EquipUI_info.Width / 2.0f,
-				m_skill_UI[i].m_EquipUI_info.Width / 2.0,
-				0),
-			&D3DXVECTOR3(
-				m_skill_UI[i].m_EquipUI_info.Width / 2.0f + m_skill_UI[i].m_x,
-				m_skill_UI[i].m_EquipUI_info.Width / 2.0f + m_skill_UI[i].m_y,
-				0.0f),
-			D3DCOLOR_ARGB(255, 255, 255, 255));
-
-		m_pSprite->Draw(m_coolTime_UI[i].m_EquipUI,
-			NULL, //&rc,
-			&D3DXVECTOR3(
-				m_coolTime_UI[i].m_EquipUI_info.Width / 2.0f,
-				m_coolTime_UI[i].m_EquipUI_info.Width / 2.0,
-				0),
-			&D3DXVECTOR3(
-				m_coolTime_UI[i].m_EquipUI_info.Width / 2.0f + m_coolTime_UI[i].m_x,
-				m_coolTime_UI[i].m_EquipUI_info.Width / 2.0f + m_coolTime_UI[i].m_y,
-				0.0f),
-			D3DCOLOR_ARGB(255, 255, 255, 255));
-	}
-
-
-
+	//*(ax/ PlayerInFo.Max_HP)
 
 	RECT rc = { 0,0,m_HP_info.Width*(ax / PlayerInFo.Max_HP),m_HP_info.Height };
 	m_pSprite->Draw(m_HP,
@@ -241,6 +209,7 @@ void cPlayerInFo::Collsion(cOBB * EnemyBox)
 {
 	if (EnemyBox)
 	{
+
 		if (EnemyBox->getCheck(0).x != -431602080 && m_playerOBB->getCheck(0).x != -431602080)
 		{
 			if (m_playerOBB->IsCollision(m_playerOBB, EnemyBox))
@@ -293,25 +262,6 @@ void cPlayerInFo::setRC()
 	m_stats_UI[4].m_y = 535;
 	m_stats_UI[4].check = false;
 	m_stats_UI[4].m_statsRC = { 190,535,220,565 };
-
-	for (int i = 0; i < 5; i++)
-	{
-		m_skill_UI[i].m_x = 140 + i * 55;
-		m_skill_UI[i].m_y = 800;
-		m_skill_UI[i].m_statsRC =
-		{ (int)m_skill_UI[i].m_x,
-			(int)m_skill_UI[i].m_y,
-			(int)m_skill_UI[i].m_x + 46,
-			(int)m_skill_UI[i].m_y + 46 };
-
-		m_coolTime_UI[i].m_x = 140 + i * 55;
-		m_coolTime_UI[i].m_y = 800;
-		m_coolTime_UI[i].m_statsRC =
-		{ (int)m_coolTime_UI[i].m_x,
-			(int)m_coolTime_UI[i].m_y,
-			(int)m_coolTime_UI[i].m_x + 46,
-			(int)m_coolTime_UI[i].m_y + 46 };
-	}
 
 }
 
@@ -422,103 +372,68 @@ void cPlayerInFo::SetUI()
 		NULL,
 		&m_HP);
 
-	D3DXCreateTextureFromFileEx(
-		g_pD3DDevice,
-		"player/attack_1.png",
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED,
-		D3DX_FILTER_NONE,
-		D3DX_DEFAULT,
-		0,
-		&m_skill_UI[0].m_EquipUI_info,
-		NULL,
-		&m_skill_UI[0].m_EquipUI);
+	/*D3DXCreateTextureFromFileEx(
+	g_pD3DDevice,
+	"player/attack_1.png",
+	D3DX_DEFAULT_NONPOW2,
+	D3DX_DEFAULT_NONPOW2,
+	D3DX_DEFAULT,
+	0,
+	D3DFMT_UNKNOWN,
+	D3DPOOL_MANAGED,
+	D3DX_FILTER_NONE,
+	D3DX_DEFAULT,
+	0,
+	&m_skill_info[0],
+	NULL,
+	&m_skill[0]);
 
 	D3DXCreateTextureFromFileEx(
-		g_pD3DDevice,
-		"player/DoubleAttack.png",
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED,
-		D3DX_FILTER_NONE,
-		D3DX_DEFAULT,
-		0,
-		&m_skill_UI[1].m_EquipUI_info,
-		NULL,
-		&m_skill_UI[1].m_EquipUI);
+	g_pD3DDevice,
+	"player/DoubleAttack.png",
+	D3DX_DEFAULT_NONPOW2,
+	D3DX_DEFAULT_NONPOW2,
+	D3DX_DEFAULT,
+	0,
+	D3DFMT_UNKNOWN,
+	D3DPOOL_MANAGED,
+	D3DX_FILTER_NONE,
+	D3DX_DEFAULT,
+	0,
+	&m_skill_info[1],
+	NULL,
+	&m_skill[1]);
 
 	D3DXCreateTextureFromFileEx(
-		g_pD3DDevice,
-		"player/breath.png",
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED,
-		D3DX_FILTER_NONE,
-		D3DX_DEFAULT,
-		0,
-		&m_skill_UI[2].m_EquipUI_info,
-		NULL,
-		&m_skill_UI[2].m_EquipUI);
+	g_pD3DDevice,
+	"player/breath.png",
+	D3DX_DEFAULT_NONPOW2,
+	D3DX_DEFAULT_NONPOW2,
+	D3DX_DEFAULT,
+	0,
+	D3DFMT_UNKNOWN,
+	D3DPOOL_MANAGED,
+	D3DX_FILTER_NONE,
+	D3DX_DEFAULT,
+	0,
+	&m_skill_info[2],
+	NULL,
+	&m_skill[2]);
 
 	D3DXCreateTextureFromFileEx(
-		g_pD3DDevice,
-		"player/roll.png",
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED,
-		D3DX_FILTER_NONE,
-		D3DX_DEFAULT,
-		0,
-		&m_skill_UI[3].m_EquipUI_info,
-		NULL,
-		&m_skill_UI[3].m_EquipUI);
-
-	D3DXCreateTextureFromFileEx(
-		g_pD3DDevice,
-		"player/roll2.png",
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED,
-		D3DX_FILTER_NONE,
-		D3DX_DEFAULT,
-		0,
-		&m_skill_UI[4].m_EquipUI_info,
-		NULL,
-		&m_skill_UI[4].m_EquipUI);
-
-	for (int i = 0; i < 5; i++)
-	{
-		D3DXCreateTextureFromFileEx(
-			g_pD3DDevice,
-			"player/BLACK.png",
-			D3DX_DEFAULT_NONPOW2,
-			D3DX_DEFAULT_NONPOW2,
-			D3DX_DEFAULT,
-			0,
-			D3DFMT_UNKNOWN,
-			D3DPOOL_MANAGED,
-			D3DX_FILTER_NONE,
-			D3DX_DEFAULT,
-			0,
-			&m_coolTime_UI[i].m_EquipUI_info,
-			NULL,
-			&m_coolTime_UI[i].m_EquipUI);
-	}
+	g_pD3DDevice,
+	"player/roll.png",
+	D3DX_DEFAULT_NONPOW2,
+	D3DX_DEFAULT_NONPOW2,
+	D3DX_DEFAULT,
+	0,
+	D3DFMT_UNKNOWN,
+	D3DPOOL_MANAGED,
+	D3DX_FILTER_NONE,
+	D3DX_DEFAULT,
+	0,
+	&m_skill_info[3],
+	NULL,
+	&m_skill[3]);*/
 
 }

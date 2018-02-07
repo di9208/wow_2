@@ -334,13 +334,13 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cLightningWorg.h">
-      <Filter>unit\enemyManager\쫄몹</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cMonsterParticle.h">
-      <Filter>unit\enemyManager\쫄몹</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cParticle.h">
-      <Filter>unit\enemyManager\쫄몹</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -573,13 +573,13 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cLightningWorg.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cMonsterParticle.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cParticle.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

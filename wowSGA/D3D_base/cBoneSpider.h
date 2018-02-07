@@ -3,6 +3,7 @@
 
 class iMap;
 class cSkinnedMesh;
+class cOBB;
 
 class cBoneSpider : public cUnit
 {
@@ -42,6 +43,9 @@ class cBoneSpider : public cUnit
 		std::vector<ST_MONSTER_ITEM>		m_ItemSprite;
 
 		D3DXMATRIXA16 matWorld;
+		D3DXMATRIXA16 matS;
+		D3DXMATRIXA16 RT;
+		cOBB* OBB;
 	};
 private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
@@ -66,6 +70,7 @@ private:
 	LPD3DXSPRITE				m_pSprite;
 	LPD3DXSPRITE				m_pInvectory;
 
+	
 public:
 	void SetUp();
 	void Update(iMap* pMap);
