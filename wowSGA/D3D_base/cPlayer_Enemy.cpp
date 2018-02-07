@@ -42,7 +42,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 	if (m_Player)
 		m_Player->Update(pMap);
 	if (m_EnemyControl)
-		m_EnemyControl->Update(m_Player->GetPosition());
+		m_EnemyControl->Update(m_Player->GetPosition(), pMap);
 }
 
 void cPlayer_Enemy::Render()

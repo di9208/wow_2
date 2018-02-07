@@ -1,6 +1,7 @@
 #pragma once
 #include "cUnit.h"
 
+class iMap;
 class cSkinnedMesh;
 
 class cArchDruid : public cUnit
@@ -13,13 +14,11 @@ class cArchDruid : public cUnit
 
 		TagUnit		t;
 		float		MaxHP;
-		float		fx;
-		float		fy;
-		float		fz;
 		float		distance;
 		float		range;
 		float		MaxRange;
 		bool		death;
+		int			attackSpeed;
 		int			time;
 		int			deathTime;
 		int			attackTime;
@@ -27,9 +26,9 @@ class cArchDruid : public cUnit
 		int			RunCount;
 
 		//몬스터 인식용
-		D3DXVECTOR3		m_vPos;
-		D3DXVECTOR3		m_vDir;
-		D3DXVECTOR3		sum;
+		D3DXVECTOR3					m_vPos;
+		D3DXVECTOR3					m_vDir;
+		D3DXVECTOR3					sum;
 
 		//스피어
 		D3DMATERIAL9				m_stMtlNone;
@@ -50,10 +49,11 @@ class cArchDruid : public cUnit
 		ST_MONSTER_ITEM						m_StItemSprite;
 		ST_MONSTER_ITEM						m_StInvectory;
 		std::vector<ST_MONSTER_ITEM>		m_ItemSprite;
+
+		D3DXMATRIXA16 matWorld;
 	};
 private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
-	D3DXMATRIXA16	m_matWorld;
 	EnemySkinnedMesh Monster;
 
 	//몬스터 스탯
@@ -75,7 +75,7 @@ private:
 
 public:
 	void SetUp();
-	void Update();
+	void Update(iMap* pMap);
 	void Render();
 
 	void MonsterInsic(D3DXVECTOR3 d);
@@ -93,6 +93,7 @@ public:
 	void SphereRender(size_t i);
 	void RangeSphere(size_t i);
 
+	void matUpdate(size_t i, iMap* map);
 
 	cArchDruid();
 	~cArchDruid();

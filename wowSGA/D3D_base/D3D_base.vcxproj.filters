@@ -303,9 +303,6 @@
     <ClInclude Include="cArchDruid.h">
       <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
-    <ClInclude Include="cBoneGuardFel.h">
-      <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClInclude>
     <ClInclude Include="cBossRagController.h">
       <Filter>unit\enemyManager\boss\ragnaros</Filter>
     </ClInclude>
@@ -332,6 +329,15 @@
     </ClInclude>
     <ClInclude Include="item_class.h">
       <Filter>ITEM</Filter>
+    </ClInclude>
+    <ClInclude Include="cLightningWorg.h">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClInclude>
+    <ClInclude Include="cMonsterParticle.h">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClInclude>
+    <ClInclude Include="cParticle.h">
+      <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -533,9 +539,6 @@
     <ClCompile Include="cArchDruid.cpp">
       <Filter>unit\enemyManager\쫄몹</Filter>
     </ClCompile>
-    <ClCompile Include="cBoneGuardFel.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClCompile>
     <ClCompile Include="cBossRagController.cpp">
       <Filter>unit\enemyManager\boss\ragnaros</Filter>
     </ClCompile>
@@ -562,6 +565,15 @@
     </ClCompile>
     <ClCompile Include="item_class.cpp">
       <Filter>ITEM</Filter>
+    </ClCompile>
+    <ClCompile Include="cLightningWorg.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClCompile>
+    <ClCompile Include="cMonsterParticle.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClCompile>
+    <ClCompile Include="cParticle.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

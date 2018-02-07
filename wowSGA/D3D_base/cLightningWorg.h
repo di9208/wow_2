@@ -1,14 +1,20 @@
 #pragma once
 #include "cUnit.h"
+#include "cParticle.h"
+#include "cMonsterParticle.h"
 
 class iMap;
+class cOBB;
 class cSkinnedMesh;
 
-class cBoneSpider : public cUnit
+class cLightningWorg : public cUnit
 {
 	struct EnemySkinnedMesh
 	{
-		cSkinnedMesh* m;
+		cParticle*		Particle;
+		cSkinnedMesh*	m;
+		cOBB*			MonsterOBB;
+		D3DXMATRIXA16	matWorld;
 		MONSTER_STATUS	ENUM_MONSTER;
 		MONSTER_KIND	ENUM_MONSTER_KIND;
 
@@ -24,6 +30,7 @@ class cBoneSpider : public cUnit
 		int			attackTime;
 		int			termCount;
 		int			RunCount;
+		
 
 		//몬스터 인식용
 		D3DXVECTOR3					m_vPos;
@@ -40,14 +47,11 @@ class cBoneSpider : public cUnit
 		ST_MONSTER_ITEM						m_StItemSprite;
 		ST_MONSTER_ITEM						m_StInvectory;
 		std::vector<ST_MONSTER_ITEM>		m_ItemSprite;
-
-		D3DXMATRIXA16 matWorld;
 	};
 private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
-	D3DXMATRIXA16 matWorld;
-
 	
+	D3DXMATRIXA16 matWorld;
 
 	//몬스터 스탯
 	int			nXAlpha;
@@ -68,9 +72,9 @@ private:
 
 public:
 	void SetUp();
-	void Update(iMap* pMap);
+	void Update(iMap* map);
 	void Render();
-	
+
 	void MonsterInsic(D3DXVECTOR3 d);
 
 	void addMonster(float x, float y, float z);
@@ -83,10 +87,10 @@ public:
 	void RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY);
 
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-	void SphereRender(size_t i, D3DXMATRIXA16& matWorld);
+	void SphereRender(size_t i, D3DXMATRIXA16& m_matWorld);
 
 	void matUpdate(size_t i, iMap* map);
 
-	cBoneSpider();
-	~cBoneSpider();
+	cLightningWorg();
+	~cLightningWorg();
 };
