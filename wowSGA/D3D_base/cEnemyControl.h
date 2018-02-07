@@ -68,6 +68,7 @@ private:
 	
 	//보스 거리 조절용 벡터
 	D3DXVECTOR3 v;
+	//라그나로스 등장
 	int a = 0;
 	//폰트
 	LPD3DXFONT	m_pFont;

@@ -261,35 +261,6 @@ void cEnemyControl::BossPlayerCheck()
 	{
 		m_vecBoss[0].m_vPos = m_pBossAniController->GetvBossPos();
 
-<<<<<<< HEAD
-			if (m_vecBoss[i].dist <= 7.f)
-			{
-				m_vecBoss[i].count++;
-				if (m_vecBoss[i].count > 100)
-				{
-					m_vecBoss[i].chk = true;	
-					
-					m_vecBoss[i].e_boss_state = E_BOSS_WALK;
-				}
-			}
-			else
-			{
-				if (m_vecBoss[i].chk)
-				{
-					D3DXVec3Normalize(&v, &m_vecBoss[i].pb);
-				}
-				m_vecBoss[i].chk = false;
-				m_vecBoss[i].chkDist = false;
-			}
-			if (!m_vecBoss[i].chk)
-			{
-				if (m_vecBoss[i].chkDist)
-				{
-			//		m_pBossAniController->SetBossDir(v);
-					return; 
-				}
-=======
->>>>>>> 8320daba5190d640a9da356fb2f8426f431a3a4c
 
 		D3DXVECTOR3 Dir;
 		float Distance;
@@ -350,7 +321,6 @@ void cEnemyControl::BossPlayerCheck()
 		}
 		
 	}
-	
 	//if (m_vPlayerPos != D3DXVECTOR3(0, 0, 0) && m_vecBoss[0].e_boss_state != E_BOSS_DEATH)
 	//{
 	//	for (size_t i = 0; i < m_vecBoss.size(); i++)
