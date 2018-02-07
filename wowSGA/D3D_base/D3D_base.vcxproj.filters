@@ -94,6 +94,9 @@
     <Filter Include="inventory">
       <UniqueIdentifier>{5226ea2d-be00-489e-8bac-39a811f97004}</UniqueIdentifier>
     </Filter>
+    <Filter Include="unit\enemyManager\boss\arthas">
+      <UniqueIdentifier>{a6b8fa49-0f44-46a2-9b8c-9a9dfd4662f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -237,9 +240,6 @@
     <ClInclude Include="cPlayerSkill.h">
       <Filter>unit\player</Filter>
     </ClInclude>
-    <ClInclude Include="cBossAniController.h">
-      <Filter>unit\enemyManager\boss</Filter>
-    </ClInclude>
     <ClInclude Include="cBossSkill.h">
       <Filter>unit\enemyManager\boss</Filter>
     </ClInclude>
@@ -331,6 +331,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="cScene1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cBossAniController.h">
+      <Filter>unit\enemyManager\boss\arthas</Filter>
+    </ClInclude>
+    <ClInclude Include="cArthasOBB.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -464,9 +470,6 @@
     <ClCompile Include="cPlayerAniController.cpp">
       <Filter>unit\player</Filter>
     </ClCompile>
-    <ClCompile Include="cBossAniController.cpp">
-      <Filter>unit\enemyManager\boss</Filter>
-    </ClCompile>
     <ClCompile Include="cBossSkill.cpp">
       <Filter>unit\enemyManager\boss</Filter>
     </ClCompile>
@@ -561,6 +564,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="cScene1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cBossAniController.cpp">
+      <Filter>unit\enemyManager\boss\arthas</Filter>
+    </ClCompile>
+    <ClCompile Include="cArthasOBB.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

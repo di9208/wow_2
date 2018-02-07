@@ -7,6 +7,8 @@ class cBoneGuardFel;
 class cBossAniController;
 class cBossSkill;
 class cBossRagController;
+class cArthasOBB;
+class cOBB;
 
 struct stBoss
 {
@@ -73,9 +75,12 @@ private:
 	//폰트
 	LPD3DXFONT	m_pFont;
 
-	//
+	//아서스 죽었을때 좌표용
 	D3DXVECTOR3 dv;
-	float	m_fDeathDir;
+
+	//아서스 obb
+	SYNTHESIZE(cArthasOBB*, m_arthasOBB, arthasOBB);
+
 private:
 	cBossAniController * m_pBossAniController;
 	cBossRagController * m_pBossRagController;
@@ -115,6 +120,8 @@ public:
 	void BossPlayerRot(D3DXVECTOR3 d);		//플레이어 좌표받아오기
 	void BossRagPlayerCheck();				//플레이어와 라그와의 체크
 	void BossRagPlayerRot(D3DXVECTOR3 d);   //플레이어 좌표받아오기(라그)
+	void Collision(cOBB* box);
+
 	void Picking();
 	void SetupUI();
 	void RenderUI();

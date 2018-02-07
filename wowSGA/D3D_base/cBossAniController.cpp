@@ -12,7 +12,7 @@ cBossAniController::cBossAniController()
 	, m_vBossPos(-5,0,0)
 	, m_pSkinnedMeshSkill(NULL)
 	, m_bSKill(false)
-	, m_pBossOBB(NULL)
+
 {
 }
 
@@ -20,7 +20,6 @@ cBossAniController::~cBossAniController()
 {
 	SAFE_DELETE(m_pSkinnedMesh);
 	SAFE_DELETE(m_pSkinnedMeshSkill);
-	SAFE_DELETE(m_pBossOBB);
 }
 
 void cBossAniController::SetUp()
@@ -41,17 +40,13 @@ void cBossAniController::SetUp()
 
 	World = matS * matT* matR;
 
-	m_pBossOBB = new cOBB();
-	m_pBossOBB->Setup(m_pSkinnedMesh, &World);
-
 }
 
 void cBossAniController::Update(E_BOSS_STATE* pState)
 {
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Update();
-	if (m_pBossOBB)
-		m_pBossOBB->Update(&m_World);
+
 	if (m_pSkinnedMesh->GetCheck() && *pState != E_BOSS_DEATH)
 	{
 		(*pState) = E_BOSS_STAND;
@@ -124,9 +119,6 @@ void cBossAniController::Render(D3DXMATRIXA16 * m_world)
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Render(NULL, &World);
 
-	D3DXCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-	if (m_pBossOBB)
-		m_pBossOBB->Render_Debug(c, &World, NULL);
 
 	if(cBoss_STATE == E_BOSS_SPELL1)
 	m_pSkinnedMeshSkill->Render(NULL, &World);
@@ -182,9 +174,5 @@ void cBossAniController::Skill()
 	m_pSkinnedMeshSkill->Update();
 }
 
-void cBossAniController::Collision(cOBB * PlayerBox)
-{
-	//m_pBossOBB->IsCollision(PlayerBox);
-}
 
 
