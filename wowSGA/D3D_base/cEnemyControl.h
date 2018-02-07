@@ -73,6 +73,9 @@ private:
 	//ÆùÆ®
 	LPD3DXFONT	m_pFont;
 
+	//
+	D3DXVECTOR3 dv;
+	float	m_fDeathDir;
 private:
 	cBossAniController * m_pBossAniController;
 	cBossRagController * m_pBossRagController;

@@ -7,7 +7,7 @@ cBossRagController::cBossRagController()
 	, cBoss_rag_state(E_BOSS_RAG_START)
 	, m_fBossRotY(0.f)
 	, m_vBossDirX(1,0,0)
-	, m_vBossDir(1,0,0)
+	, m_vBossDir(0,0,1)
 	, m_vBossPos(5,0,0)
 {
 }

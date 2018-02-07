@@ -118,6 +118,7 @@ void cBossAniController::Render(D3DXMATRIXA16 * m_world)
 	D3DXMatrixLookAtLH(&matR, &D3DXVECTOR3(0, 0, 0), &m_vBossDir, &vUp);
 	D3DXMatrixTranspose(&matR, &matR);
 	D3DXMatrixTranslation(&matT, m_vBossPos.x, m_vBossPos.y, m_vBossPos.z);
+
 	World = matS*matXX *matR*matT;
 
 	if (m_pSkinnedMesh)
@@ -125,7 +126,7 @@ void cBossAniController::Render(D3DXMATRIXA16 * m_world)
 
 	D3DXCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 	if (m_pBossOBB)
-	//	m_pBossOBB->Render_Debug(c, &World, NULL);
+		m_pBossOBB->Render_Debug(c, &World, NULL);
 
 	if(cBoss_STATE == E_BOSS_SPELL1)
 	m_pSkinnedMeshSkill->Render(NULL, &World);
