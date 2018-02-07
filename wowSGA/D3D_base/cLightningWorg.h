@@ -93,6 +93,10 @@ public:
 
 	void matUpdate(size_t i, iMap* map);
 
+
+	int getVectorSize() { return m_vecSkinnedMesh.size(); }
+	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].MonsterOBB; }
+
 	cLightningWorg();
 	~cLightningWorg();
 };

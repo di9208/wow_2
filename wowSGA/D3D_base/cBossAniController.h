@@ -35,5 +35,7 @@ public:
 	void SetAnimation(E_BOSS_STATE* pState);
 	void Skill();
 	void Collision(cOBB* PlayerBox);
+
+	cOBB* getOBB( ) { return m_pBossOBB; }
 };
 

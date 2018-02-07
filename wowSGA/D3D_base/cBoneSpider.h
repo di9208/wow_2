@@ -3,6 +3,7 @@
 
 class iMap;
 class cSkinnedMesh;
+class cOBB;
 
 class cBoneSpider : public cUnit
 {
@@ -42,12 +43,15 @@ class cBoneSpider : public cUnit
 		std::vector<ST_MONSTER_ITEM>		m_ItemSprite;
 
 		D3DXMATRIXA16 matWorld;
+		D3DXMATRIXA16 matS;
+		D3DXMATRIXA16 RT;
+		cOBB* OBB;
 	};
 private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
 	D3DXMATRIXA16 matWorld;
 
-	
+
 
 	//∏ÛΩ∫≈Õ Ω∫≈»
 	int			nXAlpha;
@@ -66,11 +70,12 @@ private:
 	LPD3DXSPRITE				m_pSprite;
 	LPD3DXSPRITE				m_pInvectory;
 
+
 public:
 	void SetUp();
 	void Update(iMap* pMap);
 	void Render();
-	
+
 	void MonsterInsic(D3DXVECTOR3 d);
 
 	void addMonster(float x, float y, float z);
@@ -86,6 +91,9 @@ public:
 	void SphereRender(size_t i, D3DXMATRIXA16& matWorld);
 
 	void matUpdate(size_t i, iMap* map);
+
+	int getVectorSize() { return m_vecSkinnedMesh.size(); }
+	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].OBB; }
 
 	cBoneSpider();
 	~cBoneSpider();

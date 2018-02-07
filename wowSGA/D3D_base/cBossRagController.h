@@ -25,5 +25,7 @@ public:
 	void Render(D3DXMATRIXA16* m_world);
 
 	void SetAnimation(E_BOSS_RAG_STATE* pStateRag);
+
+
 };
 

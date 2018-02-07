@@ -245,11 +245,13 @@ void cPlayerInFo::Collsion(cOBB * EnemyBox)
 		{
 			if (m_playerOBB->IsCollision(m_playerOBB, EnemyBox))
 			{
-				PlayerInFo.HP = 100;
+				if (PlayerInFo.HP > 0)PlayerInFo.HP -= 10;
+				ax = PlayerInFo.HP;
 			}
 			else
 			{
-				PlayerInFo.HP = 200;
+				PlayerInFo.HP = 100;
+				ax = PlayerInFo.HP;
 			}
 		}
 	}
