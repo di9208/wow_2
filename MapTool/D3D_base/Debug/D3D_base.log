@@ -1,1 +1,129 @@
-﻿  D3D_base.vcxproj -> C:\Users\di9208\Documents\GitHub\wow_2\wowSGA\Debug\MapTool.exe
+﻿  stdafx.cpp
+  ZQuadTree.cpp
+  loading.cpp
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\loading.cpp(32): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+  keyManager.cpp
+  iMap.cpp
+  D3D_base.cpp
+  cUnit.cpp
+  cUIText.cpp
+  cUIObject.cpp
+  cUIImage.cpp
+  cUIButton.cpp
+  cTimeManager.cpp
+  cTextureManager.cpp
+  cTesting.cpp
+  cSkyBox1.cpp
+  cSkyBox.cpp
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cskybox.cpp(141): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cSkinnedMeshManager.cpp
+  cSkinnedMesh.cpp
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cskinnedmesh.cpp(249): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cShop.cpp
+  cSceneManager.cpp
+  cRay.cpp
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cray.cpp(27): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cray.cpp(28): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  cQuadTree.cpp
+  cPlayer.cpp
+  cOctree.cpp
+  cObjMap.cpp
+  cObjLoader.cpp
+  cObject.cpp
+  cNpc.cpp
+  cMtlTex.cpp
+  cMapTool_UI.cpp
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(49): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(58): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(67): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(94): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(100): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(107): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(114): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(121): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(131): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(137): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(144): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(151): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(161): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool_ui.cpp(167): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cMapToolObject.cpp
+  cMaptool.cpp
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(38): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(99): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(130): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(131): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(133): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(135): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(219): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(229): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(287): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(291): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(666): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note: 'fopen' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(718): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(207): note: 'fopen' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(721): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(725): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(729): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(733): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(738): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(741): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(744): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(747): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(750): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(753): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(756): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmaptool.cpp(839): warning C4316: 'cMapToolObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cMap.cpp
+  cMainLoading.cpp
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmainloading.cpp(23): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmainloading.cpp(28): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cmainloading.cpp(33): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cMainGame.cpp
+  cHeightMap.cpp
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cheightmap.cpp(41): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cheightmap.cpp(40): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cheightmap.cpp(145): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cheightmap.cpp(146): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cGroup.cpp
+  cGrid.cpp
+  cGameObject.cpp
+  cGameManager.cpp
+  cFrustum.cpp
+  코드를 생성하고 있습니다...
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\cquadtree.cpp(533): warning C4715: 'cQuadTree::SetChild': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  cFontManager.cpp
+  cEnemyManager.cpp
+  cDeviceManager.cpp
+  cCubePTN.cpp
+  cCubeNode.cpp
+  cCube.cpp
+  cCharacter.cpp
+  cCamera.cpp
+  cAseNode.cpp
+  cAseLoader.cpp
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\caseloader.cpp(184): warning C4316: 'cAseNode': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cAllocateHierarchy.cpp
+c:\users\di9208\documents\github\wow_2\maptool\d3d_base\callocatehierarchy.cpp(18): warning C4316: 'ST_BONE': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cActionSeq.cpp
+  cActionRepeat.cpp
+  cActionLinear.cpp
+  cActionBezier.cpp
+  cAction.cpp
+  코드를 생성하고 있습니다...
+  D3D_base.vcxproj -> C:\Users\di9208\Documents\GitHub\wow_2\wowSGA\Debug\MapTool.exe

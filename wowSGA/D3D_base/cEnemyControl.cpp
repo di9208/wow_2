@@ -49,7 +49,7 @@ void cEnemyControl::SetUp(){
 
 	if (m_pSpider) m_pSpider->SetUp();
 	if (m_pDruid) m_pDruid->SetUp();
-
+	
 	BossSetup();
 
 	D3DXFONT_DESC stFD;
@@ -143,7 +143,7 @@ void cEnemyControl::BossSetup()
 	stBoss_rag.stat.HP = 500;
 	stBoss_rag.chk = false;
 	stBoss_rag.kind = BOSS_RAGNALOS;
-	stBoss_rag.e_boss_rag_state = E_BOSS_RAG_START;
+	stBoss_rag.e_boss_rag_state = E_BOSS_RAG_STAND;
 	m_vecBoss_rag.push_back(stBoss_rag);
 }
 
@@ -176,6 +176,17 @@ void cEnemyControl::BossUpdate()
 				nCount = 0;
 			}
 		}
+		if (m_vecBoss_rag[0].e_boss_rag_state == E_BOSS_RAG_SPELL)
+		{
+			nCount++;
+			if (nCount > 7)
+			{
+				nMonsterX = rand() % 15;
+				nMonsterY = rand() % 15;
+				m_pGuardFel->addMonster(nMonsterX, 0, nMonsterY);
+				nCount = 0;
+			}
+		}
 		if (m_vecBoss[0].e_boss_state == E_BOSS_SPELL1)
 		{
 			m_pBossAniController->Skill();
@@ -204,13 +215,19 @@ void cEnemyControl::BossUpdate()
 	{
 		m_vecBoss[0].stat.HP -= 10;
 	}
+	
 	if (m_vecBoss[0].stat.HP <= 0)
 	{
 		m_vecBoss[0].e_boss_state = E_BOSS_DEATH;
+		a ++ ;
 	}
 	if (m_vecBoss_rag[0].stat.HP <= 0)
 	{
 		m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_DEATH;
+	}
+	if (a==50)
+	{
+		m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_START;
 	}
 }
 
@@ -269,7 +286,7 @@ void cEnemyControl::BossPlayerCheck()
 			{
 				if (m_vecBoss[i].chkDist)
 				{
-					m_pBossAniController->SetBossDir(v);
+			//		m_pBossAniController->SetBossDir(v);
 					return; 
 				}
 
@@ -390,7 +407,7 @@ void cEnemyControl::BossRagPlayerCheck()
 				m_vecBoss_rag[i].dist = D3DXVec3Length(&m_vecBoss_rag[i].pb);
 			}
 
-			if (m_vecBoss_rag[i].dist < 4.f)
+			if (m_vecBoss_rag[i].dist < 5.f)
 			{
 				m_vecBoss_rag[i].count++;
 				if (m_vecBoss_rag[i].count > 100)
@@ -402,7 +419,7 @@ void cEnemyControl::BossRagPlayerCheck()
 
 			if (m_vecBoss_rag[i].chk)
 			{
-				if (!m_vecBoss_rag[i].chk) return;
+				//if (!m_vecBoss_rag[i].chk) return;
 
 				/*D3DXMATRIXA16 matT, matR;
 				D3DXMatrixIdentity(&matT);
@@ -417,7 +434,7 @@ void cEnemyControl::BossRagPlayerCheck()
 
 				float fDot = D3DXVec3Dot(&vDir, &m_vecBoss_rag[i].m_vDir);*/
 
-				if (m_vecBoss_rag[i].dist <= 3.f)
+				if (m_vecBoss_rag[i].dist <= 2.f)
 				{
 					m_vecBoss_rag[i].count = 0;
 					skillDelay++;
@@ -471,7 +488,7 @@ void cEnemyControl::BossRagPlayerCheck()
 					}
 				}*/
 
-				/*m_pBossRagController->SetvBossPos(m_vecBoss_rag[i].m_vPos);*/
+				m_pBossRagController->SetvBossPos(m_vecBoss_rag[i].m_vPos);
 			}
 
 			/*D3DXVECTOR3 boss_playerPos;
