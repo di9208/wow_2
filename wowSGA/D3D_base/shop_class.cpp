@@ -25,6 +25,17 @@ shop_class::~shop_class()
 	{
 		SAFE_DELETE(p);
 	}
+	for (int i = 0; i < 10; i++)
+	{
+		item_slot[i]->Destroy();
+		item_Main_name[i]->Destroy();
+	}
+	for (int i = 0; i < 30; i++)
+	{
+		item_money[i]->Destroy();
+		item_moeny_text[i]->Destroy();
+	}
+
 	Shop_UI->Destroy();
 	Page_TEXT_UI->Destroy();
 }
@@ -52,7 +63,11 @@ void shop_class::Setup()
 	{
 		item_slot[i] = new cUIImage;
 		item_Main_name[i] = new cUIText;
-		item_Sub_name[i] = new cUIText;
+	}
+	for (int i = 0; i < 30; i++)
+	{
+		item_money[i] = new cUIImage;
+		item_moeny_text[i] = new cUIText;
 	}
 }
 
@@ -105,8 +120,13 @@ void shop_class::render(LPD3DXSPRITE in_subsprite)
 	{
 		item_slot[i]->Render(in_subsprite);
 		item_Main_name[i]->Render(in_subsprite);
-		item_Sub_name[i]->Render(in_subsprite);
 	}
+	for (int i = 0; i < 30; i++)
+	{
+		item_money[i]->Render(in_subsprite);
+		item_moeny_text[i]->Render(in_subsprite);
+	}
+
 	Page_TEXT_UI->Render(in_subsprite);
 }
 
@@ -430,6 +450,8 @@ void shop_class::setting_UI_frame()
 
 void shop_class::setting_show_item_UI()
 {
+	int calling_data = 0;
+
 	for (int i = Now_page_num - 1; i < Now_page_num * 10 - 1; i++)
 	{
 		if (v_shop_sell_Things.size() <= i) break;
@@ -455,11 +477,85 @@ void shop_class::setting_show_item_UI()
 		item_Main_name[i % 10]->Sethidden(Shop_UI->Gethidden());
 		item_Main_name[i % 10]->Update();
 
-		sprintf(chartext, "%s", v_shop_sell_Things[i]->GetI_sub_text().c_str());
+		//sprintf(chartext, "%s", v_shop_sell_Things[i]->GetI_sub_text().c_str());
 
-		item_Sub_name[i % 10]->SetupText(chartext, ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
-		item_Sub_name[i % 10]->SetPos(D3DXVECTOR3(Shop_UI->GetPos().x + 70 + 160 * (i % 2), Shop_UI->GetPos().y + 100 + 48 * (i / 2), 0));
-		item_Sub_name[i % 10]->Sethidden(Shop_UI->Gethidden());
-		item_Sub_name[i % 10]->Update();
+		//item_Sub_name[i % 10]->SetupText(chartext, ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
+		//item_Sub_name[i % 10]->SetPos(D3DXVECTOR3(Shop_UI->GetPos().x + 70 + 160 * (i % 2), Shop_UI->GetPos().y + 100 + 48 * (i / 2), 0));
+		//item_Sub_name[i % 10]->Sethidden(Shop_UI->Gethidden());
+		//item_Sub_name[i % 10]->Update();
+
+		setting_moneyFram(Shop_UI->GetPos().x + 70 + 160 * (i % 2),
+			Shop_UI->GetPos().y + 80 + 48 * (i / 2),
+			calling_data,
+			v_shop_sell_Things[i]->GetI_option().Price);
+
+		calling_data += 3;
+
+	}
+}
+
+void shop_class::setting_moneyFram(float x, float y, int numbers, int money)
+{
+	char chartext[1024];
+
+	float finx, finy;
+
+	finx = x;
+	finy = y + 20;
+
+	if (money / 100 >= 1)
+	{
+		item_money[numbers]->SetTexture("shop_data/UI-GoldIcon.PNG");
+		item_money[numbers]->SetPos(D3DXVECTOR3(finx, finy, 0));
+		item_money[numbers]->Sethidden(Shop_UI->Gethidden());
+		item_money[numbers]->Update();
+
+		sprintf(chartext, "%d", money / 100);
+
+		finx += 15;
+
+		item_moeny_text[numbers]->SetupText(chartext, ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
+		item_moeny_text[numbers]->SetPos(D3DXVECTOR3(finx, finy, 0));
+		item_moeny_text[numbers]->Sethidden(Shop_UI->Gethidden());
+		item_moeny_text[numbers]->Update();
+
+		finx += 20;
+	}
+	
+	if ((money % 100) / 10 >= 1)
+	{
+		item_money[numbers + 1]->SetTexture("shop_data/UI-SilverIcon.PNG");
+		item_money[numbers + 1]->SetPos(D3DXVECTOR3(finx, finy, 0));
+		item_money[numbers + 1]->Sethidden(Shop_UI->Gethidden());
+		item_money[numbers + 1]->Update();
+
+		sprintf(chartext, "%d", (money % 100) / 10);
+
+		finx += 15;
+
+		item_moeny_text[numbers + 1]->SetupText(chartext, ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
+		item_moeny_text[numbers + 1]->SetPos(D3DXVECTOR3(finx, finy, 0));
+		item_moeny_text[numbers + 1]->Sethidden(Shop_UI->Gethidden());
+		item_moeny_text[numbers + 1]->Update();
+
+		finx += 20;
+	}
+	if ((money % 100) % 10 >= 1)
+	{
+		item_money[numbers + 2]->SetTexture("shop_data/UI-CopperIcon.PNG");
+		item_money[numbers + 2]->SetPos(D3DXVECTOR3(finx, finy, 0));
+		item_money[numbers + 2]->Sethidden(Shop_UI->Gethidden());
+		item_money[numbers + 2]->Update();
+
+		sprintf(chartext, "%d", (money % 100) % 10);
+
+		finx += 15;
+
+		item_moeny_text[numbers + 2]->SetupText(chartext, ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
+		item_moeny_text[numbers + 2]->SetPos(D3DXVECTOR3(finx, finy, 0));
+		item_moeny_text[numbers + 2]->Sethidden(Shop_UI->Gethidden());
+		item_moeny_text[numbers + 2]->Update();
+
+		finx += 20;
 	}
 }
