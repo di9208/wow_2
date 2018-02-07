@@ -4,6 +4,16 @@
 #include "cSkinnedMesh.h"
 #include "cOBB.h"
 
+#include <sstream>
+#include "cOBB.h"
+
+
+std::string Convert(float number) {
+	std::ostringstream buff;
+	buff << number;
+	return buff.str();
+
+}
 cWeapon::cWeapon()
 	: m_pSkinnedMesh(NULL)
 	, m_hand(NULL)
@@ -11,6 +21,7 @@ cWeapon::cWeapon()
 	, m_WeaponNum(0)
 	, m_changeTime(m_changeTime)
 	, m_weaponOBB(NULL)
+	, m_hp(100)
 {
 
 }
@@ -19,26 +30,44 @@ cWeapon::~cWeapon()
 {
 	SAFE_DELETE(m_pSkinnedMesh);
 	SAFE_DELETE(m_weaponOBB);
+	SAFE_RELEASE(m_pFont);
 }
 
-void cWeapon::Setup(D3DXMATRIXA16* c_charactor, ST_BONE* c_hand)
+void cWeapon::Setup(D3DXMATRIXA16* c_charactor, ST_BONE* c_hand, D3DXMATRIXA16* player)
 {
+	SetFont();
+
+
 	m_pSkinnedMesh = new cSkinnedMesh();
 
 	m_pSkinnedMesh->Setup("Weapon", "doom.X");
 	m_handle = m_pSkinnedMesh->GetFindBONE("item_objectcomponents_weapon_mace_1h_doomhammer_d_02");
 
-	//m_weaponOBB = new cOBB();
-	//m_weaponOBB->Setup(m_pSkinnedMesh);
-
 	m_charactor = c_charactor;
 	m_hand = c_hand;
+
+	D3DXMATRIXA16  matR, matS, World;
+	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
+	D3DXMatrixScaling(&matS, 0.015f, 0.015f, 0.015f);
+	D3DXMatrixIdentity(&World);
+	World = matS * matR;
+	D3DXMatrixIdentity(&m_World);
+	m_World = World;
+
+
+	m_weaponOBB = new cOBB();
+	m_weaponOBB->Setup(m_pSkinnedMesh, &m_World);
+
 }
 
-void cWeapon::Update(D3DXMATRIXA16* world)
+void cWeapon::Update(D3DXMATRIXA16* world, ST_BONE* c_hand)
 {
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Update();
+
+	D3DXMATRIXA16 matS, matR;
+	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
+
 
 	if (g_pKeyManager->isOnceKeyDown(VK_TAB))
 	{
@@ -50,32 +79,44 @@ void cWeapon::Update(D3DXMATRIXA16* world)
 		Change_Weapon();
 	}
 
+
+
+	//matR = matR1;
+
+
 	if (m_weaponOBB)
-		m_weaponOBB->Update(world);
+	{
+		m_weaponOBB->Update(&m_player);
+	}
 }
 
-void cWeapon::Render()
+void cWeapon::Render(D3DXMATRIXA16* world)
 {
-	D3DXMATRIXA16 matS, matR, World;
+	D3DXMATRIXA16 matS;
 	D3DXMatrixScaling(&matS, 4.0f, 4.0f, 4.0f);
-	D3DXMatrixRotationX(&matR, D3DX_PI);
-	m_World =
-		matS
-		*m_hand->matCombinedTransformMatrix
-		*m_handle->matCombinedTransformMatrix
-		*(*m_charactor);
+	m_WorldTM =
+		matS *
+		(m_hand->matCombinedTransformMatrix)
+		*(m_handle->matCombinedTransformMatrix)
+		*(*world);
 
+	D3DXMatrixScaling(&matS, 35.0f, 35.0f, 35.0f);
+	m_player =
+		matS *
+		(m_hand->matCombinedTransformMatrix)
+		*(m_handle->matCombinedTransformMatrix)
+		*(*world);
 	if (m_pSkinnedMesh)
 	{
 		if (m_changeTime == NULL)
 		{
-			m_pSkinnedMesh->Render(NULL, &m_World);
+			m_pSkinnedMesh->Render(NULL, &m_WorldTM);
 		}
 		else
 		{
 			if (m_changeTime + 0.00001f < g_pTimeManager->GetEllapsedTime())
 			{
-				m_pSkinnedMesh->Render(NULL, &m_World);
+				m_pSkinnedMesh->Render(NULL, &m_WorldTM);
 				m_changeTime = NULL;
 			}
 		}
@@ -84,7 +125,9 @@ void cWeapon::Render()
 	D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 
 	if (m_weaponOBB)
-		m_weaponOBB->Render_Debug(c, &m_World,NULL);
+		m_weaponOBB->Render_Debug(c, &m_WorldTM, NULL);
+
+	RenderFont();
 }
 
 void cWeapon::Change_Weapon()
@@ -108,3 +151,61 @@ void cWeapon::Change_Weapon()
 		break;
 	}
 }
+
+void cWeapon::collsion(cOBB * EnemyBox)
+{
+	if (EnemyBox)
+	{
+
+		if (EnemyBox->getCheck(0).x != -431602080)
+		{
+			if (m_weaponOBB->IsCollision(m_weaponOBB, EnemyBox))
+			{
+				m_hp = 0;
+			}
+			else
+			{
+				m_hp = 1;
+			}
+		}
+	}
+
+}
+
+void cWeapon::SetFont()
+{
+	D3DXFONT_DESC stFD;
+	ZeroMemory(&stFD, sizeof(D3DXFONT_DESC));
+	stFD.Height = 50;
+	stFD.Width = 25;
+	stFD.Weight = FW_MEDIUM;
+	stFD.Italic = false;
+	stFD.CharSet = DEFAULT_CHARSET;
+	stFD.OutputPrecision = OUT_DEFAULT_PRECIS;
+	stFD.PitchAndFamily = FF_DONTCARE;
+
+	AddFontResource("font/umberto.ttf");
+	strcpy_s(stFD.FaceName, "umberto");
+
+	D3DXCreateFontIndirect(g_pD3DDevice, &stFD, &m_pFont);
+}
+
+void cWeapon::RenderFont()
+{
+	if (m_pFont)
+	{
+		std::string sText = Convert(m_hp);
+		//sprintf(sText, "%f", (PlayerInFo.HP));
+
+		RECT rc;
+		SetRect(&rc, 100, 100, 300, 200);
+
+		m_pFont->DrawText(NULL,
+			sText.c_str(),
+			sText.length(),
+			&rc,
+			DT_LEFT | DT_TOP | DT_NOCLIP,
+			D3DCOLOR_XRGB(255, 255, 0));
+	}
+}
+
