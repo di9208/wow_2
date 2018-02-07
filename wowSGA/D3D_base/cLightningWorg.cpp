@@ -66,11 +66,11 @@ void cLightningWorg::addMonster(float x, float y, float z){
 	Monster.Particle->init("UI/sword.png");
 
 	D3DXMATRIXA16	World, matS, matR, matT;
-	D3DXMatrixRotationX(&matR, D3DX_PI * 1.5);
-	D3DXMatrixScaling(&matS, 0.14, 0.14, 0.14);
+	D3DXMatrixRotationX(&matR, D3DX_PI/2.0f);
+	D3DXMatrixScaling(&matS, 0.011f, 0.011f, 0.011f);
 	D3DXMatrixIdentity(&matT);
-	D3DXMatrixTranslation(&matT, (Monster.m_vPos.x / 100) - 5, (Monster.m_vPos.y / 100) - 7.5, (Monster.m_vPos.z / 100) + 4);
-	World = matS * matR * matT;
+	D3DXMatrixTranslation(&matT, 0,0.35f,0.3);
+	World = matS * matR*matT ;
 
 	Monster.MonsterOBB = new cOBB;
 	Monster.MonsterOBB->Setup(Monster.m, &World);
@@ -126,7 +126,7 @@ void cLightningWorg::Update(iMap* map){
 		matUpdate(i, map);
 		m_vecSkinnedMesh[i].m->Update();
 		m_vecSkinnedMesh[i].Particle->update(1);
-		m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matWorld);
+		m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
 		MonsterAI(i);						//몬스터의 패턴, 스킬
 		MonsterStatus(i); 					//몬스터 상태, 애니메이션
 	}
@@ -504,6 +504,6 @@ void cLightningWorg::matUpdate(size_t i, iMap* pMap){
 	}
 
 	D3DXMatrixTranslation(&matT, m_vecSkinnedMesh[i].m_vPos.x, m_vecSkinnedMesh[i].m_vPos.y + 0.45, m_vecSkinnedMesh[i].m_vPos.z);
-
+	m_vecSkinnedMesh[i].matRT = matR * matT;
 	m_vecSkinnedMesh[i].matWorld = matS * matR * matT;
 }

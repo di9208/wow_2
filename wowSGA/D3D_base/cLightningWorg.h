@@ -47,6 +47,8 @@ class cLightningWorg : public cUnit
 		ST_MONSTER_ITEM						m_StItemSprite;
 		ST_MONSTER_ITEM						m_StInvectory;
 		std::vector<ST_MONSTER_ITEM>		m_ItemSprite;
+
+		D3DXMATRIXA16 matRT;
 	};
 private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
