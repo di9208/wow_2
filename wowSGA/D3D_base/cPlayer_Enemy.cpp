@@ -27,7 +27,7 @@ void cPlayer_Enemy::Setup()
 {
 	m_Player = new cPlayer();
 	m_Player->Setup();
-	
+
 	m_EnemyControl = new cEnemyControl();
 	m_EnemyControl->SetUp();
 
@@ -54,4 +54,10 @@ void cPlayer_Enemy::Render()
 		m_EnemyControl->Render();
 	//if (m_Stage1)
 	//	m_Stage1->Draw(m_Frustum);
+}
+
+void cPlayer_Enemy::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	if (m_Player)
+		m_Player->WndProc(hWnd, message, wParam, lParam);
 }

@@ -258,9 +258,6 @@
     <ClInclude Include="cEnemyControl.h">
       <Filter>unit\enemyManager\EnemyControl</Filter>
     </ClInclude>
-    <ClInclude Include="item_class.h">
-      <Filter>shop</Filter>
-    </ClInclude>
     <ClInclude Include="item_loader.h">
       <Filter>shop</Filter>
     </ClInclude>
@@ -332,6 +329,9 @@
     </ClInclude>
     <ClInclude Include="cScene1.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="item_class.h">
+      <Filter>ITEM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -485,9 +485,6 @@
     <ClCompile Include="cEnemyControl.cpp">
       <Filter>unit\enemyManager\EnemyControl</Filter>
     </ClCompile>
-    <ClCompile Include="item_class.cpp">
-      <Filter>shop</Filter>
-    </ClCompile>
     <ClCompile Include="item_loader.cpp">
       <Filter>shop</Filter>
     </ClCompile>
@@ -562,6 +559,9 @@
     </ClCompile>
     <ClCompile Include="cScene1.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="item_class.cpp">
+      <Filter>ITEM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

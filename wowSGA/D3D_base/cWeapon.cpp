@@ -4,16 +4,7 @@
 #include "cSkinnedMesh.h"
 #include "cOBB.h"
 
-#include <sstream>
-#include "cOBB.h"
 
-//
-//std::string Convert(float number) {
-//	std::ostringstream buff;
-//	buff << number;
-//	return buff.str();
-//
-//}
 cWeapon::cWeapon()
 	: m_pSkinnedMesh(NULL)
 	, m_hand(NULL)

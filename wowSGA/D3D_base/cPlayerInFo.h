@@ -28,6 +28,8 @@ private:
 	POINT Pt;
 	struct status
 	{
+		D3DXIMAGE_INFO			m_EquipUI_info;
+		LPDIRECT3DTEXTURE9		m_EquipUI;
 		RECT					m_statsRC;
 		bool					check;
 		std::string				information;
@@ -35,9 +37,27 @@ private:
 		float					m_y;
 	};
 
-	status						m_stats[5];
+	status						m_stats_UI[5];			//보여줄 이미지
+	D3DXIMAGE_INFO				m_stats_info[5];	//담아둘이미지
+	LPDIRECT3DTEXTURE9			m_stats[5];
+
+
+	status						m_skill_UI[5];	//보여줄 이미지
+
+												/*
+												0번 일반공격
+												1번 더블공격
+												2번 브레스 또는 포효
+												3번 구르기
+												*/
+
 	D3DXIMAGE_INFO				m_Dummy_info;
 	LPDIRECT3DTEXTURE9			m_Dummy;
+
+	D3DXIMAGE_INFO				m_HP_info;
+	LPDIRECT3DTEXTURE9			m_HP;
+
+	int ax;
 public:
 	cPlayerInFo();
 	~cPlayerInFo();
