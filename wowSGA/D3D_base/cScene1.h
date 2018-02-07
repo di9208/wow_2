@@ -27,8 +27,6 @@ public:
 	void Destroy();
 	void Update();
 	void Render();
-	
-	void Load();
 
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 

@@ -35,11 +35,11 @@ void cBossAniController::SetUp()
 	D3DXMatrixIdentity(&matT);
 	D3DXMatrixTranslation(&matT, -3, 0, -17);
 	D3DXMATRIXA16 matR, matS, World;
-	D3DXMatrixScaling(&matS, 0.15f, 0.15f, 0.15f);
+	D3DXMatrixScaling(&matS, 0.02f, 0.02f, 0.02f);
 
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.f);
 
-	World = matS * matT* matR;
+	World = matS * matR;
 
 	m_pBossOBB = new cOBB();
 	m_pBossOBB->Setup(m_pSkinnedMesh, &World);
@@ -50,8 +50,9 @@ void cBossAniController::Update(E_BOSS_STATE* pState)
 {
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Update();
+	
 	if (m_pBossOBB)
-		m_pBossOBB->Update(&m_World);
+		m_pBossOBB->Update(&m_obbw);
 	if (m_pSkinnedMesh->GetCheck() && *pState != E_BOSS_DEATH)
 	{
 		(*pState) = E_BOSS_STAND;
@@ -120,16 +121,18 @@ void cBossAniController::Render(D3DXMATRIXA16 * m_world)
 	D3DXMatrixTranslation(&matT, m_vBossPos.x, m_vBossPos.y, m_vBossPos.z);
 
 	World = matS*matXX *matR*matT;
-
+	m_obbw = matXX * matR*matT;
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Render(NULL, &World);
 
 	D3DXCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-	if (m_pBossOBB)
-		m_pBossOBB->Render_Debug(c, &World, NULL);
+	//if (m_pBossOBB)
+	//	m_pBossOBB->Render_Debug(c, &World, NULL);
 
 	if(cBoss_STATE == E_BOSS_SPELL1)
 	m_pSkinnedMeshSkill->Render(NULL, &World);
+
+	m_pBossOBB->Render_Debug(D3DCOLOR_XRGB(192, 0, 0),nullptr , nullptr);
 
 }
 

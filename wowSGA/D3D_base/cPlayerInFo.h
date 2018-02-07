@@ -43,13 +43,13 @@ private:
 
 
 	status						m_skill_UI[5];	//보여줄 이미지
-
-												/*
-												0번 일반공격
-												1번 더블공격
-												2번 브레스 또는 포효
-												3번 구르기
-												*/
+	status						m_coolTime_UI[5];
+	/*
+	0번 일반공격
+	1번 더블공격
+	2번 브레스 또는 포효
+	3번 구르기
+	*/
 
 	D3DXIMAGE_INFO				m_Dummy_info;
 	LPDIRECT3DTEXTURE9			m_Dummy;

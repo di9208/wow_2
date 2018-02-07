@@ -22,6 +22,8 @@ private:
 	SYNTHESIZE_REF(D3DXMATRIXA16, m_world, World);
 	D3DXVECTOR3	m_vBossDirX;
 	SYNTHESIZE(D3DXMATRIXA16, m_World, World);
+
+	D3DXMATRIXA16 m_obbw;
 public:
 	cBossAniController();
 	~cBossAniController();

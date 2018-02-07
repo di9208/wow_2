@@ -107,11 +107,6 @@ void cScene1::Render()
 	///////////////////////////////////////////
 }
 
-void cScene1::Load()
-{
-	//FILE
-}
-
 void cScene1::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (m_pCamera)

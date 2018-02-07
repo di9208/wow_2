@@ -3,7 +3,6 @@
 #include "cSkinnedMesh.h"
 #include "iMap.h"
 #include <time.h>
-#include "cOBB.h"
 
 cBoneSpider::cBoneSpider()
 : m_vecSkinnedMesh(NULL)
@@ -58,12 +57,12 @@ void cBoneSpider::addMonster(float x, float y, float z){
 	Monster.attackTime = 100;
 	Monster.termCount = 0;
 	Monster.RunCount = rand() % 250 + 10;
-	
+
 	D3DXMATRIXA16	matS;
 	D3DXMatrixIdentity(&Monster.matWorld);
 	D3DXMatrixScaling(&matS, 0.4, 0.4, 0.4);
-	//Monster.matS = matS;
 	Monster.matWorld = matS;
+
 	ZeroMemory(&Monster.m_stMtlNone, sizeof(D3DMATERIAL9));
 	Monster.m_stMtlNone.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
 	Monster.m_stMtlNone.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
@@ -74,26 +73,14 @@ void cBoneSpider::addMonster(float x, float y, float z){
 	Monster.m_stMtlPicked.Diffuse = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
 	Monster.m_stMtlPicked.Specular = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
 
-	D3DXMATRIXA16  matR, matSS, World,matT;
-	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
-	D3DXMatrixScaling(&matSS, 0.009f, 0.009f, 0.009f);
-	D3DXMatrixIdentity(&World);
-	D3DXMatrixTranslation(&matT, 0.0f, 0, -0.3f);
-	World = matSS*matR*matT;
-	Monster.OBB = new cOBB;
-	Monster.OBB->Setup(Monster.m, &World);
-
-
 	D3DXCreateSphere(g_pD3DDevice, Monster.m_Sphere.fRadius, 10, 10,
 		&Monster.m_pMeshSphere, NULL);
 
 	m_vecSkinnedMesh.push_back(Monster);
-
 }
 
 
 void cBoneSpider::SetUp(){
-
 	D3DXFONT_DESC stFD;
 	srand(time(NULL));
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
@@ -125,7 +112,6 @@ void cBoneSpider::Update(iMap* pMap){
 		m_vecSkinnedMesh[i].m->Update();
 		MonsterAI(i);						//몬스터의 패턴, 스킬
 		MonsterStatus(i); 					//몬스터 상태, 애니메이션
-		m_vecSkinnedMesh[i].OBB->Update(&m_vecSkinnedMesh[i].RT);
 	}
 }
 
@@ -139,7 +125,6 @@ void cBoneSpider::Render(){
 				RenderUI(i, j, 10, 10, 79, 80);
 			}
 		}
-		m_vecSkinnedMesh[i].OBB->Render_Debug(D3DCOLOR_XRGB(192, 0, 0), nullptr,nullptr);
 	}
 	/*if (m_pFont)
 	{
@@ -500,8 +485,4 @@ void cBoneSpider::matUpdate(size_t i, iMap* pMap){
 	D3DXMatrixTranslation(&matT, m_vecSkinnedMesh[i].m_vPos.x, m_vecSkinnedMesh[i].m_vPos.y + 0.45, m_vecSkinnedMesh[i].m_vPos.z);
 
 	m_vecSkinnedMesh[i].matWorld = matS * matR * matT;
-
-	D3DXMATRIXA16 matTT;
-	D3DXMatrixTranslation(&matTT, -0.2f, 0, 0);
-	m_vecSkinnedMesh[i].RT = matR * matT;
 }
