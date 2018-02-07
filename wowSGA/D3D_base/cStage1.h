@@ -21,7 +21,7 @@ private:
 
 private:
 	cQuadTree * m_QuadTree;
-
+	LPDIRECT3DTEXTURE9			m_pTexture;
 public:
 	cStage1();
 	~cStage1();

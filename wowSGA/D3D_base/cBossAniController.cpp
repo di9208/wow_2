@@ -8,7 +8,7 @@ cBossAniController::cBossAniController()
 	, cBoss_STATE(E_BOSS_STAND)
 	, m_fBossRotY(0.f)
 	, m_vBossDirX(1,0,0)
-	, m_vBossDir(1,0,0)
+	, m_vBossDir(0,0,1)
 	, m_vBossPos(-5,0,0)
 	, m_pSkinnedMeshSkill(NULL)
 	, m_bSKill(false)
@@ -43,6 +43,7 @@ void cBossAniController::SetUp()
 
 	m_pBossOBB = new cOBB();
 	m_pBossOBB->Setup(m_pSkinnedMesh, &World);
+
 }
 
 void cBossAniController::Update(E_BOSS_STATE* pState)
@@ -96,33 +97,35 @@ void cBossAniController::Update(E_BOSS_STATE* pState)
  
 void cBossAniController::Render(D3DXMATRIXA16 * m_world)
 {
-	D3DXMATRIXA16 matR, matS, matT, matX, World;
+	D3DXMATRIXA16 matR, matS, matT, matX, matXX, World;
 	D3DXMatrixScaling(&matS, 0.15f, 0.15f, 0.15f);
 	
-	D3DXMatrixRotationX(&matR, D3DX_PI / 2.f);
-	D3DXMatrixRotationY(&matR, m_fBossRotY);
+	//D3DXMatrixRotationX(&matR, D3DX_PI / 2.f);
+	//D3DXMatrixRotationY(&matR, m_fBossRotY);
 
 	D3DXMatrixIdentity(&matT);
-	D3DXMatrixTranslation(&matT, m_vBossPos.x, m_vBossPos.y, m_vBossPos.z);
-	D3DXMatrixRotationY(&matR, D3DX_PI / -2.3f);
-	D3DXVECTOR3 dir;
-	D3DXVec3TransformNormal(&dir, &m_vBossDir, &matR);
+	
+	//D3DXMatrixRotationY(&matX, D3DX_PI/6.0f);
+	D3DXMatrixRotationY(&matXX, -D3DX_PI / 2.0f);
+	//D3DXVECTOR3 dir;
+	//D3DXVec3TransformNormal(&dir, &m_vBossDir, &matR);
+
 	D3DXVECTOR3 vUp(0, 1, 0);
 	D3DXVECTOR3 vRight;
-	D3DXVec3Cross(&vRight, &vUp, &dir);
+	D3DXVec3Cross(&vRight, &vUp, &m_vBossDir);
 	D3DXVec3Normalize(&vRight, &vRight);
-	D3DXVec3Cross(&vUp, &dir, &vRight);
-	D3DXMatrixLookAtLH(&matR, &D3DXVECTOR3(0, 0, 0), &dir, &vUp);
+	D3DXVec3Cross(&vUp, &m_vBossDir, &vRight);
+	D3DXMatrixLookAtLH(&matR, &D3DXVECTOR3(0, 0, 0), &m_vBossDir, &vUp);
 	D3DXMatrixTranspose(&matR, &matR);
-		
-	World = matS * matR * matT;
+	D3DXMatrixTranslation(&matT, m_vBossPos.x, m_vBossPos.y, m_vBossPos.z);
+	World = matS*matXX *matR*matT;
 
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Render(NULL, &World);
 
 	D3DXCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 	if (m_pBossOBB)
-		m_pBossOBB->Render_Debug(c, &World, NULL);
+	//	m_pBossOBB->Render_Debug(c, &World, NULL);
 
 	if(cBoss_STATE == E_BOSS_SPELL1)
 	m_pSkinnedMeshSkill->Render(NULL, &World);

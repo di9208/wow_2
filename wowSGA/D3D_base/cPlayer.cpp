@@ -6,7 +6,7 @@
 #include "cWeapon.h"
 #include "cPlayerInFo.h"
 #include "cOBB.h"
-
+#include "iMap.h"
 cPlayer::cPlayer()
 	:m_playerAnimController(NULL),
 	m_playerSkill(NULL),
@@ -56,9 +56,9 @@ void cPlayer::Setup()
 	m_weaponOBB->Setup(m_Weapon->GetSkinnedMesh(),&World);
 }
 
-void cPlayer::Update()
+void cPlayer::Update(iMap* pMap)
 {
-	cCharacter::Update(NULL, m_playerAnimController->GetAniCheck());
+	cCharacter::Update(pMap, m_playerAnimController->GetAniCheck());
 
 	if (m_playerAnimController)
 		m_playerAnimController->Update(&m_chractor_condition);

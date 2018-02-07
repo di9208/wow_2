@@ -5,7 +5,7 @@
 #include "cEnemyControl.h"
 #include "cStage1.h"
 #include "cFrustum.h"
-
+#include "iMap.h"
 cPlayer_Enemy::cPlayer_Enemy()
 	:m_Player(NULL),
 	m_EnemyControl(NULL),
@@ -37,10 +37,10 @@ void cPlayer_Enemy::Setup()
 	m_Frustum = new cFrustum();
 }
 
-void cPlayer_Enemy::Update()
+void cPlayer_Enemy::Update(iMap* pMap)
 {
 	if (m_Player)
-		m_Player->Update();
+		m_Player->Update(pMap);
 	if (m_EnemyControl)
 		m_EnemyControl->Update(m_Player->GetPosition());
 }
@@ -49,6 +49,7 @@ void cPlayer_Enemy::Render()
 {
 	if (m_Player)
 		m_Player->Render();
+
 	if (m_EnemyControl)
 		m_EnemyControl->Render();
 	//if (m_Stage1)
