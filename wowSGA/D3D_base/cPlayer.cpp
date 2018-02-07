@@ -96,9 +96,9 @@ void cPlayer::Collsion(cOBB * EnemyBox)
 
 void cPlayer::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	if (m_playerPicking)
+	if (m_playerInFo)
 	{
-
+		m_playerInFo->WndProc(hWnd, message, wParam, lParam);
 	}
 }
 

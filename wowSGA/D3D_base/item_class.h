@@ -16,12 +16,13 @@ class item_class
 
 	enum item_type
 	{
-		weapon,
-		Armor,
-		special_item,
+		weapon,		//公扁
+		Armor,		//规绢备
+		special_item,	//
 		Interaction_item,
-		using_item
+		using_item	//器记
 	};
+
 
 	struct item_option
 	{

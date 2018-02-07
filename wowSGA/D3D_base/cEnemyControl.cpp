@@ -2,17 +2,21 @@
 #include "cEnemyControl.h"
 #include "cBoneSpider.h"
 #include "cArchDruid.h"
-#include "cBoneGuardFel.h"
+#include "cLightningWorg.h"
 #include "cBossAniController.h"
 #include "cBossSkill.h"
 #include "cBossRagController.h"
+<<<<<<< HEAD
 #include "cArthasOBB.h"
 #include "cOBB.h"
+=======
+#include "iMap.h"
+>>>>>>> 72f066e32ec4f392b2344dba91c114e0d9747132
 
 cEnemyControl::cEnemyControl()
 	: m_pSpider(NULL)
 	, m_pDruid(NULL)
-	, m_pGuardFel(NULL)
+	, m_pWorg(NULL)
 	, m_pBossAniController(NULL)
 	, m_pBossSkill(NULL)
 	, nCount(0)
@@ -34,7 +38,7 @@ cEnemyControl::~cEnemyControl()
 	SAFE_RELEASE(m_pFont);
 	SAFE_DELETE(m_pSpider);
 	SAFE_DELETE(m_pDruid);
-	SAFE_DELETE(m_pGuardFel);
+	SAFE_DELETE(m_pWorg);
 	SAFE_DELETE(m_pBossAniController);
 	SAFE_DELETE(m_pBossRagController);
 	SAFE_DELETE(m_pBossSkill);
@@ -43,13 +47,13 @@ cEnemyControl::~cEnemyControl()
 
 void cEnemyControl::SetUp(){
 	m_pSpider = new cBoneSpider;
-	m_pSpider->addMonster(1, 0, 4);
+	//m_pSpider->addMonster(1, 0, 4);
 
 	m_pDruid = new cArchDruid;
-	m_pDruid->addMonster(-4, 0, -4);
+	//m_pDruid->addMonster(-4, 0, -4);
 
-	m_pGuardFel = new cBoneGuardFel;
-	m_pGuardFel->addMonster(4, 0, -4);
+	m_pWorg = new cLightningWorg;
+	m_pWorg->addMonster(4, 0, -4);
 
 	if (m_pSpider) m_pSpider->SetUp();
 	if (m_pDruid) m_pDruid->SetUp();
@@ -75,24 +79,24 @@ void cEnemyControl::SetUp(){
 
 }
 
-void cEnemyControl::Update(D3DXVECTOR3 d){
+void cEnemyControl::Update(D3DXVECTOR3 d, iMap* pMap){
 	BossUpdate();
 	BossPlayerRot(d);
 	BossRagPlayerRot(d);
 	//enemy
 	if (m_pSpider) {
-		m_pSpider->Update();
+		m_pSpider->Update(pMap);
 		m_pSpider->MonsterInsic(d);
 	}
 
 	if (m_pDruid) {
-		m_pDruid->Update();
+		m_pDruid->Update(pMap);
 		m_pDruid->MonsterInsic(d);
 	}
 
-	if (m_pGuardFel) {
-		m_pGuardFel->Update();
-		m_pGuardFel->MonsterInsic(d);
+	if (m_pWorg) {
+		m_pWorg->Update(pMap);
+		m_pWorg->MonsterInsic(d);
 	}
 
 	
@@ -103,7 +107,7 @@ void cEnemyControl::Update(D3DXVECTOR3 d){
 void cEnemyControl::Render(){
 	if (m_pSpider) m_pSpider->Render();
 	if (m_pDruid) m_pDruid->Render();
-	if (m_pGuardFel) m_pGuardFel->Render();
+	if (m_pWorg) m_pWorg->Render();
 
 	BossRender();
 	if (m_pFont)
@@ -713,8 +717,8 @@ void cEnemyControl::SummonsEnemy(){
 	if (g_pKeyManager->isOnceKeyDown('X')){
 		int x = rand() % 15;
 		int z = rand() % 15;
-		m_pSpider->addMonster(x, 0, z);
-		m_pDruid->addMonster(-x, 0, -z);
-		m_pGuardFel->addMonster(x, 0, -z);
+		//m_pSpider->addMonster(x, 0, z);
+		//m_pDruid->addMonster(-x, 0, -z);
+		m_pWorg->addMonster(x, 0, -z);
 	}
 }

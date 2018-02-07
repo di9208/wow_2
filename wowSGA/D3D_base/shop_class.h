@@ -15,7 +15,8 @@ private:
 
 	cUIImage* item_slot[10];
 	cUIText* item_Main_name[10];
-	cUIText* item_Sub_name[10];
+	cUIImage* item_money[30];
+	cUIText* item_moeny_text[30];
 
 	cUIText* Page_TEXT_UI;
 	int Now_page_num;
@@ -40,6 +41,7 @@ public:
 
 	void setting_UI_frame();
 	void setting_show_item_UI();
-	void reset_item_UI();
+
+	void setting_moneyFram(float x, float y, int numbers, int money);
 };
 

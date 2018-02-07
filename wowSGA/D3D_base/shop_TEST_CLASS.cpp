@@ -85,8 +85,8 @@ void shop_TEST_CLASS::Update()
 		_invens->GetINVEN()->Sethidden(false);
 	}
 
-	if (g_pKeyManager->isOnceKeyDown('M'))
-	{
+	//if (g_pKeyManager->isOnceKeyDown('M'))
+	//{
 		//if (shop_inven_UI.size() > shop_inven_calling_now_num)
 		//{
 		//	item_class* temp;
@@ -111,7 +111,7 @@ void shop_TEST_CLASS::Update()
 		//
 		//	shop_inven_calling_now_num++;
 		//}
-	}
+	//}
 
 	//if (g_pKeyManager->isStayKeyDown(VK_LBUTTON))
 	//{	

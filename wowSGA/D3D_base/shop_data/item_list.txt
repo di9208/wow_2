@@ -10,7 +10,7 @@
 			*ATK 100
 			*DEF 0
 			*ATK_SPEED 0.5
-			*PRICE 20
+			*PRICE 127
 			*UPGRADE 0
 		}
 		*STORE_OPTION {

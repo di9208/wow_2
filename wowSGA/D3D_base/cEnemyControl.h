@@ -3,12 +3,16 @@
 
 class cBoneSpider;
 class cArchDruid;
-class cBoneGuardFel;
+class cLightningWorg;
 class cBossAniController;
 class cBossSkill;
 class cBossRagController;
+<<<<<<< HEAD
 class cArthasOBB;
 class cOBB;
+=======
+class iMap;
+>>>>>>> 72f066e32ec4f392b2344dba91c114e0d9747132
 
 struct stBoss
 {
@@ -57,7 +61,7 @@ class cEnemyControl : public cEnemyManager
 private:
 	cBoneSpider*	m_pSpider;
 	cArchDruid*		m_pDruid;
-	cBoneGuardFel*	m_pGuardFel;
+	cLightningWorg*	m_pWorg;
 
 private:
 	SYNTHESIZE(std::vector<stBoss>, m_vecBoss, vecBoss);
@@ -108,7 +112,7 @@ private:
 
 public:
 	void SetUp();
-	void Update(D3DXVECTOR3 d);
+	void Update(D3DXVECTOR3 d, iMap* pMap);
 	void Render();
 
 

@@ -17,5 +17,7 @@ public:
 	void Setup();
 	void Update(iMap* pMap);
 	void Render();
+	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
 };
 

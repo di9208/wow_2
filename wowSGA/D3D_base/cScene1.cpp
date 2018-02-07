@@ -11,7 +11,7 @@ cScene1::cScene1()
 	: m_pCamera(NULL)
 	, m_pGrid(NULL)
 	, m_Player_Enemy(NULL)
-	, m_shop_TEST_CLASS(NULL)	
+	, m_shop_TEST_CLASS(NULL)
 	, m_Stage1(NULL)
 	, m_Frustum(NULL)
 {
@@ -93,7 +93,7 @@ void cScene1::Render()
 	// TODO : ±×¸®±â
 	if (m_pGrid)
 		m_pGrid->Render();
-	
+
 	if (m_Player_Enemy)
 		m_Player_Enemy->Render();
 
@@ -113,5 +113,7 @@ void cScene1::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		m_pCamera->WndProc(hWnd, message, wParam, lParam);
 	if (m_shop_TEST_CLASS)
 		m_shop_TEST_CLASS->WndProc(hWnd, message, wParam, lParam);
+	if (m_Player_Enemy)
+		m_Player_Enemy->WndProc(hWnd, message, wParam, lParam);
 
 }

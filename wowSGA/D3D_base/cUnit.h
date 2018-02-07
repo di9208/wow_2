@@ -1,6 +1,7 @@
 #pragma once
 struct TagUnit
 {
+	float		Max_HP;
 	float		HP;		//체력
 	float		MP;		//엠피
 	float		ATK;	//공격력

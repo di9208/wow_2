@@ -258,9 +258,6 @@
     <ClInclude Include="cEnemyControl.h">
       <Filter>unit\enemyManager\EnemyControl</Filter>
     </ClInclude>
-    <ClInclude Include="item_class.h">
-      <Filter>shop</Filter>
-    </ClInclude>
     <ClInclude Include="item_loader.h">
       <Filter>shop</Filter>
     </ClInclude>
@@ -306,9 +303,6 @@
     <ClInclude Include="cArchDruid.h">
       <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
-    <ClInclude Include="cBoneGuardFel.h">
-      <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClInclude>
     <ClInclude Include="cBossRagController.h">
       <Filter>unit\enemyManager\boss\ragnaros</Filter>
     </ClInclude>
@@ -333,11 +327,25 @@
     <ClInclude Include="cScene1.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="cBossAniController.h">
       <Filter>unit\enemyManager\boss\arthas</Filter>
     </ClInclude>
     <ClInclude Include="cArthasOBB.h">
       <Filter>헤더 파일</Filter>
+=======
+    <ClInclude Include="item_class.h">
+      <Filter>ITEM</Filter>
+    </ClInclude>
+    <ClInclude Include="cLightningWorg.h">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClInclude>
+    <ClInclude Include="cMonsterParticle.h">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClInclude>
+    <ClInclude Include="cParticle.h">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+>>>>>>> 72f066e32ec4f392b2344dba91c114e0d9747132
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -488,9 +496,6 @@
     <ClCompile Include="cEnemyControl.cpp">
       <Filter>unit\enemyManager\EnemyControl</Filter>
     </ClCompile>
-    <ClCompile Include="item_class.cpp">
-      <Filter>shop</Filter>
-    </ClCompile>
     <ClCompile Include="item_loader.cpp">
       <Filter>shop</Filter>
     </ClCompile>
@@ -539,9 +544,6 @@
     <ClCompile Include="cArchDruid.cpp">
       <Filter>unit\enemyManager\쫄몹</Filter>
     </ClCompile>
-    <ClCompile Include="cBoneGuardFel.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClCompile>
     <ClCompile Include="cBossRagController.cpp">
       <Filter>unit\enemyManager\boss\ragnaros</Filter>
     </ClCompile>
@@ -566,11 +568,25 @@
     <ClCompile Include="cScene1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="cBossAniController.cpp">
       <Filter>unit\enemyManager\boss\arthas</Filter>
     </ClCompile>
     <ClCompile Include="cArthasOBB.cpp">
       <Filter>소스 파일</Filter>
+=======
+    <ClCompile Include="item_class.cpp">
+      <Filter>ITEM</Filter>
+    </ClCompile>
+    <ClCompile Include="cLightningWorg.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClCompile>
+    <ClCompile Include="cMonsterParticle.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClCompile>
+    <ClCompile Include="cParticle.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+>>>>>>> 72f066e32ec4f392b2344dba91c114e0d9747132
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

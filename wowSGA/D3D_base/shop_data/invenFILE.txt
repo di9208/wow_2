@@ -6,7 +6,7 @@
 	*ITEM_WHERE "EQUIT"
 	*ITEM_TYPE "WEAPON"
 	*ITEM_SUBTEXT "긴 검이다."
-	*ITEM_IMAGE "export/item/inv-sword_53.PNG" 
+	*ITEM_IMAGE "shop_data/INV_Sword_04.PNG" 
 		*ITEM_OPTION {
 			*ATK 100
 			*DEF 0
@@ -16,12 +16,12 @@
 		}
 	}
 	*ITEM {
-	*ITEM_NAME "다른 소드~"
-	*ITEM_NUMBER 0
+	*ITEM_NAME "망치"
+	*ITEM_NUMBER 1
 	*ITEM_WHERE "EQUIT"
 	*ITEM_TYPE "WEAPON"
-	*ITEM_SUBTEXT "긴 검이다."
-	*ITEM_IMAGE "export/item/inv-sword_53.PNG" 
+	*ITEM_SUBTEXT "망치다."
+	*ITEM_IMAGE "shop_data/INV_Hammer_17.PNG" 
 		*ITEM_OPTION {
 			*ATK 100
 			*DEF 0
@@ -31,27 +31,12 @@
 		}
 	}
 	*ITEM {
-	*ITEM_NAME "롱 소드"
-	*ITEM_NUMBER 0
+	*ITEM_NAME "도끼"
+	*ITEM_NUMBER 2
 	*ITEM_WHERE "EQUIT"
 	*ITEM_TYPE "WEAPON"
-	*ITEM_SUBTEXT "긴 검이다."
-	*ITEM_IMAGE "export/item/inv-sword_53.PNG" 
-		*ITEM_OPTION {
-			*ATK 100
-			*DEF 0
-			*ATK_SPEED 0.5
-			*PRICE 20
-			*UPGRADE 0
-		}
-	}
-	*ITEM {
-	*ITEM_NAME "롱 소드"
-	*ITEM_NUMBER 0
-	*ITEM_WHERE "EQUIT"
-	*ITEM_TYPE "WEAPON"
-	*ITEM_SUBTEXT "긴 검이다."
-	*ITEM_IMAGE "export/item/inv-sword_53.PNG" 
+	*ITEM_SUBTEXT "도끼다."
+	*ITEM_IMAGE "shop_data/INV_Axe_1h_DeathwingRaidDW_D_01.PNG" 
 		*ITEM_OPTION {
 			*ATK 100
 			*DEF 0
