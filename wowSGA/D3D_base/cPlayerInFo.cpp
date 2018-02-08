@@ -5,7 +5,10 @@
 #include "cOBB.h"
 #include "item_class.h"
 #include "inventory.h"
+#include "shop_class.h"
 #include "cUIImage.h"
+#include "cUIButton.h"
+#include "Button_delegate.h"
 
 cPlayerInFo::cPlayerInFo()
 	:m_pTexture(NULL)
@@ -51,6 +54,14 @@ cPlayerInFo::~cPlayerInFo()
 		SAFE_RELEASE(m_stats[i]);
 	}
 	SAFE_DELETE(m_playerOBB);
+	SAFE_DELETE(close_button);
+
+	for (int i = 0; i < 5; i++)
+	{
+		item_slot[i]->Destroy();
+	}
+
+	close_button->Destroy();
 }
 
 void cPlayerInFo::Setup(cSkinnedMesh* playerSkinned, D3DXMATRIXA16* playerWorld)
@@ -86,8 +97,15 @@ void cPlayerInFo::Update(condition* pCondition, D3DXMATRIXA16* pMatWorld)
 	}
 	if (g_pKeyManager->isOnceKeyDown('E'))
 	{
-		if (!m_status)m_status = true;
-		else m_status = false;
+		if (close_button->Gethidden())
+		{
+			close_button->Sethidden(false);
+			inven_copy->get_shop()->GetSHOP()->Sethidden(true);
+		}
+		else close_button->Sethidden(true);
+
+		//if (!m_status)m_status = true;
+		//else m_status = false;
 	}
 	if (m_playerOBB)
 		m_playerOBB->Update(pMatWorld);
@@ -105,8 +123,13 @@ void cPlayerInFo::Update(condition* pCondition, D3DXMATRIXA16* pMatWorld)
 	for (int i = 0; i < player_Equite_vector.size(); i++)
 	{
 		item_slot[i]->Update();
+		item_slot[i]->Sethidden(!m_status);
 	}
+	close_button->Update();
+	m_status = !close_button->Gethidden();
+
 	EQUIT_ITEM();
+	UnEquite_Item();
 }
 
 void cPlayerInFo::SetFont()
@@ -278,6 +301,7 @@ void cPlayerInFo::Render(D3DXMATRIXA16* playerWorld, D3DXMATRIXA16* pMatWorld)
 			item_slot[i]->Render(UI_sprite);
 		}
 
+		close_button->Render(UI_sprite);
 		UI_sprite->End();
 	}
 
@@ -341,6 +365,8 @@ void cPlayerInFo::getItem(shop_TEST_CLASS* iven_item)
 {
 	if (iven_item)
 	{
+		inven_copy = iven_item;
+
 		//Å¬¸¯ÇßÀ»¶¼	
 		if (iven_item->Getpick_Truefalse())
 		{
@@ -387,6 +413,15 @@ void cPlayerInFo::setRC()
 	{
 		item_slot[i] = new cUIImage;
 	}
+
+	Button_delegate* button_delegae = new Button_delegate;
+
+	close_button = new cUIButton;
+	close_button->SetTag(TAG_CHILD_CLOSE);
+	close_button->SetTexture("player_info_close", "shop_data/UI-Panel-MinimizeButton-Up.PNG", "shop_data/UI-Panel-MinimizeButton-Disabled.PNG", "shop_data/UI-Panel-MinimizeButton-Down.PNG");
+	close_button->SetPos(D3DXVECTOR3(570, 158, 0));
+	close_button->SetDeleGate(button_delegae);
+	close_button->Sethidden(true);
 
 	float base_X = 50;
 	float base_Y = 150;
@@ -441,7 +476,6 @@ void cPlayerInFo::setting_EQUIT_UI()
 
 		item_slot[i]->SetTexture(chartext);
 		item_slot[i]->SetPos(D3DXVECTOR3(m_stats_UI[i].m_x, m_stats_UI[i].m_y, 0));
-		item_slot[i]->Sethidden(!m_status);
 		item_slot[i]->SetScal(D3DXVECTOR3(0.55, 0.55, 0));
 	}
 }
@@ -457,6 +491,25 @@ void cPlayerInFo::EQUIT_ITEM()
 	m_PlayerInFo.ATK = atk + curATK;
 	m_PlayerInFo.DEF = def + curDEF;
 }
+
+void cPlayerInFo::UnEquite_Item()
+{
+	for (int i = 0; i < player_Equite_vector.size(); i++)
+	{
+		RECT rc;
+		SetRect(&rc, m_stats_UI[i].m_x, m_stats_UI[i].m_y, m_stats_UI[i].m_x + 40, m_stats_UI[i].m_y + 40);
+
+		if (PtInRect(&rc, Pt))
+		{
+			if (GetKeyState(VK_RBUTTON) & 0x8000)
+			{
+				inven_copy->get_inven()->Add_inven(player_Equite_vector[i]);
+				player_Equite_vector.erase(player_Equite_vector.begin() + i);
+			}
+		}
+	}
+}
+
 void cPlayerInFo::SetUI()
 {
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);

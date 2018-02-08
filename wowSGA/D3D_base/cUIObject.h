@@ -5,7 +5,8 @@ enum ENUMTAG
 {
 	TAG_SHOP,
 	TAG_BUYBACK,
-	TAG_CLOSE
+	TAG_CLOSE,
+	TAG_CHILD_CLOSE
 };
 
 class cUIObject :public cObject

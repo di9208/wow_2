@@ -10,6 +10,7 @@
 #include "wordManager.h"
 #include "cNpc.h"
 #include "inventory.h"
+#include "cPlayerInFo.h"
 
 shop_TEST_CLASS::shop_TEST_CLASS()
 	: _shops(NULL)
@@ -76,10 +77,12 @@ void shop_TEST_CLASS::Update()
 	if (_npc)
 		_npc->update();
 
-	if (_npc->GetM_info().bIsPicked)
+	if (_npc->GetRAYPICK())
 	{
 		_shops->GetSHOP()->Sethidden(false);
 		_invens->GetINVEN()->Sethidden(false);
+		player_info_page->GetEquite_window()->Sethidden(true);
+		_npc->SetRAYPICK(false);
 		is_interface = true;
 	}
 
