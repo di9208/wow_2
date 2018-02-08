@@ -6,6 +6,7 @@
 #include "cStage1.h"
 #include "cFrustum.h"
 #include "iMap.h"
+#include "shop_TEST_CLASS.h"
 cPlayer_Enemy::cPlayer_Enemy()
 	:m_Player(NULL),
 	m_EnemyControl(NULL),
@@ -70,4 +71,9 @@ void cPlayer_Enemy::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 {
 	if (m_Player)
 		m_Player->WndProc(hWnd, message, wParam, lParam);
+}
+void cPlayer_Enemy::connet_shop(shop_TEST_CLASS * _connectSHOP)
+{
+	if (m_Player)
+		m_Player->connet_shop_test_class(_connectSHOP);
 }

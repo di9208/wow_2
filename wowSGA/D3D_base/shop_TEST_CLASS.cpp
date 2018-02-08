@@ -25,17 +25,14 @@ shop_TEST_CLASS::shop_TEST_CLASS()
 
 shop_TEST_CLASS::~shop_TEST_CLASS()
 {
-	for each(auto p in _vtestitem)
-	{
-		SAFE_DELETE(p);
-	}
-
 	SAFE_DELETE(_shops);
 	SAFE_RELEASE(UI_sprite);
 	shop_inven_UI.clear();
 	SAFE_DELETE(WM_MANAGER);
 	SAFE_DELETE(_npc);
 	SAFE_DELETE(_invens);
+
+	//_mouse->Destroy();
 }
 
 void shop_TEST_CLASS::Setup()
@@ -54,14 +51,13 @@ void shop_TEST_CLASS::Setup()
 	WM_MANAGER = new wordManager;
 	WM_MANAGER->SetFont();
 
-	cUIImage* _UImouse;
-	_UImouse = new cUIImage;
-	_UImouse->SetTexture("shop_data/cursor/Attack.PNG");
-	_mouse = _UImouse;
-	_mouse->Sethidden(true);
+	//cUIImage* _UImouse;
+	//_UImouse = new cUIImage;
+	//_UImouse->SetTexture("shop_data/cursor/Attack.PNG");
+	//_mouse = _UImouse;
+	//_mouse->Sethidden(true);
 
 	shop_inven_calling_now_num = 0;
-	Money = 1000;
 
 	shop_inven_UI.resize(28);
 	for (int i = 0; i < 4; i++)
@@ -72,6 +68,11 @@ void shop_TEST_CLASS::Setup()
 			shop_inven_UI[i * 7 + j].y = 74 + 43 * i;
 		}
 	}
+
+	sender.item_data = new item_class;
+	sender.mouse_pick = new cUIImage;
+	sender.pick_now = false;
+
 }
 
 void shop_TEST_CLASS::Update()
@@ -83,36 +84,148 @@ void shop_TEST_CLASS::Update()
 	{
 		_shops->GetSHOP()->Sethidden(false);
 		_invens->GetINVEN()->Sethidden(false);
+		is_interface = true;
 	}
+
+	int item_nums = 0;
+
+	if (!_shops->GetSHOP()->Gethidden())
+	{
+		if (_shops->ischeck(item_nums))
+		{
+			if (g_pKeyManager->isOnceKeyDown(VK_RBUTTON))
+			{
+				if (_invens->Getvector_inven().size() < 16)
+				{
+					item_class* temp;
+					temp = new item_class;
+
+					int money_temp = _invens->GetMONEY();
+
+					int a = 0;
+					_shops->buy(_shops->Get_item_slot(item_nums).item_num, money_temp, temp);
+
+					_invens->SetMONEY(money_temp);
+					_invens->Add_inven(temp);
+				}
+			}
+		}
+		if (!_invens->GetINVEN()->Gethidden())
+		{
+			if (_invens->ischeck(item_nums))
+			{
+				if (g_pKeyManager->isOnceKeyDown(VK_RBUTTON))
+				{
+					item_class* temp;
+					temp = new item_class;
+
+					int money_temp = _invens->GetMONEY();
+
+					_shops->sell(_invens->Get_item_slot(item_nums).item_num, money_temp);
+
+					_invens->SetMONEY(money_temp);
+					_invens->delete_inven(item_nums);
+				}
+			}
+		}
+	}
+
+	if (!_invens->GetINVEN()->Gethidden())
+	{
+		if (_invens->ischeck(item_nums))
+		{
+			if (GetKeyState(VK_LBUTTON) & 0x8000)
+			{
+				sender.item_data = _invens->Getvector_inven()[item_nums];
+				sender.pick_now = true;
+
+				char str[1024];
+				sprintf(str, "shop_data/%s", _invens->Getvector_inven()[item_nums]->GetI_image().c_str());
+
+				sender.mouse_pick->SetTexture(str);
+				sender.mouse_pick->Sethidden(false);
+				sender.mouse_pick->SetScal(D3DXVECTOR3(0.6f, 0.6f, 0.6f));
+			}
+		}
+	}
+
+
+	if (sender.pick_now)
+	{
+		sender.mouse_pick->SetPos(D3DXVECTOR3(Pt.x - 20, Pt.y - 20, 0));
+
+		sender.mouse_pick->Update();
+
+		if (GetKeyState(VK_LBUTTON) & 0x0001)
+		{
+			sender.mouse_pick->Destroy();
+
+			sender.mouse_pick = new cUIImage;
+
+			sender.pick_now = false;
+		}
+
+	}
+
+
+	//if (is_interface)
+	//{
+	//	for (int i = 0; i < _invens->Getvector_inven().size(); i++)
+	//	{
+	//		RECT PINKING_R;
+	//
+	//		SetRect(&PINKING_R, _invens->Getslot()[i].GetPos().x,
+	//			_invens->Getslot()[i].GetPos().y,
+	//			_invens->Getslot()[i].GetPos().x + _invens->Getslot()[i].GetSize().nWidth,
+	//			_invens->Getslot()[i].GetPos().y + _invens->Getslot()[i].GetSize().nHeight);
+	//
+	//		if (PtInRect(&PINKING_R, Pt))
+	//		{
+	//			if (g_pKeyManager->isOnceKeyDown(VK_LBUTTON))
+	//			{
+	//				//¹º°¡ Æ®·ç
+	//				sender.item_data = _invens->Getvector_inven()[i];
+	//				sender.mouse_pick = &_invens->Getslot()[i];
+	//				sender.pick_now = true;
+	//			}
+	//		}
+	//
+	//	  }
+	//  }
+	//
+	//if (g_pKeyManager->isOnceKeyUp(VK_LBUTTON) && sender.pick_now)
+	//{
+	//	//¹º°¡ ¾ÈÆ®·ç
+	//	sender.pick_now = false;
+	//}
 
 	//if (g_pKeyManager->isOnceKeyDown('M'))
 	//{
-		//if (shop_inven_UI.size() > shop_inven_calling_now_num)
-		//{
-		//	item_class* temp;
-		//	temp = new item_class;
-		//	_shops->buy(0, Money, temp);
-		//	
-		//	char char_temp[1024];
-		//	ZeroMemory(&char_temp, 1024);
-		//	sprintf(char_temp, "shop_data/%s", temp->GetI_image().c_str());
-		//	temp->Setting_cUIImage(D3DXVECTOR3(_UIob->GetPos().x + shop_inven_UI[shop_inven_calling_now_num].x,
-		//		_UIob->GetPos().y + shop_inven_UI[shop_inven_calling_now_num].y, 0),
-		//		char_temp, D3DXVECTOR3(0.6, 0.6, 0));
-		//
-		//	RECT RECTTEMP;
-		//	SetRect(&RECTTEMP, _UIob->GetPos().x + shop_inven_UI[shop_inven_calling_now_num].x, 
-		//		_UIob->GetPos().y + shop_inven_UI[shop_inven_calling_now_num].y,
-		//		_UIob->GetPos().x + shop_inven_UI[shop_inven_calling_now_num].x + 38,
-		//		_UIob->GetPos().x + shop_inven_UI[shop_inven_calling_now_num].y + 35);
-		//	temp->SetI_Rect(RECTTEMP);
-		//
-		//	_vtestitem.push_back(temp);
-		//
-		//	shop_inven_calling_now_num++;
-		//}
+	//if (shop_inven_UI.size() > shop_inven_calling_now_num)
+	//{
+	//	item_class* temp;
+	//	temp = new item_class;
+	//	_shops->buy(0, Money, temp);
+	//	
+	//	char char_temp[1024];
+	//	ZeroMemory(&char_temp, 1024);
+	//	sprintf(char_temp, "shop_data/%s", temp->GetI_image().c_str());
+	//	temp->Setting_cUIImage(D3DXVECTOR3(_UIob->GetPos().x + shop_inven_UI[shop_inven_calling_now_num].x,
+	//		_UIob->GetPos().y + shop_inven_UI[shop_inven_calling_now_num].y, 0),
+	//		char_temp, D3DXVECTOR3(0.6, 0.6, 0));
+	//
+	//	RECT RECTTEMP;
+	//	SetRect(&RECTTEMP, _UIob->GetPos().x + shop_inven_UI[shop_inven_calling_now_num].x, 
+	//		_UIob->GetPos().y + shop_inven_UI[shop_inven_calling_now_num].y,
+	//		_UIob->GetPos().x + shop_inven_UI[shop_inven_calling_now_num].x + 38,
+	//		_UIob->GetPos().x + shop_inven_UI[shop_inven_calling_now_num].y + 35);
+	//	temp->SetI_Rect(RECTTEMP);
+	//
+	//	_vtestitem.push_back(temp);
+	//
+	//	shop_inven_calling_now_num++;
 	//}
-
+	//}
 	//if (g_pKeyManager->isStayKeyDown(VK_LBUTTON))
 	//{	
 	//	for (int i = 0; i < _vtestitem.size(); i++)
@@ -127,16 +240,16 @@ void shop_TEST_CLASS::Update()
 	GetCursorPos(&Pt);
 	ScreenToClient(g_hWnd, &Pt);
 
-	_mouse->SetPos(D3DXVECTOR3(Pt.x, Pt.y, 0));
+	//_mouse->SetPos(D3DXVECTOR3(Pt.x, Pt.y, 0));
+	//_mouse->Update();
 
-	_mouse->Update();
 	_shops->update();
 	_invens->Update();
 }
 
 void shop_TEST_CLASS::Render()
 {
-	
+
 	if (_npc)
 		_npc->render();
 
@@ -146,6 +259,11 @@ void shop_TEST_CLASS::Render()
 	_shops->render(UI_sprite);
 	_invens->Render(UI_sprite);
 
+	if (sender.pick_now)
+	{
+		sender.mouse_pick->Render(UI_sprite);
+	}
+
 	if (!cursor_text)
 	{
 		char ssssstemp[1024];
@@ -153,32 +271,20 @@ void shop_TEST_CLASS::Render()
 		WM_MANAGER->Render(ssssstemp, Pt.x, Pt.y + 20, 100, 20);
 	}
 
-	if (is_now_picking_item(UI_sprite))
-	{
-		_mouse->Render(UI_sprite);
-	}
+	//if (is_now_picking_item(UI_sprite))
+	//{
+	//	_mouse->Render(UI_sprite);
+	//}
 
 	UI_sprite->End();
 }
 void  shop_TEST_CLASS::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	switch (message)
-	{
-	case WM_SETCURSOR:
-		SetCursor(NULL);
-		ShowCursor(true);
-		break;
-	}
-}
-
-bool shop_TEST_CLASS::is_now_picking_item(LPD3DXSPRITE sprite)
-{
-	for (int i = 0; i < _vtestitem.size(); i++)
-	{
-		if (_vtestitem[i]->GetI_PICK() == true)
-		{
-			return false;
-		}
-	}
-	return true;
+	//switch (message)
+	//{
+	//case WM_SETCURSOR:
+	//	SetCursor(NULL);
+	//	ShowCursor(true);
+	//	break;
+	//}
 }

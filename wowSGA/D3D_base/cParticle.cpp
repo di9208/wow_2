@@ -48,7 +48,7 @@ void cParticle::addParticle()
 void cParticle::preRender()
 {
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
-	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 	g_pD3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, true);
 
 	g_pD3DDevice->SetRenderState(D3DRS_POINTSPRITEENABLE, true);
@@ -69,15 +69,24 @@ void cParticle::preRender()
 	g_pD3DDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	g_pD3DDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	g_pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+
 }
 
 void cParticle::postRender()
 {
+
+
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, 0);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetRenderState(D3DRS_POINTSPRITEENABLE, false);
 	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALEENABLE, false);
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
-	g_pD3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, false);
+	//g_pD3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, false);
 }
 
 void cParticle::removeDeadParticles()
@@ -145,6 +154,8 @@ void cParticle::render()
 				// Copy a batch of the living particles to the
 				// next vertex buffer segment
 				//
+			
+
 				v->position = i->position;
 				v->color = (D3DCOLOR)i->color;
 				v++; // next element;

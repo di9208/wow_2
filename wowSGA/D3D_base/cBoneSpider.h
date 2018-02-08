@@ -1,5 +1,7 @@
 #pragma once
 #include "cUnit.h"
+#include "cParticle.h"
+#include "cMonsterParticle.h"
 
 class iMap;
 class cSkinnedMesh;
@@ -9,7 +11,10 @@ class cBoneSpider : public cUnit
 {
 	struct EnemySkinnedMesh
 	{
-		cSkinnedMesh* m;
+		cParticle*		Particle;
+		cSkinnedMesh*	m;
+		cOBB*			MonsterOBB;
+		D3DXMATRIXA16	matWorld;
 		MONSTER_STATUS	ENUM_MONSTER;
 		MONSTER_KIND	ENUM_MONSTER_KIND;
 
@@ -25,6 +30,7 @@ class cBoneSpider : public cUnit
 		int			attackTime;
 		int			termCount;
 		int			RunCount;
+
 
 		//몬스터 인식용
 		D3DXVECTOR3					m_vPos;
@@ -42,10 +48,7 @@ class cBoneSpider : public cUnit
 		ST_MONSTER_ITEM						m_StInvectory;
 		std::vector<ST_MONSTER_ITEM>		m_ItemSprite;
 
-		D3DXMATRIXA16 matWorld;
-		D3DXMATRIXA16 matS;
-		D3DXMATRIXA16 RT;
-		cOBB* OBB;
+		D3DXMATRIXA16 matRT;
 	};
 private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
@@ -93,7 +96,7 @@ public:
 	void matUpdate(size_t i, iMap* map);
 
 	int getVectorSize() { return m_vecSkinnedMesh.size(); }
-	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].OBB; }
+	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].MonsterOBB; }
 
 	cBoneSpider();
 	~cBoneSpider();

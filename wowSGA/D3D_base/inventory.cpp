@@ -11,14 +11,12 @@
 
 inventory::inventory()
 	: inven_UI(NULL)
-	, drage(NULL)
 {
 }
 
 
 inventory::~inventory()
 {
-	SAFE_DELETE(drage);
 	inven_UI->Destroy();
 	for (int i = 0; i < 3; i++)
 	{
@@ -33,12 +31,9 @@ void inventory::Setup()
 	Money = 1000;
 
 	item_loader loader;
-	loader.items_loader(V_INVEN,"shop_data/invenFILE.txt");
+	loader.items_loader(V_INVEN, "shop_data/invenFILE.txt");
 
 	Setting_invenUI();
-
-	drage = new DragAndDrob;
-	drage->reset();
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -48,40 +43,19 @@ void inventory::Setup()
 
 	for (int i = 0; i < 16; i++)
 	{
-		item_slot[i] = new cUIImage;
+		item_slot[i].item_slot = new cUIImage;
+		item_slot[i].item_num = -1;
 	}
 }
 
 void inventory::Update()
 {
-	POINT MOUSE;
 	GetCursorPos(&MOUSE);
 	ScreenToClient(g_hWnd, &MOUSE);
-	RECT INVEN_UI_RECT;
-	SetRect(&INVEN_UI_RECT, inven_UI->GetPos().x, inven_UI->GetPos().y, inven_UI->GetPos().x + 404, inven_UI->GetPos().y + 420);
-
-	if (PtInRect(&INVEN_UI_RECT, MOUSE))
-	{
-		if (g_pKeyManager->isOnceKeyDown(VK_RBUTTON))
-		{
-			drage->Setting(MOUSE, INVEN_UI_RECT);
-		}
-		if (g_pKeyManager->isOnceKeyUp(VK_RBUTTON))
-		{
-			drage->reset();
-		}
-	}
 
 	inven_UI->Update();
 	setting_moneyFram(inven_UI->GetPos().x, inven_UI->GetPos().y);
 	Setting_items();
-
-	RECT rc;
-	drage->Update(MOUSE, rc);
-	if (drage->Getkey())
-	{
-		inven_UI->SetPos(D3DXVECTOR3(rc.left, rc.top, 0));
-	}
 }
 
 void inventory::Render(LPD3DXSPRITE in_Sprite)
@@ -90,7 +64,7 @@ void inventory::Render(LPD3DXSPRITE in_Sprite)
 
 	for (int i = 0; i < 16; i++)
 	{
-		item_slot[i]->Render(in_Sprite);
+		item_slot[i].item_slot->Render(in_Sprite);
 	}
 
 	for (int i = 0; i < 3; i++)
@@ -105,14 +79,14 @@ void inventory::Setting_invenUI()
 	inven_UI = new cUIObject;
 	inven_UI->Sethidden(true);
 	inven_UI->SetPos(D3DXVECTOR3(1390, 450, 0));
-	
+
 	cUIImage* UI_IMAGE01 = new cUIImage;
 	UI_IMAGE01->SetTexture("shop_data/UI-BackpackBackground.PNG");
 
 	Button_delegate* dele_temp = new Button_delegate;
 
 	cUIButton* UI_BUTTON01 = new cUIButton;
-	UI_BUTTON01->SetTexture("inven_close","shop_data/UI-Panel-MinimizeButton-Up.PNG","shop_data/UI-Panel-MinimizeButton-Disabled.PNG", "shop_data/UI-Panel-MinimizeButton-Down.PNG");
+	UI_BUTTON01->SetTexture("inven_close", "shop_data/UI-Panel-MinimizeButton-Up.PNG", "shop_data/UI-Panel-MinimizeButton-Disabled.PNG", "shop_data/UI-Panel-MinimizeButton-Down.PNG");
 	UI_BUTTON01->SetPos(D3DXVECTOR3(160, 2, 0));
 	UI_BUTTON01->SetTag(1);
 	UI_BUTTON01->SetDeleGate(dele_temp);
@@ -129,13 +103,15 @@ void inventory::Setting_items()
 
 		char chartext[1024];
 
-		sprintf(chartext, "%s", V_INVEN[i]->GetI_image().c_str());
+		sprintf(chartext, "shop_data/%s", V_INVEN[i]->GetI_image().c_str());
 
-		item_slot[i]->SetTexture(chartext);
-		item_slot[i]->SetPos(D3DXVECTOR3(inven_UI->GetPos().x + 18 + (i%4) * 42, inven_UI->GetPos().y + 66 + (i / 4) * 20,0));
-		item_slot[i]->Sethidden(inven_UI->Gethidden());
-		item_slot[i]->SetScal(D3DXVECTOR3(0.55, 0.55, 0));
-		item_slot[i]->Update();
+		item_slot[i].item_num = V_INVEN[i]->GetI_num();
+
+		item_slot[i].item_slot->SetTexture(chartext);
+		item_slot[i].item_slot->SetPos(D3DXVECTOR3(inven_UI->GetPos().x + 18 + (i % 4) * 42, inven_UI->GetPos().y + 66 + (i / 4) * 42, 0));
+		item_slot[i].item_slot->Sethidden(inven_UI->Gethidden());
+		item_slot[i].item_slot->SetScal(D3DXVECTOR3(0.55, 0.55, 0));
+		item_slot[i].item_slot->Update();
 	}
 }
 
@@ -146,7 +122,7 @@ void inventory::setting_moneyFram(float x, float y)
 
 	float finx, finy;
 
-	finx = x + 100;
+	finx = x + 50;
 	finy = y + 230;
 
 	if (Money / 100 >= 1)
@@ -158,7 +134,7 @@ void inventory::setting_moneyFram(float x, float y)
 
 		sprintf(chartext, "%d", Money / 100);
 
-		finx += 15;
+		finx += 20;
 
 		money_text[0]->SetupText(chartext, ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
 		money_text[0]->SetPos(D3DXVECTOR3(finx, finy, 0));
@@ -177,7 +153,7 @@ void inventory::setting_moneyFram(float x, float y)
 
 		sprintf(chartext, "%d", (Money % 100) / 10);
 
-		finx += 15;
+		finx += 20;
 
 		money_text[1]->SetupText(chartext, ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
 		money_text[1]->SetPos(D3DXVECTOR3(finx, finy, 0));
@@ -195,7 +171,7 @@ void inventory::setting_moneyFram(float x, float y)
 
 		sprintf(chartext, "%d", (Money % 100) % 10);
 
-		finx += 15;
+		finx += 20;
 
 		money_text[2]->SetupText(chartext, ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
 		money_text[2]->SetPos(D3DXVECTOR3(finx, finy, 0));
@@ -204,4 +180,51 @@ void inventory::setting_moneyFram(float x, float y)
 
 		finx += 20;
 	}
+}
+
+void inventory::Add_inven(item_class * temp)
+{
+	V_INVEN.push_back(temp);
+}
+
+void inventory::delete_inven(int arry)
+{
+	for (int j = 0; j < 16; j++)
+	{
+		item_slot[j].item_slot->Destroy();
+		item_slot[j].item_slot = new cUIImage;
+		item_slot[j].item_num = -1;
+	}
+
+	if (V_INVEN.size() == 1)
+	{
+		V_INVEN.clear();
+	}
+	else
+	{
+		V_INVEN.erase(V_INVEN.begin() + arry);
+
+		Setting_items();
+	}
+}
+
+bool inventory::ischeck(OUT int & nums)
+{
+	RECT rc;
+
+	for (int i = 0; i < 16; i++)
+	{
+		SetRect(&rc, item_slot[i].item_slot->GetPos().x,
+			item_slot[i].item_slot->GetPos().y,
+			item_slot[i].item_slot->GetPos().x + 30,
+			item_slot[i].item_slot->GetPos().y + 32);
+
+		if (PtInRect(&rc, MOUSE))
+		{
+			nums = i;
+			return true;
+		}
+	}
+
+	return false;
 }

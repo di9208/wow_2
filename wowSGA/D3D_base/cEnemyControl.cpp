@@ -66,10 +66,10 @@ cOBB * cEnemyControl::getBossOBB()
 
 void cEnemyControl::SetUp(){
 	m_pSpider = new cBoneSpider;
-	//m_pSpider->addMonster(1, 0, 4);
+	m_pSpider->addMonster(1, 0, 4);
 
 	m_pDruid = new cArchDruid;
-	//m_pDruid->addMonster(-4, 0, -4);
+	m_pDruid->addMonster(-4, 0, -4);
 
 	m_pWorg = new cLightningWorg;
 	m_pWorg->addMonster(4, 0, -4);
@@ -713,8 +713,8 @@ void cEnemyControl::SummonsEnemy(){
 	if (g_pKeyManager->isOnceKeyDown('X')){
 		int x = rand() % 15;
 		int z = rand() % 15;
-		//m_pSpider->addMonster(x, 0, z);
-		//m_pDruid->addMonster(-x, 0, -z);
+		m_pSpider->addMonster(x, 0, z);
+		m_pDruid->addMonster(-x, 0, -z);
 		m_pWorg->addMonster(x, 0, -z);
 	}
 }

@@ -75,6 +75,19 @@ LPD3DXFONT cFontManager::GetFont(eFontType e)
 
 		strcpy_s(stFD.FaceName, "±¼¸²Ã¼");
 	}
+	else if (e == FT_wow)
+	{
+		stFD.Height = 15;
+		stFD.Width = 8;
+		stFD.Weight = FW_MEDIUM;
+		stFD.Italic = false;
+		stFD.CharSet = DEFAULT_CHARSET;
+		stFD.OutputPrecision = OUT_DEFAULT_PRECIS;
+		stFD.PitchAndFamily = FF_DONTCARE;
+
+		AddFontResource("font/FRIZQT__.ttf");
+		strcpy_s(stFD.FaceName, "FRIZQT__");
+	}
 
 	D3DXCreateFontIndirect(g_pD3DDevice, &stFD, &m_mapFont[e]);
 

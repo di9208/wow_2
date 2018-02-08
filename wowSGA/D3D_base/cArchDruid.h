@@ -1,14 +1,21 @@
 #pragma once
 #include "cUnit.h"
+#include "cParticle.h"
+#include "cMonsterParticle.h"
 
 class iMap;
 class cSkinnedMesh;
+class cOBB;
 
 class cArchDruid : public cUnit
 {
 	struct EnemySkinnedMesh
 	{
-		cSkinnedMesh* m;
+		cSkinnedMesh*	m;
+		cSkinnedMesh*	b;
+		cParticle*		Particle;
+		D3DXMATRIXA16	matWorld;
+		cOBB*			MonsterOBB;
 		MONSTER_STATUS	ENUM_MONSTER;
 		MONSTER_KIND	ENUM_MONSTER_KIND;
 
@@ -50,11 +57,13 @@ class cArchDruid : public cUnit
 		ST_MONSTER_ITEM						m_StInvectory;
 		std::vector<ST_MONSTER_ITEM>		m_ItemSprite;
 
-		D3DXMATRIXA16 matWorld;
+		D3DXMATRIXA16 matRT;
 	};
 private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
 	EnemySkinnedMesh Monster;
+
+	D3DXMATRIXA16 matWorld;
 
 	//∏ÛΩ∫≈Õ Ω∫≈»
 	int			nXAlpha;
@@ -94,6 +103,9 @@ public:
 	void RangeSphere(size_t i);
 
 	void matUpdate(size_t i, iMap* map);
+
+	int getVectorSize() { return m_vecSkinnedMesh.size(); }
+	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].MonsterOBB; }
 
 	cArchDruid();
 	~cArchDruid();

@@ -10,6 +10,7 @@ class cPlayerPicking;
 class cOBB;
 class cEnemyPicking;
 class iMap;
+class shop_TEST_CLASS;
 
 class cPlayer :public cCharacter
 {
@@ -37,4 +38,5 @@ public:
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 	void SetPlayerPick(std::vector<ST_PC_VERTEX> m_vecVertex);
+	void connet_shop_test_class(shop_TEST_CLASS* connect_shop_test);
 };

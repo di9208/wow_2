@@ -24,6 +24,17 @@ void cUIImage::SetTexture(IN char * szFullPath)
 	m_stSize.nHeight = stImageInfo.Height;
 }
 
+void cUIImage::SetTexture(IN char * keyname, IN char * szFullPath)
+{
+	D3DXIMAGE_INFO stImageInfo;
+	ZeroMemory(&stImageInfo, sizeof(D3DXIMAGE_INFO));
+	std::string sFullPath = std::string(szFullPath);
+	m_pTexture = g_pTextureManager->GetTexture(keyname, sFullPath, &stImageInfo);
+
+	m_stSize.nWidth = stImageInfo.Width;
+	m_stSize.nHeight = stImageInfo.Height;
+}
+
 void cUIImage::Render(LPD3DXSPRITE pSprite)
 {
 	if (m_isHidden) return;
