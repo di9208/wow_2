@@ -52,7 +52,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 		//´Á´ë
 		for (int i = 0; i < m_EnemyControl->getWolfVectorSize(); i++)
 		{
-			/*if (m_EnemyControl->getWolfCondition(i) == MONSTER_ATTACK || m_EnemyControl->getWolfCondition(i) == MONSTER_ATTACK)
+			if (m_EnemyControl->getWolfCondition(i) == MONSTER_ATTACK || m_EnemyControl->getWolfCondition(i) == MONSTER_ATTACK)
 			{
 				if (m_EnemyControl->getWolfTimeCheck(i) == false)
 				{
@@ -72,35 +72,35 @@ void cPlayer_Enemy::Update(iMap* pMap)
 			{
 				m_EnemyControl->setWolfDamageCheck(i, false);
 				m_EnemyControl->setWolfTimeCheck(i, false);
-			}*/
+			}
 		}
 		//°Å¹Ì
 		for (int i = 0; i < m_EnemyControl->getSpiderVectorSize(); i++)
 		{
-			//if (m_EnemyControl->getSpiderCondition(i) == MONSTER_ATTACK || m_EnemyControl->getSpiderCondition(i) == MONSTER_ATTACK)
-			//{
-			//if (m_EnemyControl->getSpiderTimeCheck(i) == false)
-			//{
-			//m_EnemyControl->setSpiderDamageTimeCheck(i, g_pTimeManager->GetLastUpdateTime());
-			//m_EnemyControl->setSpiderTimeCheck(i, true);
-			//}
-			//if (m_EnemyControl->getSpiderDamageCheck(i) == false)
-			//{
-			//if (m_EnemyControl->getSpiderDamageTimeCheck(i) + 0.3f < g_pTimeManager->GetLastUpdateTime())
-			//{
-			//m_Player->Collsion(m_EnemyControl->getSpiderOBB(i));
-			//m_EnemyControl->setSpiderDamageCheck(i, true);
-			//}
-			//}
-			//}
-			//else
-			//{
-			//m_EnemyControl->setSpiderDamageCheck(i, false);
-			//m_EnemyControl->setSpiderTimeCheck(i, false);
-			//}
+			if (m_EnemyControl->getSpiderCondition(i) == MONSTER_ATTACK || m_EnemyControl->getSpiderCondition(i) == MONSTER_ATTACK)
+			{
+			if (m_EnemyControl->getSpiderTimeCheck(i) == false)
+			{
+			m_EnemyControl->setSpiderDamageTimeCheck(i, g_pTimeManager->GetLastUpdateTime());
+			m_EnemyControl->setSpiderTimeCheck(i, true);
+			}
+			if (m_EnemyControl->getSpiderDamageCheck(i) == false)
+			{
+			if (m_EnemyControl->getSpiderDamageTimeCheck(i) + 0.3f < g_pTimeManager->GetLastUpdateTime())
+			{
+			m_Player->Collsion(m_EnemyControl->getSpiderOBB(i));
+			m_EnemyControl->setSpiderDamageCheck(i, true);
+			}
+			}
+			}
+			else
+			{
+			m_EnemyControl->setSpiderDamageCheck(i, false);
+			m_EnemyControl->setSpiderTimeCheck(i, false);
+			}
 		}
 		//¸®Ä¡¿Õ
-		/*if (m_EnemyControl->getBossCondition() == E_BOSS_ATT || m_EnemyControl->getBossCondition() == E_BOSS_ATT2)
+		if (m_EnemyControl->getBossCondition() == E_BOSS_ATT || m_EnemyControl->getBossCondition() == E_BOSS_ATT2)
 		{
 		float cool;
 		if (m_EnemyControl->getBossCondition() == E_BOSS_ATT)cool = 1.0f;
@@ -123,7 +123,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 		{
 		RichKing = false;
 		RichKingCheck = false;
-		}*/
+		}
 	}
 	if (m_EnemyControl)
 		m_EnemyControl->Update(m_Player->GetPosition(), pMap);

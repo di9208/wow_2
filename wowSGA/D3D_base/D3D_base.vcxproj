@@ -166,6 +166,7 @@
     <ClInclude Include="cEnemyControl.h" />
     <ClInclude Include="cEnemyHitEffect.h" />
     <ClInclude Include="cEnemyManager.h" />
+    <ClInclude Include="cEnemyPicking.h" />
     <ClInclude Include="cEnemySkinnedMesh.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cFrustum.h" />
@@ -249,6 +250,7 @@
     <ClCompile Include="cEnemyControl.cpp" />
     <ClCompile Include="cEnemyHitEffect.cpp" />
     <ClCompile Include="cEnemyManager.cpp" />
+    <ClCompile Include="cEnemyPicking.cpp" />
     <ClCompile Include="cEnemySkinnedMesh.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cFrustum.cpp" />

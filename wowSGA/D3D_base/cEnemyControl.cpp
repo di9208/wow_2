@@ -48,6 +48,41 @@ cOBB * cEnemyControl::getWolfOBB(int i)
 	return m_pWorg->getOBB(i);
 }
 
+MONSTER_STATUS cEnemyControl::getWolfCondition(int i)
+{
+	return m_pWorg->getCondition(i);
+}
+
+void cEnemyControl::setWolfDamageCheck(int i, bool check)
+{
+	m_pWorg->setDamageCheck(i, check);
+}
+
+bool cEnemyControl::getWolfDamageCheck(int i)
+{
+	return m_pWorg->getDamageCheck(i);
+}
+
+void cEnemyControl::setWolfTimeCheck(int i, bool check)
+{
+	m_pWorg->setTimeCheck(i, check);
+}
+
+bool cEnemyControl::getWolfTimeCheck(int i)
+{
+	return m_pWorg->getTimeCheck(i);
+}
+
+void cEnemyControl::setWolfDamageTimeCheck(int i, float time)
+{
+	m_pWorg->setDamageTimeCheck(i, time);
+}
+
+float cEnemyControl::getWolfDamageTimeCheck(int i)
+{
+	return m_pWorg->getDamageTimeCheck(i);
+}
+
 int cEnemyControl::getSpiderVectorSize()
 {
 	return m_pSpider->getVectorSize();
@@ -58,9 +93,83 @@ cOBB * cEnemyControl::getSpiderOBB(int i)
 	return m_pSpider->getOBB(i);
 }
 
+MONSTER_STATUS cEnemyControl::getSpiderCondition(int i)
+{
+	return m_pSpider->getCondition(i);
+}
+
+void cEnemyControl::setSpiderDamageCheck(int i, bool check)
+{
+	m_pSpider->setDamageCheck(i, check);
+}
+
+bool cEnemyControl::getSpiderDamageCheck(int i)
+{
+	return m_pSpider->getDamageCheck(i);
+}
+
+void cEnemyControl::setSpiderTimeCheck(int i, bool check)
+{
+	m_pSpider->setTimeCheck(i, check);
+}
+
+bool cEnemyControl::getSpiderTimeCheck(int i)
+{
+	return m_pSpider->getTimeCheck(i);
+}
+
+void cEnemyControl::setSpiderDamageTimeCheck(int i, float time)
+{
+	m_pSpider->setDamageTimeCheck(i, time);
+}
+
+float cEnemyControl::getSpiderDamageTimeCheck(int i)
+{
+	return m_pSpider->getDamageTimeCheck(i);
+}
+
 cOBB * cEnemyControl::getBossOBB()
 {
 	return m_pBossAniController->getOBB();
+}
+
+E_BOSS_STATE cEnemyControl::getBossCondition()
+{
+	return m_pBossAniController->getCondition();
+}
+
+std::vector<Enemy_Sphere> cEnemyControl::getALLEnemyCenter()
+{
+	std::vector<Enemy_Sphere> ALL_Mon;
+	Enemy_Sphere m_sphre;
+	for (int i = 0; i < getWolfVectorSize(); i++)
+	{
+		m_sphre.vCenter = m_pWorg->getOBBCenter(i);
+		m_sphre.bIsPicked = false;
+		m_sphre.fRadius = m_pWorg->getOBBhalf(i);
+		m_sphre.Mons = m_pWorg->getMonsterKind();
+		m_sphre.HP = m_pWorg->getMonsterHP(i);
+		m_sphre.Max_HP = m_pWorg->getMonsterMaxHP(i);
+		ALL_Mon.push_back(m_sphre);
+	}
+	for (int i = 0; i < getSpiderVectorSize(); i++)
+	{
+		m_sphre.vCenter = m_pSpider->getOBBCenter(i);
+		m_sphre.bIsPicked = false;
+		m_sphre.fRadius = m_pSpider->getOBBhalf(i);
+		m_sphre.Mons = m_pSpider->getMonsterKind();
+		m_sphre.HP = m_pSpider->getMonsterHP(i);
+		m_sphre.Max_HP = m_pSpider->getMonsterMaxHP(i);
+		ALL_Mon.push_back(m_sphre);
+	}
+	m_sphre.vCenter = m_pBossAniController->getOBBCenter();
+	m_sphre.bIsPicked = false;
+	m_sphre.fRadius = m_pBossAniController->getOBBhalf();
+	m_sphre.Mons = getArthasKind();
+	m_sphre.HP = getMonsterHP();
+	m_sphre.Max_HP = getMonsterMaxHP();
+	ALL_Mon.push_back(m_sphre);
+	return ALL_Mon;
 }
 
 
@@ -160,6 +269,7 @@ void cEnemyControl::BossSetup()
 	stBoss.stat.ATK = 100;
 	stBoss.stat.DEF = 20;
 	stBoss.stat.HP = 500;
+	stBoss.stat.Max_HP = 500;
 	stBoss.chk = false;
 	stBoss.kind = BOSS_ARTHAS;
 	stBoss.e_boss_state = E_BOSS_START;

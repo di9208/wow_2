@@ -11,9 +11,10 @@ class cUIImage;
 class cPlayerInFo
 {
 private:
-	TagUnit						PlayerInFo;
+	TagUnit						m_PlayerInFo;
 	LPD3DXFONT					m_pFont;
 	LPD3DXFONT					m_systemFont;
+	LPD3DXFONT					m_HpFont;
 
 	LPD3DXSPRITE				m_pSprite;
 	D3DXIMAGE_INFO				m_stImageInfo;
