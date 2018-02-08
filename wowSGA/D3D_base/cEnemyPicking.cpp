@@ -34,7 +34,7 @@ void cEnemyPicking::Update(MONSTER_KIND monster)
 {
 	switch (monster)
 	{
-	case BOSS_ARTHAS:
+	case KIND_BOSS_ARTHAS:
 	{
 		SAFE_RELEASE(m_EnemyIcon);
 		D3DXCreateTextureFromFileEx(
@@ -54,7 +54,7 @@ void cEnemyPicking::Update(MONSTER_KIND monster)
 			&m_EnemyIcon);
 	}
 	break;
-	case SPIDER:
+	case KIND_SPIDER:
 	{
 		SAFE_RELEASE(m_EnemyIcon);
 		D3DXCreateTextureFromFileEx(
@@ -74,7 +74,7 @@ void cEnemyPicking::Update(MONSTER_KIND monster)
 			&m_EnemyIcon);
 	}
 	break;
-	case WORG:
+	case KIND_WORG:
 	{
 		SAFE_RELEASE(m_EnemyIcon);
 		D3DXCreateTextureFromFileEx(

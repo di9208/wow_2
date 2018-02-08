@@ -3,6 +3,7 @@
 #include "cParticle.h"
 #include "cMonsterParticle.h"
 #include "cEnemyHitEffect.h"
+#include "cUIObject.h"
 
 class iMap;
 class cOBB;
@@ -10,6 +11,7 @@ class cSkinnedMesh;
 
 class cLightningWorg : public cUnit
 {
+	cUIObject* Root;
 	struct EnemySkinnedMesh
 	{
 		cParticle*		Particle;
@@ -35,6 +37,7 @@ class cLightningWorg : public cUnit
 		bool		Damage;
 		float		Damage_time;
 		float		TimeCheck;
+
 		//몬스터 인식용
 		D3DXVECTOR3					m_vPos;
 		D3DXVECTOR3					m_vDir;
@@ -88,8 +91,8 @@ public:
 	void MonsterStatus(size_t i);
 	void MonsterDeath(size_t i);
 
-	void SetupUI(size_t i, size_t j);
-	void RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY);
+	void SetupUI(size_t j);
+	void RenderUI();
 
 	void SphereRender(size_t i, D3DXMATRIXA16& m_matWorld);
 

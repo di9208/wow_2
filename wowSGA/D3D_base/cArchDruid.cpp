@@ -3,16 +3,17 @@
 #include "cSkinnedMesh.h"
 #include "iMap.h"
 #include "cOBB.h"
+#include "cUIImage.h"
 #include <time.h>
 
 cArchDruid::cArchDruid()
 : m_vecSkinnedMesh(NULL)
 , m_pFont(NULL)
 , m_pSprite(NULL)
+, Root(nullptr)
 {
 	g_pSoundManager->Setup();
 	g_pSoundManager->addSound("DruidBomb", "sound/monster/archdruide/treebomb.mp3", true, false);
-
 	D3DXMatrixIdentity(&matWorld);
 	m_pSkillOn = false;
 	nCount = 0;
@@ -30,6 +31,7 @@ cArchDruid::~cArchDruid()
 		SAFE_RELEASE(m_vecSkinnedMesh[i].m_rangeMesh);
 		SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
 		SAFE_DELETE(m_vecSkinnedMesh[i].MonsterOBB);
+		SAFE_DELETE(m_vecSkinnedMesh[i].MonsterAttackOBB);
 		SAFE_DELETE(m_vecSkinnedMesh[i].Particle);
 		SAFE_DELETE(m_vecSkinnedMesh[i].m);
 	}
@@ -41,7 +43,7 @@ void cArchDruid::addMonster(float x, float y, float z){
 	Monster.m = new cSkinnedMesh;
 	Monster.m->Setup("Monster/archdruid", "1.x");
 	Monster.ENUM_MONSTER = MONSTER_STATUS::MONSTER_STAND;
-	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::DRUID;
+	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::KIND_DRUID;
 	Monster.m_vPos = D3DXVECTOR3(x, y + 1, z);
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
 	Monster.t.HP = 100;
@@ -65,7 +67,7 @@ void cArchDruid::addMonster(float x, float y, float z){
 	Monster.termCount = 0;
 	Monster.RunCount = rand() % 250 + 10;
 	Monster.m_rangeCheck = false;
-	Monster.m_rangeSphere.vCenter = D3DXVECTOR3(x, y + 1, z);
+	Monster.m_rangeSphere.vCenter = D3DXVECTOR3(x, y + 3, z);
 	Monster.m_rangeSphere.fRadius = 0.2f;
 	Monster.m_rangeSphere.bIsPicked = false;
 
@@ -96,6 +98,16 @@ void cArchDruid::addMonster(float x, float y, float z){
 
 	Monster.MonsterOBB = new cOBB;
 	Monster.MonsterOBB->Setup(Monster.m, &World);
+
+	D3DXMATRIXA16	World2, matS2, matR2, matT2;
+	D3DXMatrixRotationX(&matR2, D3DX_PI / 2.0f);
+	D3DXMatrixScaling(&matS2, 0.001f, 0.001f, 0.001f);
+	D3DXMatrixIdentity(&matT2);
+	D3DXMatrixTranslation(&matT2, 0, 1.5, -0.2);
+	World2 = matS2 * matR2 * matT2;
+
+	Monster.MonsterAttackOBB = new cOBB;
+	Monster.MonsterAttackOBB->Setup(Monster.b, &World2);
 
 	D3DXCreateSphere(g_pD3DDevice, Monster.m_Sphere.fRadius, 10, 10,
 		&Monster.m_pMeshSphere, NULL);
@@ -135,13 +147,19 @@ void cArchDruid::Update(iMap* pMap){
 	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
 		//몬스터 죽음
 		if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
+
 		matUpdate(i, pMap);
 		m_vecSkinnedMesh[i].m->Update();
 		m_vecSkinnedMesh[i].b->Update();
 		m_vecSkinnedMesh[i].Particle->update(3.0f);
 		m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
+		m_vecSkinnedMesh[i].MonsterAttackOBB->Update(&m_vecSkinnedMesh[i].matRTAttack);
 		MonsterAI(i);						//몬스터의 패턴, 스킬
 		MonsterStatus(i); 					//몬스터 상태, 애니메이션
+	}
+	if (Root)
+	{
+		Root->Update();
 	}
 }
 
@@ -155,16 +173,15 @@ void cArchDruid::Render(){
 		m_vecSkinnedMesh[i].Particle->render();
 		D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
+
+		//g_pD3DDevice->SetTransform(D3DTS_WORLD, &(matWorld));
+		m_vecSkinnedMesh[i].MonsterAttackOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
 		if (m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked) RangeSphere(i);
 		SphereRender(i);
 		if (m_vecSkinnedMesh[i].death){
-			for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++){
-				RenderUI(i, j, 10, 10, 79, 80);
-			}
+			RenderUI();
 		}
 	}
-
-
 }
 
 void cArchDruid::MonsterInsic(D3DXVECTOR3 d){
@@ -180,6 +197,7 @@ void cArchDruid::HarmDamage(int Damage, size_t i){
 
 //거미 상태
 void cArchDruid::MonsterStatus(size_t i){
+	
 	switch (m_vecSkinnedMesh[i].ENUM_MONSTER)
 	{
 	case MONSTER_STAND:
@@ -204,72 +222,27 @@ void cArchDruid::MonsterStatus(size_t i){
 
 }
 
-void cArchDruid::SetupUI(size_t i, size_t a){
-	ZeroMemory(&m_vecSkinnedMesh[i].m_StInvectory.m_stImageInfo, sizeof(D3DXIMAGE_INFO));
+void cArchDruid::SetupUI(size_t a){
+	cUIImage* main = new cUIImage;
+	main->SetTexture("worgInven", "UI/UI_Enemy_Invectory.png");
+	main->SetPos(D3DXVECTOR3(20, 150, 0));
 
-	D3DXCreateTextureFromFileEx(
-		g_pD3DDevice,
-		"UI/UI_Enemy_Invectory.png",
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED,
-		D3DX_FILTER_NONE,
-		D3DX_DEFAULT,
-		0,
-		&m_vecSkinnedMesh[i].m_StInvectory.m_stImageInfo,
-		NULL,
-		&m_vecSkinnedMesh[i].m_StInvectory.m_pTexture);
-
-	for (size_t j = 0; j < a; j++){
-		ZeroMemory(&m_vecSkinnedMesh[i].m_StItemSprite.m_stImageInfo, sizeof(D3DXIMAGE_INFO));
-
-		D3DXCreateTextureFromFileEx(
-			g_pD3DDevice,
-			"UI/sword.png",
-			D3DX_DEFAULT_NONPOW2,
-			D3DX_DEFAULT_NONPOW2,
-			D3DX_DEFAULT,
-			0,
-			D3DFMT_UNKNOWN,
-			D3DPOOL_MANAGED,
-			D3DX_FILTER_NONE,
-			D3DX_DEFAULT,
-			0,
-			&m_vecSkinnedMesh[i].m_StItemSprite.m_stImageInfo,
-			NULL,
-			&m_vecSkinnedMesh[i].m_StItemSprite.m_pTexture);
-
-		m_vecSkinnedMesh[i].m_ItemSprite.push_back(m_vecSkinnedMesh[i].m_StItemSprite);
+	Root = main;
+	for (size_t j = 0; j < a; j++)
+	{
+		cUIImage* item = new cUIImage;
+		char str[1024];
+		itoa(j, str, 10);
+		std::string key = std::string("sword") + std::string(str);
+		item->SetTexture(key, "UI/sword.png");
+		item->SetPos(D3DXVECTOR3(41, (80 * j) + 181 + (j * 14), 0));
+		Root->AddChild(item);
 	}
 }
 
-void cArchDruid::RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY){
-	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
-	m_pSprite->Draw(
-		m_vecSkinnedMesh[i].m_StInvectory.m_pTexture,
-		NULL,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(x, y, 0.5f),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
-
-	m_pSprite->End();
-
-	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
-	m_pSprite->Draw(
-		m_vecSkinnedMesh[i].m_ItemSprite[j].m_pTexture,
-		NULL,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(x + 41, y + (sizeY * j) + 181 + (j * 14), 0.5f),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
-	m_pSprite->End();
-
-	m_vecSkinnedMesh[i].m_ItemSprite[j].rc.left = x;
-	m_vecSkinnedMesh[i].m_ItemSprite[j].rc.top = y;
-	m_vecSkinnedMesh[i].m_ItemSprite[j].rc.right = sizeX + x;
-	m_vecSkinnedMesh[i].m_ItemSprite[j].rc.bottom = sizeY + y;
+void cArchDruid::RenderUI(){
+	if (Root)
+		Root->Render(m_pSprite);
 }
 
 void cArchDruid::MonsterDeath(size_t i){
@@ -277,10 +250,20 @@ void cArchDruid::MonsterDeath(size_t i){
 	m_vecSkinnedMesh[i].deathTime++;
 
 
-	if (!m_vecSkinnedMesh[i].death){
+	if (!m_vecSkinnedMesh[i].death) {
 		size_t a = rand() % 4 + 1;
-		SetupUI(i, a);
+		SetupUI(a);
 		m_vecSkinnedMesh[i].death = true;
+	}
+	//죽는 모션 후 일정시간이 지나면 해당 애니메이션은 정지시킨다.
+	else {
+
+		if (m_vecSkinnedMesh[i].deathTime > 1000) {
+
+			SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
+			SAFE_DELETE(m_vecSkinnedMesh[i].m);
+			m_vecSkinnedMesh.erase(m_vecSkinnedMesh.begin() + i);
+		}
 	}
 }
 
@@ -343,7 +326,8 @@ void cArchDruid::MonsterAI(size_t i){
 		m_vecSkinnedMesh[i].time++;
 
 		//공격상태가 아니라면 일정시간이 지난 후 따라감
-		if (m_vecSkinnedMesh[i].time > 50){
+		if (m_vecSkinnedMesh[i].time > 50 &&
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH){
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_RUN;
 			if (m_vecSkinnedMesh[i].attackTime < m_vecSkinnedMesh[i].attackSpeed - 1) m_vecSkinnedMesh[i].attackTime++;
 			pos[i] += dir[i] * m_vecSkinnedMesh[i].t.Speed;
@@ -353,14 +337,16 @@ void cArchDruid::MonsterAI(size_t i){
 
 		//일정시간이 지나지 않았다면 스탠드 상태
 		else if (m_vecSkinnedMesh[i].time <= 50 &&
-			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK){
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK &&
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH){
 			if (m_vecSkinnedMesh[i].attackTime < m_vecSkinnedMesh[i].attackSpeed - 1) m_vecSkinnedMesh[i].attackTime++;
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		}
 	}
 
 	//적이 인식범위 밖으로 빠져나갔다면 행동을 멈춘다.
-	if (m_vecSkinnedMesh[i].distance > m_vecSkinnedMesh[i].MaxRange && m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH){
+	if (m_vecSkinnedMesh[i].distance > m_vecSkinnedMesh[i].MaxRange &&
+		m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH){
 		srand(time(NULL));
 
 		D3DXVECTOR3 vDir, m_vDir, vCenter;
@@ -383,12 +369,14 @@ void cArchDruid::MonsterAI(size_t i){
 			m_vecSkinnedMesh[i].termCount++;
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 
-			if (m_vecSkinnedMesh[i].termCount > rand() % 300 + 50){
+			if (m_vecSkinnedMesh[i].termCount > rand() % 300 + 50 &&
+				m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH){
 				m_vecSkinnedMesh[i].termCount = 0;
 				m_vecSkinnedMesh[i].RunCount = rand() % 250 + 10;
 			}
 		}
-		else if (m_vecSkinnedMesh[i].RunCount > 0){
+		else if (m_vecSkinnedMesh[i].RunCount > 0 &&
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH){
 			m_vecSkinnedMesh[i].termCount = 0;
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_RUN;
 			vCenter += m_vDir * m_vecSkinnedMesh[i].t.Speed;
@@ -408,37 +396,40 @@ void cArchDruid::MonsterAI(size_t i){
 		m_vecSkinnedMesh[i].time = 0;
 		m_vecSkinnedMesh[i].attackTime++;
 
-		//m_rangeCheck가 false여야 공격을 함
+		//m_rangeCheck가 true여야 공격을 함
 		//어택타임이 차면 공격하도록 함
-		if (m_vecSkinnedMesh[i].attackTime < 85){
-			//if (m_vecSkinnedMesh[i].attackTime < 3) g_pSoundManager->play("DruidBomb", 1.0f);
+		if (m_vecSkinnedMesh[i].attackTime < 85 &&
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH){
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_ATTACK;
 			//적의 방향을 보기 위한 코드
 			D3DXVECTOR3 vDir = m_vPlayerPos - pos[i];
 			m_vecSkinnedMesh[i].m_vDir = vDir;
-			if (!m_vecSkinnedMesh[i].m_rangeCheck &&
+			if (m_vecSkinnedMesh[i].m_rangeCheck &&
 				m_vecSkinnedMesh[i].attackTime > 45 &&
 				m_vecSkinnedMesh[i].attackTime < 50){
 				m_vecSkinnedMesh[i].m_rangeSphere.vCenter = m_vecSkinnedMesh[i].m_vPos;
 				m_vecSkinnedMesh[i].m_rangeDir = m_vecSkinnedMesh[i].m_vDir;
-				m_vecSkinnedMesh[i].m_rangeCheck = true;
 				m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked = true;
+				//m_vecSkinnedMesh[i].m_rangeCheck = false;
 			}
 		}
 		else if (m_vecSkinnedMesh[i].attackTime > 85 &&
-			m_vecSkinnedMesh[i].m_rangeCheck){
+			m_vecSkinnedMesh[i].m_rangeCheck &&
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH){
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		}
 	}
 
 	//아직도 때리고 있는 상태라면 어택타임을 계속해서 올림
-	else if (m_vecSkinnedMesh[i].ENUM_MONSTER == MONSTER_ATTACK)
+	else if (m_vecSkinnedMesh[i].ENUM_MONSTER == MONSTER_ATTACK &&
+		m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH)
 		m_vecSkinnedMesh[i].attackTime++;
 
 	//어택타임이 200이 넘어가면 어택타임을 0으로 초기화하고, 원거리 공격모드를 취소함
-	if (m_vecSkinnedMesh[i].attackTime > m_vecSkinnedMesh[i].attackSpeed) {
+	if (m_vecSkinnedMesh[i].attackTime > m_vecSkinnedMesh[i].attackSpeed &&
+		m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH) {
 		m_vecSkinnedMesh[i].attackTime = 0;
-		m_vecSkinnedMesh[i].m_rangeCheck = false;
+		m_vecSkinnedMesh[i].m_rangeCheck = true;
 	}
 
 
@@ -456,7 +447,7 @@ void cArchDruid::MonsterAI(size_t i){
 
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 
-		vCenter += m_vDir * m_vecSkinnedMesh[i].t.Speed * 6;
+		vCenter += m_vDir * m_vecSkinnedMesh[i].t.Speed * 5;
 
 		m_vecSkinnedMesh[i].m_rangeSphere.vCenter = vCenter;
 		m_vecSkinnedMesh[i].m_rangeSphere.vCenter.y = vCenter.y;
@@ -469,14 +460,15 @@ void cArchDruid::MonsterAI(size_t i){
 	fEnemyRange = D3DXVec3Length(&EnemyRange);
 
 	//몬스터와 몬스터의 공격(스피어)의 거리가 멀어지거나, 플레이어와 몬스터의 공격이 충돌하면 스피어 삭제
-	if (m_vecSkinnedMesh[i].m_rangeDistance <= 1.1f){
+	if (m_vecSkinnedMesh[i].m_rangeDistance <= 1.5f &&
+		m_vecSkinnedMesh[i].ENUM_MONSTER == MONSTER_ATTACK){
+			g_pSoundManager->play("DruidBomb", 1.0f);
 		m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked = false;
-		m_vecSkinnedMesh[i].m_rangeCheck = false;
+		m_vecSkinnedMesh[i].m_rangeCheck = true;
 	}
 	if (fEnemyRange > 20) {
-		//g_pSoundManager->play("DruidBomb", 1.0f);
 		m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked = false;
-		m_vecSkinnedMesh[i].m_rangeCheck = false;
+		m_vecSkinnedMesh[i].m_rangeCheck = true;
 	}
 }
 
@@ -509,8 +501,6 @@ void cArchDruid::RangeSphere(size_t i){
 
 	//g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
-
-	D3DXMATRIXA16 matWorld;
 
 	D3DXMatrixIdentity(&matWorld);
 
@@ -550,7 +540,7 @@ void cArchDruid::RangeSphere(size_t i){
 }
 
 void cArchDruid::matUpdate(size_t i, iMap* pMap){
-	D3DXMATRIXA16 matR, matS, matT;
+	D3DXMATRIXA16 matR, matS, matT, matTT;
 	D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
 
 	D3DXMatrixRotationY(&matR, D3DX_PI * 1.5);
@@ -570,6 +560,7 @@ void cArchDruid::matUpdate(size_t i, iMap* pMap){
 	vTempPos[i] = m_vecSkinnedMesh[i].m_vPos;
 
 	D3DXMatrixIdentity(&matT);
+	D3DXMatrixIdentity(&matTT);
 	if (pMap)
 	{
 		if (pMap->GetHeight(vTempPos[i].x, vTempPos[i].y, vTempPos[i].z))
@@ -590,8 +581,10 @@ void cArchDruid::matUpdate(size_t i, iMap* pMap){
 	}
 
 	D3DXMatrixTranslation(&matT, m_vecSkinnedMesh[i].m_vPos.x, m_vecSkinnedMesh[i].m_vPos.y + 1.3, m_vecSkinnedMesh[i].m_vPos.z);
+	D3DXMatrixTranslation(&matTT, m_vecSkinnedMesh[i].m_rangeSphere.vCenter.x, m_vecSkinnedMesh[i].m_rangeSphere.vCenter.y + 1.3, m_vecSkinnedMesh[i].m_rangeSphere.vCenter.z);
 
 	m_vecSkinnedMesh[i].matRT = matR * matT;
+	m_vecSkinnedMesh[i].matRTAttack = matTT;
 	m_vecSkinnedMesh[i].matWorld = matS * matR * matT;
 }
 
