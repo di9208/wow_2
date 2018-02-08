@@ -711,8 +711,8 @@ void cEnemyControl::SummonsEnemy(){
 	if (g_pKeyManager->isOnceKeyDown('X')){
 		int x = rand() % 15;
 		int z = rand() % 15;
-		//m_pSpider->addMonster(x, 0, z);
-		//m_pDruid->addMonster(-x, 0, -z);
+		m_pSpider->addMonster(x, 0, z);
+		m_pDruid->addMonster(-x, 0, -z);
 		m_pWorg->addMonster(x, 0, -z);
 	}
 }
