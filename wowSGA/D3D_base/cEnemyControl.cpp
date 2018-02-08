@@ -66,10 +66,10 @@ cOBB * cEnemyControl::getBossOBB()
 
 void cEnemyControl::SetUp(){
 	m_pSpider = new cBoneSpider;
-	//m_pSpider->addMonster(1, 0, 4);
+	m_pSpider->addMonster(1, 0, 4);
 
 	m_pDruid = new cArchDruid;
-	//m_pDruid->addMonster(-4, 0, -4);
+	m_pDruid->addMonster(-4, 0, -4);
 
 	m_pWorg = new cLightningWorg;
 	m_pWorg->addMonster(4, 0, -4);

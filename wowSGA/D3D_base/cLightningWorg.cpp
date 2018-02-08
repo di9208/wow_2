@@ -45,7 +45,7 @@ void cLightningWorg::addMonster(float x, float y, float z){
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
 	Monster.t.HP = 50;
 	Monster.MaxHP = 50;
-	Monster.t.ATK = 51;
+	Monster.t.ATK = 3;
 	Monster.t.DEF = 5;
 	Monster.t.Speed = 0.08f;
 	Monster.t.Gold = rand() % 100 + 1500;
@@ -54,7 +54,7 @@ void cLightningWorg::addMonster(float x, float y, float z){
 	Monster.m_Sphere.fRadius = 10.f;
 	Monster.m_Sphere.bIsPicked = false;
 	Monster.MaxRange = 18.f;
-	Monster.range = 2.f;
+	Monster.range = 1.f;
 	Monster.time = 0;
 	Monster.death = false;
 	Monster.deathTime = 0;
@@ -63,14 +63,14 @@ void cLightningWorg::addMonster(float x, float y, float z){
 	Monster.RunCount = rand() % 250 + 10;
 
 	Monster.Particle = new cMonsterParticle(512);
-	Monster.Particle->init("UI/sword.png");
+	Monster.Particle->init("Particle/alpha_tex.tga");
 
 	D3DXMATRIXA16	World, matS, matR, matT;
 	D3DXMatrixRotationX(&matR, D3DX_PI/2.0f);
 	D3DXMatrixScaling(&matS, 0.011f, 0.011f, 0.011f);
 	D3DXMatrixIdentity(&matT);
 	D3DXMatrixTranslation(&matT, 0,0.35f,0.3);
-	World = matS * matR*matT ;
+	World = matS * matR * matT ;
 
 	Monster.MonsterOBB = new cOBB;
 	Monster.MonsterOBB->Setup(Monster.m, &World);
@@ -125,7 +125,7 @@ void cLightningWorg::Update(iMap* map){
 		
 		matUpdate(i, map);
 		m_vecSkinnedMesh[i].m->Update();
-		m_vecSkinnedMesh[i].Particle->update(1);
+		m_vecSkinnedMesh[i].Particle->update(0.8);
 		m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
 		MonsterAI(i);						//몬스터의 패턴, 스킬
 		MonsterStatus(i); 					//몬스터 상태, 애니메이션
@@ -136,7 +136,7 @@ void cLightningWorg::Update(iMap* map){
 void cLightningWorg::Render(){
 	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
 		m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
-		//m_vecSkinnedMesh[i].Particle->render();
+		m_vecSkinnedMesh[i].Particle->render();
 		D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
 

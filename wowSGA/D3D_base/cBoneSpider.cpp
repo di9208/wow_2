@@ -40,10 +40,10 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::DRUID;
 	Monster.m_vPos = D3DXVECTOR3(x, y + 0.3, z);
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
-	Monster.t.HP = 50;
-	Monster.MaxHP = 50;
-	Monster.t.ATK = 51;
-	Monster.t.DEF = 5;
+	Monster.t.HP = 80;
+	Monster.MaxHP = 80;
+	Monster.t.ATK = 8;
+	Monster.t.DEF = 8;
 	Monster.t.Speed = 0.06f;
 	Monster.attackSpeed = 110;
 	Monster.t.Gold = rand() % 100 + 1500;

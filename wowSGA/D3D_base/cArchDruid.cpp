@@ -2,6 +2,7 @@
 #include "cArchDruid.h"
 #include "cSkinnedMesh.h"
 #include "iMap.h"
+#include "cOBB.h"
 #include <time.h>
 
 cArchDruid::cArchDruid()
@@ -9,6 +10,7 @@ cArchDruid::cArchDruid()
 , m_pFont(NULL)
 , m_pSprite(NULL)
 {
+	D3DXMatrixIdentity(&matWorld);
 	m_pSkillOn = false;
 	nCount = 0;
 }
@@ -37,10 +39,10 @@ void cArchDruid::addMonster(float x, float y, float z){
 	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::DRUID;
 	Monster.m_vPos = D3DXVECTOR3(x, y + 1, z);
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
-	Monster.t.HP = 50;
-	Monster.MaxHP = 50;
-	Monster.t.ATK = 51;
-	Monster.t.DEF = 5;
+	Monster.t.HP = 100;
+	Monster.MaxHP = 100;
+	Monster.t.ATK = 20;
+	Monster.t.DEF = 10;
 	Monster.t.Speed = 0.03f;
 	Monster.attackSpeed = 150;
 	Monster.t.Gold = rand() % 100 + 1500;
@@ -59,6 +61,16 @@ void cArchDruid::addMonster(float x, float y, float z){
 	Monster.m_rangeSphere.vCenter = D3DXVECTOR3(x, y + 1, z);
 	Monster.m_rangeSphere.fRadius = 0.2f;
 	Monster.m_rangeSphere.bIsPicked = false;
+
+	D3DXMATRIXA16	World, matS, matR, matT;
+	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
+	D3DXMatrixScaling(&matS, 0.01f, 0.01f, 0.01f);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixTranslation(&matT, 0, 1, -1.3);
+	World = matS * matR * matT;
+
+	Monster.MonsterOBB = new cOBB;
+	Monster.MonsterOBB->Setup(Monster.m, &World);
 
 	ZeroMemory(&Monster.m_stMtlNone, sizeof(D3DMATERIAL9));
 	Monster.m_stMtlNone.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
@@ -112,6 +124,7 @@ void cArchDruid::Update(iMap* pMap){
 		if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
 		matUpdate(i, pMap);
 		m_vecSkinnedMesh[i].m->Update();
+		m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
 		MonsterAI(i);						//몬스터의 패턴, 스킬
 		MonsterStatus(i); 					//몬스터 상태, 애니메이션
 	}
@@ -121,6 +134,8 @@ void cArchDruid::Update(iMap* pMap){
 void cArchDruid::Render(){
 	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
 		m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
+		D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
+		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
 		if (m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked) RangeSphere(i);
 		SphereRender(i);
 		if (m_vecSkinnedMesh[i].death){
@@ -559,7 +574,8 @@ void cArchDruid::matUpdate(size_t i, iMap* pMap){
 		m_vecSkinnedMesh[i].m_vPos = vTempPos[i];
 	}
 
-	D3DXMatrixTranslation(&matT, m_vecSkinnedMesh[i].m_vPos.x, m_vecSkinnedMesh[i].m_vPos.y + 0.45, m_vecSkinnedMesh[i].m_vPos.z);
+	D3DXMatrixTranslation(&matT, m_vecSkinnedMesh[i].m_vPos.x, m_vecSkinnedMesh[i].m_vPos.y + 1.3, m_vecSkinnedMesh[i].m_vPos.z);
 
+	m_vecSkinnedMesh[i].matRT = matR * matT;
 	m_vecSkinnedMesh[i].matWorld = matS * matR * matT;
 }
