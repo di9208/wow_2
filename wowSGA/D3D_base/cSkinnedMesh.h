@@ -79,5 +79,8 @@ public:
 	void updateSetting(LPD3DXFRAME pFrame, D3DXMATRIXA16* m_Word);
 
 	void addMonsterPos(D3DXMATRIXA16* m_Word, float x, float y, float z, float size);
+
+	//animation speed
+	void setAnimationSpeed(float fSpeed);
 };
 
