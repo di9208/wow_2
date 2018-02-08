@@ -87,6 +87,8 @@ void cPlayer::Render()
 		m_Weapon->Render(&m_matWorld);
 	if (m_playerInFo)
 		m_playerInFo->Render(&m_playerAnimController->GetWorld(), &m_matWorld);
+	if (m_playerSkill)
+		m_playerSkill->Render();
 }
 
 void cPlayer::Collsion(cOBB * EnemyBox)

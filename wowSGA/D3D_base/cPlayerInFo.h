@@ -10,6 +10,7 @@ class cPlayerInFo
 private:
 	TagUnit						PlayerInFo;
 	LPD3DXFONT					m_pFont;
+	LPD3DXFONT					m_systemFont;
 
 	LPD3DXSPRITE				m_pSprite;
 	D3DXIMAGE_INFO				m_stImageInfo;
@@ -43,13 +44,13 @@ private:
 
 
 	status						m_skill_UI[5];	//보여줄 이미지
-	status						m_coolTime_UI[5];
-	/*
-	0번 일반공격
-	1번 더블공격
-	2번 브레스 또는 포효
-	3번 구르기
-	*/
+
+												/*
+												0번 일반공격
+												1번 더블공격
+												2번 브레스 또는 포효
+												3번 구르기
+												*/
 
 	D3DXIMAGE_INFO				m_Dummy_info;
 	LPDIRECT3DTEXTURE9			m_Dummy;
@@ -69,6 +70,7 @@ public:
 	void SetUI();
 	void RenderUI();
 	void RenderFont();
+	void RenderFontSysytem();
 	void Render(D3DXMATRIXA16* playerWorld, D3DXMATRIXA16* pMatWorld);
 	void RenderPlayerStat();
 
