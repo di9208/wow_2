@@ -3,6 +3,7 @@
 #include "cParticle.h"
 #include "cMonsterParticle.h"
 #include "cEnemyHitEffect.h"
+#include "cUIObject.h"
 
 class iMap;
 class cSkinnedMesh;
@@ -10,6 +11,7 @@ class cOBB;
 
 class cArchDruid : public cUnit
 {
+	cUIObject* Root;
 	struct EnemySkinnedMesh
 	{
 		cSkinnedMesh*	m;
@@ -17,6 +19,7 @@ class cArchDruid : public cUnit
 		cParticle*		Particle;
 		D3DXMATRIXA16	matWorld;
 		cOBB*			MonsterOBB;
+		cOBB*			MonsterAttackOBB;
 		MONSTER_STATUS	ENUM_MONSTER;
 		MONSTER_KIND	ENUM_MONSTER_KIND;
 
@@ -64,6 +67,7 @@ class cArchDruid : public cUnit
 		std::vector<ST_MONSTER_ITEM>		m_ItemSprite;
 
 		D3DXMATRIXA16 matRT;
+		D3DXMATRIXA16 matRTAttack;
 	};
 private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
@@ -101,16 +105,13 @@ public:
 	void MonsterStatus(size_t i);
 	void MonsterDeath(size_t i);
 
-	void SetupUI(size_t i, size_t j);
-	void RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY);
+	void SetupUI(size_t j);
+	void RenderUI();
 
 	void SphereRender(size_t i);
 	void RangeSphere(size_t i);
 
 	void matUpdate(size_t i, iMap* map);
-
-	int getVectorSize() { return m_vecSkinnedMesh.size(); }
-	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].MonsterOBB; }
 
 	D3DXVECTOR3 getOBBCenter(int i);
 	float getOBBhalf(int i);
@@ -135,6 +136,10 @@ public:
 
 	void getWeaponHit(int i, cOBB * PlayerWeapon);
 	void setHurt(int i, bool check) { m_vecSkinnedMesh[i].Hurt = check; };
+
+
+	int getVectorSize() { return m_vecSkinnedMesh.size(); }
+	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].MonsterOBB; }
 
 	cArchDruid();
 	~cArchDruid();

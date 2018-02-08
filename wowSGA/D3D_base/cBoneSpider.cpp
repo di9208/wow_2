@@ -58,7 +58,7 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 	Monster.m = new cSkinnedMesh;
 	Monster.m->Setup("Monster/bonespider", "1.x");
 	Monster.ENUM_MONSTER = MONSTER_STATUS::MONSTER_STAND;
-	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::SPIDER;
+	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::KIND_SPIDER;
 	Monster.m_vPos = D3DXVECTOR3(x, y + 0.3, z);
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
 	Monster.t.HP = 80;
@@ -153,7 +153,6 @@ void cBoneSpider::Update(iMap* pMap) {
 		//몬스터 죽음
 		if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
 
-
 		matUpdate(i, pMap);
 		m_vecSkinnedMesh[i].m->Update();
 		m_vecSkinnedMesh[i].Particle->update(2.0f);
@@ -164,8 +163,7 @@ void cBoneSpider::Update(iMap* pMap) {
 	if (Root)
 	{
 		Root->Update();
-	}
-		
+	}	
 }
 
 
@@ -181,26 +179,12 @@ void cBoneSpider::Render() {
 
 		SphereRender(i, m_vecSkinnedMesh[i].matWorld);
 		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, nullptr, nullptr);
+
+
 		if (m_vecSkinnedMesh[i].death) {
-			RenderUI(2, 0, 10, 10, 79, 80);
+			RenderUI();
 		}
 	}
-	//RenderUI(0, 0, 10, 10, 79, 80);
-	/*if (m_pFont)
-	{
-	char str[128];
-	sprintf(str, "bossHP : %d ", m_vecSkinnedMesh[0].attackTime);
-	std::string sText(str);
-	RECT rc;
-	SetRect(&rc, 100, 630, 300, 200);
-
-	m_pFont->DrawText(NULL,
-	sText.c_str(),
-	sText.length(),
-	&rc,
-	DT_LEFT | DT_TOP | DT_NOCLIP,
-	D3DCOLOR_XRGB(255, 255, 255));
-	}*/
 }
 
 void cBoneSpider::MonsterInsic(D3DXVECTOR3 d) {
@@ -220,7 +204,6 @@ void cBoneSpider::MonsterStatus(size_t i) {
 	if (g_pKeyManager->isOnceKeyDown('Z')) {
 		HarmDamage(205, 0);
 	}
-
 	switch (m_vecSkinnedMesh[i].ENUM_MONSTER)
 	{
 	case MONSTER_STAND:
@@ -245,7 +228,7 @@ void cBoneSpider::MonsterStatus(size_t i) {
 
 }
 
-void cBoneSpider::SetupUI(size_t i, size_t a) {
+void cBoneSpider::SetupUI(size_t a) {
 	cUIImage* main = new cUIImage;
 	main->SetTexture("bonespiderInven","UI/UI_Enemy_Invectory.png");
 	main->SetPos(D3DXVECTOR3(20, 150, 0));
@@ -263,10 +246,9 @@ void cBoneSpider::SetupUI(size_t i, size_t a) {
 	}
 }
 
-void cBoneSpider::RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY) {
-	
+void cBoneSpider::RenderUI() {
 	if (Root)
-	Root->Render(m_pSprite);
+		Root->Render(m_pSprite);
 }
 
 void cBoneSpider::MonsterDeath(size_t i) {
@@ -276,14 +258,17 @@ void cBoneSpider::MonsterDeath(size_t i) {
 
 	if (!m_vecSkinnedMesh[i].death) {
 		size_t a = rand() % 4 + 1;
-		SetupUI(i, a);
+		SetupUI(a);
 		m_vecSkinnedMesh[i].death = true;
 	}
 	//죽는 모션 후 일정시간이 지나면 해당 애니메이션은 정지시킨다.
 	else {
-		
-		if (m_vecSkinnedMesh[i].deathTime > 1000) {
+		m_vecSkinnedMesh[i].Particle = new cMonsterParticle(512, 20);
+		m_vecSkinnedMesh[i].Particle->init("Particle/alpha_tex.tga");
+		m_vecSkinnedMesh[i].Particle->reset();
 
+
+		if (m_vecSkinnedMesh[i].deathTime > 1000) {
 			SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
 			SAFE_DELETE(m_vecSkinnedMesh[i].m);
 			m_vecSkinnedMesh.erase(m_vecSkinnedMesh.begin() + i);
@@ -351,7 +336,8 @@ void cBoneSpider::MonsterAI(size_t i) {
 
 		//공격상태가 아니라면 일정시간이 지난 후 따라감
 		if (m_vecSkinnedMesh[i].time > 50 &&
-			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK) {
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK &&
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH) {
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_RUN;
 			if (m_vecSkinnedMesh[i].attackTime < m_vecSkinnedMesh[i].attackSpeed - 1) m_vecSkinnedMesh[i].attackTime++;
 			pos[i] += dir[i] * m_vecSkinnedMesh[i].t.Speed;
@@ -361,7 +347,8 @@ void cBoneSpider::MonsterAI(size_t i) {
 
 		//일정시간이 지나지 않았다면 스탠드 상태
 		else if (m_vecSkinnedMesh[i].time <= 50 &&
-			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK) {
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK &&
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH) {
 			if (m_vecSkinnedMesh[i].attackTime < m_vecSkinnedMesh[i].attackSpeed - 1) m_vecSkinnedMesh[i].attackTime++;
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		}
@@ -424,14 +411,16 @@ void cBoneSpider::MonsterAI(size_t i) {
 		m_vecSkinnedMesh[i].attackTime++;
 
 		//어택타임이 차면 공격
-		if (m_vecSkinnedMesh[i].attackTime < 50) {
+		if (m_vecSkinnedMesh[i].attackTime < 50 &&
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH) {
 			if (m_vecSkinnedMesh[i].attackTime < 2) {
 				g_pSoundManager->play("SpiderHit", 1.0f);
 			}
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_ATTACK;
 		}
 		//하거나 쉬도록 함
-		else if (m_vecSkinnedMesh[i].attackTime > 50) {
+		else if (m_vecSkinnedMesh[i].attackTime > 50 &&
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH) {
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		}
 	}

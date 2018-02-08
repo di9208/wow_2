@@ -345,7 +345,7 @@ void cEnemyControl::BossSetup()
 	stBoss1.stat.HP = 500;
 	stBoss1.stat.Max_HP = 500;
 	stBoss1.chk = false;
-	stBoss1.kind = BOSS_ARTHAS;
+	stBoss1.kind = KIND_BOSS_ARTHAS;
 	stBoss1.e_boss_state = E_BOSS_START;
 	stBoss1.particle = new cArthasPaticle(700, 20);
 	stBoss1.particle->init("Particle/T_VFX_SWIRL64B_A_CONTRAST2.png");
@@ -358,7 +358,7 @@ void cEnemyControl::BossSetup()
 	stBoss_rag.stat.DEF = 20;
 	stBoss_rag.stat.HP = 500;
 	stBoss_rag.chk = false;
-	stBoss_rag.kind = BOSS_RAGNALOS;
+	stBoss_rag.kind = KIND_BOSS_RAGNALOS;
 	stBoss_rag.e_boss_rag_state = E_BOSS_RAG_STAND;
 	stBoss_rag.particle = new cRagPaticle(500,20);
 	stBoss_rag.particle->init("Particle/T_VFX_SWIRL64B_A_CONTRAST2.png");
