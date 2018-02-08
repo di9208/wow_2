@@ -21,7 +21,7 @@ private:
 	POINT MOUSE;
 	tag_slot item_slot[10];
 
-	tag_slot buyback_item_slot[10];
+	tag_slot buyback_item_slot;
 
 	cUIText* Page_TEXT_UI;
 	int Now_page_num;

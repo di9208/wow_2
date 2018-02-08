@@ -16,13 +16,6 @@ class shop_TEST_CLASS
 		int item_num;
 	};
 
-	struct Tag_picking_mouse
-	{
-		cUIImage* mouse_pick;
-		bool pick_now;
-		item_class* item_data;
-	};
-
 private:
 	shop_class* _shops;
 	inventory* _invens;
@@ -43,9 +36,10 @@ private:
 
 	bool cursor_text;
 
-	LPDIRECT3DTEXTURE9 mouse_cursorImage;
+	SYNTHESIZE(int, picking_nums, pick_number);
+	SYNTHESIZE(bool, picking_isit, pick_Truefalse);
 
-	SYNTHESIZE(Tag_picking_mouse, sender, picking_data);
+	LPDIRECT3DTEXTURE9 mouse_cursorImage;
 
 	SYNTHESIZE(bool, is_interface, isinterface);
 public:
@@ -56,5 +50,11 @@ public:
 	void Update();
 	void Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+	inventory* get_inven() { return _invens; }
+	//void resetting_inven() 
+	//{
+	//	//_invens->Setting_items();
+	//}
 };
 

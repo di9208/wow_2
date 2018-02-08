@@ -1,9 +1,12 @@
 #pragma once
 #include "cUnit.h"
-#include "item_class.h"
+#include "shop_TEST_CLASS.h"
 
 class cOBB;
 class cSkinnedMesh;
+class item_class;
+class inventory;
+class cUIImage;
 
 class cPlayerInFo
 {
@@ -38,6 +41,7 @@ private:
 		float					m_y;
 	};
 
+	cUIImage* item_slot[5];
 	status						m_stats_UI[5];			//보여줄 이미지
 	D3DXIMAGE_INFO				m_stats_info[5];	//담아둘이미지
 	LPDIRECT3DTEXTURE9			m_stats[5];
@@ -59,6 +63,9 @@ private:
 	LPDIRECT3DTEXTURE9			m_HP;
 
 	int ax;
+
+	std::vector<item_class*> player_Equite_vector;
+	LPD3DXSPRITE UI_sprite;
 public:
 	cPlayerInFo();
 	~cPlayerInFo();
@@ -78,4 +85,6 @@ public:
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 	void setRC();
+	void getItem(shop_TEST_CLASS* iven_item);
+	void setting_EQUIT_UI();
 };

@@ -43,5 +43,9 @@ public:
 	bool ischeck(OUT int & nums);
 
 	tag_slot Get_item_slot(int i) { return item_slot[i]; }
+
+	void Set_item_slot(int i, D3DXVECTOR3 pt);
+
+
 };
 

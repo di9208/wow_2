@@ -37,7 +37,7 @@ shop_class::~shop_class()
 	}
 
 	Shop_UI->Destroy();
-	buybackShop_UI->Destroy();
+	//buybackShop_UI->Destroy();
 
 	Page_TEXT_UI->Destroy();
 }
@@ -53,7 +53,7 @@ void shop_class::Setup()
 	if ((v_shop_sell_Things.size() - (Page_num * 10)) < 0) Page_num += 1;
 
 	setting_UI_frame();
-	setting_buyback_UI_frame();
+	//setting_buyback_UI_frame();
 
 	SetRect(&Shop_UI_RECT, Shop_UI->GetPos().x, Shop_UI->GetPos().y, Shop_UI->GetPos().x + 404, Shop_UI->GetPos().y + 420);
 
@@ -76,12 +76,10 @@ void shop_class::Setup()
 void shop_class::update()
 {
 
-
-
 	SetRect(&Shop_UI_RECT, Shop_UI->GetPos().x, Shop_UI->GetPos().y, Shop_UI->GetPos().x + 404, Shop_UI->GetPos().y + 420);
 
 	Shop_UI->Update();
-	buybackShop_UI->Update();
+	//buybackShop_UI->Update();
 
 	char Page_text_temp[1024];
 	ZeroMemory(Page_text_temp, 1024);
@@ -115,7 +113,7 @@ void shop_class::update()
 void shop_class::render(LPD3DXSPRITE in_subsprite)
 {
 	Shop_UI->Render(in_subsprite);
-	buybackShop_UI->Render(in_subsprite);
+	//buybackShop_UI->Render(in_subsprite);
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -189,6 +187,7 @@ void shop_class::rebuy(IN int nums, OUT int & money, OUT item_class* buyitem)
 void shop_class::setting_UI_frame()
 {
 	Shop_UI = new cUIObject;
+	//Shop_UI->SetPos(D3DXVECTOR3(0, 0, 0));
 	Shop_UI->Sethidden(true);
 	//image
 
@@ -292,15 +291,15 @@ void shop_class::setting_UI_frame()
 	cui_T01->SetupText("타우렌 상점", ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
 	cui_T01->SetPos(D3DXVECTOR3(145, 17, 0));
 
-	cUIText* cui_T02;
-	cui_T02 = new cUIText;
-	cui_T02->SetupText("상품 목록", ST_SIZE(80, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
-	cui_T02->SetPos(D3DXVECTOR3(23, 455, 0));
+	//cUIText* cui_T02;
+	//cui_T02 = new cUIText;
+	//cui_T02->SetupText("상품 목록", ST_SIZE(80, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
+	//cui_T02->SetPos(D3DXVECTOR3(23, 455, 0));
 
-	cUIText* cui_T03;
-	cui_T03 = new cUIText;
-	cui_T03->SetupText("재 매입", ST_SIZE(80, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
-	cui_T03->SetPos(D3DXVECTOR3(135, 455, 0));
+	//cUIText* cui_T03;
+	//cui_T03 = new cUIText;
+	//cui_T03->SetupText("재 매입", ST_SIZE(80, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
+	//cui_T03->SetPos(D3DXVECTOR3(135, 455, 0));
 
 	cUIText* cui_T04;
 	cui_T04 = new cUIText;
@@ -313,15 +312,14 @@ void shop_class::setting_UI_frame()
 	cui_T05->SetPos(D3DXVECTOR3(265, 344, 0));
 
 	//button
-
-	Button_delegate* dele_close = new Button_delegate;
+	Button_delegate* dele_temp = new Button_delegate;
 
 	cUIButton* cui_close;
 	cui_close = new cUIButton;
-	cui_close->SetTag(1);
+	cui_close->SetTag(TAG_CLOSE);
 	cui_close->SetTexture("shop_data/UI-Panel-MinimizeButton-Up.PNG", "shop_data/UI-Panel-MinimizeButton-Disabled.PNG", "shop_data/UI-Panel-MinimizeButton-Down.PNG");
 	cui_close->SetPos(D3DXVECTOR3(322, 8, 0));
-	cui_close->SetDeleGate(dele_close);
+	cui_close->SetDeleGate(dele_temp);
 
 	cUIButton* cui_B01;
 	cui_B01 = new cUIButton;
@@ -389,18 +387,20 @@ void shop_class::setting_UI_frame()
 	cui_BuyBack_EMPTY_ICON->SetTexture("BuyBack_EMPTY_ICON", "shop_data/UI-EmptySlot.PNG", "shop_data/UI-EmptySlot-Disabled.PNG", "shop_data/UI-EmptySlot-White.PNG");
 	cui_BuyBack_EMPTY_ICON->SetPos(D3DXVECTOR3(20 + 162, 75 + 296, 0));
 
-	cUIButton* cui_BUY;
-	cui_BUY = new cUIButton;
-	cui_BUY->SetTexture("Buy", "shop_data/SHOP_UI/UI-Character-InActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG");
-	cui_BUY->SetPos(D3DXVECTOR3(10, 450, 0));
-	cui_BUY->SetScal(D3DXVECTOR3(0.8, 1, 0));
+	//cUIButton* cui_BUY;
+	//cui_BUY = new cUIButton;
+	//cui_BUY->SetTexture("Buy", "shop_data/SHOP_UI/UI-Character-InActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG");
+	//cui_BUY->SetTag(TAG_SHOP);
+	//cui_BUY->SetDeleGate(dele_close);
+	//cui_BUY->SetPos(D3DXVECTOR3(10, 450, 0));
+	//cui_BUY->SetScal(D3DXVECTOR3(0.8, 1, 0));
 
-	cUIButton* cui_BUYBACK;
+	/*cUIButton* cui_BUYBACK;
 	cui_BUYBACK = new cUIButton;
-	//cui_BUYBACK->SetTag(0);
+	cui_BUYBACK->SetTag(TAG_BUYBACK);
 	cui_BUYBACK->SetTexture("BuyBack", "shop_data/SHOP_UI/UI-Character-InActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG");
 	cui_BUYBACK->SetPos(D3DXVECTOR3(120, 450, 0));
-	cui_BUYBACK->SetScal(D3DXVECTOR3(0.8, 1, 0));
+	cui_BUYBACK->SetScal(D3DXVECTOR3(0.8, 1, 0));*/
 	//cui_BUYBACK->SetDelevery(dele_close);
 
 	//add
@@ -426,8 +426,8 @@ void shop_class::setting_UI_frame()
 	Shop_UI->AddChild(cui_Item_slot10);
 
 	Shop_UI->AddChild(cui_close);
-	Shop_UI->AddChild(cui_BUY);
-	Shop_UI->AddChild(cui_BUYBACK);
+	//Shop_UI->AddChild(cui_BUY);
+	//Shop_UI->AddChild(cui_BUYBACK);
 
 	Shop_UI->AddChild(cui_B01);
 	Shop_UI->AddChild(cui_B02);
@@ -444,8 +444,8 @@ void shop_class::setting_UI_frame()
 	Shop_UI->AddChild(cui_BuyBack_EMPTY_ICON);
 
 	Shop_UI->AddChild(cui_T01);
-	Shop_UI->AddChild(cui_T02);
-	Shop_UI->AddChild(cui_T03);
+	//Shop_UI->AddChild(cui_T02);
+	//Shop_UI->AddChild(cui_T03);
 	Shop_UI->AddChild(cui_T04);
 	Shop_UI->AddChild(cui_T05);
 
@@ -454,7 +454,8 @@ void shop_class::setting_UI_frame()
 void shop_class::setting_buyback_UI_frame()
 {
 	buybackShop_UI = new cUIObject;
-	buybackShop_UI->Sethidden(true);
+	buybackShop_UI->SetPos(D3DXVECTOR3(0, 0, 0.6f));
+	//buybackShop_UI->Sethidden(true);
 	//image
 
 	cUIImage* cui_I01;
@@ -652,15 +653,22 @@ void shop_class::setting_buyback_UI_frame()
 	cui_B14->SetTexture("BBslot14", "shop_data/UI-EmptySlot.PNG", "shop_data/UI-EmptySlot-Disabled.PNG", "shop_data/UI-EmptySlot-White.PNG");
 	cui_B14->SetPos(D3DXVECTOR3(20 + 160, 75 + 288, 0));
 
-	cUIButton* cui_BUY;
+	/*cUIButton* cui_BUY;
 	cui_BUY = new cUIButton;
 	cui_BUY->SetTexture("BBBuy", "shop_data/SHOP_UI/UI-Character-InActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG");
 	cui_BUY->SetPos(D3DXVECTOR3(10, 450, 0));
-	cui_BUY->SetScal(D3DXVECTOR3(0.8, 1, 0));
+	cui_BUY->SetScal(D3DXVECTOR3(0.8, 1, 0));*/
 
+	//cUIButton* cui_BUYBACK;
+	//cui_BUYBACK = new cUIButton;
+	//cui_BUYBACK->SetTexture("BBBuyBack", "shop_data/SHOP_UI/UI-Character-InActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG");
+	//cui_BUYBACK->SetPos(D3DXVECTOR3(120, 450, 0));
+	//cui_BUYBACK->SetScal(D3DXVECTOR3(0.8, 1, 0));
 	cUIButton* cui_BUYBACK;
 	cui_BUYBACK = new cUIButton;
-	cui_BUYBACK->SetTexture("BBBuyBack", "shop_data/SHOP_UI/UI-Character-InActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG");
+	cui_BUYBACK->SetTag(TAG_SHOP);
+	cui_BUYBACK->SetTexture("BuyBack", "shop_data/SHOP_UI/UI-Character-InActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG", "shop_data/SHOP_UI/UI-Character-ActiveTab.PNG");
+	cui_BUYBACK->SetDeleGate(dele_close);
 	cui_BUYBACK->SetPos(D3DXVECTOR3(120, 450, 0));
 	cui_BUYBACK->SetScal(D3DXVECTOR3(0.8, 1, 0));
 
@@ -688,7 +696,7 @@ void shop_class::setting_buyback_UI_frame()
 	buybackShop_UI->AddChild(cui_Item_slot14);
 
 	buybackShop_UI->AddChild(cui_close);
-	buybackShop_UI->AddChild(cui_BUY);
+	//	buybackShop_UI->AddChild(cui_BUY);
 	buybackShop_UI->AddChild(cui_BUYBACK);
 
 	buybackShop_UI->AddChild(cui_B01);

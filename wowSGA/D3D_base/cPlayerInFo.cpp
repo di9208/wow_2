@@ -3,7 +3,9 @@
 
 #include <sstream>
 #include "cOBB.h"
-
+#include "item_class.h"
+#include "inventory.h"
+#include "cUIImage.h"
 
 cPlayerInFo::cPlayerInFo()
 	:m_pTexture(NULL)
@@ -29,6 +31,7 @@ cPlayerInFo::cPlayerInFo()
 
 cPlayerInFo::~cPlayerInFo()
 {
+	SAFE_RELEASE(UI_sprite);
 	SAFE_RELEASE(m_pFont);
 	SAFE_RELEASE(m_pTexture);
 	SAFE_RELEASE(m_pSprite);
@@ -48,6 +51,8 @@ cPlayerInFo::~cPlayerInFo()
 
 void cPlayerInFo::Setup(cSkinnedMesh* playerSkinned, D3DXMATRIXA16* playerWorld)
 {
+	D3DXCreateSprite(g_pD3DDevice, &UI_sprite);
+
 	SetFont();
 	SetUI();
 	setRC();
@@ -87,6 +92,10 @@ void cPlayerInFo::Update(condition* pCondition, D3DXMATRIXA16* pMatWorld)
 		{
 			int a = 0;
 		}
+	}
+	for (int i = 0; i < player_Equite_vector.size(); i++)
+	{
+		item_slot[i]->Update();
 	}
 }
 
@@ -234,6 +243,15 @@ void cPlayerInFo::Render(D3DXMATRIXA16* playerWorld, D3DXMATRIXA16* pMatWorld)
 	{
 		RenderPlayerStat();
 		RenderFont();
+
+		UI_sprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+		for (int i = 0; i < player_Equite_vector.size(); i++)
+		{
+			item_slot[i]->Render(UI_sprite);
+		}
+
+		UI_sprite->End();
 	}
 
 	D3DCOLOR c = D3DCOLOR_XRGB(0, 255, 255);
@@ -291,8 +309,57 @@ void cPlayerInFo::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 }
 
+void cPlayerInFo::getItem(shop_TEST_CLASS* iven_item)
+{
+	if (iven_item)
+	{
+		//Å¬¸¯ÇßÀ»¶¼	
+		if (iven_item->Getpick_Truefalse())
+		{
+			if (player_Equite_vector.size() > 0)
+			{
+				bool is_sametype = false;
+
+				for (int i = 0; i < player_Equite_vector.size(); i++)
+				{
+					if (player_Equite_vector[i]->GetI_type() == iven_item->get_inven()->Getvector_inven()[iven_item->Getpick_number()]->GetI_type())
+					{
+						item_class* tmep;
+						tmep = new item_class;
+						*tmep = *player_Equite_vector[i];
+						*player_Equite_vector[i] = *iven_item->get_inven()->Getvector_inven()[iven_item->Getpick_number()];
+						*iven_item->get_inven()->Getvector_inven()[iven_item->Getpick_number()] = *tmep;
+
+						is_sametype = true;
+						break;
+					}
+				}
+				if (!is_sametype)
+				{
+					player_Equite_vector.push_back(iven_item->get_inven()->Getvector_inven()[iven_item->Getpick_number()]);
+					iven_item->get_inven()->delete_inven(iven_item->Getpick_number());
+				}
+			}
+			else
+			{
+				player_Equite_vector.push_back(iven_item->get_inven()->Getvector_inven()[iven_item->Getpick_number()]);
+				iven_item->get_inven()->delete_inven(iven_item->Getpick_number());
+			}
+			iven_item->get_inven()->Setting_items();
+			iven_item->Setpick_Truefalse(false);
+
+			setting_EQUIT_UI();
+		}
+	}
+}
+
 void cPlayerInFo::setRC()
 {
+	for (int i = 0; i < 5; i++)
+	{
+		item_slot[i] = new cUIImage;
+	}
+
 	float base_X = 50;
 	float base_Y = 150;
 
@@ -336,6 +403,20 @@ void cPlayerInFo::setRC()
 
 }
 
+void cPlayerInFo::setting_EQUIT_UI()
+{
+	for (int i = 0; i < player_Equite_vector.size(); i++)
+	{
+		char chartext[1024];
+
+		sprintf(chartext, "shop_data/%s", player_Equite_vector[i]->GetI_image().c_str());
+
+		item_slot[i]->SetTexture(chartext);
+		item_slot[i]->SetPos(D3DXVECTOR3(m_stats_UI[i].m_x, m_stats_UI[i].m_y, 0));
+		item_slot[i]->Sethidden(!m_status);
+		item_slot[i]->SetScal(D3DXVECTOR3(0.55, 0.55, 0));
+	}
+}
 void cPlayerInFo::SetUI()
 {
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);

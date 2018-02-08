@@ -46,6 +46,8 @@ void inventory::Setup()
 		item_slot[i].item_slot = new cUIImage;
 		item_slot[i].item_num = -1;
 	}
+
+	Setting_items();
 }
 
 void inventory::Update()
@@ -53,9 +55,14 @@ void inventory::Update()
 	GetCursorPos(&MOUSE);
 	ScreenToClient(g_hWnd, &MOUSE);
 
+	for (int i = 0; i < 16; i++)
+	{
+		item_slot[i].item_slot->Sethidden(inven_UI->Gethidden());
+		item_slot[i].item_slot->Update();
+	}
+
 	inven_UI->Update();
 	setting_moneyFram(inven_UI->GetPos().x, inven_UI->GetPos().y);
-	Setting_items();
 }
 
 void inventory::Render(LPD3DXSPRITE in_Sprite)
@@ -88,7 +95,7 @@ void inventory::Setting_invenUI()
 	cUIButton* UI_BUTTON01 = new cUIButton;
 	UI_BUTTON01->SetTexture("inven_close", "shop_data/UI-Panel-MinimizeButton-Up.PNG", "shop_data/UI-Panel-MinimizeButton-Disabled.PNG", "shop_data/UI-Panel-MinimizeButton-Down.PNG");
 	UI_BUTTON01->SetPos(D3DXVECTOR3(160, 2, 0));
-	UI_BUTTON01->SetTag(1);
+	UI_BUTTON01->SetTag(TAG_CLOSE);
 	UI_BUTTON01->SetDeleGate(dele_temp);
 
 	inven_UI->AddChild(UI_IMAGE01);
@@ -111,7 +118,7 @@ void inventory::Setting_items()
 		item_slot[i].item_slot->SetPos(D3DXVECTOR3(inven_UI->GetPos().x + 18 + (i % 4) * 42, inven_UI->GetPos().y + 66 + (i / 4) * 42, 0));
 		item_slot[i].item_slot->Sethidden(inven_UI->Gethidden());
 		item_slot[i].item_slot->SetScal(D3DXVECTOR3(0.55, 0.55, 0));
-		item_slot[i].item_slot->Update();
+		//item_slot[i].item_slot->Update();
 	}
 }
 
@@ -185,6 +192,7 @@ void inventory::setting_moneyFram(float x, float y)
 void inventory::Add_inven(item_class * temp)
 {
 	V_INVEN.push_back(temp);
+	Setting_items();
 }
 
 void inventory::delete_inven(int arry)
@@ -216,8 +224,8 @@ bool inventory::ischeck(OUT int & nums)
 	{
 		SetRect(&rc, item_slot[i].item_slot->GetPos().x,
 			item_slot[i].item_slot->GetPos().y,
-			item_slot[i].item_slot->GetPos().x + 30,
-			item_slot[i].item_slot->GetPos().y + 32);
+			item_slot[i].item_slot->GetPos().x + 40,
+			item_slot[i].item_slot->GetPos().y + 40);
 
 		if (PtInRect(&rc, MOUSE))
 		{
@@ -227,4 +235,9 @@ bool inventory::ischeck(OUT int & nums)
 	}
 
 	return false;
+}
+
+void inventory::Set_item_slot(int i, D3DXVECTOR3 pt)
+{
+	return item_slot[i].item_slot->SetPos(D3DXVECTOR3(pt.x - 20, pt.y - 20, 0));
 }

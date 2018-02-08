@@ -1,6 +1,13 @@
 #pragma once
 #include "cObject.h"
 
+enum ENUMTAG
+{
+	TAG_SHOP,
+	TAG_BUYBACK,
+	TAG_CLOSE
+};
+
 class cUIObject :public cObject
 {
 protected:

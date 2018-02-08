@@ -68,11 +68,7 @@ void shop_TEST_CLASS::Setup()
 			shop_inven_UI[i * 7 + j].y = 74 + 43 * i;
 		}
 	}
-
-	sender.item_data = new item_class;
-	sender.mouse_pick = new cUIImage;
-	sender.pick_now = false;
-
+	picking_isit = false;
 }
 
 void shop_TEST_CLASS::Update()
@@ -87,8 +83,24 @@ void shop_TEST_CLASS::Update()
 		is_interface = true;
 	}
 
-	int item_nums = 0;
 
+	if (_invens->GetINVEN()->Gethidden())
+	{
+		if (g_pKeyManager->isOnceKeyDown('B'))
+		{
+			_invens->GetINVEN()->Sethidden(false);
+		}
+	}
+	else if (!_invens->GetINVEN()->Gethidden())
+	{
+		if (g_pKeyManager->isOnceKeyDown('B'))
+		{
+			_invens->GetINVEN()->Sethidden(true);
+		}
+	}
+
+	//»ç°í ÆÈ±â
+	int item_nums = 0;
 	if (!_shops->GetSHOP()->Gethidden())
 	{
 		if (_shops->ischeck(item_nums))
@@ -112,7 +124,7 @@ void shop_TEST_CLASS::Update()
 		}
 		if (!_invens->GetINVEN()->Gethidden())
 		{
-			if (_invens->ischeck(item_nums))
+			if (_invens->ischeck(item_nums) && !picking_isit)
 			{
 				if (g_pKeyManager->isOnceKeyDown(VK_RBUTTON))
 				{
@@ -129,43 +141,47 @@ void shop_TEST_CLASS::Update()
 			}
 		}
 	}
+	//
 
 	if (!_invens->GetINVEN()->Gethidden())
 	{
-		if (_invens->ischeck(item_nums))
+		if (!picking_isit)
 		{
-			if (GetKeyState(VK_LBUTTON) & 0x8000)
+			if (_invens->ischeck(item_nums))
 			{
-				sender.item_data = _invens->Getvector_inven()[item_nums];
-				sender.pick_now = true;
-
-				char str[1024];
-				sprintf(str, "shop_data/%s", _invens->Getvector_inven()[item_nums]->GetI_image().c_str());
-
-				sender.mouse_pick->SetTexture(str);
-				sender.mouse_pick->Sethidden(false);
-				sender.mouse_pick->SetScal(D3DXVECTOR3(0.6f, 0.6f, 0.6f));
+				if (g_pKeyManager->isOnceKeyDown(VK_RBUTTON))
+				{
+					picking_isit = true;
+					picking_nums = item_nums;
+				}
 			}
 		}
 	}
 
-
-	if (sender.pick_now)
+	//if (!_invens->GetINVEN()->Gethidden())
+	//{
+	//	if (picking_isit)
+	//	{
+	//		_invens->Set_item_slot(picking_nums, D3DXVECTOR3(Pt.x, Pt.y, 0));
+	//		_invens->Get_item_slot(picking_nums).item_slot->Update();
+	//	}
+	//}
+	/*if (sender.pick_now)
 	{
-		sender.mouse_pick->SetPos(D3DXVECTOR3(Pt.x - 20, Pt.y - 20, 0));
+	sender.mouse_pick->SetPos(D3DXVECTOR3(Pt.x - 20, Pt.y - 20, 0));
 
-		sender.mouse_pick->Update();
+	sender.mouse_pick->Update();
 
-		if (GetKeyState(VK_LBUTTON) & 0x0001)
-		{
-			sender.mouse_pick->Destroy();
+	if (GetKeyState(VK_LBUTTON) & 0x0001)
+	{
+	sender.mouse_pick->Destroy();
 
-			sender.mouse_pick = new cUIImage;
+	sender.mouse_pick = new cUIImage;
 
-			sender.pick_now = false;
-		}
-
+	sender.pick_now = false;
 	}
+
+	}*/
 
 
 	//if (is_interface)
@@ -198,7 +214,7 @@ void shop_TEST_CLASS::Update()
 	//	//¹º°¡ ¾ÈÆ®·ç
 	//	sender.pick_now = false;
 	//}
-
+	//
 	//if (g_pKeyManager->isOnceKeyDown('M'))
 	//{
 	//if (shop_inven_UI.size() > shop_inven_calling_now_num)
@@ -258,11 +274,6 @@ void shop_TEST_CLASS::Render()
 
 	_shops->render(UI_sprite);
 	_invens->Render(UI_sprite);
-
-	if (sender.pick_now)
-	{
-		sender.mouse_pick->Render(UI_sprite);
-	}
 
 	if (!cursor_text)
 	{

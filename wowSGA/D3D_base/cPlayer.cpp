@@ -111,8 +111,5 @@ void cPlayer::SetPlayerPick(std::vector<ST_PC_VERTEX> m_vecVertex)
 
 void cPlayer::connet_shop_test_class(shop_TEST_CLASS * connect_shop_test)
 {
-	if (connect_shop_test->Getpicking_data().mouse_pick)
-	{
-		//m_playerInFo
-	}
+	m_playerInFo->getItem(connect_shop_test);
 }
