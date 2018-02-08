@@ -162,6 +162,20 @@ public:
 
 	void  setSpiderDamageTimeCheck(int i, float time);
 	float getSpiderDamageTimeCheck(int i);
+	//===========================================================
+	int getDruidVectorSize();
+	cOBB* getDruidOBB(int i);
+
+	MONSTER_STATUS getDruidCondition(int i);
+
+	void setDruidDamageCheck(int i, bool check);
+	bool getDruidDamageCheck(int i);
+
+	void setDruidTimeCheck(int i, bool check);
+	bool getDruidTimeCheck(int i);
+
+	void  setDruidDamageTimeCheck(int i, float time);
+	float getDruidDamageTimeCheck(int i);
 	//=========================================================================
 	cOBB* getBossOBB();
 	E_BOSS_STATE getBossCondition();

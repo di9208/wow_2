@@ -594,3 +594,13 @@ void cArchDruid::matUpdate(size_t i, iMap* pMap){
 	m_vecSkinnedMesh[i].matRT = matR * matT;
 	m_vecSkinnedMesh[i].matWorld = matS * matR * matT;
 }
+
+D3DXVECTOR3 cArchDruid::getOBBCenter(int i)
+{
+	return m_vecSkinnedMesh[i].MonsterOBB->GetCenterPos();
+}
+
+float cArchDruid::getOBBhalf(int i)
+{
+	return m_vecSkinnedMesh[i].MonsterOBB->getMax();
+}
