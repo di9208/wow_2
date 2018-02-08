@@ -8,7 +8,7 @@ class cNpc_AniController
 private:
 	SYNTHESIZE(NPC_State, cNpc_State, State);
 	SYNTHESIZE(cSkinnedMesh*, m_NPC_SkinnedMesh, NPC_SkinnedMesh);
-	SYNTHESIZE(D3DXMATRIXA16, m_world, world);
+	SYNTHESIZE_REF(D3DXMATRIXA16, m_world, world);
 
 public:
 	cNpc_AniController();

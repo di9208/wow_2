@@ -86,9 +86,9 @@ void cArchDruid::addMonster(float x, float y, float z){
 
 	D3DXMATRIXA16	World, matS, matR, matT;
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
-	D3DXMatrixScaling(&matS, 0.01f, 0.01f, 0.01f);
+	D3DXMatrixScaling(&matS, 0.004f, 0.004f, 0.004f);
 	D3DXMatrixIdentity(&matT);
-	D3DXMatrixTranslation(&matT, 0, 1, -1.3);
+	D3DXMatrixTranslation(&matT, 0, 0.5, -0.7);
 	World = matS * matR * matT;
 
 	Monster.MonsterOBB = new cOBB;
@@ -477,23 +477,6 @@ void cArchDruid::MonsterAI(size_t i){
 	}
 }
 
-void cArchDruid::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	switch (message)
-	{
-	case WM_LBUTTONDOWN:
-
-		break;
-
-	case WM_LBUTTONUP:
-		break;
-
-	case WM_MOUSEMOVE:
-
-		break;
-	}
-}
-
 //스피어 렌더(골드, 몬스터)
 void cArchDruid::SphereRender(size_t i){
 	//스피어부분 렌더
@@ -565,7 +548,7 @@ void cArchDruid::RangeSphere(size_t i){
 
 void cArchDruid::matUpdate(size_t i, iMap* pMap){
 	D3DXMATRIXA16 matR, matS, matT;
-	D3DXMatrixScaling(&matS, 0.07f, 0.07f, 0.07f);
+	D3DXMatrixScaling(&matS, 0.03f, 0.03f, 0.03f);
 
 	D3DXMatrixRotationY(&matR, D3DX_PI * 1.5);
 
@@ -591,6 +574,10 @@ void cArchDruid::matUpdate(size_t i, iMap* pMap){
 			if (m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH)
 			{
 				m_vecSkinnedMesh[i].m_vPos = vTempPos[i];
+			}
+			else {
+				m_vecSkinnedMesh[i].m_vPos.x = vTempPos[i].x;
+				m_vecSkinnedMesh[i].m_vPos.z = vTempPos[i].z;
 			}
 		}
 	}

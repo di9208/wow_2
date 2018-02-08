@@ -438,22 +438,6 @@ void cLightningWorg::MonsterAI(size_t i){
 	
 }
 
-void cLightningWorg::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	switch (message)
-	{
-	case WM_LBUTTONDOWN:
-
-		break;
-
-	case WM_LBUTTONUP:
-		break;
-
-	case WM_MOUSEMOVE:
-
-		break;
-	}
-}
 
 //½ºÇÇ¾î ·»´õ(°ñµå, ¸ó½ºÅÍ)
 void cLightningWorg::SphereRender(size_t i, D3DXMATRIXA16& m_matWorld){
@@ -495,6 +479,10 @@ void cLightningWorg::matUpdate(size_t i, iMap* pMap){
 			if (m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH)
 			{
 				m_vecSkinnedMesh[i].m_vPos = vTempPos[i];
+			}
+			else {
+				m_vecSkinnedMesh[i].m_vPos.x = vTempPos[i].x;
+				m_vecSkinnedMesh[i].m_vPos.z = vTempPos[i].z;
 			}
 		}
 	}

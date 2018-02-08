@@ -20,9 +20,9 @@ private:
 	SYNTHESIZE(float, m_fBossRotY, fBossRotY);
 	SYNTHESIZE(D3DXVECTOR3, m_vBossPos, vBossPos);
 	SYNTHESIZE(D3DXVECTOR3, m_vBossDir, BossDir);
-	SYNTHESIZE_REF(D3DXMATRIXA16, m_world, World);
+	SYNTHESIZE_REF(D3DXMATRIXA16, m_world, world);
 	D3DXVECTOR3	m_vBossDirX;
-	SYNTHESIZE(D3DXMATRIXA16, m_World, World);
+	SYNTHESIZE_REF(D3DXMATRIXA16, m_World, World);
 
 	D3DXMATRIXA16 m_obbw;
 public:

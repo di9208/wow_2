@@ -23,17 +23,13 @@
     <ProjectGuid>{DF3DCD04-F9E1-4763-895D-3CA5373AB3EE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>D3D_base</RootNamespace>
-<<<<<<< HEAD
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
-=======
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
->>>>>>> 2b9b4ca77af0cb1ad9751967432b03e052b058f7
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -158,7 +154,6 @@
     <ClInclude Include="cArthasPaticle.h" />
     <ClInclude Include="cAseLoader.h" />
     <ClInclude Include="cAseNode.h" />
-    <ClInclude Include="cBoneGuardFel.h" />
     <ClInclude Include="cBoneSpider.h" />
     <ClInclude Include="cBossAniController.h" />
     <ClInclude Include="cBossRagController.h" />
@@ -170,6 +165,7 @@
     <ClInclude Include="cCubePTN.h" />
     <ClInclude Include="cDeviceManager.h" />
     <ClInclude Include="cEnemyControl.h" />
+    <ClInclude Include="cEnemyHitEffect.h" />
     <ClInclude Include="cEnemyManager.h" />
     <ClInclude Include="cEnemySkinnedMesh.h" />
     <ClInclude Include="cFontManager.h" />
@@ -242,7 +238,6 @@
     <ClCompile Include="cArthasPaticle.cpp" />
     <ClCompile Include="cAseLoader.cpp" />
     <ClCompile Include="cAseNode.cpp" />
-    <ClCompile Include="cBoneGuardFel.cpp" />
     <ClCompile Include="cBoneSpider.cpp" />
     <ClCompile Include="cBossAniController.cpp" />
     <ClCompile Include="cBossRagController.cpp" />
@@ -254,6 +249,7 @@
     <ClCompile Include="cCubePTN.cpp" />
     <ClCompile Include="cDeviceManager.cpp" />
     <ClCompile Include="cEnemyControl.cpp" />
+    <ClCompile Include="cEnemyHitEffect.cpp" />
     <ClCompile Include="cEnemyManager.cpp" />
     <ClCompile Include="cEnemySkinnedMesh.cpp" />
     <ClCompile Include="cFontManager.cpp" />

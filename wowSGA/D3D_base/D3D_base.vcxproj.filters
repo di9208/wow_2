@@ -330,9 +330,6 @@
     <ClInclude Include="item_class.h">
       <Filter>ITEM</Filter>
     </ClInclude>
-    <ClInclude Include="cBoneGuardFel.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="cLightningWorg.h">
       <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
@@ -347,6 +344,9 @@
     </ClInclude>
     <ClInclude Include="cBossAniController.h">
       <Filter>unit\enemyManager\boss\arthas</Filter>
+    </ClInclude>
+    <ClInclude Include="cEnemyHitEffect.h">
+      <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -572,9 +572,6 @@
     <ClCompile Include="item_class.cpp">
       <Filter>ITEM</Filter>
     </ClCompile>
-    <ClCompile Include="cBoneGuardFel.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="cLightningWorg.cpp">
       <Filter>unit\enemyManager\쫄몹</Filter>
     </ClCompile>
@@ -589,6 +586,9 @@
     </ClCompile>
     <ClCompile Include="cBossAniController.cpp">
       <Filter>unit\enemyManager\boss\arthas</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemyHitEffect.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

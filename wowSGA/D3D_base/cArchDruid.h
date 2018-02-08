@@ -2,6 +2,7 @@
 #include "cUnit.h"
 #include "cParticle.h"
 #include "cMonsterParticle.h"
+#include "cEnemyHitEffect.h"
 
 class iMap;
 class cSkinnedMesh;
@@ -98,7 +99,6 @@ public:
 	void SetupUI(size_t i, size_t j);
 	void RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY);
 
-	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	void SphereRender(size_t i);
 	void RangeSphere(size_t i);
 

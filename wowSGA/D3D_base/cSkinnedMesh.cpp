@@ -29,11 +29,6 @@ void cSkinnedMesh::addMonsterPos(D3DXMATRIXA16* m_Word, float x, float y, float 
 	D3DXMatrixIdentity(m_Word);
 }
 
-void cSkinnedMesh::setAnimationSpeed(float fSpeed)
-{
-	m_pAnimationController->SetTrackSpeed(0, fSpeed);
-}
-
 void cSkinnedMesh::Setup(IN char * szFolder, IN char * szFile)
 {
 	std::string sFullPath(szFolder);

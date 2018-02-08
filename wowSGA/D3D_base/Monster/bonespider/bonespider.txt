@@ -1,5 +1,0 @@
-1. stand
-2. death
-3. run
-4. attackunarmed
-5. combatwound
