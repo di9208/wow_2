@@ -11,6 +11,7 @@ public:
 	virtual ~cUIImage();
 
 	void SetTexture(IN char* szFullPath);
+	void SetTexture(IN char * keyname, IN char * szFullPath);
 	virtual void Render(LPD3DXSPRITE pSprite);
 };
 

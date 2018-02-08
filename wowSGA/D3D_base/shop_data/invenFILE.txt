@@ -6,7 +6,7 @@
 	*ITEM_WHERE "EQUIT"
 	*ITEM_TYPE "WEAPON"
 	*ITEM_SUBTEXT "±‰ ∞À¿Ã¥Ÿ."
-	*ITEM_IMAGE "shop_data/INV_Sword_04.PNG" 
+	*ITEM_IMAGE "INV_Sword_04.PNG" 
 		*ITEM_OPTION {
 			*ATK 100
 			*DEF 0
@@ -21,7 +21,7 @@
 	*ITEM_WHERE "EQUIT"
 	*ITEM_TYPE "WEAPON"
 	*ITEM_SUBTEXT "∏¡ƒ°¥Ÿ."
-	*ITEM_IMAGE "shop_data/INV_Hammer_17.PNG" 
+	*ITEM_IMAGE "INV_Hammer_17.PNG" 
 		*ITEM_OPTION {
 			*ATK 100
 			*DEF 0
@@ -36,7 +36,7 @@
 	*ITEM_WHERE "EQUIT"
 	*ITEM_TYPE "WEAPON"
 	*ITEM_SUBTEXT "µµ≥¢¥Ÿ."
-	*ITEM_IMAGE "shop_data/INV_Axe_1h_DeathwingRaidDW_D_01.PNG" 
+	*ITEM_IMAGE "INV_Axe_1h_DeathwingRaidDW_D_01.PNG" 
 		*ITEM_OPTION {
 			*ATK 100
 			*DEF 0

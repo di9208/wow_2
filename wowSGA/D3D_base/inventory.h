@@ -1,22 +1,28 @@
 #pragma once
 
 class cUIObject;
-class DragAndDrob;
 class item_class;
 class cUIImage;
 class cUIText;
 
 class inventory
 {
+	struct tag_slot
+	{
+		cUIImage* item_slot;
+		int item_num;
+	};
+
 private:
+	POINT MOUSE;
+
 	SYNTHESIZE(cUIObject*, inven_UI, INVEN);
-	DragAndDrob* drage;
 
-	std::vector<item_class*> V_INVEN;
+	SYNTHESIZE(std::vector<item_class*>, V_INVEN, vector_inven);
 
-	int Money;
+	SYNTHESIZE(int, Money, MONEY);
 
-	cUIImage* item_slot[16];
+	tag_slot item_slot[16];
 
 	cUIImage* money_image[3];
 	cUIText* money_text[3];
@@ -32,5 +38,10 @@ public:
 	void Setting_invenUI();
 	void Setting_items();
 	void setting_moneyFram(float x, float y);
+	void Add_inven(item_class* temp);
+	void delete_inven(int arry);
+	bool ischeck(OUT int & nums);
+
+	tag_slot Get_item_slot(int i) { return item_slot[i]; }
 };
 

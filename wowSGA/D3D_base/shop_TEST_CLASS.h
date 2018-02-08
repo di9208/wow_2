@@ -2,6 +2,7 @@
 class shop_class;
 class item_class;
 class cUIObject;
+class cUIImage;
 class wordManager;
 class cNpc;
 class inventory;
@@ -15,6 +16,13 @@ class shop_TEST_CLASS
 		int item_num;
 	};
 
+	struct Tag_picking_mouse
+	{
+		cUIImage* mouse_pick;
+		bool pick_now;
+		item_class* item_data;
+	};
+
 private:
 	shop_class* _shops;
 	inventory* _invens;
@@ -24,11 +32,8 @@ private:
 
 	cNpc* _npc;
 
-	std::vector<item_class*> _vtestitem;
-	float Money;
-
-	LPD3DXSPRITE UI_sprite;
 	std::vector<tag_shop_sub_room> shop_inven_UI;
+	LPD3DXSPRITE UI_sprite;
 
 	int shop_inven_calling_now_num;
 
@@ -40,6 +45,8 @@ private:
 
 	LPDIRECT3DTEXTURE9 mouse_cursorImage;
 
+	Tag_picking_mouse sender;
+
 	SYNTHESIZE(bool, is_interface, isinterface);
 public:
 	shop_TEST_CLASS();
@@ -49,7 +56,5 @@ public:
 	void Update();
 	void Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-
-	bool is_now_picking_item(LPD3DXSPRITE sprite);
 };
 

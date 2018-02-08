@@ -9,7 +9,8 @@ public:
 		FT_DEFAULT,
 		FT_UI,
 		FT_QUEST,
-		FT_STORE
+		FT_STORE,
+		FT_wow
 	};
 
 private:
