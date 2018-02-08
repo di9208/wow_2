@@ -18,6 +18,8 @@ class cPlayer_Enemy
 	float			RichKingTime;
 	//-------------------------
 	bool			Player_Attack;
+	//===================================================
+	int				Enemy_NUM;
 public:
 	cPlayer_Enemy();
 	~cPlayer_Enemy();

@@ -8,7 +8,6 @@
 #include "cBossRagController.h"
 #include "iMap.h"
 #include "cOBB.h"
-
 cEnemyControl::cEnemyControl()
 	: m_pSpider(NULL)
 	, m_pDruid(NULL)
@@ -194,7 +193,7 @@ void cEnemyControl::getWeaponHitBOSS(cOBB * PlayerWeapon)
 		{
 			if (PlayerWeapon->IsCollision(m_pBossAniController->GetBossOBB(), PlayerWeapon))
 			{
-				m_vecBoss[0].stat.HP -= 10;
+				m_vecBoss[0].stat.HP -= 100;
 			}
 		}
 	}

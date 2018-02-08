@@ -18,6 +18,7 @@ cPlayer_Enemy::cPlayer_Enemy()
 	, RichKingTime(0.0f)
 	, RichKingCheck(false)
 	, Player_Attack(false)
+	, Enemy_NUM(999)
 {
 }
 
@@ -143,6 +144,11 @@ void cPlayer_Enemy::Update(iMap* pMap)
 	if (m_EnemyControl)
 		m_EnemyControl->Update(m_Player->GetPosition(), pMap);
 
+	if (Enemy_NUM != 999)
+	{
+		m_Player->setHp(m_EnemyControl->getALLEnemyCenter()[Enemy_NUM].HP,
+			m_EnemyControl->getALLEnemyCenter()[Enemy_NUM].Max_HP);
+	}
 
 }
 
@@ -170,10 +176,12 @@ void cPlayer_Enemy::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 			//m_EnemyControl->getALLEnemyCenter()[i].bIsPicked = r.IsPicked(&m_EnemyControl->getALLEnemyCenter()[i]);
 			if (r.IsPicked(&m_EnemyControl->getALLEnemyCenter()[i]))
 			{
+				Enemy_NUM = i;
 				m_Player->UpdatePicking(m_EnemyControl->getALLEnemyCenter()[i].Mons);
 				//m_Player->setUI(true);
 				m_Player->setHp(m_EnemyControl->getALLEnemyCenter()[i].HP,
 					m_EnemyControl->getALLEnemyCenter()[i].Max_HP);
+				break;
 			}
 		}
 	} break;
