@@ -4,9 +4,6 @@
     <ClCompile Include="cCamera.cpp">
       <Filter>camera</Filter>
     </ClCompile>
-    <ClCompile Include="cGameManager.cpp">
-      <Filter>gameManager</Filter>
-    </ClCompile>
     <ClCompile Include="cCube.cpp">
       <Filter>cube</Filter>
     </ClCompile>
@@ -16,14 +13,17 @@
     <ClCompile Include="cCubePTN.cpp">
       <Filter>cube</Filter>
     </ClCompile>
-    <ClCompile Include="cHeightMap.cpp">
-      <Filter>HeightMap</Filter>
+    <ClCompile Include="cGameManager.cpp">
+      <Filter>gameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cGameObject.cpp">
+      <Filter>gameobject</Filter>
     </ClCompile>
     <ClCompile Include="cCharacter.cpp">
       <Filter>gameobject</Filter>
     </ClCompile>
-    <ClCompile Include="cGameObject.cpp">
-      <Filter>gameobject</Filter>
+    <ClCompile Include="cHeightMap.cpp">
+      <Filter>HeightMap</Filter>
     </ClCompile>
     <ClCompile Include="inventory.cpp">
       <Filter>inventory</Filter>
@@ -130,6 +130,9 @@
     <ClCompile Include="cBossRagController.cpp">
       <Filter>unit\enemyManager\boss\ragnaros</Filter>
     </ClCompile>
+    <ClCompile Include="cRagPaticle.cpp">
+      <Filter>unit\enemyManager\boss\ragnaros</Filter>
+    </ClCompile>
     <ClCompile Include="cBossSkill.cpp">
       <Filter>unit\enemyManager\boss</Filter>
     </ClCompile>
@@ -169,6 +172,9 @@
     <ClCompile Include="cNpcInfo.cpp">
       <Filter>unit\npc</Filter>
     </ClCompile>
+    <ClCompile Include="cEnemyPicking.cpp">
+      <Filter>unit\player</Filter>
+    </ClCompile>
     <ClCompile Include="cPlayer.cpp">
       <Filter>unit\player</Filter>
     </ClCompile>
@@ -180,12 +186,6 @@
     </ClCompile>
     <ClCompile Include="cPlayerSkill.cpp">
       <Filter>unit\player</Filter>
-    </ClCompile>
-    <ClCompile Include="cPlayer_Enemy.cpp">
-      <Filter>unit</Filter>
-    </ClCompile>
-    <ClCompile Include="cUnit.cpp">
-      <Filter>unit</Filter>
     </ClCompile>
     <ClCompile Include="cAction.cpp">
       <Filter>보간</Filter>
@@ -201,6 +201,12 @@
     </ClCompile>
     <ClCompile Include="cActionSeq.cpp">
       <Filter>보간</Filter>
+    </ClCompile>
+    <ClCompile Include="cUnit.cpp">
+      <Filter>unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayer_Enemy.cpp">
+      <Filter>unit</Filter>
     </ClCompile>
     <ClCompile Include="cFrustum.cpp">
       <Filter>소스파일</Filter>
@@ -238,27 +244,16 @@
     <ClCompile Include="loading.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="soundManager.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
-    <ClCompile Include="cEnemyPicking.cpp">
-      <Filter>unit\player</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="cRagPaticle.cpp">
-      <Filter>unit\enemyManager\boss\ragnaros</Filter>
-=======
-    <ClCompile Include="soundManager.cpp">
-      <Filter>Manager</Filter>
->>>>>>> 7b22ff7cfec6eecad912a42035c1eed55172e890
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cCamera.h">
       <Filter>camera</Filter>
-    </ClInclude>
-    <ClInclude Include="cGameManager.h">
-      <Filter>gameManager</Filter>
     </ClInclude>
     <ClInclude Include="cCube.h">
       <Filter>cube</Filter>
@@ -269,14 +264,17 @@
     <ClInclude Include="cCubePTN.h">
       <Filter>cube</Filter>
     </ClInclude>
-    <ClInclude Include="cHeightMap.h">
-      <Filter>HeightMap</Filter>
+    <ClInclude Include="cGameManager.h">
+      <Filter>gameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="cGameObject.h">
+      <Filter>gameobject</Filter>
     </ClInclude>
     <ClInclude Include="cCharacter.h">
       <Filter>gameobject</Filter>
     </ClInclude>
-    <ClInclude Include="cGameObject.h">
-      <Filter>gameobject</Filter>
+    <ClInclude Include="cHeightMap.h">
+      <Filter>HeightMap</Filter>
     </ClInclude>
     <ClInclude Include="inventory.h">
       <Filter>inventory</Filter>
@@ -386,6 +384,9 @@
     <ClInclude Include="cBossRagController.h">
       <Filter>unit\enemyManager\boss\ragnaros</Filter>
     </ClInclude>
+    <ClInclude Include="cRagPaticle.h">
+      <Filter>unit\enemyManager\boss\ragnaros</Filter>
+    </ClInclude>
     <ClInclude Include="cBossSkill.h">
       <Filter>unit\enemyManager\boss</Filter>
     </ClInclude>
@@ -425,6 +426,9 @@
     <ClInclude Include="cNpcInfo.h">
       <Filter>unit\npc</Filter>
     </ClInclude>
+    <ClInclude Include="cEnemyPicking.h">
+      <Filter>unit\player</Filter>
+    </ClInclude>
     <ClInclude Include="cPlayer.h">
       <Filter>unit\player</Filter>
     </ClInclude>
@@ -437,15 +441,6 @@
     <ClInclude Include="cPlayerSkill.h">
       <Filter>unit\player</Filter>
     </ClInclude>
-    <ClInclude Include="cPlayer_Enemy.h">
-      <Filter>unit</Filter>
-    </ClInclude>
-    <ClInclude Include="cUnit.h">
-      <Filter>unit</Filter>
-    </ClInclude>
-    <ClInclude Include="cActionSeq.h">
-      <Filter>보간</Filter>
-    </ClInclude>
     <ClInclude Include="cAction.h">
       <Filter>보간</Filter>
     </ClInclude>
@@ -456,6 +451,9 @@
       <Filter>보간</Filter>
     </ClInclude>
     <ClInclude Include="cActionRepeat.h">
+      <Filter>보간</Filter>
+    </ClInclude>
+    <ClInclude Include="cActionSeq.h">
       <Filter>보간</Filter>
     </ClInclude>
     <ClInclude Include="cFrustum.h">
@@ -485,8 +483,20 @@
     <ClInclude Include="cStage1.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
-    <ClInclude Include="D3D_base.h">
+    <ClInclude Include="targetver.h">
       <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cUnit.h">
+      <Filter>unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayer_Enemy.h">
+      <Filter>unit</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D_base.h">
+      <Filter>리소스파일</Filter>
     </ClInclude>
     <ClInclude Include="iMap.h">
       <Filter>헤더파일</Filter>
@@ -497,33 +507,19 @@
     <ClInclude Include="Resource.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>헤더파일</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cEnemyPicking.h">
-      <Filter>unit\player</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="cRagPaticle.h">
-      <Filter>unit\enemyManager\boss\ragnaros</Filter>
-=======
     <ClInclude Include="singletonBase.h">
-      <Filter>Manager</Filter>
+      <Filter>헤더파일</Filter>
     </ClInclude>
     <ClInclude Include="soundManager.h">
-      <Filter>Manager</Filter>
->>>>>>> 7b22ff7cfec6eecad912a42035c1eed55172e890
+      <Filter>헤더파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3D_base.ico">
-      <Filter>unit\리소스파일</Filter>
+      <Filter>리소스파일</Filter>
     </Image>
     <Image Include="small.ico">
-      <Filter>unit\리소스파일</Filter>
+      <Filter>리소스파일</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
@@ -531,102 +527,102 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="camera">
-      <UniqueIdentifier>{2ad1811b-389c-4746-95af-b2babe03ae1b}</UniqueIdentifier>
+      <UniqueIdentifier>{7c5a8af6-9b31-4138-8b09-47da34fd0255}</UniqueIdentifier>
     </Filter>
     <Filter Include="cube">
-      <UniqueIdentifier>{b27492db-0c70-44ed-90c1-da6671243da4}</UniqueIdentifier>
+      <UniqueIdentifier>{71a9eecc-d1ba-418f-b660-daca582fc164}</UniqueIdentifier>
     </Filter>
     <Filter Include="gameManager">
-      <UniqueIdentifier>{e58dc7c9-386c-4e2e-bc9e-eeba25330cdc}</UniqueIdentifier>
+      <UniqueIdentifier>{eb75eb3d-404c-4968-a201-f77eb308bc71}</UniqueIdentifier>
     </Filter>
     <Filter Include="gameobject">
-      <UniqueIdentifier>{349e64db-38b8-46b6-942c-d363ec4d245e}</UniqueIdentifier>
+      <UniqueIdentifier>{96c97365-e17b-47e0-96c0-e673428603b5}</UniqueIdentifier>
     </Filter>
     <Filter Include="HeightMap">
-      <UniqueIdentifier>{d4ab6dd8-7fc0-4e84-8220-a7ad9316ba72}</UniqueIdentifier>
+      <UniqueIdentifier>{da62bb84-5ca3-4f39-a317-1e0450364ebd}</UniqueIdentifier>
     </Filter>
     <Filter Include="inventory">
-      <UniqueIdentifier>{9547c0c3-8dea-4fce-9481-8378dd11a4fc}</UniqueIdentifier>
+      <UniqueIdentifier>{851f0cbe-2b28-41cf-b5f3-45c1c60805b1}</UniqueIdentifier>
     </Filter>
     <Filter Include="ITEM">
-      <UniqueIdentifier>{43b141ab-38e6-4ffa-859b-73d141711607}</UniqueIdentifier>
+      <UniqueIdentifier>{1e4e2894-9162-46b8-b2c9-6cfffc7417d8}</UniqueIdentifier>
     </Filter>
     <Filter Include="loader">
-      <UniqueIdentifier>{3fd7483b-0adb-4458-ad89-78ef9f2d92a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="loader\ASELoader">
-      <UniqueIdentifier>{c3ebfe5b-b549-4a9a-a0a0-e91041b5ad2d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="loader\X-File">
-      <UniqueIdentifier>{74357972-677c-4a0b-9e6c-278f6804562b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="loader\ObjLoader">
-      <UniqueIdentifier>{78d6b4b2-1f98-476d-9190-d7eb071db323}</UniqueIdentifier>
+      <UniqueIdentifier>{e85dcbd3-bfd9-4e44-9113-ce0f005bd15a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager">
-      <UniqueIdentifier>{cba3975f-dedf-4a99-9120-e99150f2ed9e}</UniqueIdentifier>
+      <UniqueIdentifier>{98a01491-7e1f-43ed-be15-c8177ab53f8e}</UniqueIdentifier>
     </Filter>
     <Filter Include="map">
-      <UniqueIdentifier>{0dae73ad-ef28-487c-91fc-d85edadcf5a4}</UniqueIdentifier>
+      <UniqueIdentifier>{b3579548-11ff-41e9-8d71-30e156852719}</UniqueIdentifier>
     </Filter>
     <Filter Include="mapTool">
-      <UniqueIdentifier>{418de7ad-feca-4775-a701-4ebc141121f8}</UniqueIdentifier>
+      <UniqueIdentifier>{f2ac0e25-e831-4c4d-a3b7-e8c909ece4a9}</UniqueIdentifier>
     </Filter>
     <Filter Include="OBB">
-      <UniqueIdentifier>{2cf1c2b1-2038-47ee-9b6e-85057126a5df}</UniqueIdentifier>
+      <UniqueIdentifier>{036eaa0a-38b7-45ed-977f-bee4764096ba}</UniqueIdentifier>
     </Filter>
     <Filter Include="Picking">
-      <UniqueIdentifier>{33f3a28f-20e8-4304-85d1-0b7390dc194c}</UniqueIdentifier>
+      <UniqueIdentifier>{cd0194b5-fcc4-4c56-a58d-763c669f87f1}</UniqueIdentifier>
     </Filter>
     <Filter Include="shop">
-      <UniqueIdentifier>{15d3e9ac-081e-4e9b-ad0a-3e1bc95f6935}</UniqueIdentifier>
+      <UniqueIdentifier>{ecf645b0-72cc-43b0-b64f-c9a2032374ca}</UniqueIdentifier>
     </Filter>
     <Filter Include="UI">
-      <UniqueIdentifier>{257bfa07-04da-410c-9a4f-2a8d8f26d35d}</UniqueIdentifier>
+      <UniqueIdentifier>{a2e470bd-0e7e-4578-bb8e-c8bdb73d7e48}</UniqueIdentifier>
     </Filter>
     <Filter Include="unit">
-      <UniqueIdentifier>{afbf269b-f680-4177-9b5c-664ada8fb2ab}</UniqueIdentifier>
+      <UniqueIdentifier>{df6e8091-994f-4cc1-9b98-34599237436b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loader\ASELoader">
+      <UniqueIdentifier>{d93354d9-d00f-4819-b876-eccdffd0ef32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loader\ObjLoader">
+      <UniqueIdentifier>{c23fbdf7-b80e-469e-ad66-5ee41787b430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loader\X-File">
+      <UniqueIdentifier>{8e42fa8e-1601-430d-96c6-13e7f9a6b98b}</UniqueIdentifier>
     </Filter>
     <Filter Include="unit\enemyManager">
-      <UniqueIdentifier>{5b1690d9-9ca4-4fa7-9f1e-b023e050b316}</UniqueIdentifier>
+      <UniqueIdentifier>{1fdf6f95-8128-44be-aff6-a6383747db27}</UniqueIdentifier>
     </Filter>
     <Filter Include="unit\enemyManager\boss">
-      <UniqueIdentifier>{587760f1-c636-44af-b1f7-dc18d0e6d2c9}</UniqueIdentifier>
+      <UniqueIdentifier>{6926a47c-e562-4d2e-bc02-95945f84d8f1}</UniqueIdentifier>
     </Filter>
     <Filter Include="unit\enemyManager\boss\arthas">
-      <UniqueIdentifier>{96b4859c-4a9a-4715-94ed-bc0c0cd2059a}</UniqueIdentifier>
+      <UniqueIdentifier>{8f9c9c46-7c62-4aa4-9f7a-a11b5840dffb}</UniqueIdentifier>
     </Filter>
     <Filter Include="unit\enemyManager\boss\ragnaros">
-      <UniqueIdentifier>{3665a5b8-64d7-4473-97e3-02bbbe39e38f}</UniqueIdentifier>
+      <UniqueIdentifier>{7c29c445-265f-4d51-9831-a457026de08b}</UniqueIdentifier>
     </Filter>
     <Filter Include="unit\enemyManager\EnemyControl">
-      <UniqueIdentifier>{db187d5a-614c-4409-8296-a3cce0b18232}</UniqueIdentifier>
+      <UniqueIdentifier>{87e18fdb-fce8-449f-94ef-bc708a00b401}</UniqueIdentifier>
     </Filter>
     <Filter Include="unit\enemyManager\쫄몹">
-      <UniqueIdentifier>{d7f9bf5b-7858-45ac-b92f-39c6353aa3c0}</UniqueIdentifier>
+      <UniqueIdentifier>{d05a9a47-3a54-4834-ac57-eea800e7596b}</UniqueIdentifier>
     </Filter>
     <Filter Include="unit\npc">
-      <UniqueIdentifier>{0724102b-94f0-4bf5-900a-2c7c3e045b11}</UniqueIdentifier>
+      <UniqueIdentifier>{e31f4c37-42b9-47a6-88d9-e80b6d681b4e}</UniqueIdentifier>
     </Filter>
     <Filter Include="unit\player">
-      <UniqueIdentifier>{e715b4da-789f-4cbe-b4c7-a09bb5dde823}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit\리소스파일">
-      <UniqueIdentifier>{d119936a-7823-4811-a72c-f23b56ae2732}</UniqueIdentifier>
+      <UniqueIdentifier>{8e02c2b6-fc40-41ad-be22-eb0de3d2ed03}</UniqueIdentifier>
     </Filter>
     <Filter Include="보간">
-      <UniqueIdentifier>{4a68964b-d064-4f1f-91f3-6a5075a97c28}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스파일">
-      <UniqueIdentifier>{19ed0a08-cf1a-4a34-9489-eba5ddc88ed9}</UniqueIdentifier>
+      <UniqueIdentifier>{1817168a-8586-4f8f-ac58-f7c44d14e361}</UniqueIdentifier>
     </Filter>
     <Filter Include="헤더파일">
-      <UniqueIdentifier>{8925a6bd-cd39-4020-80c5-f26e76ae4e98}</UniqueIdentifier>
+      <UniqueIdentifier>{c4af2a90-6981-4738-85f3-fa8c0ac8360c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="리소스파일">
+      <UniqueIdentifier>{03d9a1ad-a97b-4bb8-b2da-794180db393e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일">
+      <UniqueIdentifier>{74297a3b-84f7-486b-8782-ae4d68357206}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="D3D_base.rc">
-      <Filter>unit\리소스파일</Filter>
+      <Filter>리소스파일</Filter>
     </ResourceCompile>
   </ItemGroup>
 </Project>
