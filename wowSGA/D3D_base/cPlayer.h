@@ -31,7 +31,7 @@ public:
 	void Setup();
 	void Update(iMap* m_map);
 	void Render();
-
+	void UpdatePicking(MONSTER_KIND monster);
 	void Collsion(cOBB* EnemyBox);
 
 	void setEnemyPos(D3DXVECTOR3 EnemyPos) { m_EnemyPos = EnemyPos; }
@@ -39,4 +39,9 @@ public:
 
 	void SetPlayerPick(std::vector<ST_PC_VERTEX> m_vecVertex);
 	void connet_shop_test_class(shop_TEST_CLASS* connect_shop_test);
+
+	void setUI(bool check);
+	void setHp(int hp, int maxHP);
+
+	cOBB* getWeapon();
 };

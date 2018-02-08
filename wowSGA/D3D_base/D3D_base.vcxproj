@@ -23,7 +23,7 @@
     <ProjectGuid>{DF3DCD04-F9E1-4763-895D-3CA5373AB3EE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>D3D_base</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -167,6 +167,7 @@
     <ClInclude Include="cEnemyControl.h" />
     <ClInclude Include="cEnemyHitEffect.h" />
     <ClInclude Include="cEnemyManager.h" />
+    <ClInclude Include="cEnemyPicking.h" />
     <ClInclude Include="cEnemySkinnedMesh.h" />
     <ClInclude Include="cFontManager.h" />
     <ClInclude Include="cFrustum.h" />
@@ -251,6 +252,7 @@
     <ClCompile Include="cEnemyControl.cpp" />
     <ClCompile Include="cEnemyHitEffect.cpp" />
     <ClCompile Include="cEnemyManager.cpp" />
+    <ClCompile Include="cEnemyPicking.cpp" />
     <ClCompile Include="cEnemySkinnedMesh.cpp" />
     <ClCompile Include="cFontManager.cpp" />
     <ClCompile Include="cFrustum.cpp" />

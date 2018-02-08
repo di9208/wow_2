@@ -31,8 +31,10 @@ class cLightningWorg : public cUnit
 		int			attackTime;
 		int			termCount;
 		int			RunCount;
-		
 
+		bool		Damage;
+		float		Damage_time;
+		float		TimeCheck;
 		//몬스터 인식용
 		D3DXVECTOR3					m_vPos;
 		D3DXVECTOR3					m_vDir;
@@ -53,7 +55,7 @@ class cLightningWorg : public cUnit
 	};
 private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
-	
+
 	D3DXMATRIXA16 matWorld;
 
 	//몬스터 스탯
@@ -96,6 +98,25 @@ public:
 
 	int getVectorSize() { return m_vecSkinnedMesh.size(); }
 	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].MonsterOBB; }
+	D3DXVECTOR3 getOBBCenter(int i);
+	float getOBBhalf(int i);
+	MONSTER_STATUS getCondition(int i) { return m_vecSkinnedMesh[i].ENUM_MONSTER; }
+
+	void setDamageCheck(int i, bool check) { m_vecSkinnedMesh[i].Damage = check; }
+	bool getDamageCheck(int i) { return m_vecSkinnedMesh[i].Damage; }
+
+	void setTimeCheck(int i, bool check) { m_vecSkinnedMesh[i].TimeCheck = check; }
+	bool getTimeCheck(int i) { return m_vecSkinnedMesh[i].TimeCheck; }
+
+	void setDamageTimeCheck(int i, float time) { m_vecSkinnedMesh[i].Damage_time = time; }
+	float getDamageTimeCheck(int i) { return m_vecSkinnedMesh[i].Damage_time; }
+
+	MONSTER_KIND getMonsterKind() { return m_vecSkinnedMesh[0].ENUM_MONSTER_KIND; }
+
+	float getMonsterHP(int i) { return m_vecSkinnedMesh[i].t.HP; }
+	float getMonsterMaxHP(int i) { return m_vecSkinnedMesh[i].MaxHP; }
+
+	void getWeaponHit(int i, cOBB * PlayerWeapon);
 
 	cLightningWorg();
 	~cLightningWorg();

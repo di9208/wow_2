@@ -97,6 +97,15 @@ enum NPC_State
 	YES,
 	NO
 };
+struct Enemy_Sphere
+{
+	D3DXVECTOR3		vCenter;
+	float			fRadius;
+	bool			bIsPicked;
+	MONSTER_KIND	Mons;
+	int				HP;
+	int				Max_HP;
+};
 class cUnit
 {
 

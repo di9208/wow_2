@@ -11,9 +11,12 @@ class cUIImage;
 class cPlayerInFo
 {
 private:
-	TagUnit						PlayerInFo;
+	TagUnit						m_PlayerInFo;
+	int							curATK;
+	int							curDEF;
 	LPD3DXFONT					m_pFont;
 	LPD3DXFONT					m_systemFont;
+	LPD3DXFONT					m_HpFont;
 
 	LPD3DXSPRITE				m_pSprite;
 	D3DXIMAGE_INFO				m_stImageInfo;
@@ -87,4 +90,6 @@ public:
 	void setRC();
 	void getItem(shop_TEST_CLASS* iven_item);
 	void setting_EQUIT_UI();
+
+	void EQUIT_ITEM();
 };

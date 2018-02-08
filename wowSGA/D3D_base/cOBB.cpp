@@ -250,8 +250,8 @@ bool cOBB::IsCollision(cOBB * pObb1, cOBB * pObb2)
 		if (r0 > r1 + r2)
 			return false;
 	}
-	//if (isExistParaller)
-	//	return true;
+	if (isExistParaller)
+		return true;
 	// obb 2의 평면 3개를 기준으로 obb1 의 축 3개를 검사
 
 
@@ -384,4 +384,15 @@ void cOBB::RenderFont(std::vector<ST_PC_VERTEX> pc)
 			DT_LEFT | DT_TOP | DT_NOCLIP,
 			D3DCOLOR_XRGB(255, 255, 0));
 	}
+}
+
+float cOBB::getMax()
+{
+	float max = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		if (max < m_fAxisLen[i])
+			max = m_fAxisLen[i];
+	}
+	return max;
 }

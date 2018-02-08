@@ -9,7 +9,8 @@ protected:
 	D3DXMATRIXA16	m_matWorld;
 	float			speed;
 	float			speed_max;
-	condition		m_chractor_condition;
+	//condition		m_chractor_condition;
+	SYNTHESIZE(condition, m_chractor_condition, chractor_condition);
 	E_BOSS_STATE	m_boss_state;
 
 	float			m_jump;

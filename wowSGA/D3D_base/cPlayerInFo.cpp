@@ -18,6 +18,9 @@ cPlayerInFo::cPlayerInFo()
 	, m_status(false)
 	, ax(100)
 	, m_systemFont(NULL)
+	, m_HpFont(NULL)
+	, curATK(0)
+	, curDEF(0)
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -40,6 +43,7 @@ cPlayerInFo::~cPlayerInFo()
 	SAFE_RELEASE(m_statusUI);
 	SAFE_RELEASE(m_HP);
 	SAFE_RELEASE(m_systemFont);
+	SAFE_RELEASE(m_HpFont);
 	for (int i = 0; i < 5; i++)
 	{
 		SAFE_RELEASE(m_stats_UI[i].m_EquipUI);
@@ -56,23 +60,28 @@ void cPlayerInFo::Setup(cSkinnedMesh* playerSkinned, D3DXMATRIXA16* playerWorld)
 	SetFont();
 	SetUI();
 	setRC();
-	PlayerInFo.HP = 100;
-	PlayerInFo.Max_HP = 100;
-	PlayerInFo.MP = 70;
-	PlayerInFo.ATK = 10;
-	PlayerInFo.DEF = 5;
-	PlayerInFo.Gold = 0;
+	m_PlayerInFo.HP = 100;
+	m_PlayerInFo.Max_HP = 100;
+	m_PlayerInFo.MP = 70;
+	m_PlayerInFo.ATK = 10;
+	m_PlayerInFo.DEF = 5;
+	m_PlayerInFo.Gold = 0;
+
+	curATK = 100;
+	curDEF = 5;
 
 	m_playerOBB = new cOBB();
 	m_playerOBB->Setup(playerSkinned, playerWorld);
+
+
 }
 
 void cPlayerInFo::Update(condition* pCondition, D3DXMATRIXA16* pMatWorld)
 {
 	if (g_pKeyManager->isOnceKeyDown('Q'))
 	{
-		if (PlayerInFo.HP > 0)PlayerInFo.HP -= 10;
-		ax = PlayerInFo.HP;
+		if (m_PlayerInFo.HP > 0)m_PlayerInFo.HP -= 10;
+		ax = m_PlayerInFo.HP;
 		*pCondition = HURT;
 	}
 	if (g_pKeyManager->isOnceKeyDown('E'))
@@ -97,6 +106,7 @@ void cPlayerInFo::Update(condition* pCondition, D3DXMATRIXA16* pMatWorld)
 	{
 		item_slot[i]->Update();
 	}
+	EQUIT_ITEM();
 }
 
 void cPlayerInFo::SetFont()
@@ -176,7 +186,7 @@ void cPlayerInFo::RenderUI()
 
 
 
-	RECT rc = { 0,0,m_HP_info.Width*(ax / PlayerInFo.Max_HP),m_HP_info.Height };
+	RECT rc = { 0,0,m_HP_info.Width*(ax / m_PlayerInFo.Max_HP),m_HP_info.Height };
 	m_pSprite->Draw(m_HP,
 		&rc, //&rc,
 		&D3DXVECTOR3(m_HP_info.Width / 2.0f, m_HP_info.Height / 2.0, 0),
@@ -192,11 +202,11 @@ void cPlayerInFo::RenderFont()
 	{
 		char str[128];
 		sprintf(str, "체력:%.0f \n 마력:%.0f \n 공격력:%.0f \n 방어력:%.0f \n 소지금:%.0f \n",
-			PlayerInFo.HP,
-			PlayerInFo.MP,
-			PlayerInFo.ATK,
-			PlayerInFo.DEF,
-			PlayerInFo.Gold);
+			m_PlayerInFo.HP,
+			m_PlayerInFo.MP,
+			m_PlayerInFo.ATK,
+			m_PlayerInFo.DEF,
+			m_PlayerInFo.Gold);
 
 		std::string sText(str);
 
@@ -226,6 +236,23 @@ void cPlayerInFo::RenderFontSysytem()
 		SetRect(&rc, 145, 810, 267, 900);
 
 		m_systemFont->DrawText(NULL,
+			sText.c_str(),
+			sText.length(),
+			&rc,
+			DT_LEFT | DT_TOP | DT_NOCLIP,
+			D3DCOLOR_XRGB(255, 255, 255));
+	}
+	if (m_HpFont)
+	{
+		char str[128];
+		sprintf(str, "HP: %.0f / %.0f", m_PlayerInFo.HP, m_PlayerInFo.Max_HP);
+
+		std::string sText(str);
+
+		RECT rc;
+		SetRect(&rc, 150, 53, 250, 100);
+
+		m_HpFont->DrawText(NULL,
 			sText.c_str(),
 			sText.length(),
 			&rc,
@@ -290,11 +317,12 @@ void cPlayerInFo::Collsion(cOBB * EnemyBox)
 		{
 			if (m_playerOBB->IsCollision(m_playerOBB, EnemyBox))
 			{
-				PlayerInFo.HP = 100;
+				m_PlayerInFo.HP -= 10;
+				ax = m_PlayerInFo.HP;
 			}
 			else
 			{
-				PlayerInFo.HP = 200;
+				//PlayerInFo.HP = 200;
 			}
 		}
 	}
@@ -322,7 +350,7 @@ void cPlayerInFo::getItem(shop_TEST_CLASS* iven_item)
 
 				for (int i = 0; i < player_Equite_vector.size(); i++)
 				{
-					if (player_Equite_vector[i]->GetI_type() == iven_item->get_inven()->Getvector_inven()[iven_item->Getpick_number()]->GetI_type())
+					if (player_Equite_vector[i]->Get_Itype() == iven_item->get_inven()->Getvector_inven()[iven_item->Getpick_number()]->Get_Itype())
 					{
 						item_class* tmep;
 						tmep = new item_class;
@@ -409,13 +437,25 @@ void cPlayerInFo::setting_EQUIT_UI()
 	{
 		char chartext[1024];
 
-		sprintf(chartext, "shop_data/%s", player_Equite_vector[i]->GetI_image().c_str());
+		sprintf(chartext, "shop_data/%s", player_Equite_vector[i]->Get_Iimage().c_str());
 
 		item_slot[i]->SetTexture(chartext);
 		item_slot[i]->SetPos(D3DXVECTOR3(m_stats_UI[i].m_x, m_stats_UI[i].m_y, 0));
 		item_slot[i]->Sethidden(!m_status);
 		item_slot[i]->SetScal(D3DXVECTOR3(0.55, 0.55, 0));
 	}
+}
+void cPlayerInFo::EQUIT_ITEM()
+{
+	int atk = 0;
+	int def = 0;
+	for (int i = 0; i < player_Equite_vector.size(); i++)
+	{
+		atk += player_Equite_vector[i]->Get_Ioption().ATK;
+		def += player_Equite_vector[i]->Get_Ioption().DEF;
+	}
+	m_PlayerInFo.ATK = atk + curATK;
+	m_PlayerInFo.DEF = def + curDEF;
 }
 void cPlayerInFo::SetUI()
 {

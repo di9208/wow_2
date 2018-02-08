@@ -209,4 +209,13 @@ void cBossAniController::skillRender()
 	//g_pD3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, false);
 }
 
+D3DXVECTOR3 cBossAniController::getOBBCenter()
+{
+	return m_pBossOBB->GetCenterPos();
+}
+
+float cBossAniController::getOBBhalf()
+{
+	return m_pBossOBB->getMax();
+}
 

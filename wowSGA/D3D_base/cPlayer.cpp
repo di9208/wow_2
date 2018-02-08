@@ -8,7 +8,7 @@
 #include "cOBB.h"
 #include "iMap.h"
 #include "shop_TEST_CLASS.h"
-
+#include "cEnemyPicking.h"
 
 cPlayer::cPlayer()
 	:m_playerAnimController(NULL),
@@ -42,7 +42,7 @@ void cPlayer::Setup()
 
 	D3DXMATRIXA16  matR, matS, World;
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
-	D3DXMatrixScaling(&matS, 0.015f, 0.015f, 0.015f);
+	D3DXMatrixScaling(&matS, 0.05f, 0.03f, 0.015f);
 	D3DXMatrixIdentity(&World);
 	World = matS * matR;
 
@@ -51,6 +51,9 @@ void cPlayer::Setup()
 
 	m_playerInFo = new cPlayerInFo();
 	m_playerInFo->Setup(m_playerAnimController->GetSkinnedMesh(), &World);
+
+	m_EnemyPicking = new cEnemyPicking();
+	m_EnemyPicking->Setup();
 }
 
 void cPlayer::Update(iMap* m_map)
@@ -89,7 +92,15 @@ void cPlayer::Render()
 		m_playerInFo->Render(&m_playerAnimController->GetWorld(), &m_matWorld);
 	if (m_playerSkill)
 		m_playerSkill->Render();
+	if (m_EnemyPicking)
+		m_EnemyPicking->Render();
 }
+
+void cPlayer::UpdatePicking(MONSTER_KIND monster)
+{
+	m_EnemyPicking->Update(monster);
+}
+
 
 void cPlayer::Collsion(cOBB * EnemyBox)
 {
@@ -113,3 +124,18 @@ void cPlayer::connet_shop_test_class(shop_TEST_CLASS * connect_shop_test)
 {
 	m_playerInFo->getItem(connect_shop_test);
 }
+void cPlayer::setUI(bool check)
+{
+	m_EnemyPicking->setUI(check);
+}
+
+void cPlayer::setHp(int hp, int maxHP)
+{
+	m_EnemyPicking->HPset(hp, maxHP);
+}
+
+cOBB * cPlayer::getWeapon()
+{
+	return m_Weapon->GetweaponOBB();
+}
+

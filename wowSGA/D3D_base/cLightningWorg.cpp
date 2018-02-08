@@ -5,10 +5,24 @@
 #include "iMap.h"
 #include <time.h>
 
+void cLightningWorg::getWeaponHit(int i, cOBB * PlayerWeapon)
+{
+	if (PlayerWeapon)
+	{
+		if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
+		{
+			if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
+			{
+				m_vecSkinnedMesh[i].t.HP -= 10;
+			}
+		}
+	}
+}
+
 cLightningWorg::cLightningWorg()
-: m_vecSkinnedMesh(NULL)
-, m_pFont(NULL)
-, m_pSprite(NULL)
+	: m_vecSkinnedMesh(NULL)
+	, m_pFont(NULL)
+	, m_pSprite(NULL)
 {
 	D3DXMatrixIdentity(&matWorld);
 	m_pSkillOn = false;
@@ -22,7 +36,7 @@ cLightningWorg::~cLightningWorg()
 	SAFE_RELEASE(m_pSprite);
 	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++)
 	{
-		for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++){
+		for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++) {
 			SAFE_RELEASE(m_vecSkinnedMesh[i].m_ItemSprite[j].m_pTexture);
 		}
 		SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
@@ -33,7 +47,7 @@ cLightningWorg::~cLightningWorg()
 }
 
 
-void cLightningWorg::addMonster(float x, float y, float z){
+void cLightningWorg::addMonster(float x, float y, float z) {
 	//몬스터를 생성해줌
 
 	EnemySkinnedMesh Monster;
@@ -61,13 +75,13 @@ void cLightningWorg::addMonster(float x, float y, float z){
 	Monster.attackTime = 100;
 	Monster.termCount = 0;
 	Monster.RunCount = rand() % 250 + 10;
-	
+
 	Monster.Particle = new cMonsterParticle(512, 25);
 	Monster.Particle->init("Particle/alpha_tex.tga");
 	D3DXMatrixIdentity(&Monster.matWorld);
 	D3DXMATRIXA16 matTT, matSS;
 	D3DXMatrixScaling(&matSS, 0.0f, 0.0f, 0.0f);
-	D3DXMatrixTranslation(&matTT, x, y+0.45, z);
+	D3DXMatrixTranslation(&matTT, x, y + 0.45, z);
 	Monster.matWorld = matSS * matTT;
 
 	ZeroMemory(&Monster.m_stMtlNone, sizeof(D3DMATERIAL9));
@@ -97,7 +111,7 @@ void cLightningWorg::addMonster(float x, float y, float z){
 }
 
 
-void cLightningWorg::SetUp(){
+void cLightningWorg::SetUp() {
 	D3DXFONT_DESC stFD;
 	srand(time(NULL));
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
@@ -120,13 +134,13 @@ void cLightningWorg::SetUp(){
 }
 
 
-void cLightningWorg::Update(iMap* map){
+void cLightningWorg::Update(iMap* map) {
 	//거미 업데이트
-	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
+	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
 		//몬스터 죽음
 		if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
 
-		
+
 		matUpdate(i, map);
 		m_vecSkinnedMesh[i].m->Update();
 		m_vecSkinnedMesh[i].Particle->update(3.0f);
@@ -137,9 +151,9 @@ void cLightningWorg::Update(iMap* map){
 }
 
 
-void cLightningWorg::Render(){
-	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
-		
+void cLightningWorg::Render() {
+	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
+
 		m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
 		D3DXMATRIXA16 matT;
 		D3DXMatrixTranslation(&matT, 0, 0.35f, 0);
@@ -152,8 +166,8 @@ void cLightningWorg::Render(){
 		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(NULL, nullptr, nullptr);
 
 		//죽었을 때
-		if (m_vecSkinnedMesh[i].death){
-			for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++){
+		if (m_vecSkinnedMesh[i].death) {
+			for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++) {
 				RenderUI(i, j, 10, 10, 79, 80);
 			}
 		}
@@ -161,11 +175,11 @@ void cLightningWorg::Render(){
 	}
 }
 
-void cLightningWorg::MonsterInsic(D3DXVECTOR3 d){
+void cLightningWorg::MonsterInsic(D3DXVECTOR3 d) {
 	m_vPlayerPos = d;
 }
 
-void cLightningWorg::HarmDamage(int Damage, size_t i){
+void cLightningWorg::HarmDamage(int Damage, size_t i) {
 	//인자1 : 들어올 데미지, i 타겟이 된 몬스터
 	if (m_vecSkinnedMesh[i].t.HP > (Damage - m_vecSkinnedMesh[i].t.DEF))
 		m_vecSkinnedMesh[i].t.HP -= (Damage - m_vecSkinnedMesh[i].t.DEF);
@@ -173,7 +187,7 @@ void cLightningWorg::HarmDamage(int Damage, size_t i){
 }
 
 //거미 상태
-void cLightningWorg::MonsterStatus(size_t i){
+void cLightningWorg::MonsterStatus(size_t i) {
 	//Z키를 누르면 체력 100 달게 함
 	if (g_pKeyManager->isOnceKeyDown('Z')) {
 		HarmDamage(205, 0);
@@ -203,7 +217,7 @@ void cLightningWorg::MonsterStatus(size_t i){
 
 }
 
-void cLightningWorg::SetupUI(size_t i, size_t a){
+void cLightningWorg::SetupUI(size_t i, size_t a) {
 	ZeroMemory(&m_vecSkinnedMesh[i].m_StInvectory.m_stImageInfo, sizeof(D3DXIMAGE_INFO));
 
 	D3DXCreateTextureFromFileEx(
@@ -222,7 +236,7 @@ void cLightningWorg::SetupUI(size_t i, size_t a){
 		NULL,
 		&m_vecSkinnedMesh[i].m_StInvectory.m_pTexture);
 
-	for (size_t j = 0; j < a; j++){
+	for (size_t j = 0; j < a; j++) {
 		ZeroMemory(&m_vecSkinnedMesh[i].m_StItemSprite.m_stImageInfo, sizeof(D3DXIMAGE_INFO));
 
 		D3DXCreateTextureFromFileEx(
@@ -240,12 +254,12 @@ void cLightningWorg::SetupUI(size_t i, size_t a){
 			&m_vecSkinnedMesh[i].m_StItemSprite.m_stImageInfo,
 			NULL,
 			&m_vecSkinnedMesh[i].m_StItemSprite.m_pTexture);
-		
+
 		m_vecSkinnedMesh[i].m_ItemSprite.push_back(m_vecSkinnedMesh[i].m_StItemSprite);
 	}
 }
 
-void cLightningWorg::RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY){
+void cLightningWorg::RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY) {
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 	m_pSprite->Draw(
 		m_vecSkinnedMesh[i].m_StInvectory.m_pTexture,
@@ -271,12 +285,12 @@ void cLightningWorg::RenderUI(size_t i, size_t j, int x, int y, int sizeX, int s
 	m_vecSkinnedMesh[i].m_ItemSprite[j].rc.bottom = sizeY + y;
 }
 
-void cLightningWorg::MonsterDeath(size_t i){
+void cLightningWorg::MonsterDeath(size_t i) {
 	//HP가 0이 되면 죽는 모션이 나온다.
 	m_vecSkinnedMesh[i].deathTime++;
 
 
-	if (!m_vecSkinnedMesh[i].death){
+	if (!m_vecSkinnedMesh[i].death) {
 		size_t a = rand() % 4 + 1;
 		SetupUI(i, a);
 		m_vecSkinnedMesh[i].death = true;
@@ -284,7 +298,7 @@ void cLightningWorg::MonsterDeath(size_t i){
 
 	else {
 		//죽는 모션 후 일정시간이 지나면 해당 애니메이션은 정지시킨다.
-		if (m_vecSkinnedMesh[i].deathTime > 45){
+		if (m_vecSkinnedMesh[i].deathTime > 45) {
 			m_vecSkinnedMesh[i].m->GetAnimationController()->SetTrackEnable(0, false);
 
 			//SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
@@ -295,7 +309,7 @@ void cLightningWorg::MonsterDeath(size_t i){
 }
 
 //거미 AI1
-void cLightningWorg::MonsterAI(size_t i){
+void cLightningWorg::MonsterAI(size_t i) {
 	D3DXVECTOR3 pos[100], dir[100];
 	pos[i] = m_vecSkinnedMesh[i].m_vPos;
 	dir[i] = m_vecSkinnedMesh[i].m_vDir;
@@ -354,7 +368,7 @@ void cLightningWorg::MonsterAI(size_t i){
 
 		//공격상태가 아니라면 일정시간이 지난 후 따라감
 		if (m_vecSkinnedMesh[i].time > 90 &&
-			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK){
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK) {
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_RUN;
 			if (m_vecSkinnedMesh[i].attackTime < m_vecSkinnedMesh[i].attackSpeed - 1) m_vecSkinnedMesh[i].attackTime++;
 			pos[i] += dir[i] * m_vecSkinnedMesh[i].t.Speed;
@@ -364,14 +378,14 @@ void cLightningWorg::MonsterAI(size_t i){
 
 		//일정시간이 지나지 않았다면 스탠드 상태
 		else if (m_vecSkinnedMesh[i].time <= 90 &&
-			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK){
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK) {
 			if (m_vecSkinnedMesh[i].attackTime < m_vecSkinnedMesh[i].attackSpeed - 1) m_vecSkinnedMesh[i].attackTime++;
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		}
 	}
 
 	//적이 인식범위 밖으로 빠져나갔다면 행동을 멈춘다.
-	if (m_vecSkinnedMesh[i].distance > m_vecSkinnedMesh[i].MaxRange){
+	if (m_vecSkinnedMesh[i].distance > m_vecSkinnedMesh[i].MaxRange) {
 		m_vecSkinnedMesh[i].time = 0;
 		//if (m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_RUN) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		srand(time(NULL));
@@ -379,7 +393,7 @@ void cLightningWorg::MonsterAI(size_t i){
 		D3DXVECTOR3 vDir, m_vDir, vCenter;
 		m_vDir = m_vecSkinnedMesh[i].m_vDir;
 		vCenter = m_vecSkinnedMesh[i].m_vPos;
-		if (m_vecSkinnedMesh[i].RunCount < 0){
+		if (m_vecSkinnedMesh[i].RunCount < 0) {
 
 			D3DXMATRIXA16 matR;
 			D3DXMatrixIdentity(&matR);
@@ -393,7 +407,7 @@ void cLightningWorg::MonsterAI(size_t i){
 			m_vecSkinnedMesh[i].termCount++;
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 
-			if (m_vecSkinnedMesh[i].termCount > rand() % 300 + 50){
+			if (m_vecSkinnedMesh[i].termCount > rand() % 300 + 50) {
 				m_vecSkinnedMesh[i].termCount = 0;
 				m_vecSkinnedMesh[i].RunCount = rand() % 250 + 10;
 			}
@@ -402,7 +416,7 @@ void cLightningWorg::MonsterAI(size_t i){
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 
 		m_vecSkinnedMesh[i].RunCount--;
-		if (m_vecSkinnedMesh[i].RunCount > 0){
+		if (m_vecSkinnedMesh[i].RunCount > 0) {
 			m_vecSkinnedMesh[i].termCount = 0;
 			vCenter += m_vDir * m_vecSkinnedMesh[i].t.Speed;
 			m_vecSkinnedMesh[i].m_vPos = vCenter;
@@ -415,7 +429,7 @@ void cLightningWorg::MonsterAI(size_t i){
 	if (m_vecSkinnedMesh[i].attackTime >= m_vecSkinnedMesh[i].attackSpeed) {
 		m_vecSkinnedMesh[i].attackTime = 0;
 	}
-		
+
 
 	//공격의 인식거리
 	if (m_vecSkinnedMesh[i].distance <= m_vecSkinnedMesh[i].range ||
@@ -426,21 +440,21 @@ void cLightningWorg::MonsterAI(size_t i){
 		m_vecSkinnedMesh[i].attackTime++;
 
 		//어택타임이 차면 공격
-		if (m_vecSkinnedMesh[i].attackTime < 90){
+		if (m_vecSkinnedMesh[i].attackTime < 90) {
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_ATTACK;
 		}
 		//하거나 쉬도록 함
-		else if (m_vecSkinnedMesh[i].attackTime > 90){
+		else if (m_vecSkinnedMesh[i].attackTime > 90) {
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		}
 	}
 
-	
+
 }
 
 
 //스피어 렌더(골드, 몬스터)
-void cLightningWorg::SphereRender(size_t i, D3DXMATRIXA16& m_matWorld){
+void cLightningWorg::SphereRender(size_t i, D3DXMATRIXA16& m_matWorld) {
 	//스피어부분 렌더
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
@@ -450,7 +464,7 @@ void cLightningWorg::SphereRender(size_t i, D3DXMATRIXA16& m_matWorld){
 	//m_vecSkinnedMesh[i].m_pMeshSphere->DrawSubset(0);
 }
 
-void cLightningWorg::matUpdate(size_t i, iMap* pMap){
+void cLightningWorg::matUpdate(size_t i, iMap* pMap) {
 
 	D3DXMATRIXA16 matR, matS, matT;
 	D3DXMatrixScaling(&matS, 0.07f, 0.07f, 0.07f);
@@ -494,4 +508,14 @@ void cLightningWorg::matUpdate(size_t i, iMap* pMap){
 	D3DXMatrixTranslation(&matT, m_vecSkinnedMesh[i].m_vPos.x, m_vecSkinnedMesh[i].m_vPos.y + 0.45, m_vecSkinnedMesh[i].m_vPos.z);
 	m_vecSkinnedMesh[i].matRT = matR * matT;
 	m_vecSkinnedMesh[i].matWorld = matS * matR * matT;
+}
+
+D3DXVECTOR3 cLightningWorg::getOBBCenter(int i)
+{
+	return m_vecSkinnedMesh[i].MonsterOBB->GetCenterPos();
+}
+
+float cLightningWorg::getOBBhalf(int i)
+{
+	return m_vecSkinnedMesh[i].MonsterOBB->getMax();
 }

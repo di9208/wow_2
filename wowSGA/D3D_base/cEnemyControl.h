@@ -1,7 +1,11 @@
 #pragma once
 #include "cEnemyManager.h"
+<<<<<<< HEAD
 #include "cParticle.h"
 #include "cArthasPaticle.h"
+=======
+#include "cUnit.h"
+>>>>>>> e46814df4a297aacb26cf85753cb1b1d29878a3b
 
 class cBoneSpider;
 class cArchDruid;
@@ -60,19 +64,25 @@ struct stBoss_rag
 class cEnemyControl : public cEnemyManager
 {
 private:
-	cBoneSpider*	m_pSpider;
+	cBoneSpider * m_pSpider;
 	cArchDruid*		m_pDruid;
 	cLightningWorg*	m_pWorg;
 
 private:
 	SYNTHESIZE(std::vector<stBoss>, m_vecBoss, vecBoss);
+<<<<<<< HEAD
 	
+=======
+
+
+	stBoss				stBoss;
+>>>>>>> e46814df4a297aacb26cf85753cb1b1d29878a3b
 	D3DXMATRIXA16		matR;
 	//======================================================
 	SYNTHESIZE(std::vector<stBoss_rag>, m_vecBoss_rag, vecBoss_rag);
 	stBoss_rag			stBoss_rag;
 	D3DXMATRIXA16		matragR;
-	
+
 	//보스 거리 조절용 벡터
 	D3DXVECTOR3 v;
 	//라그나로스 등장
@@ -87,20 +97,20 @@ private:
 	cBossAniController * m_pBossAniController;
 	cBossRagController * m_pBossRagController;
 	cBossSkill*			 m_pBossSkill;
-	
+
 
 	//Picking
 	std::vector<ST_SPHERE>	m_vecSphere;
 	D3DMATERIAL9			m_stMtlNone;
 	D3DMATERIAL9			m_stMtlPicked;
 	LPD3DXMESH				m_pMeshSphere;
-	
+
 	//spell
 	int						nCount; // spell2 몹소환 카운트
 	int						nMonsterX; //소환되는 몹 좌표
 	int						nMonsterY; //소환되는 몹 좌표
 
-	//playerCheck
+									   //playerCheck
 	D3DXVECTOR3				m_vPlayerPos;
 
 	D3DXMATRIXA16			m_world;
@@ -130,13 +140,45 @@ public:
 	void SummonsEnemy();
 	cEnemyControl();
 	~cEnemyControl();
-
+	//-------------------------------------------------------------------------------
 	int getWolfVectorSize();
 	cOBB* getWolfOBB(int i);
 
+	MONSTER_STATUS getWolfCondition(int i);
+
+	void setWolfDamageCheck(int i, bool check);
+	bool getWolfDamageCheck(int i);
+
+	void setWolfTimeCheck(int i, bool check);
+	bool getWolfTimeCheck(int i);
+
+	void  setWolfDamageTimeCheck(int i, float time);
+	float getWolfDamageTimeCheck(int i);
+	//===============================================================================
 	int getSpiderVectorSize();
 	cOBB* getSpiderOBB(int i);
 
+	MONSTER_STATUS getSpiderCondition(int i);
+
+	void setSpiderDamageCheck(int i, bool check);
+	bool getSpiderDamageCheck(int i);
+
+	void setSpiderTimeCheck(int i, bool check);
+	bool getSpiderTimeCheck(int i);
+
+	void  setSpiderDamageTimeCheck(int i, float time);
+	float getSpiderDamageTimeCheck(int i);
+	//=========================================================================
 	cOBB* getBossOBB();
+	E_BOSS_STATE getBossCondition();
+	MONSTER_KIND getArthasKind() { return m_vecBoss[0].kind; }
+	float getMonsterHP() { return m_vecBoss[0].stat.HP; }
+	float getMonsterMaxHP() { return m_vecBoss[0].stat.Max_HP; }
+	//==================================================================
+	std::vector<Enemy_Sphere> getALLEnemyCenter();
+
+	//무기충돌----------------------------------------------------
+	void WeaponHit(cOBB * PlayerWeapon);
+	void getWeaponHitBOSS(cOBB * PlayerWeapon);
 };
 

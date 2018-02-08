@@ -1,10 +1,9 @@
 #include "stdafx.h"
 #include "item_loader.h"
 #include "item_class.h"
-#include "textparsing_class.h"
+
 
 item_loader::item_loader()
-	: tp(NULL)
 {
 
 }
@@ -12,18 +11,17 @@ item_loader::item_loader()
 
 item_loader::~item_loader()
 {
-	SAFE_DELETE(tp);
+
 }
 
 void item_loader::items_loader(OUT std::vector<item_class*> & result_vi, IN char * loadertext)
 {
-	tp = new textparsing_class;
 
-	fopen_s(&fp,loadertext,"r");
-	 
-	while (char* szToken = tp->GetToken(fp))
+	fopen_s(&fp, loadertext, "r");
+
+	while (char* szToken = GetToken())
 	{
-		if (tp->IsEqual(szToken, "*ITEM_LIST"))
+		if (IsEqual(szToken, "*ITEM_LIST"))
 		{
 			Item_setting(result_vi);
 		}
@@ -40,16 +38,16 @@ void item_loader::Item_setting(std::vector<item_class*> & result_vi)
 	int nLevel = 0;
 	do
 	{
-		char* szToken = tp->GetToken(fp);
-		if (tp->IsEqual(szToken, "{"))
+		char* szToken = GetToken();
+		if (IsEqual(szToken, "{"))
 		{
 			nLevel++;
 		}
-		else if (tp->IsEqual(szToken, "}"))
+		else if (IsEqual(szToken, "}"))
 		{
 			nLevel--;
 		}
-		else if (tp->IsEqual(szToken, "*ITEM"))
+		else if (IsEqual(szToken, "*ITEM"))
 		{
 			Item_main_setting(result_vi);
 		}
@@ -64,55 +62,55 @@ void item_loader::Item_main_setting(std::vector<item_class*> & result_vi)
 	int nLevel = 0;
 	do
 	{
-		char* szToken = tp->GetToken(fp);
-		if (tp->IsEqual(szToken, "{"))
+		char* szToken = GetToken();
+		if (IsEqual(szToken, "{"))
 		{
 			nLevel++;
 		}
-		else if (tp->IsEqual(szToken, "}"))
+		else if (IsEqual(szToken, "}"))
 		{
 			nLevel--;
 		}
 
-		else if (tp->IsEqual(szToken, "*ITEM_NAME"))
+		else if (IsEqual(szToken, "*ITEM_NAME"))
 		{
-			temp->SetI_name(tp->GetToken(fp));
+			temp->Set_Iname(std::string(GetToken()));
 		}
-		else if (tp->IsEqual(szToken, "*ITEM_NUMBER"))
+		else if (IsEqual(szToken, "*ITEM_NUMBER"))
 		{
-			temp->SetI_num(tp->GetInt(fp));
+			temp->Set_Inum(GetInt());
 		}
-		else if (tp->IsEqual(szToken, "*ITEM_WHERE"))
+		else if (IsEqual(szToken, "*ITEM_WHERE"))
 		{
-			char* tempToken = tp->GetToken(fp);
+			char* tempToken = GetToken();
 			if (strcmp(tempToken, "EQUIT") == 0)	temp->setting_where(0);
 			else if (strcmp(tempToken, "ITEM") == 0)	temp->setting_where(1);
 			else if (strcmp(tempToken, "Collect") == 0)	temp->setting_where(2);
 			else if (strcmp(tempToken, "Map") == 0)	temp->setting_where(3);
 		}
-		else if (tp->IsEqual(szToken, "*ITEM_TYPE"))
+		else if (IsEqual(szToken, "*ITEM_TYPE"))
 		{
-			char* tempToken = tp->GetToken(fp);
+			char* tempToken = GetToken();
 			if (strcmp(tempToken, "WEAPON") == 0)	temp->setting_where(0);
 			else if (strcmp(tempToken, "ARMOR") == 0)	temp->setting_where(1);
 			else if (strcmp(tempToken, "SPECIAL") == 0)	temp->setting_where(2);
 			else if (strcmp(tempToken, "INTERACTION") == 0)	temp->setting_where(3);
 			else if (strcmp(tempToken, "USING") == 0)	temp->setting_where(4);
 		}
-		else if (tp->IsEqual(szToken, "*ITEM_SUBTEXT"))
-		{
-			temp->SetI_sub_text(tp->GetToken(fp));
-		}
-		else if (tp->IsEqual(szToken, "*ITEM_IMAGE"))
-		{
-			temp->SetI_image(std::string(tp->GetToken(fp)));
-		}
 
-		else if (tp->IsEqual(szToken, "*ITEM_OPTION"))
+		else if (IsEqual(szToken, "*ITEM_IMAGE"))
+		{
+			temp->Set_Iimage(std::string(GetToken()));
+		}
+		else if (IsEqual(szToken, "*ITEM_SUBTEXT"))
+		{
+			temp->Set_ISub(std::string(GetToken()));
+		}
+		else if (IsEqual(szToken, "*ITEM_OPTION"))
 		{
 			Item_sub_setting(temp);
 		}
-		else if (tp->IsEqual(szToken, "*STORE_OPTION"))
+		else if (IsEqual(szToken, "*STORE_OPTION"))
 		{
 			//Item_store_setting(temp);
 		}
@@ -130,41 +128,97 @@ void item_loader::Item_sub_setting(item_class* temp)
 	int nLevel = 0;
 	do
 	{
-		char* szToken = tp->GetToken(fp);
-		if (tp->IsEqual(szToken, "{"))
+		char* szToken = GetToken();
+		if (IsEqual(szToken, "{"))
 		{
 			nLevel++;
 		}
-		else if (tp->IsEqual(szToken, "}"))
+		else if (IsEqual(szToken, "}"))
 		{
 			nLevel--;
 		}
-		else if (tp->IsEqual(szToken, "*ATK"))
+		else if (IsEqual(szToken, "*ATK"))
 		{
-			n1 = tp->GetInt(fp);
+			n1 = GetInt();
 		}
-		else if (tp->IsEqual(szToken, "*DEF"))
+		else if (IsEqual(szToken, "*DEF"))
 		{
-			n2 = tp->GetInt(fp);
+			n2 = GetInt();
 		}
-		else if (tp->IsEqual(szToken, "*ATK_SPEED"))
+		else if (IsEqual(szToken, "*ATK_SPEED"))
 		{
-			f1 = tp->Getfloat(fp);
+			f1 = Getfloat();
 		}
-		else if (tp->IsEqual(szToken, "*PRICE"))
+		else if (IsEqual(szToken, "*PRICE"))
 		{
-			n3 = tp->GetInt(fp);
+			n3 = GetInt();
 		}
-		else if (tp->IsEqual(szToken, "*UPGRADE"))
+		else if (IsEqual(szToken, "*UPGRADE"))
 		{
-			n4 = tp->GetInt(fp);
+			n4 = GetInt();
 		}
 
 	} while (nLevel > 0);
 
-	temp->setting_option(n1,n2,f1,n3,n4);
+	temp->setting_option(n1, n2, f1, n3, n4);
 }
 
 void item_loader::Item_store_setting()
 {
+}
+
+// text passing advice functions
+char * item_loader::GetToken()
+{
+	int nReadCnt = 0;
+	bool isQuote = false;
+
+	while (true)
+	{
+		if (feof(fp))
+			break;
+
+		char c = fgetc(fp);
+
+		if (c == '\"')
+		{
+			if (isQuote)
+				break;
+
+			isQuote = true;
+			continue;
+		}
+
+		if (!isQuote && Iswhile(c))
+		{
+			if (nReadCnt == 0)
+				continue;
+			else
+				break;
+		}
+		m_szToken[nReadCnt++] = c;
+	}
+
+	if (nReadCnt == 0)
+		return NULL;
+
+	m_szToken[nReadCnt] = '\0';
+
+	return m_szToken;
+}
+bool item_loader::Iswhile(char c)
+{
+	return c < 33;
+}
+float item_loader::Getfloat()
+{
+	return (float)atof(GetToken());
+}
+int item_loader::GetInt()
+{
+	return atof(GetToken());
+}
+bool item_loader::IsEqual(char* str1, char* str2)
+{
+	return strcmp(str1, str2) == 0;
 }

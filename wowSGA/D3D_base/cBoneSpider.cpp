@@ -5,6 +5,21 @@
 #include <time.h>
 #include "cOBB.h"
 
+void cBoneSpider::getWeaponHit(int i, cOBB * PlayerWeapon)
+{
+	if (PlayerWeapon)
+	{
+		if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
+		{
+			if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
+			{
+				m_vecSkinnedMesh[i].t.HP -= 10;
+			}
+		}
+	}
+
+}
+
 cBoneSpider::cBoneSpider()
 	: m_vecSkinnedMesh(NULL)
 	, m_pFont(NULL)
@@ -42,7 +57,7 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::SPIDER;
 	Monster.m_vPos = D3DXVECTOR3(x, y + 0.3, z);
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
-	Monster.t.HP = 80;
+	Monster.t.HP = 50;
 	Monster.MaxHP = 80;
 	Monster.t.ATK = 8;
 	Monster.t.DEF = 8;
@@ -61,6 +76,9 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 	Monster.termCount = 0;
 	Monster.RunCount = rand() % 250 + 10;
 
+	Monster.Damage = false;
+	Monster.Damage_time = 0.0f;
+	Monster.TimeCheck = 0.0f;
 	Monster.Particle = new cMonsterParticle(512, 20);
 	Monster.Particle->init("Particle/alpha_tex.tga");
 	D3DXMatrixIdentity(&Monster.matWorld);
@@ -450,6 +468,22 @@ void cBoneSpider::MonsterAI(size_t i) {
 	}
 }
 
+void cBoneSpider::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+	{
+	case WM_LBUTTONDOWN:
+
+		break;
+
+	case WM_LBUTTONUP:
+		break;
+
+	case WM_MOUSEMOVE:
+
+		break;
+	}
+}
 
 //½ºÇÇ¾î ·»´õ(°ñµå, ¸ó½ºÅÍ)
 void cBoneSpider::SphereRender(size_t i, D3DXMATRIXA16& m_matWorld) {
@@ -491,10 +525,6 @@ void cBoneSpider::matUpdate(size_t i, iMap* pMap) {
 			{
 				m_vecSkinnedMesh[i].m_vPos = vTempPos[i];
 			}
-			else {
-				m_vecSkinnedMesh[i].m_vPos.x = vTempPos[i].x;
-				m_vecSkinnedMesh[i].m_vPos.z = vTempPos[i].z;
-			}
 		}
 	}
 	else
@@ -505,4 +535,14 @@ void cBoneSpider::matUpdate(size_t i, iMap* pMap) {
 	D3DXMatrixTranslation(&matT, m_vecSkinnedMesh[i].m_vPos.x, m_vecSkinnedMesh[i].m_vPos.y + 0.45, m_vecSkinnedMesh[i].m_vPos.z);
 	m_vecSkinnedMesh[i].matRT = matR * matT;
 	m_vecSkinnedMesh[i].matWorld = matS * matR * matT;
+}
+
+D3DXVECTOR3 cBoneSpider::getOBBCenter(int i)
+{
+	return m_vecSkinnedMesh[i].MonsterOBB->GetCenterPos();
+}
+
+float cBoneSpider::getOBBhalf(int i)
+{
+	return m_vecSkinnedMesh[i].MonsterOBB->getMax();
 }

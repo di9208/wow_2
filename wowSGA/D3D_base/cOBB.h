@@ -6,7 +6,7 @@ private:
 	D3DXVECTOR3		m_vOrgCenterPos;
 	D3DXVECTOR3		m_vOrgAxisDir[3];
 
-	D3DXVECTOR3		m_vCenterPos;
+	SYNTHESIZE(D3DXVECTOR3, m_vCenterPos, CenterPos);
 	D3DXVECTOR3		m_vAxisDir[3];
 	float			m_fAxisLen[3];
 	float			m_fAxisHalfLen[3];
@@ -35,6 +35,6 @@ public:
 	void RenderFont(std::vector<ST_PC_VERTEX> pc);
 
 	D3DXVECTOR3 getCheck(int i) { return m_vAxisDir[i]; }
-
+	float getMax();
 };
 

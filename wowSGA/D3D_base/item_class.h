@@ -35,15 +35,15 @@ class item_class
 
 private:
 	//item main info
-	SYNTHESIZE(item_option, Io, I_option);
-	SYNTHESIZE(item_where, Iw, I_where);
-	SYNTHESIZE(item_type, It, I_type);
-	SYNTHESIZE(std::string, In, I_name);
-	SYNTHESIZE(std::string, Ist, I_sub_text);
-	SYNTHESIZE(int, Inum, I_num);
-	SYNTHESIZE(int, Iv, I_volume);
-	SYNTHESIZE(bool, Ie, I_equit);
-	SYNTHESIZE(std::string, Ii, I_image);
+	SYNTHESIZE(item_option, ItemOption, _Ioption);
+	SYNTHESIZE(item_where, ItemWhere, _Iwhere);
+	SYNTHESIZE(item_type, ItemType, _Itype);
+	SYNTHESIZE(std::string, ItemName, _Iname);
+	SYNTHESIZE(std::string, ItemSub, _ISub);
+	SYNTHESIZE(int, ItemNumber, _Inum);
+	SYNTHESIZE(int, ItemVolume, _Ivolume);
+	SYNTHESIZE(bool, ItemEquit, _Iequit);
+	SYNTHESIZE(std::string, ItemImage, _Iimage);
 
 	//item sub info - 1 (UI interface Part)
 	SYNTHESIZE(RECT, Rc, I_Rect);
@@ -60,11 +60,11 @@ public:
 
 	void setting_option(int _atk, int _def, float _atk_speed, int _price, int _upgrade)
 	{
-		Io.ATK = _atk;
-		Io.DEF = _def;
-		Io.ATK_SPEED = _atk_speed;
-		Io.Price = _price;
-		Io.Upgrade = _upgrade;
+		ItemOption.ATK = _atk;
+		ItemOption.DEF = _def;
+		ItemOption.ATK_SPEED = _atk_speed;
+		ItemOption.Price = _price;
+		ItemOption.Upgrade = _upgrade;
 	}
 
 	void setting_type(int num)
@@ -72,19 +72,19 @@ public:
 		switch (num)
 		{
 		case 0:
-			It = weapon;
+			ItemType = weapon;
 			break;
 		case 1:
-			It = Armor;
+			ItemType = Armor;
 			break;
 		case 2:
-			It = special_item;
+			ItemType = special_item;
 			break;
 		case 3:
-			It = Interaction_item;
+			ItemType = Interaction_item;
 			break;
 		case 4:
-			It = using_item;
+			ItemType = using_item;
 			break;
 		}
 	}
@@ -94,16 +94,16 @@ public:
 		switch (num)
 		{
 		case 0:
-			Iw = EQUIT_item;
+			ItemWhere = EQUIT_item;
 			break;
 		case 1:
-			Iw = inventory_item;
+			ItemWhere = inventory_item;
 			break;
 		case 2:
-			Iw = inventory_collect;
+			ItemWhere = inventory_collect;
 			break;
 		case 3:
-			Iw = inventory_map;
+			ItemWhere = inventory_map;
 			break;
 		}
 	}

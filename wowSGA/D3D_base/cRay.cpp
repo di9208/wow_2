@@ -43,6 +43,27 @@ cRay cRay::RayAtWorldSpace(int nScreenX, int nScreenY)
 	return r;
 }
 
+bool cRay::IsPicked(Enemy_Sphere * pS)
+{
+	cRay r = (*this);
+
+	D3DXMATRIXA16	matInvWorld;
+	D3DXMatrixIdentity(&matInvWorld);
+	matInvWorld._41 = -pS->vCenter.x;
+	matInvWorld._42 = -pS->vCenter.y;
+	matInvWorld._43 = -pS->vCenter.z;
+
+	D3DXVec3TransformCoord(&r.m_vPos, &r.m_vPos, &matInvWorld);
+	D3DXVec3TransformNormal(&r.m_vDir, &r.m_vDir, &matInvWorld);
+
+	float vv = D3DXVec3Dot(&r.m_vDir, &r.m_vDir);
+	float qv = D3DXVec3Dot(&r.m_vPos, &r.m_vDir);
+	float qq = D3DXVec3Dot(&r.m_vPos, &r.m_vPos);
+	float rr = pS->fRadius * pS->fRadius;
+
+	return qv * qv - vv * (qq - rr) >= 0;
+}
+
 bool cRay::IsPicked(ST_SPHERE * pS)
 {
 	cRay r = (*this);
@@ -62,4 +83,13 @@ bool cRay::IsPicked(ST_SPHERE * pS)
 	float rr = pS->fRadius * pS->fRadius;
 
 	return qv * qv - vv * (qq - rr) >= 0;
+}
+
+bool cRay::IntersectTri(IN D3DXVECTOR3 & v0, IN D3DXVECTOR3 & v1, IN D3DXVECTOR3 & v2, OUT D3DXVECTOR3 & pickPoision)
+{
+	float u, v, t;
+	bool b = D3DXIntersectTri(&v0, &v1, &v2, &m_vPos, &m_vDir, &u, &v, &t);
+	pickPoision = m_vPos + (t*m_vDir);
+
+	return b;
 }
