@@ -25,6 +25,12 @@ cEnemyControl::cEnemyControl()
 	D3DXMatrixIdentity(&m_world);
 	D3DXMatrixIdentity(&matR);
 	D3DXMatrixIdentity(&matragR);
+	g_pSoundManager->Setup();
+	g_pSoundManager->addSound("arthas_att", "sound/boss/arthas_att.mp3", true, false);
+	g_pSoundManager->addSound("arthas_whirlwind", "sound/boss/arthas_whirlwind.wav", true, false);
+	g_pSoundManager->addSound("ragnaros_att", "sound/boss/ragnaros_att.wav", true, false);
+	g_pSoundManager->addSound("ragnaros_death", "sound/boss/ragnaros_death.ogg", true, false);
+
 }
 
 cEnemyControl::~cEnemyControl()
@@ -432,7 +438,7 @@ void cEnemyControl::BossUpdate()
 	// 체력 테스트
 	if (g_pKeyManager->isOnceKeyDown('L'))
 	{
-		m_vecBoss[0].stat.HP = m_vecBoss[0].stat.HP - 500;
+		m_vecBoss[0].stat.HP = m_vecBoss[0].stat.HP - 450;
 	}
 	if (g_pKeyManager->isOnceKeyDown('K'))
 	{
@@ -452,6 +458,7 @@ void cEnemyControl::BossUpdate()
 	if (m_vecBoss_rag[0].stat.HP <= 0)
 	{
 		m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_DEATH;
+		g_pSoundManager->play("ragnaros_death", 1.f);
 	}
 	if (m_vecBoss[0].e_boss_state == E_BOSS_DEATH&& a <= 50)
 	{
@@ -540,12 +547,17 @@ void cEnemyControl::BossPlayerCheck()
 					m_vecBoss[0].count += 5;
 					if (m_vecBoss[0].count > 5)
 					{
+						g_pSoundManager->play("arthas_att", 1.f);
 						m_vecBoss[0].e_boss_state = E_BOSS_ATT;
 						m_vecBoss[0].count = 0;
+						
 					}
 					if (m_vecBoss[0].stat.HP <= 50)
 					{
 						m_vecBoss[0].e_boss_state = E_BOSS_WHIRLWIND;
+						if(m_vecBoss[0].e_boss_state == E_BOSS_WHIRLWIND)
+						g_pSoundManager->play("arthas_whirlwind", 1.f);
+						//else g_pSoundManager->stop("arthas_whirlwind");
 					}
 					m_vecBoss[0].chk = false;
 				}
@@ -860,7 +872,7 @@ void cEnemyControl::BossRagPlayerCheck()
 		{
 			skillDelay++;
 
-			if (skillDelay > 50)
+			if (skillDelay > 70)
 			{
 				delay1 = rand() % 15;
 				delay2 = rand() % 15;
@@ -871,6 +883,7 @@ void cEnemyControl::BossRagPlayerCheck()
 					{
 						if (m_vecBoss_rag[0].e_boss_rag_state != E_BOSS_RAG_MERGE)
 						{
+							g_pSoundManager->play("ragnaros_att", 1.f);
 							m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_ATT;
 						}
 						if (m_vecBoss_rag[0].e_boss_rag_state == E_BOSS_RAG_MERGE)
@@ -894,6 +907,7 @@ void cEnemyControl::BossRagPlayerCheck()
 					}
 					if (m_vecBoss_rag[0].stat.HP <= 100)
 					{
+						g_pSoundManager->play("ragnaros_att", 1.f);
 						m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_ATT;
 						m_vecBoss_rag[0].count = 0;
 					}
