@@ -19,6 +19,8 @@ cPlayerInFo::cPlayerInFo()
 	, ax(100)
 	, m_systemFont(NULL)
 	, m_HpFont(NULL)
+	, curATK(0)
+	, curDEF(0)
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -65,10 +67,13 @@ void cPlayerInFo::Setup(cSkinnedMesh* playerSkinned, D3DXMATRIXA16* playerWorld)
 	m_PlayerInFo.DEF = 5;
 	m_PlayerInFo.Gold = 0;
 
+	curATK = 100;
+	curDEF = 5;
+
 	m_playerOBB = new cOBB();
 	m_playerOBB->Setup(playerSkinned, playerWorld);
 
-	
+
 }
 
 void cPlayerInFo::Update(condition* pCondition, D3DXMATRIXA16* pMatWorld)
@@ -101,6 +106,7 @@ void cPlayerInFo::Update(condition* pCondition, D3DXMATRIXA16* pMatWorld)
 	{
 		item_slot[i]->Update();
 	}
+	EQUIT_ITEM();
 }
 
 void cPlayerInFo::SetFont()
@@ -438,6 +444,18 @@ void cPlayerInFo::setting_EQUIT_UI()
 		item_slot[i]->Sethidden(!m_status);
 		item_slot[i]->SetScal(D3DXVECTOR3(0.55, 0.55, 0));
 	}
+}
+void cPlayerInFo::EQUIT_ITEM()
+{
+	int atk = 0;
+	int def = 0;
+	for (int i = 0; i < player_Equite_vector.size(); i++)
+	{
+		atk += player_Equite_vector[i]->GetI_option().ATK;
+		def += player_Equite_vector[i]->GetI_option().DEF;
+	}
+	m_PlayerInFo.ATK = atk + curATK;
+	m_PlayerInFo.DEF = def + curDEF;
 }
 void cPlayerInFo::SetUI()
 {

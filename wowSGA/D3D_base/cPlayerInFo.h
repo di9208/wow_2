@@ -12,6 +12,8 @@ class cPlayerInFo
 {
 private:
 	TagUnit						m_PlayerInFo;
+	int							curATK;
+	int							curDEF;
 	LPD3DXFONT					m_pFont;
 	LPD3DXFONT					m_systemFont;
 	LPD3DXFONT					m_HpFont;
@@ -88,4 +90,6 @@ public:
 	void setRC();
 	void getItem(shop_TEST_CLASS* iven_item);
 	void setting_EQUIT_UI();
+
+	void EQUIT_ITEM();
 };

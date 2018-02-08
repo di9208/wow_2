@@ -23,7 +23,7 @@
 	*ITEM_SUBTEXT "¸ÁÄ¡´Ù."
 	*ITEM_IMAGE "INV_Hammer_17.PNG" 
 		*ITEM_OPTION {
-			*ATK 100
+			*ATK 200
 			*DEF 0
 			*ATK_SPEED 0.5
 			*PRICE 20
@@ -38,7 +38,7 @@
 	*ITEM_SUBTEXT "µµ³¢´Ù."
 	*ITEM_IMAGE "INV_Axe_1h_DeathwingRaidDW_D_01.PNG" 
 		*ITEM_OPTION {
-			*ATK 100
+			*ATK 300
 			*DEF 0
 			*ATK_SPEED 0.5
 			*PRICE 20
