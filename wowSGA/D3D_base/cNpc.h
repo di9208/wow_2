@@ -17,7 +17,7 @@ private:
 
 	SYNTHESIZE(ST_SPHERE, PmeshInfo, M_info);
 	LPD3DXMESH m_mesh;
-
+	SYNTHESIZE(bool, ispickinged, RAYPICK);
 public:
 	cNpc();
 	~cNpc();

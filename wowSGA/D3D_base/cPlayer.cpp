@@ -134,6 +134,11 @@ void cPlayer::setHp(int hp, int maxHP)
 	m_EnemyPicking->HPset(hp, maxHP);
 }
 
+void cPlayer::checkUI()
+{
+	return m_EnemyPicking->SetUiOn(true);
+}
+
 cOBB * cPlayer::getWeapon()
 {
 	return m_Weapon->GetweaponOBB();

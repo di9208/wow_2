@@ -7,6 +7,7 @@ class cSkinnedMesh;
 class item_class;
 class inventory;
 class cUIImage;
+class cUIButton;
 
 class cPlayerInFo
 {
@@ -69,6 +70,8 @@ private:
 
 	std::vector<item_class*> player_Equite_vector;
 	LPD3DXSPRITE UI_sprite;
+	shop_TEST_CLASS* inven_copy;
+	SYNTHESIZE(cUIButton*, close_button, Equite_window);
 public:
 	cPlayerInFo();
 	~cPlayerInFo();
@@ -92,4 +95,6 @@ public:
 	void setting_EQUIT_UI();
 
 	void EQUIT_ITEM();
+
+	void UnEquite_Item();
 };

@@ -28,4 +28,9 @@ void Button_delegate::OnClick(cUIButton * pSender)
 	{
 		pSender->GetParent()->Sethidden(true);
 	}
+
+	if (pSender->GetTag() == TAG_CHILD_CLOSE)
+	{
+		pSender->Sethidden(true);
+	}
 }

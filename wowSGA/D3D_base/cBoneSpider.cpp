@@ -4,27 +4,17 @@
 #include "iMap.h"
 #include <time.h>
 #include "cOBB.h"
+#include "cUIImage.h"
 
-void cBoneSpider::getWeaponHit(int i, cOBB * PlayerWeapon)
-{
-	if (PlayerWeapon)
-	{
-		if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
-		{
-			if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
-			{
-				m_vecSkinnedMesh[i].t.HP -= 10;
-			}
-		}
-	}
-
-}
 
 cBoneSpider::cBoneSpider()
 	: m_vecSkinnedMesh(NULL)
 	, m_pFont(NULL)
 	, m_pSprite(NULL)
+	, Root(nullptr)
 {
+	g_pSoundManager->Setup();
+	g_pSoundManager->addSound("SpiderHit", "sound/monster/bonespider/wound.mp3", true, false);
 	D3DXMatrixIdentity(&matWorld);
 	m_pSkillOn = false;
 	nCount = 0;
@@ -46,6 +36,20 @@ cBoneSpider::~cBoneSpider()
 	}
 }
 
+void cBoneSpider::getWeaponHit(int i, cOBB * PlayerWeapon)
+{
+	if (PlayerWeapon)
+	{
+		if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
+		{
+			if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
+			{
+				m_vecSkinnedMesh[i].t.HP -= 10;
+			}
+		}
+	}
+
+}
 
 void cBoneSpider::addMonster(float x, float y, float z) {
 	//몬스터를 생성해줌
@@ -57,7 +61,7 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::SPIDER;
 	Monster.m_vPos = D3DXVECTOR3(x, y + 0.3, z);
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
-	Monster.t.HP = 50;
+	Monster.t.HP = 80;
 	Monster.MaxHP = 80;
 	Monster.t.ATK = 8;
 	Monster.t.DEF = 8;
@@ -75,10 +79,10 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 	Monster.attackTime = 100;
 	Monster.termCount = 0;
 	Monster.RunCount = rand() % 250 + 10;
-
 	Monster.Damage = false;
 	Monster.Damage_time = 0.0f;
 	Monster.TimeCheck = 0.0f;
+
 	Monster.Particle = new cMonsterParticle(512, 20);
 	Monster.Particle->init("Particle/alpha_tex.tga");
 	D3DXMatrixIdentity(&Monster.matWorld);
@@ -114,6 +118,8 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 
 	m_vecSkinnedMesh.push_back(Monster);
 
+
+	//SetupUI(0, 4);
 }
 
 
@@ -155,6 +161,11 @@ void cBoneSpider::Update(iMap* pMap) {
 		MonsterAI(i);						//몬스터의 패턴, 스킬
 		MonsterStatus(i); 					//몬스터 상태, 애니메이tus
 	}
+	if (Root)
+	{
+		Root->Update();
+	}
+		
 }
 
 
@@ -171,11 +182,10 @@ void cBoneSpider::Render() {
 		SphereRender(i, m_vecSkinnedMesh[i].matWorld);
 		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, nullptr, nullptr);
 		if (m_vecSkinnedMesh[i].death) {
-			for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++) {
-				RenderUI(i, j, 10, 10, 79, 80);
-			}
+			RenderUI(2, 0, 10, 10, 79, 80);
 		}
 	}
+	//RenderUI(0, 0, 10, 10, 79, 80);
 	/*if (m_pFont)
 	{
 	char str[128];
@@ -236,71 +246,27 @@ void cBoneSpider::MonsterStatus(size_t i) {
 }
 
 void cBoneSpider::SetupUI(size_t i, size_t a) {
-	ZeroMemory(&m_vecSkinnedMesh[i].m_StInvectory.m_stImageInfo, sizeof(D3DXIMAGE_INFO));
+	cUIImage* main = new cUIImage;
+	main->SetTexture("bonespiderInven","UI/UI_Enemy_Invectory.png");
+	main->SetPos(D3DXVECTOR3(20, 150, 0));
 
-	D3DXCreateTextureFromFileEx(
-		g_pD3DDevice,
-		"UI/UI_Enemy_Invectory.png",
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT,
-		0,
-		D3DFMT_UNKNOWN,
-		D3DPOOL_MANAGED,
-		D3DX_FILTER_NONE,
-		D3DX_DEFAULT,
-		0,
-		&m_vecSkinnedMesh[i].m_StInvectory.m_stImageInfo,
-		NULL,
-		&m_vecSkinnedMesh[i].m_StInvectory.m_pTexture);
-
-	for (size_t j = 0; j < a; j++) {
-		ZeroMemory(&m_vecSkinnedMesh[i].m_StItemSprite.m_stImageInfo, sizeof(D3DXIMAGE_INFO));
-
-		D3DXCreateTextureFromFileEx(
-			g_pD3DDevice,
-			"UI/sword.png",
-			D3DX_DEFAULT_NONPOW2,
-			D3DX_DEFAULT_NONPOW2,
-			D3DX_DEFAULT,
-			0,
-			D3DFMT_UNKNOWN,
-			D3DPOOL_MANAGED,
-			D3DX_FILTER_NONE,
-			D3DX_DEFAULT,
-			0,
-			&m_vecSkinnedMesh[i].m_StItemSprite.m_stImageInfo,
-			NULL,
-			&m_vecSkinnedMesh[i].m_StItemSprite.m_pTexture);
-
-		m_vecSkinnedMesh[i].m_ItemSprite.push_back(m_vecSkinnedMesh[i].m_StItemSprite);
+	Root = main;
+	for (size_t j = 0; j < a; j++)
+	{
+		cUIImage* item = new cUIImage;
+		char str[1024];
+		itoa(j, str, 10);
+		std::string key = std::string("sword") + std::string(str);
+		item->SetTexture(key, "UI/sword.png");
+		item->SetPos(D3DXVECTOR3(41, (80 * j) + 181 + (j * 14), 0));
+		Root->AddChild(item);
 	}
 }
 
 void cBoneSpider::RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY) {
-	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
-	m_pSprite->Draw(
-		m_vecSkinnedMesh[i].m_StInvectory.m_pTexture,
-		NULL,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(x, y, 0.5f),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
-
-	m_pSprite->End();
-
-	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
-	m_pSprite->Draw(
-		m_vecSkinnedMesh[i].m_ItemSprite[j].m_pTexture,
-		NULL,
-		&D3DXVECTOR3(0, 0, 0),
-		&D3DXVECTOR3(x + 41, y + (sizeY * j) + 181 + (j * 14), 0.5f),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
-	m_pSprite->End();
-
-	m_vecSkinnedMesh[i].m_ItemSprite[j].rc.left = x;
-	m_vecSkinnedMesh[i].m_ItemSprite[j].rc.top = y;
-	m_vecSkinnedMesh[i].m_ItemSprite[j].rc.right = sizeX + x;
-	m_vecSkinnedMesh[i].m_ItemSprite[j].rc.bottom = sizeY + y;
+	
+	if (Root)
+	Root->Render(m_pSprite);
 }
 
 void cBoneSpider::MonsterDeath(size_t i) {
@@ -313,15 +279,14 @@ void cBoneSpider::MonsterDeath(size_t i) {
 		SetupUI(i, a);
 		m_vecSkinnedMesh[i].death = true;
 	}
-
+	//죽는 모션 후 일정시간이 지나면 해당 애니메이션은 정지시킨다.
 	else {
-		//죽는 모션 후 일정시간이 지나면 해당 애니메이션은 정지시킨다.
-		if (m_vecSkinnedMesh[i].deathTime > 45) {
-			m_vecSkinnedMesh[i].m->GetAnimationController()->SetTrackEnable(0, false);
+		
+		if (m_vecSkinnedMesh[i].deathTime > 1000) {
 
-			//SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
-			//SAFE_DELETE(m_vecSkinnedMesh[i].m);
-			//m_vecSkinnedMesh.erase(m_vecSkinnedMesh.begin() + i);
+			SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
+			SAFE_DELETE(m_vecSkinnedMesh[i].m);
+			m_vecSkinnedMesh.erase(m_vecSkinnedMesh.begin() + i);
 		}
 	}
 }
@@ -403,7 +368,8 @@ void cBoneSpider::MonsterAI(size_t i) {
 	}
 
 	//적이 인식범위 밖으로 빠져나갔다면 행동을 멈춘다.
-	if (m_vecSkinnedMesh[i].distance > m_vecSkinnedMesh[i].MaxRange) {
+	if (m_vecSkinnedMesh[i].distance > m_vecSkinnedMesh[i].MaxRange &&
+		m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH) {
 		m_vecSkinnedMesh[i].time = 0;
 		//if (m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_RUN) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		srand(time(NULL));
@@ -459,6 +425,9 @@ void cBoneSpider::MonsterAI(size_t i) {
 
 		//어택타임이 차면 공격
 		if (m_vecSkinnedMesh[i].attackTime < 50) {
+			if (m_vecSkinnedMesh[i].attackTime < 2) {
+				g_pSoundManager->play("SpiderHit", 1.0f);
+			}
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_ATTACK;
 		}
 		//하거나 쉬도록 함
@@ -468,22 +437,6 @@ void cBoneSpider::MonsterAI(size_t i) {
 	}
 }
 
-void cBoneSpider::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	switch (message)
-	{
-	case WM_LBUTTONDOWN:
-
-		break;
-
-	case WM_LBUTTONUP:
-		break;
-
-	case WM_MOUSEMOVE:
-
-		break;
-	}
-}
 
 //스피어 렌더(골드, 몬스터)
 void cBoneSpider::SphereRender(size_t i, D3DXMATRIXA16& m_matWorld) {
@@ -524,6 +477,10 @@ void cBoneSpider::matUpdate(size_t i, iMap* pMap) {
 			if (m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH)
 			{
 				m_vecSkinnedMesh[i].m_vPos = vTempPos[i];
+			}
+			else {
+				m_vecSkinnedMesh[i].m_vPos.x = vTempPos[i].x;
+				m_vecSkinnedMesh[i].m_vPos.z = vTempPos[i].z;
 			}
 		}
 	}

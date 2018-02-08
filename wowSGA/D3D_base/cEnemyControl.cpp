@@ -129,6 +129,51 @@ float cEnemyControl::getSpiderDamageTimeCheck(int i)
 	return m_pSpider->getDamageTimeCheck(i);
 }
 
+int cEnemyControl::getDruidVectorSize()
+{
+	return m_pDruid->getVectorSize();
+}
+
+cOBB * cEnemyControl::getDruidOBB(int i)
+{
+	return m_pDruid->getOBB(i);
+}
+
+MONSTER_STATUS cEnemyControl::getDruidCondition(int i)
+{
+	return m_pDruid->getCondition(i);
+}
+
+void cEnemyControl::setDruidDamageCheck(int i, bool check)
+{
+	m_pDruid->setDamageCheck(i, check);
+}
+
+bool cEnemyControl::getDruidDamageCheck(int i)
+{
+	return m_pDruid->getDamageCheck(i);
+}
+
+void cEnemyControl::setDruidTimeCheck(int i, bool check)
+{
+	m_pDruid->setTimeCheck(i, check);
+}
+
+bool cEnemyControl::getDruidTimeCheck(int i)
+{
+	return m_pDruid->getTimeCheck(i);
+}
+
+void cEnemyControl::setDruidDamageTimeCheck(int i, float time)
+{
+	m_pDruid->setDamageTimeCheck(i, time);
+}
+
+float cEnemyControl::getDruidDamageTimeCheck(int i)
+{
+	return m_pDruid->getDamageTimeCheck(i);
+}
+
 cOBB * cEnemyControl::getBossOBB()
 {
 	return m_pBossAniController->getOBB();
@@ -297,6 +342,7 @@ void cEnemyControl::BossSetup()
 	stBoss1.stat.ATK = 100;
 	stBoss1.stat.DEF = 20;
 	stBoss1.stat.HP = 500;
+	stBoss1.stat.Max_HP = 500;
 	stBoss1.chk = false;
 	stBoss1.kind = BOSS_ARTHAS;
 	stBoss1.e_boss_state = E_BOSS_START;

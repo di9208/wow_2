@@ -244,8 +244,13 @@
     <ClCompile Include="cEnemyPicking.cpp">
       <Filter>unit\player</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="cRagPaticle.cpp">
       <Filter>unit\enemyManager\boss\ragnaros</Filter>
+=======
+    <ClCompile Include="soundManager.cpp">
+      <Filter>Manager</Filter>
+>>>>>>> 7b22ff7cfec6eecad912a42035c1eed55172e890
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -501,8 +506,16 @@
     <ClInclude Include="cEnemyPicking.h">
       <Filter>unit\player</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="cRagPaticle.h">
       <Filter>unit\enemyManager\boss\ragnaros</Filter>
+=======
+    <ClInclude Include="singletonBase.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="soundManager.h">
+      <Filter>Manager</Filter>
+>>>>>>> 7b22ff7cfec6eecad912a42035c1eed55172e890
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

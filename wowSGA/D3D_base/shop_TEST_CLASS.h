@@ -6,6 +6,7 @@ class cUIImage;
 class wordManager;
 class cNpc;
 class inventory;
+class cPlayerInFo;
 
 class shop_TEST_CLASS
 {
@@ -42,6 +43,8 @@ private:
 	LPDIRECT3DTEXTURE9 mouse_cursorImage;
 
 	SYNTHESIZE(bool, is_interface, isinterface);
+
+	cPlayerInFo* player_info_page;
 public:
 	shop_TEST_CLASS();
 	~shop_TEST_CLASS();
@@ -52,6 +55,9 @@ public:
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 	inventory* get_inven() { return _invens; }
+	shop_class* get_shop() { return _shops; }
+
+	void setting_playerinfo(cPlayerInFo* player_info_temp) { player_info_page = player_info_temp; }
 	//void resetting_inven() 
 	//{
 	//	//_invens->Setting_items();

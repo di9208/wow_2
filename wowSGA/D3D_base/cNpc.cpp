@@ -30,7 +30,9 @@ void cNpc::Setup()
 	m_npc_info->setup();
 
 	D3DXCreateSphere(g_pD3DDevice, 0.8f, 20, 20, &m_mesh, NULL);
-	PmeshInfo.fRadius = 0.8f;
+	PmeshInfo.fRadius = 0.8f * 0.1f;
+
+	ispickinged = false;
 }
 
 void cNpc::update()
@@ -38,31 +40,35 @@ void cNpc::update()
 	if (m_npcAnicontroller)
 		m_npcAnicontroller->Update(&Npc_State);
 
-	if (g_pKeyManager->isOnceKeyDown(VK_LBUTTON))
+	if (GetKeyState(VK_LBUTTON) & 0x8000)
 	{
 		POINT pt;
 		GetCursorPos(&pt);
 		ScreenToClient(g_hWnd, &pt);
 		cRay r = cRay::RayAtWorldSpace(pt.x, pt.y);
 		PmeshInfo.bIsPicked = r.IsPicked(&PmeshInfo);
+		if (PmeshInfo.bIsPicked) ispickinged = true;
 	}
 }
 
 void cNpc::render()
 {
-	D3DXMATRIXA16 matworld, matT, matR;
+	D3DXMATRIXA16 matworld, matT, matR, matS;
 
 	D3DXMatrixIsIdentity(&matworld);
 	D3DXMatrixIsIdentity(&matT);
 
 	D3DXMatrixTranslation(&matT, 5.0f, 0.9f, 0.0f);
 	D3DXMatrixRotationY(&matR, D3DX_PI / 2.0f);
+	D3DXMatrixScaling(&matS, 0.1f, 0.1f, 0.1f);
 
 	matworld = m_matWorld * matR;
 
 	matworld._41 += matT._41;
 	matworld._42 += matT._42;
 	matworld._43 += matT._43;
+
+	matworld *= matS;
 
 	PmeshInfo.vCenter = D3DXVECTOR3(matworld._41, matworld._42, matworld._43);
 

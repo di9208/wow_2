@@ -7,7 +7,7 @@ cEnemyPicking::cEnemyPicking()
 	m_pSprite(NULL),
 	m_EnemyUI(NULL),
 	m_EnemyIcon(NULL),
-	m_UiOn(true),
+	m_UiOn(false),
 	m_HP(NULL),
 	m_HPint(1),
 	m_MaxHPint(1)
@@ -98,6 +98,20 @@ void cEnemyPicking::Update(MONSTER_KIND monster)
 
 void cEnemyPicking::SetFont()
 {
+	D3DXFONT_DESC stFD;
+	ZeroMemory(&stFD, sizeof(D3DXFONT_DESC));
+	stFD.Height = 15;
+	stFD.Width = 7;
+	stFD.Weight = FW_MEDIUM;
+	stFD.Italic = false;
+	stFD.CharSet = DEFAULT_CHARSET;
+	stFD.OutputPrecision = OUT_DEFAULT_PRECIS;
+	stFD.PitchAndFamily = FF_DONTCARE;
+
+	AddFontResource("FRIZQT__.TTF");
+	strcpy_s(stFD.FaceName, "FRIZQT__");
+
+	D3DXCreateFontIndirect(g_pD3DDevice, &stFD, &m_HpFont);
 }
 
 void cEnemyPicking::SetUI()
@@ -175,16 +189,26 @@ void cEnemyPicking::SetUI()
 		&m_EnemyIcon);
 }
 
-void cEnemyPicking::RenderUI()
-{
-}
 
 void cEnemyPicking::RenderFont()
 {
-}
+	if (m_HpFont)
+	{
+		char str[128];
+		sprintf(str, "HP: %.0f / %.0f", m_HPint, m_MaxHPint);
 
-void cEnemyPicking::DistanceSet(D3DXVECTOR3 Player, D3DXVECTOR3 Enemy)
-{
+		std::string sText(str);
+
+		RECT rc;
+		SetRect(&rc, 650, 53, 750, 250);
+
+		m_HpFont->DrawText(NULL,
+			sText.c_str(),
+			sText.length(),
+			&rc,
+			DT_LEFT | DT_TOP | DT_NOCLIP,
+			D3DCOLOR_XRGB(255, 255, 255));
+	}
 }
 
 void cEnemyPicking::HPset(float hp, float maxHp)
@@ -195,8 +219,11 @@ void cEnemyPicking::HPset(float hp, float maxHp)
 
 void cEnemyPicking::Render()
 {
-	//if (m_UiOn)
+
+	if (m_UiOn)
 	{
+		RenderFont();
+
 		m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 		m_pSprite->Draw(m_EnemyIcon,
