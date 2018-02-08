@@ -69,7 +69,7 @@ void cBossRagController::Update(E_BOSS_RAG_STATE * pStateRag)
 	SetAnimation(pStateRag);
 }
 
-void cBossRagController::Render(D3DXMATRIXA16 * m_world)
+void cBossRagController::Render(D3DXMATRIXA16  &m_world)
 {
 	D3DXMATRIXA16 matR2, matS2, matT2, matX2, World2;
 	D3DXMatrixScaling(&matS2, 0.025f, 0.025f, 0.025f);
@@ -95,7 +95,7 @@ void cBossRagController::Render(D3DXMATRIXA16 * m_world)
 	m_obbw = matR2 *matT2;
 	if (m_pSkinnedMesh_rag)
 		m_pSkinnedMesh_rag->Render(NULL, &World2);
-
+	m_world = World2;
 	if (m_pSkinnedMesh_rag_skill1) skillRender();
 	if (m_pSkinnedMesh_rag_skill2) skillRender2();
 

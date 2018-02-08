@@ -404,6 +404,22 @@ void cEnemyControl::BossUpdate()
 			m_pBossAniController->Skill();
 		}
 	}
+	if (!m_vecBoss_rag[0].chk)
+	{
+		if (m_vecBoss_rag[0].e_boss_rag_state == E_BOSS_RAG_SPELL)
+		{
+			nCount++;
+
+			if (nCount > 8)
+			{
+				nMonsterX = rand() % 15;
+				nMonsterY = rand() % 15;
+				m_pWorg->addMonster(nMonsterX, 0, nMonsterY);
+				nCount = 0;
+			}
+		}
+		
+	}
 
 	BossPlayerCheck();
 
@@ -420,12 +436,12 @@ void cEnemyControl::BossUpdate()
 	}
 	if (g_pKeyManager->isOnceKeyDown('K'))
 	{
-		m_vecBoss_rag[0].stat.HP = m_vecBoss_rag[0].stat.HP - 500;
+		m_vecBoss_rag[0].stat.HP = m_vecBoss_rag[0].stat.HP - 450;
 	}
 
 	if (g_pKeyManager->isStayKeyDown(VK_F11))
 	{
-		m_vecBoss[0].stat.HP -= 10;
+		m_vecBoss_rag[0].stat.HP -= 10;
 	}
 
 	if (m_vecBoss[0].stat.HP <= 0)
@@ -464,11 +480,14 @@ void cEnemyControl::BossRender()
 	D3DXMatrixTranslation(&matT2, 5, 0, 0);
 	D3DXMATRIXA16 world2 =  matT2;*/
 	D3DXMATRIXA16 matW2;
-	//D3DXMatrixIdentity(&matW2);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matW2);
+
+	
 	if (m_pBossRagController && m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
-		m_pBossRagController->Render(nullptr);
-	m_vecBoss_rag[0].particle->render();
+		m_pBossRagController->Render(matW2);
+	//D3DXMatrixIdentity(&matW2);
+	
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matW2);
+	//m_vecBoss_rag[0].particle->render();
 
 
 }
@@ -841,7 +860,7 @@ void cEnemyControl::BossRagPlayerCheck()
 		{
 			skillDelay++;
 
-			if (skillDelay > 40)
+			if (skillDelay > 50)
 			{
 				delay1 = rand() % 15;
 				delay2 = rand() % 15;
@@ -850,7 +869,14 @@ void cEnemyControl::BossRagPlayerCheck()
 					m_vecBoss_rag[0].count += 5;
 					if (m_vecBoss_rag[0].count > 5)
 					{
-						m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_ATT;
+						if (m_vecBoss_rag[0].e_boss_rag_state != E_BOSS_RAG_MERGE)
+						{
+							m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_ATT;
+						}
+						if (m_vecBoss_rag[0].e_boss_rag_state == E_BOSS_RAG_MERGE)
+						{
+							m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_START;
+						}
 						m_vecBoss_rag[0].count = 0;
 					}
 					if (m_vecBoss_rag[0].stat.HP <= 50)
@@ -861,7 +887,7 @@ void cEnemyControl::BossRagPlayerCheck()
 				}
 				if (delay2 > 8 && delay2 < 15)
 				{
-					m_vecBoss_rag[0].count += 5;
+					m_vecBoss_rag[0].count += 1;
 					if (m_vecBoss_rag[0].count > 6)
 					{
 						m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_SPELL;

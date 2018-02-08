@@ -22,29 +22,23 @@ cRagPaticle::~cRagPaticle()
 
 void cRagPaticle::resetParticle(Attribute * attribute)
 {
-	float a = rand() % 2;
-	float b = rand() % 2;
+	int a = rand() % 2;
+	int b = rand() % 2;
 
 	//x는 모름
 	//y는 가로
 	//z는 세로	
-	if (a == 0)			attribute->position.x = (rand() % 60) *0.03f*7.0f;
-	else if (a == 1.f)	attribute->position.x = -(rand() % 60) *0.03f*7.0f;
-	if (b == 0)			attribute->position.z = (rand() % 60) *0.03f*5.0f;
-	else if (b == 1.f)	attribute->position.z = -(rand() % 60) *0.03f*5.0f;
-	attribute->position.y = rand() % 10 + 0.1f;
+	if (a == 0)			attribute->position.x = (rand() % 10) *0.03f*7.0f;
+	else if (a == 1.f)	attribute->position.x = -(rand() % 10) *0.03f*7.0f;
+	if (b == 0)			attribute->position.z = (rand() % 10) *0.03f*5.0f;
+	else if (b == 1.f)	attribute->position.z = -(rand() % 10) *0.03f*5.0f;
+	attribute->position.y = -rand() % 7 +5.f;
 
-	/*attribute->position.x = 0;
-
-	attribute->position.z = 1;
-
-	attribute->position.y =0;*/
-
-	attribute->velocity.x = 0.5f;
+	attribute->velocity.x = 0;
 	attribute->velocity.y = 0.5f;
-	attribute->velocity.z = 0.5f;
+	attribute->velocity.z = 0;
 
-	attribute->color = D3DCOLOR_ARGB(255, 255, 255, 255);
+	attribute->color = D3DCOLOR_ARGB(255, 255, 0, 0);
 }
 
 void cRagPaticle::update(float timeDelta)
@@ -59,7 +53,7 @@ void cRagPaticle::update(float timeDelta)
 		D3DXMatrixRotationZ(&matRZ, a);
 		D3DXMatrixTranslation(&matT, 0, 0, 0);
 
-		matW = matR * matRZ*matRX* matT;
+		matW = matR * /*matRZ*matRX* */matT;
 		D3DXVec3TransformCoord(&i->position, &i->position, &matW);
 		//D3DXVec3TransformCoord(&i->position, &i->position, &matR);
 		//i->position 
