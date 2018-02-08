@@ -305,19 +305,6 @@ void cEnemyControl::BossSetup()
 
 	m_vecBoss.push_back(stBoss1);
 
-
-<<<<<<< HEAD
-=======
-	stBoss.count = 0;
-	stBoss.stat.ATK = 100;
-	stBoss.stat.DEF = 20;
-	stBoss.stat.HP = 500;
-	stBoss.stat.Max_HP = 500;
-	stBoss.chk = false;
-	stBoss.kind = BOSS_ARTHAS;
-	stBoss.e_boss_state = E_BOSS_START;
-	m_vecBoss.push_back(stBoss);
->>>>>>> e46814df4a297aacb26cf85753cb1b1d29878a3b
 	//===============================위가 리치왕, 아래가 라그나로스 스탯//
 	stBoss_rag.count = 0;
 	stBoss_rag.stat.ATK = 100;
@@ -416,7 +403,7 @@ void cEnemyControl::BossUpdate()
 
 void cEnemyControl::BossRender()
 {
-<<<<<<< HEAD
+
 	/*D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, -5, 0, 0);
 	D3DXMATRIXA16 world = (matT);
@@ -439,28 +426,8 @@ void cEnemyControl::BossRender()
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matW2);
 	if (m_pBossRagController && m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
 		m_pBossRagController->Render(nullptr);
-=======
 
-	/*D3DXMATRIXA16 matT;
-	D3DXMatrixTranslation(&matT, -5, 0, 0);
-	D3DXMATRIXA16 world = (matT);
-	*/	D3DXMATRIXA16 matW;
-D3DXMatrixIdentity(&matW);
-g_pD3DDevice->SetTransform(D3DTS_WORLD, &matW);
-if (m_pBossAniController)
-m_pBossAniController->Render(nullptr);
 
-//==============================================
-
-/*D3DXMATRIXA16 matT2;
-D3DXMatrixTranslation(&matT2, 5, 0, 0);
-D3DXMATRIXA16 world2 =  matT2;*/
-D3DXMATRIXA16 matW2;
-D3DXMatrixIdentity(&matW2);
-g_pD3DDevice->SetTransform(D3DTS_WORLD, &matW2);
-if (m_pBossRagController && m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
-m_pBossRagController->Render(nullptr);
->>>>>>> e46814df4a297aacb26cf85753cb1b1d29878a3b
 }
 
 void cEnemyControl::BossPlayerCheck()

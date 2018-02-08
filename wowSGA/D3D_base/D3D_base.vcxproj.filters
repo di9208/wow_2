@@ -1,199 +1,256 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="소스 파일">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="HeightMap">
-      <UniqueIdentifier>{c6f5e1b5-d507-48a9-9538-fb8e3665c3dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Picking">
-      <UniqueIdentifier>{acfdfade-83ca-402d-b70f-9ae9f18d353d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="UI">
-      <UniqueIdentifier>{a8ff84f9-ed02-4ee8-ab93-f32955e361e5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{fcc19ee9-0307-47e0-8809-9899786619fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="보간">
-      <UniqueIdentifier>{3e438b61-c67d-47f4-b242-9e7f258dbe05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cube">
-      <UniqueIdentifier>{d5849fde-b6d8-4924-a3e6-f3449f917484}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="loader">
-      <UniqueIdentifier>{73bd9d13-147d-4538-acc2-c2f67f0e265f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="loader\ObjLoader">
-      <UniqueIdentifier>{25f2c264-14ed-41b5-af1f-c10f021d4d3f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="loader\ASELoader">
-      <UniqueIdentifier>{ec42ffbd-689f-4d31-ae02-2c26f36c2447}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="loader\X-File">
-      <UniqueIdentifier>{8b2cddd6-51c6-4d5b-9bce-f1ed2f12cdd6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="camera">
-      <UniqueIdentifier>{d67c8e5a-3e2c-4107-8372-3968a12a9ee4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="gameobject">
-      <UniqueIdentifier>{b51b93f1-8100-47ea-a730-7b3cb131c3fb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="mapTool">
-      <UniqueIdentifier>{f8bb0234-2aeb-4ad3-b50c-dbff0bf4ddb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="gameManager">
-      <UniqueIdentifier>{e2fdb7ef-0d68-4ac4-9245-93fc455e4941}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit">
-      <UniqueIdentifier>{6a788913-1a4d-4c17-9a50-833930186b37}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="map">
-      <UniqueIdentifier>{e70e913d-589f-4e7e-9cf5-e747a38a60bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit\player">
-      <UniqueIdentifier>{d4495cf4-ecf9-4845-a23f-7ad6bcab71bd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit\enemyManager">
-      <UniqueIdentifier>{78ec5129-c109-429c-901d-83cbe51bda3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit\npc">
-      <UniqueIdentifier>{19c45618-3d57-4917-92ee-07354fe2c81b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit\enemyManager\boss">
-      <UniqueIdentifier>{1cd88a4f-b199-41f9-95b8-194920b42c1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit\enemyManager\쫄몹">
-      <UniqueIdentifier>{5dc6a2a5-18b6-4365-b085-d02c3a7740e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ITEM">
-      <UniqueIdentifier>{a01e7c6b-9dee-4720-abc5-8aec62eb61a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit\enemyManager\EnemyControl">
-      <UniqueIdentifier>{8f1a203d-4022-4515-81da-7db215986ab3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="shop">
-      <UniqueIdentifier>{786ca5c4-4454-4b31-a0b2-cacb7e66e446}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit\리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="OBB">
-      <UniqueIdentifier>{92a0a0d4-4f7d-4aa3-aaee-1e4f547f9cc0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit\enemyManager\boss\ragnaros">
-      <UniqueIdentifier>{d903471f-8937-4683-b51e-db86f47ae225}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="inventory">
-      <UniqueIdentifier>{5226ea2d-be00-489e-8bac-39a811f97004}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="unit\enemyManager\boss\arthas">
-      <UniqueIdentifier>{3fffb148-3708-4af2-a992-40b0088f59c7}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="cCamera.cpp">
+      <Filter>camera</Filter>
+    </ClCompile>
+    <ClCompile Include="cGameManager.cpp">
+      <Filter>gameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cCube.cpp">
+      <Filter>cube</Filter>
+    </ClCompile>
+    <ClCompile Include="cCubeNode.cpp">
+      <Filter>cube</Filter>
+    </ClCompile>
+    <ClCompile Include="cCubePTN.cpp">
+      <Filter>cube</Filter>
+    </ClCompile>
+    <ClCompile Include="cHeightMap.cpp">
+      <Filter>HeightMap</Filter>
+    </ClCompile>
+    <ClCompile Include="cCharacter.cpp">
+      <Filter>gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="cGameObject.cpp">
+      <Filter>gameobject</Filter>
+    </ClCompile>
+    <ClCompile Include="inventory.cpp">
+      <Filter>inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="cWeapon.cpp">
+      <Filter>ITEM</Filter>
+    </ClCompile>
+    <ClCompile Include="item_class.cpp">
+      <Filter>ITEM</Filter>
+    </ClCompile>
+    <ClCompile Include="cAseLoader.cpp">
+      <Filter>loader\ASELoader</Filter>
+    </ClCompile>
+    <ClCompile Include="cAseNode.cpp">
+      <Filter>loader\ASELoader</Filter>
+    </ClCompile>
+    <ClCompile Include="cGroup.cpp">
+      <Filter>loader\ObjLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="cMtlTex.cpp">
+      <Filter>loader\ObjLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjLoader.cpp">
+      <Filter>loader\ObjLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="cObjMap.cpp">
+      <Filter>loader\ObjLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="cAllocateHierarchy.cpp">
+      <Filter>loader\X-File</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkinnedMesh.cpp">
+      <Filter>loader\X-File</Filter>
+    </ClCompile>
+    <ClCompile Include="cDeviceManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cFontManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkinnedMeshManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cTextureManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cTimeManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="keyManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="cMap.cpp">
+      <Filter>map</Filter>
+    </ClCompile>
+    <ClCompile Include="cMaptool.cpp">
+      <Filter>mapTool</Filter>
+    </ClCompile>
+    <ClCompile Include="cOBB.cpp">
+      <Filter>OBB</Filter>
+    </ClCompile>
+    <ClCompile Include="cRay.cpp">
+      <Filter>Picking</Filter>
+    </ClCompile>
+    <ClCompile Include="item_loader.cpp">
+      <Filter>shop</Filter>
+    </ClCompile>
+    <ClCompile Include="shop_class.cpp">
+      <Filter>shop</Filter>
+    </ClCompile>
+    <ClCompile Include="shop_TEST_CLASS.cpp">
+      <Filter>shop</Filter>
+    </ClCompile>
+    <ClCompile Include="textparsing_class.cpp">
+      <Filter>shop</Filter>
+    </ClCompile>
+    <ClCompile Include="wordManager.cpp">
+      <Filter>shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Button_delegate.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIImage.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIObject.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cUIText.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DragAndDrob.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="cArthasPaticle.cpp">
+      <Filter>unit\enemyManager\boss\arthas</Filter>
+    </ClCompile>
+    <ClCompile Include="cBossAniController.cpp">
+      <Filter>unit\enemyManager\boss\arthas</Filter>
+    </ClCompile>
+    <ClCompile Include="cBossRagController.cpp">
+      <Filter>unit\enemyManager\boss\ragnaros</Filter>
+    </ClCompile>
+    <ClCompile Include="cBossSkill.cpp">
+      <Filter>unit\enemyManager\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemyControl.cpp">
+      <Filter>unit\enemyManager\EnemyControl</Filter>
+    </ClCompile>
+    <ClCompile Include="cArchDruid.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClCompile>
+    <ClCompile Include="cBoneSpider.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemyHitEffect.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClCompile>
+    <ClCompile Include="cLightningWorg.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClCompile>
+    <ClCompile Include="cMonsterParticle.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClCompile>
+    <ClCompile Include="cParticle.cpp">
+      <Filter>unit\enemyManager\쫄몹</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemyManager.cpp">
+      <Filter>unit\enemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemySkinnedMesh.cpp">
+      <Filter>unit\enemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="cNpc.cpp">
+      <Filter>unit\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="cNpc_AniController.cpp">
+      <Filter>unit\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="cNpcInfo.cpp">
+      <Filter>unit\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayer.cpp">
+      <Filter>unit\player</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayerAniController.cpp">
+      <Filter>unit\player</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayerInFo.cpp">
+      <Filter>unit\player</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayerSkill.cpp">
+      <Filter>unit\player</Filter>
+    </ClCompile>
+    <ClCompile Include="cPlayer_Enemy.cpp">
+      <Filter>unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cUnit.cpp">
+      <Filter>unit</Filter>
+    </ClCompile>
+    <ClCompile Include="cAction.cpp">
+      <Filter>보간</Filter>
+    </ClCompile>
+    <ClCompile Include="cActionBezier.cpp">
+      <Filter>보간</Filter>
+    </ClCompile>
+    <ClCompile Include="cActionLinear.cpp">
+      <Filter>보간</Filter>
+    </ClCompile>
+    <ClCompile Include="cActionRepeat.cpp">
+      <Filter>보간</Filter>
+    </ClCompile>
+    <ClCompile Include="cActionSeq.cpp">
+      <Filter>보간</Filter>
+    </ClCompile>
+    <ClCompile Include="cFrustum.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cGrid.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cMainGame.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cMainLoading.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cObject.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cQuadTree.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cScene1.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cSceneManager.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cStage1.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="D3D_base.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="iMap.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="loading.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cEnemyPicking.cpp">
+      <Filter>unit\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="cCamera.h">
+      <Filter>camera</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="D3D_base.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cMainGame.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cGrid.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cObjLoader.h">
-      <Filter>loader\ObjLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="cMtlTex.h">
-      <Filter>loader\ObjLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="cGroup.h">
-      <Filter>loader\ObjLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="cObjMap.h">
-      <Filter>loader\ObjLoader</Filter>
-    </ClInclude>
-    <ClInclude Include="iMap.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Asciitok.h">
-      <Filter>loader\ASELoader</Filter>
-    </ClInclude>
-    <ClInclude Include="cAseLoader.h">
-      <Filter>loader\ASELoader</Filter>
-    </ClInclude>
-    <ClInclude Include="cAseNode.h">
-      <Filter>loader\ASELoader</Filter>
-    </ClInclude>
-    <ClInclude Include="cHeightMap.h">
-      <Filter>HeightMap</Filter>
-    </ClInclude>
-    <ClInclude Include="cRay.h">
-      <Filter>Picking</Filter>
-    </ClInclude>
-    <ClInclude Include="cObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIObject.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIImage.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIText.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="cAllocateHierarchy.h">
-      <Filter>loader\X-File</Filter>
-    </ClInclude>
-    <ClInclude Include="cSkinnedMesh.h">
-      <Filter>loader\X-File</Filter>
-    </ClInclude>
-    <ClInclude Include="cTimeManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="cTextureManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="cFontManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="cDeviceManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="cUIButton.h">
-      <Filter>UI</Filter>
-    </ClInclude>
-    <ClInclude Include="cAction.h">
-      <Filter>보간</Filter>
-    </ClInclude>
-    <ClInclude Include="cActionSeq.h">
-      <Filter>보간</Filter>
-    </ClInclude>
-    <ClInclude Include="cActionRepeat.h">
-      <Filter>보간</Filter>
-    </ClInclude>
-    <ClInclude Include="cActionLinear.h">
-      <Filter>보간</Filter>
-    </ClInclude>
-    <ClInclude Include="cActionBezier.h">
-      <Filter>보간</Filter>
+    <ClInclude Include="cGameManager.h">
+      <Filter>gameManager</Filter>
     </ClInclude>
     <ClInclude Include="cCube.h">
       <Filter>cube</Filter>
@@ -204,59 +261,80 @@
     <ClInclude Include="cCubePTN.h">
       <Filter>cube</Filter>
     </ClInclude>
-    <ClInclude Include="cCamera.h">
-      <Filter>camera</Filter>
-    </ClInclude>
-    <ClInclude Include="cGameObject.h">
-      <Filter>gameobject</Filter>
+    <ClInclude Include="cHeightMap.h">
+      <Filter>HeightMap</Filter>
     </ClInclude>
     <ClInclude Include="cCharacter.h">
       <Filter>gameobject</Filter>
     </ClInclude>
-    <ClInclude Include="keyManager.h">
-      <Filter>Manager</Filter>
+    <ClInclude Include="cGameObject.h">
+      <Filter>gameobject</Filter>
     </ClInclude>
-    <ClInclude Include="cMaptool.h">
-      <Filter>mapTool</Filter>
-    </ClInclude>
-    <ClInclude Include="cGameManager.h">
-      <Filter>gameManager</Filter>
-    </ClInclude>
-    <ClInclude Include="cUnit.h">
-      <Filter>unit</Filter>
-    </ClInclude>
-    <ClInclude Include="cMap.h">
-      <Filter>map</Filter>
-    </ClInclude>
-    <ClInclude Include="cPlayer.h">
-      <Filter>unit\player</Filter>
-    </ClInclude>
-    <ClInclude Include="cNpc.h">
-      <Filter>unit\npc</Filter>
-    </ClInclude>
-    <ClInclude Include="cPlayerAniController.h">
-      <Filter>unit\player</Filter>
-    </ClInclude>
-    <ClInclude Include="cPlayerSkill.h">
-      <Filter>unit\player</Filter>
-    </ClInclude>
-    <ClInclude Include="cBossSkill.h">
-      <Filter>unit\enemyManager\boss</Filter>
+    <ClInclude Include="inventory.h">
+      <Filter>inventory</Filter>
     </ClInclude>
     <ClInclude Include="cWeapon.h">
       <Filter>ITEM</Filter>
     </ClInclude>
-    <ClInclude Include="cBoneSpider.h">
-      <Filter>unit\enemyManager\쫄몹</Filter>
+    <ClInclude Include="item_class.h">
+      <Filter>ITEM</Filter>
     </ClInclude>
-    <ClInclude Include="cEnemyManager.h">
-      <Filter>unit\enemyManager</Filter>
+    <ClInclude Include="Asciitok.h">
+      <Filter>loader\ASELoader</Filter>
     </ClInclude>
-    <ClInclude Include="cEnemySkinnedMesh.h">
-      <Filter>unit\enemyManager</Filter>
+    <ClInclude Include="cAseLoader.h">
+      <Filter>loader\ASELoader</Filter>
     </ClInclude>
-    <ClInclude Include="cEnemyControl.h">
-      <Filter>unit\enemyManager\EnemyControl</Filter>
+    <ClInclude Include="cAseNode.h">
+      <Filter>loader\ASELoader</Filter>
+    </ClInclude>
+    <ClInclude Include="cGroup.h">
+      <Filter>loader\ObjLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="cMtlTex.h">
+      <Filter>loader\ObjLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjLoader.h">
+      <Filter>loader\ObjLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="cObjMap.h">
+      <Filter>loader\ObjLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="cAllocateHierarchy.h">
+      <Filter>loader\X-File</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkinnedMesh.h">
+      <Filter>loader\X-File</Filter>
+    </ClInclude>
+    <ClInclude Include="cDeviceManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cFontManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkinnedMeshManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cTextureManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cTimeManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="keyManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="cMap.h">
+      <Filter>map</Filter>
+    </ClInclude>
+    <ClInclude Include="cMaptool.h">
+      <Filter>mapTool</Filter>
+    </ClInclude>
+    <ClInclude Include="cOBB.h">
+      <Filter>OBB</Filter>
+    </ClInclude>
+    <ClInclude Include="cRay.h">
+      <Filter>Picking</Filter>
     </ClInclude>
     <ClInclude Include="item_loader.h">
       <Filter>shop</Filter>
@@ -273,62 +351,47 @@
     <ClInclude Include="wordManager.h">
       <Filter>shop</Filter>
     </ClInclude>
-    <ClInclude Include="cSkinnedMeshManager.h">
-      <Filter>Manager</Filter>
+    <ClInclude Include="Button_delegate.h">
+      <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="cPlayer_Enemy.h">
-      <Filter>unit</Filter>
+    <ClInclude Include="cUIButton.h">
+      <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="cPlayerInFo.h">
-      <Filter>unit\player</Filter>
+    <ClInclude Include="cUIImage.h">
+      <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="cOBB.h">
-      <Filter>OBB</Filter>
+    <ClInclude Include="cUIObject.h">
+      <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="cStage1.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cFrustum.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cQuadTree.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="cUIText.h">
+      <Filter>UI</Filter>
     </ClInclude>
     <ClInclude Include="DragAndDrob.h">
       <Filter>UI</Filter>
     </ClInclude>
-    <ClInclude Include="Button_delegate.h">
-      <Filter>UI</Filter>
+    <ClInclude Include="cArthasPaticle.h">
+      <Filter>unit\enemyManager\boss\arthas</Filter>
     </ClInclude>
-    <ClInclude Include="cArchDruid.h">
-      <Filter>unit\enemyManager\쫄몹</Filter>
+    <ClInclude Include="cBossAniController.h">
+      <Filter>unit\enemyManager\boss\arthas</Filter>
     </ClInclude>
     <ClInclude Include="cBossRagController.h">
       <Filter>unit\enemyManager\boss\ragnaros</Filter>
     </ClInclude>
-    <ClInclude Include="cNpc_AniController.h">
-      <Filter>unit\npc</Filter>
+    <ClInclude Include="cBossSkill.h">
+      <Filter>unit\enemyManager\boss</Filter>
     </ClInclude>
-    <ClInclude Include="cNpcInfo.h">
-      <Filter>unit\npc</Filter>
+    <ClInclude Include="cEnemyControl.h">
+      <Filter>unit\enemyManager\EnemyControl</Filter>
     </ClInclude>
-    <ClInclude Include="inventory.h">
-      <Filter>inventory</Filter>
+    <ClInclude Include="cArchDruid.h">
+      <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
-    <ClInclude Include="loading.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="cBoneSpider.h">
+      <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
-    <ClInclude Include="cSceneManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cMainLoading.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="cScene1.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="item_class.h">
-      <Filter>ITEM</Filter>
+    <ClInclude Include="cEnemyHitEffect.h">
+      <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
     <ClInclude Include="cLightningWorg.h">
       <Filter>unit\enemyManager\쫄몹</Filter>
@@ -339,282 +402,212 @@
     <ClInclude Include="cParticle.h">
       <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
-    <ClInclude Include="cBossAniController.h">
-      <Filter>unit\enemyManager\boss\arthas</Filter>
+    <ClInclude Include="cEnemyManager.h">
+      <Filter>unit\enemyManager</Filter>
     </ClInclude>
-    <ClInclude Include="cEnemyHitEffect.h">
-      <Filter>unit\enemyManager\쫄몹</Filter>
+    <ClInclude Include="cEnemySkinnedMesh.h">
+      <Filter>unit\enemyManager</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="cArthasPaticle.h">
-      <Filter>unit\enemyManager\boss\arthas</Filter>
-=======
+    <ClInclude Include="cNpc.h">
+      <Filter>unit\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="cNpc_AniController.h">
+      <Filter>unit\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="cNpcInfo.h">
+      <Filter>unit\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayer.h">
+      <Filter>unit\player</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayerAniController.h">
+      <Filter>unit\player</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayerInFo.h">
+      <Filter>unit\player</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayerSkill.h">
+      <Filter>unit\player</Filter>
+    </ClInclude>
+    <ClInclude Include="cPlayer_Enemy.h">
+      <Filter>unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cUnit.h">
+      <Filter>unit</Filter>
+    </ClInclude>
+    <ClInclude Include="cActionSeq.h">
+      <Filter>보간</Filter>
+    </ClInclude>
+    <ClInclude Include="cAction.h">
+      <Filter>보간</Filter>
+    </ClInclude>
+    <ClInclude Include="cActionBezier.h">
+      <Filter>보간</Filter>
+    </ClInclude>
+    <ClInclude Include="cActionLinear.h">
+      <Filter>보간</Filter>
+    </ClInclude>
+    <ClInclude Include="cActionRepeat.h">
+      <Filter>보간</Filter>
+    </ClInclude>
+    <ClInclude Include="cFrustum.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cGrid.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cMainGame.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cMainLoading.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cObject.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cQuadTree.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cScene1.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cSceneManager.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cStage1.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="D3D_base.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="iMap.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="loading.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
     <ClInclude Include="cEnemyPicking.h">
       <Filter>unit\player</Filter>
->>>>>>> e46814df4a297aacb26cf85753cb1b1d29878a3b
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="D3D_base.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cMainGame.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cGrid.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cObjLoader.cpp">
-      <Filter>loader\ObjLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="cMtlTex.cpp">
-      <Filter>loader\ObjLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="cGroup.cpp">
-      <Filter>loader\ObjLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="cObjMap.cpp">
-      <Filter>loader\ObjLoader</Filter>
-    </ClCompile>
-    <ClCompile Include="cAseLoader.cpp">
-      <Filter>loader\ASELoader</Filter>
-    </ClCompile>
-    <ClCompile Include="cAseNode.cpp">
-      <Filter>loader\ASELoader</Filter>
-    </ClCompile>
-    <ClCompile Include="cHeightMap.cpp">
-      <Filter>HeightMap</Filter>
-    </ClCompile>
-    <ClCompile Include="cRay.cpp">
-      <Filter>Picking</Filter>
-    </ClCompile>
-    <ClCompile Include="cObject.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIObject.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIImage.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIText.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="cAllocateHierarchy.cpp">
-      <Filter>loader\X-File</Filter>
-    </ClCompile>
-    <ClCompile Include="cSkinnedMesh.cpp">
-      <Filter>loader\X-File</Filter>
-    </ClCompile>
-    <ClCompile Include="cDeviceManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="cFontManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="cTextureManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="cTimeManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="cUIButton.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="cActionBezier.cpp">
-      <Filter>보간</Filter>
-    </ClCompile>
-    <ClCompile Include="cAction.cpp">
-      <Filter>보간</Filter>
-    </ClCompile>
-    <ClCompile Include="cActionLinear.cpp">
-      <Filter>보간</Filter>
-    </ClCompile>
-    <ClCompile Include="cActionSeq.cpp">
-      <Filter>보간</Filter>
-    </ClCompile>
-    <ClCompile Include="cActionRepeat.cpp">
-      <Filter>보간</Filter>
-    </ClCompile>
-    <ClCompile Include="cCube.cpp">
-      <Filter>cube</Filter>
-    </ClCompile>
-    <ClCompile Include="cCubeNode.cpp">
-      <Filter>cube</Filter>
-    </ClCompile>
-    <ClCompile Include="cCubePTN.cpp">
-      <Filter>cube</Filter>
-    </ClCompile>
-    <ClCompile Include="cCamera.cpp">
-      <Filter>camera</Filter>
-    </ClCompile>
-    <ClCompile Include="cGameObject.cpp">
-      <Filter>gameobject</Filter>
-    </ClCompile>
-    <ClCompile Include="cCharacter.cpp">
-      <Filter>gameobject</Filter>
-    </ClCompile>
-    <ClCompile Include="keyManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="cMaptool.cpp">
-      <Filter>mapTool</Filter>
-    </ClCompile>
-    <ClCompile Include="cGameManager.cpp">
-      <Filter>gameManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cUnit.cpp">
-      <Filter>unit</Filter>
-    </ClCompile>
-    <ClCompile Include="cMap.cpp">
-      <Filter>map</Filter>
-    </ClCompile>
-    <ClCompile Include="cPlayer.cpp">
-      <Filter>unit\player</Filter>
-    </ClCompile>
-    <ClCompile Include="cNpc.cpp">
-      <Filter>unit\npc</Filter>
-    </ClCompile>
-    <ClCompile Include="cPlayerSkill.cpp">
-      <Filter>unit\player</Filter>
-    </ClCompile>
-    <ClCompile Include="cPlayerAniController.cpp">
-      <Filter>unit\player</Filter>
-    </ClCompile>
-    <ClCompile Include="cBossSkill.cpp">
-      <Filter>unit\enemyManager\boss</Filter>
-    </ClCompile>
-    <ClCompile Include="cWeapon.cpp">
-      <Filter>ITEM</Filter>
-    </ClCompile>
-    <ClCompile Include="cBoneSpider.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClCompile>
-    <ClCompile Include="cEnemyManager.cpp">
-      <Filter>unit\enemyManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cEnemySkinnedMesh.cpp">
-      <Filter>unit\enemyManager</Filter>
-    </ClCompile>
-    <ClCompile Include="cEnemyControl.cpp">
-      <Filter>unit\enemyManager\EnemyControl</Filter>
-    </ClCompile>
-    <ClCompile Include="item_loader.cpp">
-      <Filter>shop</Filter>
-    </ClCompile>
-    <ClCompile Include="shop_class.cpp">
-      <Filter>shop</Filter>
-    </ClCompile>
-    <ClCompile Include="shop_TEST_CLASS.cpp">
-      <Filter>shop</Filter>
-    </ClCompile>
-    <ClCompile Include="wordManager.cpp">
-      <Filter>shop</Filter>
-    </ClCompile>
-    <ClCompile Include="textparsing_class.cpp">
-      <Filter>shop</Filter>
-    </ClCompile>
-    <ClCompile Include="cSkinnedMeshManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="cPlayer_Enemy.cpp">
-      <Filter>unit</Filter>
-    </ClCompile>
-    <ClCompile Include="cPlayerInFo.cpp">
-      <Filter>unit\player</Filter>
-    </ClCompile>
-    <ClCompile Include="cOBB.cpp">
-      <Filter>OBB</Filter>
-    </ClCompile>
-    <ClCompile Include="cStage1.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cFrustum.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cQuadTree.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="iMap.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Button_delegate.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="DragAndDrob.cpp">
-      <Filter>UI</Filter>
-    </ClCompile>
-    <ClCompile Include="cArchDruid.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClCompile>
-    <ClCompile Include="cBossRagController.cpp">
-      <Filter>unit\enemyManager\boss\ragnaros</Filter>
-    </ClCompile>
-    <ClCompile Include="cNpc_AniController.cpp">
-      <Filter>unit\npc</Filter>
-    </ClCompile>
-    <ClCompile Include="cNpcInfo.cpp">
-      <Filter>unit\npc</Filter>
-    </ClCompile>
-    <ClCompile Include="inventory.cpp">
-      <Filter>inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="loading.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cSceneManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cMainLoading.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="cScene1.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="item_class.cpp">
-      <Filter>ITEM</Filter>
-    </ClCompile>
-    <ClCompile Include="cLightningWorg.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClCompile>
-    <ClCompile Include="cMonsterParticle.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClCompile>
-    <ClCompile Include="cParticle.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClCompile>
-    <ClCompile Include="cBossAniController.cpp">
-      <Filter>unit\enemyManager\boss\arthas</Filter>
-    </ClCompile>
-    <ClCompile Include="cEnemyHitEffect.cpp">
-      <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="cArthasPaticle.cpp">
-      <Filter>unit\enemyManager\boss\arthas</Filter>
-=======
-    <ClCompile Include="cEnemyPicking.cpp">
-      <Filter>unit\player</Filter>
->>>>>>> e46814df4a297aacb26cf85753cb1b1d29878a3b
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="D3D_base.rc">
-      <Filter>unit\리소스 파일</Filter>
-    </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="small.ico">
-      <Filter>unit\리소스 파일</Filter>
-    </Image>
     <Image Include="D3D_base.ico">
-      <Filter>unit\리소스 파일</Filter>
+      <Filter>unit\리소스파일</Filter>
+    </Image>
+    <Image Include="small.ico">
+      <Filter>unit\리소스파일</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="camera">
+      <UniqueIdentifier>{2ad1811b-389c-4746-95af-b2babe03ae1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="cube">
+      <UniqueIdentifier>{b27492db-0c70-44ed-90c1-da6671243da4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameManager">
+      <UniqueIdentifier>{e58dc7c9-386c-4e2e-bc9e-eeba25330cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="gameobject">
+      <UniqueIdentifier>{349e64db-38b8-46b6-942c-d363ec4d245e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeightMap">
+      <UniqueIdentifier>{d4ab6dd8-7fc0-4e84-8220-a7ad9316ba72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inventory">
+      <UniqueIdentifier>{9547c0c3-8dea-4fce-9481-8378dd11a4fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ITEM">
+      <UniqueIdentifier>{43b141ab-38e6-4ffa-859b-73d141711607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loader">
+      <UniqueIdentifier>{3fd7483b-0adb-4458-ad89-78ef9f2d92a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loader\ASELoader">
+      <UniqueIdentifier>{c3ebfe5b-b549-4a9a-a0a0-e91041b5ad2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loader\X-File">
+      <UniqueIdentifier>{74357972-677c-4a0b-9e6c-278f6804562b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loader\ObjLoader">
+      <UniqueIdentifier>{78d6b4b2-1f98-476d-9190-d7eb071db323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{cba3975f-dedf-4a99-9120-e99150f2ed9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="map">
+      <UniqueIdentifier>{0dae73ad-ef28-487c-91fc-d85edadcf5a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="mapTool">
+      <UniqueIdentifier>{418de7ad-feca-4775-a701-4ebc141121f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OBB">
+      <UniqueIdentifier>{2cf1c2b1-2038-47ee-9b6e-85057126a5df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Picking">
+      <UniqueIdentifier>{33f3a28f-20e8-4304-85d1-0b7390dc194c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="shop">
+      <UniqueIdentifier>{15d3e9ac-081e-4e9b-ad0a-3e1bc95f6935}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{257bfa07-04da-410c-9a4f-2a8d8f26d35d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit">
+      <UniqueIdentifier>{afbf269b-f680-4177-9b5c-664ada8fb2ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\enemyManager">
+      <UniqueIdentifier>{5b1690d9-9ca4-4fa7-9f1e-b023e050b316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\enemyManager\boss">
+      <UniqueIdentifier>{587760f1-c636-44af-b1f7-dc18d0e6d2c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\enemyManager\boss\arthas">
+      <UniqueIdentifier>{96b4859c-4a9a-4715-94ed-bc0c0cd2059a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\enemyManager\boss\ragnaros">
+      <UniqueIdentifier>{3665a5b8-64d7-4473-97e3-02bbbe39e38f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\enemyManager\EnemyControl">
+      <UniqueIdentifier>{db187d5a-614c-4409-8296-a3cce0b18232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\enemyManager\쫄몹">
+      <UniqueIdentifier>{d7f9bf5b-7858-45ac-b92f-39c6353aa3c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\npc">
+      <UniqueIdentifier>{0724102b-94f0-4bf5-900a-2c7c3e045b11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\player">
+      <UniqueIdentifier>{e715b4da-789f-4cbe-b4c7-a09bb5dde823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unit\리소스파일">
+      <UniqueIdentifier>{d119936a-7823-4811-a72c-f23b56ae2732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="보간">
+      <UniqueIdentifier>{4a68964b-d064-4f1f-91f3-6a5075a97c28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스파일">
+      <UniqueIdentifier>{19ed0a08-cf1a-4a34-9489-eba5ddc88ed9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더파일">
+      <UniqueIdentifier>{8925a6bd-cd39-4020-80c5-f26e76ae4e98}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D3D_base.rc">
+      <Filter>unit\리소스파일</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

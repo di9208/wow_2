@@ -1,11 +1,10 @@
 #pragma once
 #include "cEnemyManager.h"
-<<<<<<< HEAD
+
 #include "cParticle.h"
 #include "cArthasPaticle.h"
-=======
+
 #include "cUnit.h"
->>>>>>> e46814df4a297aacb26cf85753cb1b1d29878a3b
 
 class cBoneSpider;
 class cArchDruid;
@@ -70,13 +69,8 @@ private:
 
 private:
 	SYNTHESIZE(std::vector<stBoss>, m_vecBoss, vecBoss);
-<<<<<<< HEAD
-	
-=======
 
-
-	stBoss				stBoss;
->>>>>>> e46814df4a297aacb26cf85753cb1b1d29878a3b
+	stBoss				stBoss1;
 	D3DXMATRIXA16		matR;
 	//======================================================
 	SYNTHESIZE(std::vector<stBoss_rag>, m_vecBoss_rag, vecBoss_rag);
