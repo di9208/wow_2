@@ -10,6 +10,9 @@ cArchDruid::cArchDruid()
 , m_pFont(NULL)
 , m_pSprite(NULL)
 {
+	g_pSoundManager->Setup();
+	g_pSoundManager->addSound("DruidBomb", "sound/monster/archdruide/treebomb.mp3", true, false);
+
 	D3DXMatrixIdentity(&matWorld);
 	m_pSkillOn = false;
 	nCount = 0;
@@ -177,11 +180,6 @@ void cArchDruid::HarmDamage(int Damage, size_t i){
 
 //거미 상태
 void cArchDruid::MonsterStatus(size_t i){
-	//Z키를 누르면 체력 달게 함
-	if (g_pKeyManager->isOnceKeyDown('Z')) {
-		HarmDamage(205, 0);
-	}
-
 	switch (m_vecSkinnedMesh[i].ENUM_MONSTER)
 	{
 	case MONSTER_STAND:
@@ -362,7 +360,7 @@ void cArchDruid::MonsterAI(size_t i){
 	}
 
 	//적이 인식범위 밖으로 빠져나갔다면 행동을 멈춘다.
-	if (m_vecSkinnedMesh[i].distance > m_vecSkinnedMesh[i].MaxRange){
+	if (m_vecSkinnedMesh[i].distance > m_vecSkinnedMesh[i].MaxRange && m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_DEATH){
 		srand(time(NULL));
 
 		D3DXVECTOR3 vDir, m_vDir, vCenter;
@@ -413,6 +411,7 @@ void cArchDruid::MonsterAI(size_t i){
 		//m_rangeCheck가 false여야 공격을 함
 		//어택타임이 차면 공격하도록 함
 		if (m_vecSkinnedMesh[i].attackTime < 85){
+			//if (m_vecSkinnedMesh[i].attackTime < 3) g_pSoundManager->play("DruidBomb", 1.0f);
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_ATTACK;
 			//적의 방향을 보기 위한 코드
 			D3DXVECTOR3 vDir = m_vPlayerPos - pos[i];
@@ -470,8 +469,12 @@ void cArchDruid::MonsterAI(size_t i){
 	fEnemyRange = D3DXVec3Length(&EnemyRange);
 
 	//몬스터와 몬스터의 공격(스피어)의 거리가 멀어지거나, 플레이어와 몬스터의 공격이 충돌하면 스피어 삭제
-	if (m_vecSkinnedMesh[i].m_rangeDistance <= 1.1f ||
-		fEnemyRange > 20) {
+	if (m_vecSkinnedMesh[i].m_rangeDistance <= 1.1f){
+		m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked = false;
+		m_vecSkinnedMesh[i].m_rangeCheck = false;
+	}
+	if (fEnemyRange > 20) {
+		//g_pSoundManager->play("DruidBomb", 1.0f);
 		m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked = false;
 		m_vecSkinnedMesh[i].m_rangeCheck = false;
 	}

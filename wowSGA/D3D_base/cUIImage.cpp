@@ -24,7 +24,7 @@ void cUIImage::SetTexture(IN char * szFullPath)
 	m_stSize.nHeight = stImageInfo.Height;
 }
 
-void cUIImage::SetTexture(IN char * keyname, IN char * szFullPath)
+void cUIImage::SetTexture(IN std ::string keyname, IN char * szFullPath)
 {
 	D3DXIMAGE_INFO stImageInfo;
 	ZeroMemory(&stImageInfo, sizeof(D3DXIMAGE_INFO));
