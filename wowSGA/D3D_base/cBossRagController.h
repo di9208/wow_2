@@ -1,6 +1,7 @@
 #pragma once
 #include "cUnit.h"
 class cSkinnedMesh;
+class cOBB;
 class cParticle;
 
 class cBossRagController
@@ -10,6 +11,7 @@ class cBossRagController
 	cSkinnedMesh*			m_pSkinnedMesh_rag_skill2;
 
 	E_BOSS_RAG_STATE		cBoss_rag_state;
+	SYNTHESIZE(cOBB*, m_pBossRagOBB, RagOBB);
 
 private:
 	SYNTHESIZE(float, m_fBossRotY, fBossRotY);
@@ -18,6 +20,7 @@ private:
 	SYNTHESIZE_REF(D3DXMATRIXA16, m_world, World);
 	D3DXVECTOR3	m_vBossDirX;
 
+	D3DXMATRIXA16 m_obbw;
 public:
 
 	cBossRagController();

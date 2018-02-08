@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "cBossRagController.h"
 #include "cSkinnedMesh.h"
+#include "cOBB.h"
 
 cBossRagController::cBossRagController()
 	: m_pSkinnedMesh_rag(NULL)
@@ -11,6 +12,7 @@ cBossRagController::cBossRagController()
 	, m_vBossPos(5,0,0)
 	, m_pSkinnedMesh_rag_skill1(NULL)
 	, m_pSkinnedMesh_rag_skill2(NULL)
+	, m_pBossRagOBB(NULL)
 {
 }
 
@@ -20,6 +22,7 @@ cBossRagController::~cBossRagController()
 	SAFE_DELETE(m_pSkinnedMesh_rag);
 	SAFE_DELETE(m_pSkinnedMesh_rag_skill1);
 	SAFE_DELETE(m_pSkinnedMesh_rag_skill2);
+	SAFE_DELETE(m_pBossRagOBB);
 }
 
 void cBossRagController::SetUp()
@@ -34,6 +37,17 @@ void cBossRagController::SetUp()
 	g_pSkinnedMeshManager->Setup("스킬2", "Monster/boss/ragnaros", "ragSkill2.x");
 	m_pSkinnedMesh_rag_skill2 = g_pSkinnedMeshManager->Find("스킬2");
 	m_pSkinnedMesh_rag_skill2->Play("rag2");
+
+
+	D3DXMATRIXA16 matR, matS, matT, World;
+	D3DXMatrixScaling(&matS, 0.0035f, 0.0035f, 0.0035f);
+	D3DXMatrixTranslation(&matT, -2.8f, 0, 4.5f);
+	D3DXMatrixRotationX(&matR, D3DX_PI / 2.3f);
+
+	World = matS * matR * matT;
+
+	m_pBossRagOBB = new cOBB();
+	m_pBossRagOBB->Setup(m_pSkinnedMesh_rag, &World);
 }
 
 void cBossRagController::Update(E_BOSS_RAG_STATE * pStateRag)
@@ -43,6 +57,9 @@ void cBossRagController::Update(E_BOSS_RAG_STATE * pStateRag)
 
 	if (m_pSkinnedMesh_rag_skill1) m_pSkinnedMesh_rag_skill1->Update();
 	if (m_pSkinnedMesh_rag_skill2) m_pSkinnedMesh_rag_skill2->Update();
+
+	if (m_pBossRagOBB)
+		m_pBossRagOBB->Update(&m_obbw);
 
 	if (m_pSkinnedMesh_rag->GetCheck() && *pStateRag != E_BOSS_RAG_DEATH)
 	{
@@ -74,11 +91,15 @@ void cBossRagController::Render(D3DXMATRIXA16 * m_world)
 	D3DXMatrixTranspose(&matR2, &matR2);
 
 	World2 = matS2 * matR2 * matT2;
+	//D3DXMatrixTranspose(&matR2, &matR2);
+	m_obbw = matR2 *matT2;
 	if (m_pSkinnedMesh_rag)
 		m_pSkinnedMesh_rag->Render(NULL, &World2);
 
 	if (m_pSkinnedMesh_rag_skill1) skillRender();
 	if (m_pSkinnedMesh_rag_skill2) skillRender2();
+
+	m_pBossRagOBB->Render_Debug(D3DCOLOR_XRGB(192, 0, 0), nullptr, nullptr);
 }
 
 void cBossRagController::SetAnimation(E_BOSS_RAG_STATE * pStateRag)
@@ -109,7 +130,7 @@ void cBossRagController::SetAnimation(E_BOSS_RAG_STATE * pStateRag)
 				m_pSkinnedMesh_rag->PlayOneShot("MERGE", 0.3f, 0.3f);
 				break;
 			default:
-				m_pSkinnedMesh_rag->Play("STAND", 0.3f);
+				//m_pSkinnedMesh_rag->Play("STAND", 0.3f);
 				break;
 			}
 		}

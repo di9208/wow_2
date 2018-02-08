@@ -40,7 +40,7 @@ void cBossAniController::SetUp()
 
 	D3DXMATRIXA16 matT;
 	D3DXMatrixIdentity(&matT);
-	D3DXMatrixTranslation(&matT, -3, 0, -17);
+	//D3DXMatrixTranslation(&matT, -3, 0, -17);
 	D3DXMATRIXA16 matR, matS, World;
 	D3DXMatrixScaling(&matS, 0.02f, 0.02f, 0.02f);
 
@@ -62,6 +62,7 @@ void cBossAniController::Update(E_BOSS_STATE* pState)
 
 	if (m_pBossOBB)
 		m_pBossOBB->Update(&m_obbw);
+
 	if (m_pSkinnedMesh->GetCheck() && *pState != E_BOSS_DEATH)
 	{
 		(*pState) = E_BOSS_STAND;

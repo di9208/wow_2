@@ -197,6 +197,7 @@
     <ClInclude Include="cPlayerSkill.h" />
     <ClInclude Include="cPlayer_Enemy.h" />
     <ClInclude Include="cQuadTree.h" />
+    <ClInclude Include="cRagPaticle.h" />
     <ClInclude Include="cRay.h" />
     <ClInclude Include="cScene1.h" />
     <ClInclude Include="cSceneManager.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="cPlayerSkill.cpp" />
     <ClCompile Include="cPlayer_Enemy.cpp" />
     <ClCompile Include="cQuadTree.cpp" />
+    <ClCompile Include="cRagPaticle.cpp" />
     <ClCompile Include="cRay.cpp" />
     <ClCompile Include="cScene1.cpp" />
     <ClCompile Include="cSceneManager.cpp" />

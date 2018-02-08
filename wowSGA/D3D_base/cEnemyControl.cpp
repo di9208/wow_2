@@ -346,23 +346,11 @@ void cEnemyControl::BossUpdate()
 				nCount = 0;
 			}
 		}
-		/*if (m_vecBoss_rag[0].e_boss_rag_state == E_BOSS_RAG_SPELL)
-		{
-		nCount++;
-		if (nCount > 7)
-		{
-		nMonsterX = rand() % 15;
-		nMonsterY = rand() % 15;
-		m_pGuardFel->addMonster(nMonsterX, 0, nMonsterY);
-		nCount = 0;
-		}
-		}*/
 		if (m_vecBoss[0].e_boss_state == E_BOSS_SPELL1)
 		{
 			m_pBossAniController->Skill();
 		}
 	}
-
 
 	BossPlayerCheck();
 
@@ -381,6 +369,7 @@ void cEnemyControl::BossUpdate()
 	{
 		m_vecBoss_rag[0].stat.HP = m_vecBoss_rag[0].stat.HP - 500;
 	}
+
 	if (g_pKeyManager->isStayKeyDown(VK_F11))
 	{
 		m_vecBoss[0].stat.HP -= 10;
@@ -395,7 +384,7 @@ void cEnemyControl::BossUpdate()
 	{
 		m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_DEATH;
 	}
-	if (a == 50)
+	if (m_vecBoss[0].e_boss_state == E_BOSS_DEATH&& a <= 50)
 	{
 		m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_START;
 	}

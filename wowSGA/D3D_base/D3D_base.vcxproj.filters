@@ -244,6 +244,9 @@
     <ClCompile Include="cEnemyPicking.cpp">
       <Filter>unit\player</Filter>
     </ClCompile>
+    <ClCompile Include="cRagPaticle.cpp">
+      <Filter>unit\enemyManager\boss\ragnaros</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cCamera.h">
@@ -497,6 +500,9 @@
     </ClInclude>
     <ClInclude Include="cEnemyPicking.h">
       <Filter>unit\player</Filter>
+    </ClInclude>
+    <ClInclude Include="cRagPaticle.h">
+      <Filter>unit\enemyManager\boss\ragnaros</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
