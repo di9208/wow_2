@@ -339,9 +339,6 @@
     <ClInclude Include="cParticle.h">
       <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
-    <ClInclude Include="cArthasPaticle.h">
-      <Filter>unit\enemyManager\boss\arthas</Filter>
-    </ClInclude>
     <ClInclude Include="cBossAniController.h">
       <Filter>unit\enemyManager\boss\arthas</Filter>
     </ClInclude>
@@ -580,9 +577,6 @@
     </ClCompile>
     <ClCompile Include="cParticle.cpp">
       <Filter>unit\enemyManager\쫄몹</Filter>
-    </ClCompile>
-    <ClCompile Include="cArthasPaticle.cpp">
-      <Filter>unit\enemyManager\boss\arthas</Filter>
     </ClCompile>
     <ClCompile Include="cBossAniController.cpp">
       <Filter>unit\enemyManager\boss\arthas</Filter>

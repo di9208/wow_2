@@ -1,10 +1,13 @@
 #pragma once
 #include "cUnit.h"
 class cSkinnedMesh;
+class cParticle;
 
 class cBossRagController
 {
 	cSkinnedMesh*			m_pSkinnedMesh_rag;
+	cSkinnedMesh*			m_pSkinnedMesh_rag_skill1;
+	cSkinnedMesh*			m_pSkinnedMesh_rag_skill2;
 
 	E_BOSS_RAG_STATE		cBoss_rag_state;
 
@@ -26,6 +29,7 @@ public:
 
 	void SetAnimation(E_BOSS_RAG_STATE* pStateRag);
 
-
+	void skillRender();
+	void skillRender2();
 };
 
