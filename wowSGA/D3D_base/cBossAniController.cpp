@@ -2,6 +2,7 @@
 #include "cBossAniController.h"
 #include "cSkinnedMesh.h"
 #include "cOBB.h"
+#include "cParticle.h"
 
 cBossAniController::cBossAniController()
 	: m_pSkinnedMesh(NULL)
@@ -13,6 +14,7 @@ cBossAniController::cBossAniController()
 	, m_pSkinnedMeshSkill(NULL)
 	, m_bSKill(false)
 	, m_pBossOBB(NULL)
+	, m_pSkinnedMeshSkill2(NULL)
 {
 }
 
@@ -20,6 +22,7 @@ cBossAniController::~cBossAniController()
 {
 	SAFE_DELETE(m_pSkinnedMesh);
 	SAFE_DELETE(m_pSkinnedMeshSkill);
+	SAFE_DELETE(m_pSkinnedMeshSkill2);
 	SAFE_DELETE(m_pBossOBB);
 }
 
@@ -30,6 +33,10 @@ void cBossAniController::SetUp()
 	
 	g_pSkinnedMeshManager->Setup("스킬", "Monster/boss/Arthaslichking", "skill.x");
 	m_pSkinnedMeshSkill = g_pSkinnedMeshManager->Find("스킬");
+
+	g_pSkinnedMeshManager->Setup("아이스노바", "Monster/boss/Arthaslichking", "icenova.x");
+	m_pSkinnedMeshSkill2 = g_pSkinnedMeshManager->Find("아이스노바");
+
 
 	D3DXMATRIXA16 matT;
 	D3DXMatrixIdentity(&matT);
@@ -43,14 +50,16 @@ void cBossAniController::SetUp()
 
 	m_pBossOBB = new cOBB();
 	m_pBossOBB->Setup(m_pSkinnedMesh, &World);
-
+	m_pSkinnedMeshSkill2->Play("SKILL2");
 }
 
 void cBossAniController::Update(E_BOSS_STATE* pState)
 {
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Update();
-	
+
+	m_pSkinnedMeshSkill2->Update();
+
 	if (m_pBossOBB)
 		m_pBossOBB->Update(&m_obbw);
 	if (m_pSkinnedMesh->GetCheck() && *pState != E_BOSS_DEATH)
@@ -59,39 +68,7 @@ void cBossAniController::Update(E_BOSS_STATE* pState)
 
 	}
 
-	/*if (g_pKeyManager->isStayKeyDown(VK_NUMPAD1))
-	{
-		m_fBossRotY -= 0.1f;
-	}
-	if (g_pKeyManager->isStayKeyDown(VK_NUMPAD3))
-	{
-		m_fBossRotY += 0.1f;
-	}*/
-
-	//float fSpeed = 0.1f;
-	//if (g_pKeyManager->isStayKeyDown(VK_NUMPAD5))
-	//{
-	//	//if (*pState == E_BOSS_WALK || *pState == E_BOSS_STAND)
-	//	{
-	//		(*pState) = E_BOSS_WALK;
-	//		m_vBossPos =  m_vBossPos + (m_vBossDir * fSpeed);
-	//		
-	//	} 
-	//}
-	//if (g_pKeyManager->isStayKeyDown(VK_NUMPAD2))
-	//{
-	//	if (*pState == E_BOSS_WALK || *pState == E_BOSS_STAND)
-	//	{
-	//		m_vBossPos = m_vBossPos - (m_vBossDir * fSpeed);
-	//		(*pState) = E_BOSS_WALK;
-	//	}
-	//}
-	//if (!(g_pKeyManager->isStayKeyDown(VK_NUMPAD5))
-	//	&& !(g_pKeyManager->isStayKeyDown(VK_NUMPAD2)))
-	//{ 
-	//	if ((*pState) == E_BOSS_WALK)
-	//		(*pState) = E_BOSS_STAND;
-	//}
+	
 
 	SetAnimation(pState);
 } 
@@ -124,7 +101,7 @@ void cBossAniController::Render(D3DXMATRIXA16 * m_world)
 	m_obbw = matXX * matR*matT;
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Render(NULL, &World);
-
+	
 	D3DXCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 	//if (m_pBossOBB)
 	//	m_pBossOBB->Render_Debug(c, &World, NULL);
@@ -134,6 +111,7 @@ void cBossAniController::Render(D3DXMATRIXA16 * m_world)
 
 	m_pBossOBB->Render_Debug(D3DCOLOR_XRGB(192, 0, 0),nullptr , nullptr);
 
+	skillRender();
 }
 
 void cBossAniController::SetAnimation(E_BOSS_STATE * pState)
@@ -188,6 +166,46 @@ void cBossAniController::Skill()
 void cBossAniController::Collision(cOBB * PlayerBox)
 {
 	//m_pBossOBB->IsCollision(PlayerBox);
+}
+
+void cBossAniController::skillRender()
+{
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	g_pD3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, true);
+
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSPRITEENABLE, true);
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALEENABLE, true);
+
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALE_A, 0.0f);
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALE_B, 0.0f);
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALE_C, 1.0f);
+
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSIZE, 1);
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSIZE_MIN, 0.2f);
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSIZE_MAX, 20.0f);
+
+	g_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
+	g_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);
+	g_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE);
+
+	g_pD3DDevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	g_pD3DDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	g_pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_ONE);
+
+	D3DXMATRIXA16 matS, matR, matT, World;
+	D3DXMatrixScaling(&matS, 0.005f, 0.005f, 0.005f);
+	D3DXMatrixRotationX(&matR, D3DX_PI / 2.f);
+	D3DXMatrixTranslation(&matT, m_vBossPos.x, m_vBossPos.y, m_vBossPos.z);
+	World = matS * matR * matT;
+	m_pSkinnedMeshSkill2->Render(NULL, &World);
+
+
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSPRITEENABLE, false);
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALEENABLE, false);
+	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+	//g_pD3DDevice->SetRenderState(D3DRS_ZWRITEENABLE, false);
 }
 
 
