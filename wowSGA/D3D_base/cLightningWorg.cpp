@@ -40,7 +40,7 @@ void cLightningWorg::addMonster(float x, float y, float z){
 	Monster.m = new cSkinnedMesh;
 	Monster.m->Setup("Monster/lightningworg", "1.x");
 	Monster.ENUM_MONSTER = MONSTER_STATUS::MONSTER_STAND;
-	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::DRUID;
+	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::WORG;
 	Monster.m_vPos = D3DXVECTOR3(x, y + 0.45, z);
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
 	Monster.t.HP = 50;
@@ -48,8 +48,8 @@ void cLightningWorg::addMonster(float x, float y, float z){
 	Monster.t.ATK = 3;
 	Monster.t.DEF = 5;
 	Monster.t.Speed = 0.08f;
-	Monster.t.Gold = rand() % 100 + 1500;
 	Monster.attackSpeed = 130;
+	Monster.t.Gold = rand() % 100 + 1500;
 	Monster.m_Sphere.vCenter = D3DXVECTOR3(x, y + 0.45, z);
 	Monster.m_Sphere.fRadius = 10.f;
 	Monster.m_Sphere.bIsPicked = false;
@@ -61,19 +61,14 @@ void cLightningWorg::addMonster(float x, float y, float z){
 	Monster.attackTime = 100;
 	Monster.termCount = 0;
 	Monster.RunCount = rand() % 250 + 10;
-
-	Monster.Particle = new cMonsterParticle(512);
+	
+	Monster.Particle = new cMonsterParticle(512, 25);
 	Monster.Particle->init("Particle/alpha_tex.tga");
-
-	D3DXMATRIXA16	World, matS, matR, matT;
-	D3DXMatrixRotationX(&matR, D3DX_PI/2.0f);
-	D3DXMatrixScaling(&matS, 0.011f, 0.011f, 0.011f);
-	D3DXMatrixIdentity(&matT);
-	D3DXMatrixTranslation(&matT, 0,0.35f,0.3);
-	World = matS * matR * matT ;
-
-	Monster.MonsterOBB = new cOBB;
-	Monster.MonsterOBB->Setup(Monster.m, &World);
+	D3DXMatrixIdentity(&Monster.matWorld);
+	D3DXMATRIXA16 matTT, matSS;
+	D3DXMatrixScaling(&matSS, 0.0f, 0.0f, 0.0f);
+	D3DXMatrixTranslation(&matTT, x, y+0.45, z);
+	Monster.matWorld = matSS * matTT;
 
 	ZeroMemory(&Monster.m_stMtlNone, sizeof(D3DMATERIAL9));
 	Monster.m_stMtlNone.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
@@ -87,6 +82,16 @@ void cLightningWorg::addMonster(float x, float y, float z){
 
 	D3DXCreateSphere(g_pD3DDevice, Monster.m_Sphere.fRadius, 10, 10,
 		&Monster.m_pMeshSphere, NULL);
+
+	D3DXMATRIXA16	World, matS, matR, matT;
+	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
+	D3DXMatrixScaling(&matS, 0.011f, 0.011f, 0.011f);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixTranslation(&matT, 0, 0.35f, 0.3);
+	World = matS * matR * matT;
+
+	Monster.MonsterOBB = new cOBB;
+	Monster.MonsterOBB->Setup(Monster.m, &World);
 
 	m_vecSkinnedMesh.push_back(Monster);
 }
@@ -116,7 +121,6 @@ void cLightningWorg::SetUp(){
 
 
 void cLightningWorg::Update(iMap* map){
-
 	//거미 업데이트
 	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
 		//몬스터 죽음
@@ -125,7 +129,7 @@ void cLightningWorg::Update(iMap* map){
 		
 		matUpdate(i, map);
 		m_vecSkinnedMesh[i].m->Update();
-		m_vecSkinnedMesh[i].Particle->update(0.8);
+		m_vecSkinnedMesh[i].Particle->update(3.0f);
 		m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
 		MonsterAI(i);						//몬스터의 패턴, 스킬
 		MonsterStatus(i); 					//몬스터 상태, 애니메이션
@@ -135,32 +139,25 @@ void cLightningWorg::Update(iMap* map){
 
 void cLightningWorg::Render(){
 	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
+		
 		m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
+		D3DXMATRIXA16 matT;
+		D3DXMatrixTranslation(&matT, 0, 0.35f, 0);
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &(m_vecSkinnedMesh[i].matWorld*matT));
 		m_vecSkinnedMesh[i].Particle->render();
+
 		D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
 
 		SphereRender(i, m_vecSkinnedMesh[i].matWorld);
+		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(NULL, nullptr, nullptr);
+
+		//죽었을 때
 		if (m_vecSkinnedMesh[i].death){
 			for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++){
 				RenderUI(i, j, 10, 10, 79, 80);
 			}
 		}
-	}
-	if (m_pFont)
-	{
-		char str[128];
-		sprintf(str, "bossHP : %d ", m_vecSkinnedMesh[0].attackTime);
-		std::string sText(str);
-		RECT rc;
-		SetRect(&rc, 100, 630, 300, 200);
 
-		m_pFont->DrawText(NULL,
-			sText.c_str(),
-			sText.length(),
-			&rc,
-			DT_LEFT | DT_TOP | DT_NOCLIP,
-			D3DCOLOR_XRGB(255, 255, 255));
 	}
 }
 
@@ -318,6 +315,8 @@ void cLightningWorg::MonsterAI(size_t i){
 
 		D3DXVECTOR3 vDir = m_vPlayerPos - pos[i];
 
+		vDir.y = dir[i].y = 0.F;
+
 		D3DXVec3Normalize(&vDir, &vDir);
 		D3DXVec3Normalize(&dir[i], &dir[i]);
 
@@ -468,6 +467,7 @@ void cLightningWorg::SphereRender(size_t i, D3DXMATRIXA16& m_matWorld){
 }
 
 void cLightningWorg::matUpdate(size_t i, iMap* pMap){
+
 	D3DXMATRIXA16 matR, matS, matT;
 	D3DXMatrixScaling(&matS, 0.07f, 0.07f, 0.07f);
 

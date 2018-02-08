@@ -25,6 +25,8 @@ cBoneSpider::~cBoneSpider()
 			SAFE_RELEASE(m_vecSkinnedMesh[i].m_ItemSprite[j].m_pTexture);
 		}
 		SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
+		SAFE_DELETE(m_vecSkinnedMesh[i].Particle);
+		SAFE_DELETE(m_vecSkinnedMesh[i].MonsterOBB);
 		SAFE_DELETE(m_vecSkinnedMesh[i].m);
 	}
 }
@@ -37,21 +39,21 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 	Monster.m = new cSkinnedMesh;
 	Monster.m->Setup("Monster/bonespider", "1.x");
 	Monster.ENUM_MONSTER = MONSTER_STATUS::MONSTER_STAND;
-	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::DRUID;
+	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::SPIDER;
 	Monster.m_vPos = D3DXVECTOR3(x, y + 0.3, z);
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
 	Monster.t.HP = 80;
 	Monster.MaxHP = 80;
 	Monster.t.ATK = 8;
 	Monster.t.DEF = 8;
-	Monster.t.Speed = 0.06f;
+	Monster.t.Speed = 0.07f;
 	Monster.attackSpeed = 110;
 	Monster.t.Gold = rand() % 100 + 1500;
 	Monster.m_Sphere.vCenter = D3DXVECTOR3(x, y + 0.3, z);
 	Monster.m_Sphere.fRadius = 10.f;
 	Monster.m_Sphere.bIsPicked = false;
 	Monster.MaxRange = 10.f;
-	Monster.range = 2.f;
+	Monster.range = 1.5f;
 	Monster.time = 0;
 	Monster.death = false;
 	Monster.deathTime = 0;
@@ -59,11 +61,14 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 	Monster.termCount = 0;
 	Monster.RunCount = rand() % 250 + 10;
 
-	D3DXMATRIXA16	matS;
+	Monster.Particle = new cMonsterParticle(512, 20);
+	Monster.Particle->init("Particle/alpha_tex.tga");
 	D3DXMatrixIdentity(&Monster.matWorld);
-	D3DXMatrixScaling(&matS, 0.4, 0.4, 0.4);
-	//Monster.matS = matS;
-	Monster.matWorld = matS;
+	D3DXMATRIXA16 matTT, matSS;
+	D3DXMatrixScaling(&matSS, 0.0f, 0.0f, 0.0f);
+	D3DXMatrixTranslation(&matTT, x, y + 0.3, z);
+	Monster.matWorld = matSS * matTT;
+
 	ZeroMemory(&Monster.m_stMtlNone, sizeof(D3DMATERIAL9));
 	Monster.m_stMtlNone.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
 	Monster.m_stMtlNone.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
@@ -74,14 +79,16 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 	Monster.m_stMtlPicked.Diffuse = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
 	Monster.m_stMtlPicked.Specular = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
 
-	D3DXMATRIXA16  matR, matSS, World, matT;
+	D3DXMATRIXA16	World, matS, matR, matT;
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
-	D3DXMatrixScaling(&matSS, 0.009f, 0.009f, 0.009f);
-	D3DXMatrixIdentity(&World);
-	D3DXMatrixTranslation(&matT, 0.0f, 0, -0.3f);
-	World = matSS*matR*matT;
-	Monster.OBB = new cOBB;
-	Monster.OBB->Setup(Monster.m, &World);
+	D3DXMatrixScaling(&matS, 0.009f, 0.009f, 0.009f);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixTranslation(&matT, 0, 0, -0.3);
+	World = matS * matR * matT;
+
+	Monster.MonsterOBB = new cOBB;
+	Monster.MonsterOBB->Setup(Monster.m, &World);
+
 
 
 	D3DXCreateSphere(g_pD3DDevice, Monster.m_Sphere.fRadius, 10, 10,
@@ -121,11 +128,14 @@ void cBoneSpider::Update(iMap* pMap) {
 	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
 		//몬스터 죽음
 		if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
+
+
 		matUpdate(i, pMap);
 		m_vecSkinnedMesh[i].m->Update();
+		m_vecSkinnedMesh[i].Particle->update(2.0f);
+		m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
 		MonsterAI(i);						//몬스터의 패턴, 스킬
-		MonsterStatus(i); 					//몬스터 상태, 애니메이션
-		m_vecSkinnedMesh[i].OBB->Update(&m_vecSkinnedMesh[i].RT);
+		MonsterStatus(i); 					//몬스터 상태, 애니메이tus
 	}
 }
 
@@ -133,13 +143,20 @@ void cBoneSpider::Update(iMap* pMap) {
 void cBoneSpider::Render() {
 	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
 		m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
+		D3DXMATRIXA16 matT;
+		D3DXMatrixTranslation(&matT, 0, 0, -0.3);
+		g_pD3DDevice->SetTransform(D3DTS_WORLD, &(m_vecSkinnedMesh[i].matWorld*matT));
+
+		m_vecSkinnedMesh[i].Particle->render();
+		D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
+
 		SphereRender(i, m_vecSkinnedMesh[i].matWorld);
+		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, nullptr, nullptr);
 		if (m_vecSkinnedMesh[i].death) {
 			for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++) {
 				RenderUI(i, j, 10, 10, 79, 80);
 			}
 		}
-		m_vecSkinnedMesh[i].OBB->Render_Debug(D3DCOLOR_XRGB(192, 0, 0), nullptr, nullptr);
 	}
 	/*if (m_pFont)
 	{
@@ -498,10 +515,6 @@ void cBoneSpider::matUpdate(size_t i, iMap* pMap) {
 	}
 
 	D3DXMatrixTranslation(&matT, m_vecSkinnedMesh[i].m_vPos.x, m_vecSkinnedMesh[i].m_vPos.y + 0.45, m_vecSkinnedMesh[i].m_vPos.z);
-
+	m_vecSkinnedMesh[i].matRT = matR * matT;
 	m_vecSkinnedMesh[i].matWorld = matS * matR * matT;
-
-	D3DXMATRIXA16 matTT;
-	D3DXMatrixTranslation(&matTT, -0.2f, 0, 0);
-	m_vecSkinnedMesh[i].RT = matR * matT;
 }

@@ -4,9 +4,9 @@
 class cMonsterParticle : public cParticle
 {
 private:
-	SYNTHESIZE(int, m_nAlpha, Alpah);
+	int	m_nsize;
 public:
-	cMonsterParticle(int num);
+	cMonsterParticle(int num, int size);
 	virtual ~cMonsterParticle();
 
 
