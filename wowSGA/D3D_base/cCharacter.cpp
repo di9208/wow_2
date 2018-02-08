@@ -41,8 +41,8 @@ void cCharacter::Update(iMap* pMap, bool animCheck)
 	D3DXVECTOR3 vTempPos = m_vPos;
 	if (g_pKeyManager->isStayKeyDown('W'))
 	{
-		if (m_chractor_condition == RUN 
-			|| m_chractor_condition == IDLE 
+		if (m_chractor_condition == RUN
+			|| m_chractor_condition == IDLE
 			|| m_chractor_condition == JUMP_ING
 			|| m_chractor_condition == BACKWALK)
 		{
@@ -69,6 +69,8 @@ void cCharacter::Update(iMap* pMap, bool animCheck)
 	{
 		if (m_chractor_condition == RUN)
 			m_chractor_condition = IDLE;
+		if (m_chractor_condition == BACKWALK)
+			m_chractor_condition = IDLE;
 	}
 
 	D3DXMATRIXA16 matR, matT;
@@ -81,9 +83,14 @@ void cCharacter::Update(iMap* pMap, bool animCheck)
 	{
 		if (pMap->GetHeight(vTempPos.x, vTempPos.y, vTempPos.z))
 		{
-			if (m_chractor_condition != JUMP_START && m_chractor_condition != JUMP_ING && m_chractor_condition != JUMP_DOWN)
+			if (m_chractor_condition != JUMP_START && m_chractor_condition != JUMP_ING)
 			{
 				m_vPos = vTempPos;
+			}
+			else
+			{
+				m_vPos.x = vTempPos.x;
+				m_vPos.z = vTempPos.z;
 			}
 		}
 	}
@@ -98,11 +105,18 @@ void cCharacter::Update(iMap* pMap, bool animCheck)
 
 void cCharacter::setSpeed()
 {
-	if (m_chractor_condition == RUN || m_chractor_condition == ROLL_START || m_chractor_condition == BACKWALK)
+	if (m_chractor_condition == RUN || m_chractor_condition == BACKWALK)
 	{
 		if (speed < speed_max)
 		{
-			speed += 0.001f;
+			speed = 0.08f;
+		}
+	}
+	if (m_chractor_condition == ROLL_START)
+	{
+		if (speed < speed_max)
+		{
+			speed = 0.15f;
 		}
 	}
 	if (m_chractor_condition == IDLE)
@@ -117,12 +131,15 @@ void cCharacter::Jump(bool animCheck)
 	static float dummy = 0.0f;
 	if (g_pKeyManager->isOnceKeyDown(VK_SPACE))
 	{
-		m_chractor_condition = JUMP_ING;
-		jump_Position = m_vPos.y;
+		if (m_chractor_condition != ROLL_START && m_chractor_condition != ROLL && m_chractor_condition != ROLL_END)
+		{
+			m_chractor_condition = JUMP_ING;
+			jump_Position = m_vPos.y;
 
-		m_jump = (0.08f);
-		m_gravity = (0.0000f);
-		m_gSpeed = (0.0003f);
+			m_jump = (0.08f);
+			m_gravity = (0.0000f);
+			m_gSpeed = (0.0003f);
+		}
 	}
 	if (m_chractor_condition == JUMP_UP)
 	{
@@ -133,7 +150,7 @@ void cCharacter::Jump(bool animCheck)
 	}
 	else if (m_chractor_condition == JUMP_ING)
 	{
-		if (!animCheck &&m_vPos.y>=0)
+		if (!animCheck &&m_vPos.y >= 0)
 		{
 			m_vPos.y += m_jump;
 			m_jump += m_gravity;
@@ -152,7 +169,10 @@ void cCharacter::Roll(bool animCheck)
 
 	if (g_pKeyManager->isOnceKeyDown(VK_SHIFT))
 	{
-		m_chractor_condition = ROLL_START;
+		if (m_chractor_condition != JUMP_UP && m_chractor_condition != JUMP_ING && m_chractor_condition != JUMP_DOWN)
+		{
+			m_chractor_condition = ROLL_START;
+		}
 
 	}
 	if (m_chractor_condition == ROLL_START)
