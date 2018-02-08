@@ -3,7 +3,7 @@
 
 #include "cParticle.h"
 #include "cArthasPaticle.h"
-
+#include "cRagPaticle.h"
 #include "cUnit.h"
 
 class cBoneSpider;
@@ -51,12 +51,16 @@ struct stBoss_rag
 	int						count;				// 보스접근후 모션쓰기위한 카운트
 	bool					chk;				// 접근했는지 안했는지
 	E_BOSS_RAG_STATE		e_boss_rag_state;	// 라그 상태
+
+	cParticle*				particle;			// 라그 파티클
+
 	stBoss_rag()
 		: m_vDir(1, 0, 0)
 		, m_vPos(0, 0, 0)
 		, pb(0, 0, 0)
 		, dist(0.f)
 		, count(0)
+		, particle(NULL)
 	{}
 };
 

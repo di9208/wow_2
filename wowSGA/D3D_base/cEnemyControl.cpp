@@ -37,6 +37,7 @@ cEnemyControl::~cEnemyControl()
 	SAFE_DELETE(m_pBossRagController);
 	SAFE_DELETE(m_pBossSkill);
 	SAFE_DELETE(m_vecBoss[0].particle);
+	SAFE_DELETE(m_vecBoss[0].particle);
 }
 
 int cEnemyControl::getWolfVectorSize()
@@ -359,6 +360,9 @@ void cEnemyControl::BossSetup()
 	stBoss_rag.chk = false;
 	stBoss_rag.kind = BOSS_RAGNALOS;
 	stBoss_rag.e_boss_rag_state = E_BOSS_RAG_STAND;
+	stBoss_rag.particle = new cRagPaticle(500,20);
+	stBoss_rag.particle->init("Particle/T_VFX_SWIRL64B_A_CONTRAST2.png");
+
 	m_vecBoss_rag.push_back(stBoss_rag);
 }
 
@@ -371,9 +375,12 @@ void cEnemyControl::BossUpdate()
 		m_pBossAniController->Update(&m_vecBoss[0].e_boss_state);
 
 	m_vecBoss[0].particle->update(1.0001f);
+
 	//라그나로스 업데이트
 	if (m_pBossRagController)
 		m_pBossRagController->Update(&m_vecBoss_rag[0].e_boss_rag_state);
+
+	m_vecBoss_rag[0].particle->update(1.0f);
 
 	if (m_pBossSkill)
 		m_pBossSkill->Update(&m_vecBoss[0].e_boss_state, &m_vecBoss_rag[0].e_boss_rag_state);
@@ -457,10 +464,11 @@ void cEnemyControl::BossRender()
 	D3DXMatrixTranslation(&matT2, 5, 0, 0);
 	D3DXMATRIXA16 world2 =  matT2;*/
 	D3DXMATRIXA16 matW2;
-	D3DXMatrixIdentity(&matW2);
+	//D3DXMatrixIdentity(&matW2);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matW2);
 	if (m_pBossRagController && m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
 		m_pBossRagController->Render(nullptr);
+	m_vecBoss_rag[0].particle->render();
 
 
 }
