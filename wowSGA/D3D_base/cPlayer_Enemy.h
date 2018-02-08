@@ -4,6 +4,7 @@ class cEnemyControl;
 class cStage1;
 class cFrustum;
 class iMap;
+class shop_TEST_CLASS;
 class cPlayer_Enemy
 {
 	cPlayer*		m_Player;
@@ -19,5 +20,6 @@ public:
 	void Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
+	void connet_shop(shop_TEST_CLASS * _connectSHOP);
 };
 

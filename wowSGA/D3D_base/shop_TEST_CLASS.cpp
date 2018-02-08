@@ -87,9 +87,10 @@ void shop_TEST_CLASS::Update()
 		is_interface = true;
 	}
 
+	int item_nums = 0;
+
 	if (!_shops->GetSHOP()->Gethidden())
 	{
-		int item_nums = 0;
 		if (_shops->ischeck(item_nums))
 		{
 			if (g_pKeyManager->isOnceKeyDown(VK_RBUTTON))
@@ -125,8 +126,16 @@ void shop_TEST_CLASS::Update()
 					_invens->SetMONEY(money_temp);
 					_invens->delete_inven(item_nums);
 				}
-				/*if (g_pKeyManager->isOnceKeyDown(VK_LBUTTON))
-				{
+			}
+		}
+	}
+
+	if (!_invens->GetINVEN()->Gethidden())
+	{
+		if (_invens->ischeck(item_nums))
+		{
+			if (GetKeyState(VK_LBUTTON) & 0x8000)
+			{
 				sender.item_data = _invens->Getvector_inven()[item_nums];
 				sender.pick_now = true;
 
@@ -136,24 +145,27 @@ void shop_TEST_CLASS::Update()
 				sender.mouse_pick->SetTexture(str);
 				sender.mouse_pick->Sethidden(false);
 				sender.mouse_pick->SetScal(D3DXVECTOR3(0.6f, 0.6f, 0.6f));
-				}*/
 			}
+		}
+	}
+
+
+	if (sender.pick_now)
+	{
+		sender.mouse_pick->SetPos(D3DXVECTOR3(Pt.x - 20, Pt.y - 20, 0));
+
+		sender.mouse_pick->Update();
+
+		if (GetKeyState(VK_LBUTTON) & 0x0001)
+		{
+			sender.mouse_pick->Destroy();
+
+			sender.mouse_pick = new cUIImage;
+
+			sender.pick_now = false;
 		}
 
 	}
-
-	//if (sender.pick_now)
-	//{
-	//	sender.mouse_pick->SetPos(D3DXVECTOR3(Pt.x, Pt.y, 0));
-
-	//	if (g_pKeyManager->isOnceKeyUp(VK_LBUTTON))
-	//	{
-	//		sender.mouse_pick->Destroy();
-
-	//		sender.pick_now = false;
-	//	}
-
-	//}
 
 
 	//if (is_interface)
@@ -247,7 +259,10 @@ void shop_TEST_CLASS::Render()
 	_shops->render(UI_sprite);
 	_invens->Render(UI_sprite);
 
-	sender.mouse_pick->Render(UI_sprite);
+	if (sender.pick_now)
+	{
+		sender.mouse_pick->Render(UI_sprite);
+	}
 
 	if (!cursor_text)
 	{

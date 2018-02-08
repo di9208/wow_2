@@ -45,7 +45,7 @@ private:
 
 	LPDIRECT3DTEXTURE9 mouse_cursorImage;
 
-	Tag_picking_mouse sender;
+	SYNTHESIZE(Tag_picking_mouse, sender, picking_data);
 
 	SYNTHESIZE(bool, is_interface, isinterface);
 public:

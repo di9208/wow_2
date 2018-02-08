@@ -81,6 +81,7 @@ void cScene1::Update()
 
 	if (m_Player_Enemy)
 		m_Player_Enemy->Update(m_Stage1);
+		m_Player_Enemy->connet_shop(m_shop_TEST_CLASS);
 
 	if (m_shop_TEST_CLASS)
 		m_shop_TEST_CLASS->Update();
