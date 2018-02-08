@@ -1,12 +1,14 @@
 #pragma once
 #include "cUnit.h"
+
 class cSkinnedMesh;
 class cOBB;
 class cParticle;
 
 class cBossAniController
 {
-	cSkinnedMesh*		m_pSkinnedMesh;
+	SYNTHESIZE(cSkinnedMesh*, m_pSkinnedMesh, SkinnedMesh);
+	//cSkinnedMesh*		m_pSkinnedMesh;
 	cSkinnedMesh*		m_pSkinnedMeshSkill;		//리치왕스킬 // 가시 솟아오르기
 	cSkinnedMesh*		m_pSkinnedMeshSkill2;		//리치왕스킬 // 아이스노바
 	E_BOSS_STATE		cBoss_STATE;
@@ -31,7 +33,7 @@ public:
 
 	void SetUp();
 	void Update(E_BOSS_STATE* pState);
-	void Render(D3DXMATRIXA16* m_world);
+	void Render(D3DXMATRIXA16& m_world);
 	
 	void SetAnimation(E_BOSS_STATE* pState);
 	void Skill();

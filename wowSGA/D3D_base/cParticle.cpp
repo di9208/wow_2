@@ -112,6 +112,7 @@ void cParticle::removeDeadParticles()
 
 void cParticle::render()
 {
+
 	if (!_particles.empty())
 	{
 		//

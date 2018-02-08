@@ -36,6 +36,7 @@ cEnemyControl::~cEnemyControl()
 	SAFE_DELETE(m_pBossAniController);
 	SAFE_DELETE(m_pBossRagController);
 	SAFE_DELETE(m_pBossSkill);
+	SAFE_DELETE(m_vecBoss[0].particle);
 }
 
 int cEnemyControl::getWolfVectorSize()
@@ -155,15 +156,20 @@ void cEnemyControl::BossSetup()
 	m_pBossRagController->SetUp();
 
 	m_pBossSkill = new cBossSkill;
+	stBoss		stBoss1;
+	stBoss1.count = 0;
+	stBoss1.stat.ATK = 100;
+	stBoss1.stat.DEF = 20;
+	stBoss1.stat.HP = 500;
+	stBoss1.chk = false;
+	stBoss1.kind = BOSS_ARTHAS;
+	stBoss1.e_boss_state = E_BOSS_START;
+	stBoss1.particle = new cArthasPaticle(700, 20);
+	stBoss1.particle->init("Particle/T_VFX_SWIRL64B_A_CONTRAST2.png");
 
-	stBoss.count = 0;
-	stBoss.stat.ATK = 100;
-	stBoss.stat.DEF = 20;
-	stBoss.stat.HP = 500;
-	stBoss.chk = false;
-	stBoss.kind = BOSS_ARTHAS;
-	stBoss.e_boss_state = E_BOSS_START;
-	m_vecBoss.push_back(stBoss);
+	m_vecBoss.push_back(stBoss1);
+
+
 	//===============================위가 리치왕, 아래가 라그나로스 스탯//
 	stBoss_rag.count = 0;
 	stBoss_rag.stat.ATK = 100;
@@ -183,6 +189,7 @@ void cEnemyControl::BossUpdate()
 	if (m_pBossAniController)
 		m_pBossAniController->Update(&m_vecBoss[0].e_boss_state);
 
+	m_vecBoss[0].particle->update(1.0001f);
 	//라그나로스 업데이트
 	if (m_pBossRagController)
 		m_pBossRagController->Update(&m_vecBoss_rag[0].e_boss_rag_state);
@@ -261,16 +268,18 @@ void cEnemyControl::BossUpdate()
 
 void cEnemyControl::BossRender()
 {
-	
 	/*D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, -5, 0, 0);
 	D3DXMATRIXA16 world = (matT);
-*/	D3DXMATRIXA16 matW;
-	D3DXMatrixIdentity(&matW);
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matW);
-	if (m_pBossAniController)
-		m_pBossAniController->Render(nullptr);
+*/	
 	
+	D3DXMATRIXA16 matWW;
+	if (m_pBossAniController)
+		m_pBossAniController->Render(matWW);
+
+	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWW);
+	if(m_vecBoss[0].e_boss_state == E_BOSS_WHIRLWIND && m_vecBoss[0].e_boss_state != E_BOSS_DEATH)
+	m_vecBoss[0].particle->render();
 	//==============================================
 
 	/*D3DXMATRIXA16 matT2;

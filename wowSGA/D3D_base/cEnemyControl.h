@@ -1,5 +1,7 @@
 #pragma once
 #include "cEnemyManager.h"
+#include "cParticle.h"
+#include "cArthasPaticle.h"
 
 class cBoneSpider;
 class cArchDruid;
@@ -9,6 +11,7 @@ class cBossSkill;
 class cBossRagController;
 class iMap;
 class cOBB;
+
 struct stBoss
 {
 	TagUnit					stat;
@@ -22,6 +25,8 @@ struct stBoss
 	bool					chkDist;			// 거리관련 불값
 	E_BOSS_STATE			e_boss_state;		// 보스 상태
 	E_BOSS_RAG_STATE		e_boss_rag_state;	// 라그 상태
+	cParticle*				particle;			// 리치왕 파티클
+
 	stBoss()
 		: m_vDir(1, 0, 0)
 		, m_vPos(0, 0, 0)
@@ -29,6 +34,7 @@ struct stBoss
 		, dist(0.f)
 		, count(0)
 		, chkDist(false)
+		, particle(NULL)
 	{}											//구조체 초기화
 };
 struct stBoss_rag
@@ -60,7 +66,7 @@ private:
 
 private:
 	SYNTHESIZE(std::vector<stBoss>, m_vecBoss, vecBoss);
-	stBoss				stBoss;
+	
 	D3DXMATRIXA16		matR;
 	//======================================================
 	SYNTHESIZE(std::vector<stBoss_rag>, m_vecBoss_rag, vecBoss_rag);

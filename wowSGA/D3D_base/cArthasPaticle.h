@@ -1,8 +1,15 @@
 #pragma once
-class cArthasPaticle
+#include "cParticle.h"
+
+class cArthasPaticle : public cParticle
 {
+private:
+	int m_nSize;
 public:
-	cArthasPaticle();
-	~cArthasPaticle();
+	cArthasPaticle(int num, int size);
+	virtual ~cArthasPaticle();
+
+	void resetParticle(Attribute* attribute);
+	void update(float timeDelta);
 };
 

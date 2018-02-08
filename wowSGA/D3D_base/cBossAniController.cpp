@@ -2,7 +2,7 @@
 #include "cBossAniController.h"
 #include "cSkinnedMesh.h"
 #include "cOBB.h"
-#include "cParticle.h"
+
 
 cBossAniController::cBossAniController()
 	: m_pSkinnedMesh(NULL)
@@ -73,7 +73,7 @@ void cBossAniController::Update(E_BOSS_STATE* pState)
 	SetAnimation(pState);
 } 
  
-void cBossAniController::Render(D3DXMATRIXA16 * m_world)
+void cBossAniController::Render(D3DXMATRIXA16  &m_world)
 {
 	D3DXMATRIXA16 matR, matS, matT, matX, matXX, World;
 	D3DXMatrixScaling(&matS, 0.15f, 0.15f, 0.15f);
@@ -101,7 +101,7 @@ void cBossAniController::Render(D3DXMATRIXA16 * m_world)
 	m_obbw = matXX * matR*matT;
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Render(NULL, &World);
-	
+	m_world = World;
 	D3DXCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 	//if (m_pBossOBB)
 	//	m_pBossOBB->Render_Debug(c, &World, NULL);
