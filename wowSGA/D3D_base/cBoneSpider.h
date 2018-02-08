@@ -56,8 +56,6 @@ private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
 	D3DXMATRIXA16 matWorld;
 
-
-
 	//∏ÛΩ∫≈Õ Ω∫≈»
 	int			nXAlpha;
 	int			nCount;
@@ -117,6 +115,10 @@ public:
 
 	float getMonsterHP(int i) { return m_vecSkinnedMesh[i].t.HP; }
 	float getMonsterMaxHP(int i) { return m_vecSkinnedMesh[i].MaxHP; }
+
+	//==========================================================================================
+
+	void getWeaponHit(int i, cOBB * PlayerWeapon);
 
 	cBoneSpider();
 	~cBoneSpider();

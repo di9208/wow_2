@@ -17,6 +17,7 @@ cPlayer_Enemy::cPlayer_Enemy()
 	, RichKing(false)
 	, RichKingTime(0.0f)
 	, RichKingCheck(false)
+	, Player_Attack(false)
 {
 }
 
@@ -79,54 +80,70 @@ void cPlayer_Enemy::Update(iMap* pMap)
 		{
 			if (m_EnemyControl->getSpiderCondition(i) == MONSTER_ATTACK || m_EnemyControl->getSpiderCondition(i) == MONSTER_ATTACK)
 			{
-			if (m_EnemyControl->getSpiderTimeCheck(i) == false)
-			{
-			m_EnemyControl->setSpiderDamageTimeCheck(i, g_pTimeManager->GetLastUpdateTime());
-			m_EnemyControl->setSpiderTimeCheck(i, true);
-			}
-			if (m_EnemyControl->getSpiderDamageCheck(i) == false)
-			{
-			if (m_EnemyControl->getSpiderDamageTimeCheck(i) + 0.3f < g_pTimeManager->GetLastUpdateTime())
-			{
-			m_Player->Collsion(m_EnemyControl->getSpiderOBB(i));
-			m_EnemyControl->setSpiderDamageCheck(i, true);
-			}
-			}
+				if (m_EnemyControl->getSpiderTimeCheck(i) == false)
+				{
+					m_EnemyControl->setSpiderDamageTimeCheck(i, g_pTimeManager->GetLastUpdateTime());
+					m_EnemyControl->setSpiderTimeCheck(i, true);
+				}
+				if (m_EnemyControl->getSpiderDamageCheck(i) == false)
+				{
+					if (m_EnemyControl->getSpiderDamageTimeCheck(i) + 0.3f < g_pTimeManager->GetLastUpdateTime())
+					{
+						m_Player->Collsion(m_EnemyControl->getSpiderOBB(i));
+						m_EnemyControl->setSpiderDamageCheck(i, true);
+					}
+				}
 			}
 			else
 			{
-			m_EnemyControl->setSpiderDamageCheck(i, false);
-			m_EnemyControl->setSpiderTimeCheck(i, false);
+				m_EnemyControl->setSpiderDamageCheck(i, false);
+				m_EnemyControl->setSpiderTimeCheck(i, false);
 			}
 		}
 		//리치왕
 		if (m_EnemyControl->getBossCondition() == E_BOSS_ATT || m_EnemyControl->getBossCondition() == E_BOSS_ATT2)
 		{
-		float cool;
-		if (m_EnemyControl->getBossCondition() == E_BOSS_ATT)cool = 1.0f;
-		if (m_EnemyControl->getBossCondition() == E_BOSS_ATT2)cool = 0.5f;
-		if (!RichKingCheck)
-		{
-		RichKingTime = g_pTimeManager->GetLastUpdateTime();
-		RichKingCheck = true;
-		}
-		if (!RichKing)
-		{
-		if (RichKingTime + cool < g_pTimeManager->GetLastUpdateTime())
-		{
-		m_Player->Collsion(m_EnemyControl->getBossOBB());
-		RichKing = true;
-		}
-		}
+			float cool;
+			if (m_EnemyControl->getBossCondition() == E_BOSS_ATT)cool = 1.0f;
+			if (m_EnemyControl->getBossCondition() == E_BOSS_ATT2)cool = 0.5f;
+			if (!RichKingCheck)
+			{
+				RichKingTime = g_pTimeManager->GetLastUpdateTime();
+				RichKingCheck = true;
+			}
+			if (!RichKing)
+			{
+				if (RichKingTime + cool < g_pTimeManager->GetLastUpdateTime())
+				{
+					m_Player->Collsion(m_EnemyControl->getBossOBB());
+					RichKing = true;
+				}
+			}
 		}
 		else
 		{
-		RichKing = false;
-		RichKingCheck = false;
+			RichKing = false;
+			RichKingCheck = false;
+		}
+
+		//플레이어-------------------------------------
+		if (m_Player->Getchractor_condition() == ATTACK || m_Player->Getchractor_condition() == SKILL_2)
+		{
+			if (!Player_Attack)
+			{
+				m_EnemyControl->WeaponHit(m_Player->getWeapon());
+				Player_Attack = true;
+			}
+		}
+		else
+		{
+			Player_Attack = false;
 		}
 	}
 	if (m_EnemyControl)
 		m_EnemyControl->Update(m_Player->GetPosition(), pMap);
+
+
 }
 
 void cPlayer_Enemy::Render()
@@ -157,10 +174,6 @@ void cPlayer_Enemy::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 				//m_Player->setUI(true);
 				m_Player->setHp(m_EnemyControl->getALLEnemyCenter()[i].HP,
 					m_EnemyControl->getALLEnemyCenter()[i].Max_HP);
-			}
-			else
-			{
-				//m_Player->setUI(false);
 			}
 		}
 	} break;

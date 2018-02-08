@@ -55,7 +55,7 @@ struct stBoss_rag
 class cEnemyControl : public cEnemyManager
 {
 private:
-	cBoneSpider*	m_pSpider;
+	cBoneSpider * m_pSpider;
 	cArchDruid*		m_pDruid;
 	cLightningWorg*	m_pWorg;
 
@@ -69,7 +69,7 @@ private:
 	SYNTHESIZE(std::vector<stBoss_rag>, m_vecBoss_rag, vecBoss_rag);
 	stBoss_rag			stBoss_rag;
 	D3DXMATRIXA16		matragR;
-	
+
 	//보스 거리 조절용 벡터
 	D3DXVECTOR3 v;
 	//라그나로스 등장
@@ -84,20 +84,20 @@ private:
 	cBossAniController * m_pBossAniController;
 	cBossRagController * m_pBossRagController;
 	cBossSkill*			 m_pBossSkill;
-	
+
 
 	//Picking
 	std::vector<ST_SPHERE>	m_vecSphere;
 	D3DMATERIAL9			m_stMtlNone;
 	D3DMATERIAL9			m_stMtlPicked;
 	LPD3DXMESH				m_pMeshSphere;
-	
+
 	//spell
 	int						nCount; // spell2 몹소환 카운트
 	int						nMonsterX; //소환되는 몹 좌표
 	int						nMonsterY; //소환되는 몹 좌표
 
-	//playerCheck
+									   //playerCheck
 	D3DXVECTOR3				m_vPlayerPos;
 
 	D3DXMATRIXA16			m_world;
@@ -163,5 +163,9 @@ public:
 	float getMonsterMaxHP() { return m_vecBoss[0].stat.Max_HP; }
 	//==================================================================
 	std::vector<Enemy_Sphere> getALLEnemyCenter();
+
+	//무기충돌----------------------------------------------------
+	void WeaponHit(cOBB * PlayerWeapon);
+	void getWeaponHitBOSS(cOBB * PlayerWeapon);
 };
 

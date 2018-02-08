@@ -42,4 +42,6 @@ public:
 
 	void setUI(bool check);
 	void setHp(int hp, int maxHP);
+
+	cOBB* getWeapon();
 };

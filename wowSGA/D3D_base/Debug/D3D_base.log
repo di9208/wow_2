@@ -1,0 +1,23 @@
+﻿  cPlayer_Enemy.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer_enemy.cpp(35): warning C4316: 'cPlayer': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer_enemy.cpp(38): warning C4316: 'cEnemyControl': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cEnemyControl.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(152): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(153): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(162): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(163): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(170): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(171): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(205): warning C4316: 'cBoneSpider': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(208): warning C4316: 'cArchDruid': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(211): warning C4316: 'cLightningWorg': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(270): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(288): warning C4316: 'cBossAniController': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(291): warning C4316: 'cBossRagController': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(341): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(853): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(854): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(855): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  D3D_base.vcxproj -> C:\Users\준\Documents\GitHub\wow_2\wowSGA\Debug\D3D_base.exe

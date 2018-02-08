@@ -134,3 +134,8 @@ void cPlayer::setHp(int hp, int maxHP)
 	m_EnemyPicking->HPset(hp, maxHP);
 }
 
+cOBB * cPlayer::getWeapon()
+{
+	return m_Weapon->GetweaponOBB();
+}
+

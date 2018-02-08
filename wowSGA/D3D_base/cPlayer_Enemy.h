@@ -16,6 +16,8 @@ class cPlayer_Enemy
 	bool			RichKing;
 	bool			RichKingCheck;
 	float			RichKingTime;
+	//-------------------------
+	bool			Player_Attack;
 public:
 	cPlayer_Enemy();
 	~cPlayer_Enemy();

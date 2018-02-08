@@ -5,6 +5,21 @@
 #include <time.h>
 #include "cOBB.h"
 
+void cBoneSpider::getWeaponHit(int i, cOBB * PlayerWeapon)
+{
+	if (PlayerWeapon)
+	{
+		if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
+		{
+			if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
+			{
+				m_vecSkinnedMesh[i].t.HP -= 10;
+			}
+		}
+	}
+
+}
+
 cBoneSpider::cBoneSpider()
 	: m_vecSkinnedMesh(NULL)
 	, m_pFont(NULL)
