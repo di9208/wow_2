@@ -40,7 +40,18 @@ void cPlayer_Enemy::Setup()
 void cPlayer_Enemy::Update(iMap* pMap)
 {
 	if (m_Player)
+	{
 		m_Player->Update(pMap);
+		for (int i = 0; i < m_EnemyControl->getWolfVectorSize(); i++)
+		{
+			m_Player->Collsion(m_EnemyControl->getWolfOBB(i));
+		}
+		for (int i = 0; i < m_EnemyControl->getSpiderVectorSize(); i++)
+		{
+			m_Player->Collsion(m_EnemyControl->getSpiderOBB(i));
+		}
+		m_Player->Collsion(m_EnemyControl->getBossOBB());
+	}
 	if (m_EnemyControl)
 		m_EnemyControl->Update(m_Player->GetPosition(), pMap);
 }
@@ -52,8 +63,7 @@ void cPlayer_Enemy::Render()
 
 	if (m_EnemyControl)
 		m_EnemyControl->Render();
-	//if (m_Stage1)
-	//	m_Stage1->Draw(m_Frustum);
+
 }
 
 void cPlayer_Enemy::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)

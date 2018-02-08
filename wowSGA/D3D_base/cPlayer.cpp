@@ -87,11 +87,13 @@ void cPlayer::Render()
 		m_Weapon->Render(&m_matWorld);
 	if (m_playerInFo)
 		m_playerInFo->Render(&m_playerAnimController->GetWorld(), &m_matWorld);
+	if (m_playerSkill)
+		m_playerSkill->Render();
 }
 
 void cPlayer::Collsion(cOBB * EnemyBox)
 {
-	//m_Weapon->collsion(m_DummyBox->GetOBB());
+	m_playerInFo->Collsion(EnemyBox);
 }
 
 void cPlayer::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)

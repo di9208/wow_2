@@ -206,12 +206,17 @@ void cSkinnedMesh::Render(LPD3DXFRAME pFrame, D3DXMATRIXA16* m_Word)
 				g_pD3DDevice->SetTransform(D3DTS_WORLD,
 					&pBone->matCombinedTransformMatrix);
 			}
+			g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, true);
+			g_pD3DDevice->SetRenderState(D3DRS_ALPHAREF, 0x00000088);
+			g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 			for (size_t i = 0; i < pBoneMesh->vecMtl.size(); i++)
 			{
 				g_pD3DDevice->SetTexture(0, pBoneMesh->vecTexture[i]);
 				g_pD3DDevice->SetMaterial(&pBoneMesh->vecMtl[i]);
 				pBoneMesh->MeshData.pMesh->DrawSubset(i);
 			}
+			g_pD3DDevice->SetRenderState(D3DRS_ALPHATESTENABLE, false);
+			g_pD3DDevice->SetRenderState(D3DRS_ALPHAFUNC, 0);
 		}
 	}
 

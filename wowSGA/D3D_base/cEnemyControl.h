@@ -8,7 +8,7 @@ class cBossAniController;
 class cBossSkill;
 class cBossRagController;
 class iMap;
-
+class cOBB;
 struct stBoss
 {
 	TagUnit					stat;
@@ -124,5 +124,13 @@ public:
 	void SummonsEnemy();
 	cEnemyControl();
 	~cEnemyControl();
+
+	int getWolfVectorSize();
+	cOBB* getWolfOBB(int i);
+
+	int getSpiderVectorSize();
+	cOBB* getSpiderOBB(int i);
+
+	cOBB* getBossOBB();
 };
 

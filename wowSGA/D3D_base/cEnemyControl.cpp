@@ -38,6 +38,32 @@ cEnemyControl::~cEnemyControl()
 	SAFE_DELETE(m_pBossSkill);
 }
 
+int cEnemyControl::getWolfVectorSize()
+{
+	return m_pWorg->getVectorSize();
+}
+
+cOBB * cEnemyControl::getWolfOBB(int i)
+{
+	return m_pWorg->getOBB(i);
+}
+
+int cEnemyControl::getSpiderVectorSize()
+{
+	return m_pSpider->getVectorSize();
+}
+
+cOBB * cEnemyControl::getSpiderOBB(int i)
+{
+	return m_pSpider->getOBB(i);
+}
+
+cOBB * cEnemyControl::getBossOBB()
+{
+	return m_pBossAniController->getOBB();
+}
+
+
 void cEnemyControl::SetUp(){
 	m_pSpider = new cBoneSpider;
 	//m_pSpider->addMonster(1, 0, 4);

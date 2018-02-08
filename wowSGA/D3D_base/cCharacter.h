@@ -21,7 +21,7 @@ public:
 	~cCharacter();
 
 	void Setup();
-	void Update(iMap* pMap = NULL,bool animCheck=NULL);
+	void Update(iMap* pMap = NULL, bool animCheck = NULL);
 
 	void setSpeed();
 	void Jump(bool animCheck);

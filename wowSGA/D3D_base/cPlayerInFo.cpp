@@ -4,11 +4,6 @@
 #include <sstream>
 #include "cOBB.h"
 
-std::string Convert(float number) {
-	std::ostringstream buff;
-	buff << number;
-	return buff.str();
-}
 
 cPlayerInFo::cPlayerInFo()
 	:m_pTexture(NULL)
@@ -20,13 +15,13 @@ cPlayerInFo::cPlayerInFo()
 	, m_HP(NULL)
 	, m_status(false)
 	, ax(100)
+	, m_systemFont(NULL)
 {
 	for (int i = 0; i < 5; i++)
 	{
 		m_stats_UI[i].m_EquipUI = NULL;
 		m_skill_UI[i].m_EquipUI = NULL;
 		m_stats[i] = NULL;
-		m_coolTime_UI[i].m_EquipUI = NULL;
 	}
 	Pt.x = 0;
 	Pt.y = 0;
@@ -41,12 +36,12 @@ cPlayerInFo::~cPlayerInFo()
 	SAFE_RELEASE(m_PlayerUI);
 	SAFE_RELEASE(m_statusUI);
 	SAFE_RELEASE(m_HP);
+	SAFE_RELEASE(m_systemFont);
 	for (int i = 0; i < 5; i++)
 	{
 		SAFE_RELEASE(m_stats_UI[i].m_EquipUI);
 		SAFE_RELEASE(m_skill_UI[i].m_EquipUI);
 		SAFE_RELEASE(m_stats[i]);
-		SAFE_RELEASE(m_coolTime_UI[i].m_EquipUI);
 	}
 	SAFE_DELETE(m_playerOBB);
 }
@@ -111,6 +106,12 @@ void cPlayerInFo::SetFont()
 	strcpy_s(stFD.FaceName, "FRIZQT__");
 
 	D3DXCreateFontIndirect(g_pD3DDevice, &stFD, &m_pFont);
+
+	stFD.Height = 30;
+	stFD.Width = 15;
+	AddFontResource("font/umberto.ttf");
+	strcpy_s(stFD.FaceName, "umberto");
+	D3DXCreateFontIndirect(g_pD3DDevice, &stFD, &m_systemFont);
 }
 
 void cPlayerInFo::RenderUI()
@@ -150,17 +151,17 @@ void cPlayerInFo::RenderUI()
 				0.0f),
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 
-		m_pSprite->Draw(m_coolTime_UI[i].m_EquipUI,
-			NULL, //&rc,
-			&D3DXVECTOR3(
-				m_coolTime_UI[i].m_EquipUI_info.Width / 2.0f,
-				m_coolTime_UI[i].m_EquipUI_info.Width / 2.0,
-				0),
-			&D3DXVECTOR3(
-				m_coolTime_UI[i].m_EquipUI_info.Width / 2.0f + m_coolTime_UI[i].m_x,
-				m_coolTime_UI[i].m_EquipUI_info.Width / 2.0f + m_coolTime_UI[i].m_y,
-				0.0f),
-			D3DCOLOR_ARGB(255, 255, 255, 255));
+		//m_pSprite->Draw(m_coolTime_UI[i].m_EquipUI,
+		//	NULL, //&rc,
+		//	&D3DXVECTOR3(
+		//		m_coolTime_UI[i].m_EquipUI_info.Width / 2.0f,
+		//		m_coolTime_UI[i].m_EquipUI_info.Width / 2.0,
+		//		0),
+		//	&D3DXVECTOR3(
+		//		m_coolTime_UI[i].m_EquipUI_info.Width / 2.0f + m_coolTime_UI[i].m_x,
+		//		m_coolTime_UI[i].m_EquipUI_info.Width / 2.0f + m_coolTime_UI[i].m_y,
+		//		0.0f),
+		//	D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 
 
@@ -180,13 +181,15 @@ void cPlayerInFo::RenderFont()
 {
 	if (m_pFont)
 	{
-		std::string sText =
-			"체력: " + Convert(PlayerInFo.HP) + "\n"
-			"마력: " + Convert(PlayerInFo.MP) + "\n"
-			"공격력: " + Convert(PlayerInFo.ATK) + "\n"
-			"방어력: " + Convert(PlayerInFo.DEF) + "\n"
-			"소지금: " + Convert(PlayerInFo.Gold) + "\n";
-		//sprintf(sText, "%f", (PlayerInFo.HP));
+		char str[128];
+		sprintf(str, "체력:%.0f \n 마력:%.0f \n 공격력:%.0f \n 방어력:%.0f \n 소지금:%.0f \n",
+			PlayerInFo.HP,
+			PlayerInFo.MP,
+			PlayerInFo.ATK,
+			PlayerInFo.DEF,
+			PlayerInFo.Gold);
+
+		std::string sText(str);
 
 		RECT rc;
 		SetRect(&rc, 410, 270, 510, 370);
@@ -198,11 +201,35 @@ void cPlayerInFo::RenderFont()
 			DT_LEFT | DT_TOP | DT_NOCLIP,
 			D3DCOLOR_XRGB(255, 255, 255));
 	}
+
+}
+
+void cPlayerInFo::RenderFontSysytem()
+{
+	if (m_systemFont)
+	{
+		char str[128];
+		sprintf(str, "1   2    3    4     5");
+
+		std::string sText(str);
+
+		RECT rc;
+		SetRect(&rc, 145, 810, 267, 900);
+
+		m_systemFont->DrawText(NULL,
+			sText.c_str(),
+			sText.length(),
+			&rc,
+			DT_LEFT | DT_TOP | DT_NOCLIP,
+			D3DCOLOR_XRGB(255, 255, 255));
+	}
 }
 
 void cPlayerInFo::Render(D3DXMATRIXA16* playerWorld, D3DXMATRIXA16* pMatWorld)
 {
 	RenderUI();
+	RenderFontSysytem();
+
 	if (m_status)
 	{
 		RenderPlayerStat();
@@ -304,13 +331,7 @@ void cPlayerInFo::setRC()
 			(int)m_skill_UI[i].m_x + 46,
 			(int)m_skill_UI[i].m_y + 46 };
 
-		m_coolTime_UI[i].m_x = 140 + i * 55;
-		m_coolTime_UI[i].m_y = 800;
-		m_coolTime_UI[i].m_statsRC =
-		{ (int)m_coolTime_UI[i].m_x,
-			(int)m_coolTime_UI[i].m_y,
-			(int)m_coolTime_UI[i].m_x + 46,
-			(int)m_coolTime_UI[i].m_y + 46 };
+
 	}
 
 }
@@ -472,7 +493,7 @@ void cPlayerInFo::SetUI()
 
 	D3DXCreateTextureFromFileEx(
 		g_pD3DDevice,
-		"player/roll.png",
+		"player/musle.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -488,7 +509,7 @@ void cPlayerInFo::SetUI()
 
 	D3DXCreateTextureFromFileEx(
 		g_pD3DDevice,
-		"player/roll2.png",
+		"player/roll.png",
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT_NONPOW2,
 		D3DX_DEFAULT,
@@ -502,23 +523,6 @@ void cPlayerInFo::SetUI()
 		NULL,
 		&m_skill_UI[4].m_EquipUI);
 
-	for (int i = 0; i < 5; i++)
-	{
-		D3DXCreateTextureFromFileEx(
-			g_pD3DDevice,
-			"player/BLACK.png",
-			D3DX_DEFAULT_NONPOW2,
-			D3DX_DEFAULT_NONPOW2,
-			D3DX_DEFAULT,
-			0,
-			D3DFMT_UNKNOWN,
-			D3DPOOL_MANAGED,
-			D3DX_FILTER_NONE,
-			D3DX_DEFAULT,
-			0,
-			&m_coolTime_UI[i].m_EquipUI_info,
-			NULL,
-			&m_coolTime_UI[i].m_EquipUI);
-	}
+
 
 }

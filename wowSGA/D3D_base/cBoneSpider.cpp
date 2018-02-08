@@ -3,11 +3,12 @@
 #include "cSkinnedMesh.h"
 #include "iMap.h"
 #include <time.h>
+#include "cOBB.h"
 
 cBoneSpider::cBoneSpider()
-: m_vecSkinnedMesh(NULL)
-, m_pFont(NULL)
-, m_pSprite(NULL)
+	: m_vecSkinnedMesh(NULL)
+	, m_pFont(NULL)
+	, m_pSprite(NULL)
 {
 	D3DXMatrixIdentity(&matWorld);
 	m_pSkillOn = false;
@@ -20,7 +21,7 @@ cBoneSpider::~cBoneSpider()
 	SAFE_RELEASE(m_pSprite);
 	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++)
 	{
-		for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++){
+		for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++) {
 			SAFE_RELEASE(m_vecSkinnedMesh[i].m_ItemSprite[j].m_pTexture);
 		}
 		SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
@@ -29,7 +30,7 @@ cBoneSpider::~cBoneSpider()
 }
 
 
-void cBoneSpider::addMonster(float x, float y, float z){
+void cBoneSpider::addMonster(float x, float y, float z) {
 	//몬스터를 생성해줌
 
 	EnemySkinnedMesh Monster;
@@ -61,8 +62,8 @@ void cBoneSpider::addMonster(float x, float y, float z){
 	D3DXMATRIXA16	matS;
 	D3DXMatrixIdentity(&Monster.matWorld);
 	D3DXMatrixScaling(&matS, 0.4, 0.4, 0.4);
+	//Monster.matS = matS;
 	Monster.matWorld = matS;
-
 	ZeroMemory(&Monster.m_stMtlNone, sizeof(D3DMATERIAL9));
 	Monster.m_stMtlNone.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
 	Monster.m_stMtlNone.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
@@ -73,14 +74,26 @@ void cBoneSpider::addMonster(float x, float y, float z){
 	Monster.m_stMtlPicked.Diffuse = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
 	Monster.m_stMtlPicked.Specular = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
 
+	D3DXMATRIXA16  matR, matSS, World, matT;
+	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
+	D3DXMatrixScaling(&matSS, 0.009f, 0.009f, 0.009f);
+	D3DXMatrixIdentity(&World);
+	D3DXMatrixTranslation(&matT, 0.0f, 0, -0.3f);
+	World = matSS*matR*matT;
+	Monster.OBB = new cOBB;
+	Monster.OBB->Setup(Monster.m, &World);
+
+
 	D3DXCreateSphere(g_pD3DDevice, Monster.m_Sphere.fRadius, 10, 10,
 		&Monster.m_pMeshSphere, NULL);
 
 	m_vecSkinnedMesh.push_back(Monster);
+
 }
 
 
-void cBoneSpider::SetUp(){
+void cBoneSpider::SetUp() {
+
 	D3DXFONT_DESC stFD;
 	srand(time(NULL));
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
@@ -103,51 +116,53 @@ void cBoneSpider::SetUp(){
 }
 
 
-void cBoneSpider::Update(iMap* pMap){
+void cBoneSpider::Update(iMap* pMap) {
 	//거미 업데이트
-	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
+	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
 		//몬스터 죽음
 		if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
 		matUpdate(i, pMap);
 		m_vecSkinnedMesh[i].m->Update();
 		MonsterAI(i);						//몬스터의 패턴, 스킬
 		MonsterStatus(i); 					//몬스터 상태, 애니메이션
+		m_vecSkinnedMesh[i].OBB->Update(&m_vecSkinnedMesh[i].RT);
 	}
 }
 
 
-void cBoneSpider::Render(){
-	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
+void cBoneSpider::Render() {
+	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
 		m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
 		SphereRender(i, m_vecSkinnedMesh[i].matWorld);
-		if (m_vecSkinnedMesh[i].death){
-			for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++){
+		if (m_vecSkinnedMesh[i].death) {
+			for (size_t j = 0; j < m_vecSkinnedMesh[i].m_ItemSprite.size(); j++) {
 				RenderUI(i, j, 10, 10, 79, 80);
 			}
 		}
+		m_vecSkinnedMesh[i].OBB->Render_Debug(D3DCOLOR_XRGB(192, 0, 0), nullptr, nullptr);
 	}
 	/*if (m_pFont)
 	{
-		char str[128];
-		sprintf(str, "bossHP : %d ", m_vecSkinnedMesh[0].attackTime);
-		std::string sText(str);
-		RECT rc;
-		SetRect(&rc, 100, 630, 300, 200);
+	char str[128];
+	sprintf(str, "bossHP : %d ", m_vecSkinnedMesh[0].attackTime);
+	std::string sText(str);
+	RECT rc;
+	SetRect(&rc, 100, 630, 300, 200);
 
-		m_pFont->DrawText(NULL,
-			sText.c_str(),
-			sText.length(),
-			&rc,
-			DT_LEFT | DT_TOP | DT_NOCLIP,
-			D3DCOLOR_XRGB(255, 255, 255));
+	m_pFont->DrawText(NULL,
+	sText.c_str(),
+	sText.length(),
+	&rc,
+	DT_LEFT | DT_TOP | DT_NOCLIP,
+	D3DCOLOR_XRGB(255, 255, 255));
 	}*/
 }
 
-void cBoneSpider::MonsterInsic(D3DXVECTOR3 d){
+void cBoneSpider::MonsterInsic(D3DXVECTOR3 d) {
 	m_vPlayerPos = d;
 }
 
-void cBoneSpider::HarmDamage(int Damage, size_t i){
+void cBoneSpider::HarmDamage(int Damage, size_t i) {
 	//인자1 : 들어올 데미지, i 타겟이 된 몬스터
 	if (m_vecSkinnedMesh[i].t.HP > (Damage - m_vecSkinnedMesh[i].t.DEF))
 		m_vecSkinnedMesh[i].t.HP -= (Damage - m_vecSkinnedMesh[i].t.DEF);
@@ -155,7 +170,7 @@ void cBoneSpider::HarmDamage(int Damage, size_t i){
 }
 
 //거미 상태
-void cBoneSpider::MonsterStatus(size_t i){
+void cBoneSpider::MonsterStatus(size_t i) {
 	//Z키를 누르면 체력 100 달게 함
 	if (g_pKeyManager->isOnceKeyDown('Z')) {
 		HarmDamage(205, 0);
@@ -185,7 +200,7 @@ void cBoneSpider::MonsterStatus(size_t i){
 
 }
 
-void cBoneSpider::SetupUI(size_t i, size_t a){
+void cBoneSpider::SetupUI(size_t i, size_t a) {
 	ZeroMemory(&m_vecSkinnedMesh[i].m_StInvectory.m_stImageInfo, sizeof(D3DXIMAGE_INFO));
 
 	D3DXCreateTextureFromFileEx(
@@ -204,7 +219,7 @@ void cBoneSpider::SetupUI(size_t i, size_t a){
 		NULL,
 		&m_vecSkinnedMesh[i].m_StInvectory.m_pTexture);
 
-	for (size_t j = 0; j < a; j++){
+	for (size_t j = 0; j < a; j++) {
 		ZeroMemory(&m_vecSkinnedMesh[i].m_StItemSprite.m_stImageInfo, sizeof(D3DXIMAGE_INFO));
 
 		D3DXCreateTextureFromFileEx(
@@ -227,7 +242,7 @@ void cBoneSpider::SetupUI(size_t i, size_t a){
 	}
 }
 
-void cBoneSpider::RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY){
+void cBoneSpider::RenderUI(size_t i, size_t j, int x, int y, int sizeX, int sizeY) {
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 	m_pSprite->Draw(
 		m_vecSkinnedMesh[i].m_StInvectory.m_pTexture,
@@ -253,12 +268,12 @@ void cBoneSpider::RenderUI(size_t i, size_t j, int x, int y, int sizeX, int size
 	m_vecSkinnedMesh[i].m_ItemSprite[j].rc.bottom = sizeY + y;
 }
 
-void cBoneSpider::MonsterDeath(size_t i){
+void cBoneSpider::MonsterDeath(size_t i) {
 	//HP가 0이 되면 죽는 모션이 나온다.
 	m_vecSkinnedMesh[i].deathTime++;
 
 
-	if (!m_vecSkinnedMesh[i].death){
+	if (!m_vecSkinnedMesh[i].death) {
 		size_t a = rand() % 4 + 1;
 		SetupUI(i, a);
 		m_vecSkinnedMesh[i].death = true;
@@ -266,7 +281,7 @@ void cBoneSpider::MonsterDeath(size_t i){
 
 	else {
 		//죽는 모션 후 일정시간이 지나면 해당 애니메이션은 정지시킨다.
-		if (m_vecSkinnedMesh[i].deathTime > 45){
+		if (m_vecSkinnedMesh[i].deathTime > 45) {
 			m_vecSkinnedMesh[i].m->GetAnimationController()->SetTrackEnable(0, false);
 
 			//SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
@@ -277,7 +292,7 @@ void cBoneSpider::MonsterDeath(size_t i){
 }
 
 //거미 AI1
-void cBoneSpider::MonsterAI(size_t i){
+void cBoneSpider::MonsterAI(size_t i) {
 	D3DXVECTOR3 pos[100], dir[100];
 	pos[i] = m_vecSkinnedMesh[i].m_vPos;
 	dir[i] = m_vecSkinnedMesh[i].m_vDir;
@@ -336,7 +351,7 @@ void cBoneSpider::MonsterAI(size_t i){
 
 		//공격상태가 아니라면 일정시간이 지난 후 따라감
 		if (m_vecSkinnedMesh[i].time > 50 &&
-			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK){
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK) {
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_RUN;
 			if (m_vecSkinnedMesh[i].attackTime < m_vecSkinnedMesh[i].attackSpeed - 1) m_vecSkinnedMesh[i].attackTime++;
 			pos[i] += dir[i] * m_vecSkinnedMesh[i].t.Speed;
@@ -346,14 +361,14 @@ void cBoneSpider::MonsterAI(size_t i){
 
 		//일정시간이 지나지 않았다면 스탠드 상태
 		else if (m_vecSkinnedMesh[i].time <= 50 &&
-			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK){
+			m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_ATTACK) {
 			if (m_vecSkinnedMesh[i].attackTime < m_vecSkinnedMesh[i].attackSpeed - 1) m_vecSkinnedMesh[i].attackTime++;
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		}
 	}
 
 	//적이 인식범위 밖으로 빠져나갔다면 행동을 멈춘다.
-	if (m_vecSkinnedMesh[i].distance > m_vecSkinnedMesh[i].MaxRange){
+	if (m_vecSkinnedMesh[i].distance > m_vecSkinnedMesh[i].MaxRange) {
 		m_vecSkinnedMesh[i].time = 0;
 		//if (m_vecSkinnedMesh[i].ENUM_MONSTER != MONSTER_RUN) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		srand(time(NULL));
@@ -361,7 +376,7 @@ void cBoneSpider::MonsterAI(size_t i){
 		D3DXVECTOR3 vDir, m_vDir, vCenter;
 		m_vDir = m_vecSkinnedMesh[i].m_vDir;
 		vCenter = m_vecSkinnedMesh[i].m_vPos;
-		if (m_vecSkinnedMesh[i].RunCount < 0){
+		if (m_vecSkinnedMesh[i].RunCount < 0) {
 			vDir.y = 0.f;
 
 			D3DXMATRIXA16 matR;
@@ -376,7 +391,7 @@ void cBoneSpider::MonsterAI(size_t i){
 			m_vecSkinnedMesh[i].termCount++;
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 
-			if (m_vecSkinnedMesh[i].termCount > rand() % 300 + 50){
+			if (m_vecSkinnedMesh[i].termCount > rand() % 300 + 50) {
 				m_vecSkinnedMesh[i].termCount = 0;
 				m_vecSkinnedMesh[i].RunCount = rand() % 250 + 10;
 			}
@@ -385,7 +400,7 @@ void cBoneSpider::MonsterAI(size_t i){
 		D3DXVec3Normalize(&m_vDir, &m_vDir);
 
 		m_vecSkinnedMesh[i].RunCount--;
-		if (m_vecSkinnedMesh[i].RunCount > 0){
+		if (m_vecSkinnedMesh[i].RunCount > 0) {
 			m_vecSkinnedMesh[i].termCount = 0;
 			vCenter += m_vDir * m_vecSkinnedMesh[i].t.Speed;
 			m_vecSkinnedMesh[i].m_vPos = vCenter;
@@ -408,11 +423,11 @@ void cBoneSpider::MonsterAI(size_t i){
 		m_vecSkinnedMesh[i].attackTime++;
 
 		//어택타임이 차면 공격
-		if (m_vecSkinnedMesh[i].attackTime < 50){
+		if (m_vecSkinnedMesh[i].attackTime < 50) {
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_ATTACK;
 		}
 		//하거나 쉬도록 함
-		else if (m_vecSkinnedMesh[i].attackTime > 50){
+		else if (m_vecSkinnedMesh[i].attackTime > 50) {
 			m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STAND;
 		}
 	}
@@ -436,7 +451,7 @@ void cBoneSpider::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 }
 
 //스피어 렌더(골드, 몬스터)
-void cBoneSpider::SphereRender(size_t i, D3DXMATRIXA16& m_matWorld){
+void cBoneSpider::SphereRender(size_t i, D3DXMATRIXA16& m_matWorld) {
 	//스피어부분 렌더
 	g_pD3DDevice->SetTexture(0, NULL);
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
@@ -446,7 +461,7 @@ void cBoneSpider::SphereRender(size_t i, D3DXMATRIXA16& m_matWorld){
 	//m_vecSkinnedMesh[i].m_pMeshSphere->DrawSubset(0);
 }
 
-void cBoneSpider::matUpdate(size_t i, iMap* pMap){
+void cBoneSpider::matUpdate(size_t i, iMap* pMap) {
 	D3DXMATRIXA16 matR, matS, matT;
 	D3DXMatrixScaling(&matS, 0.07f, 0.07f, 0.07f);
 
@@ -485,4 +500,8 @@ void cBoneSpider::matUpdate(size_t i, iMap* pMap){
 	D3DXMatrixTranslation(&matT, m_vecSkinnedMesh[i].m_vPos.x, m_vecSkinnedMesh[i].m_vPos.y + 0.45, m_vecSkinnedMesh[i].m_vPos.z);
 
 	m_vecSkinnedMesh[i].matWorld = matS * matR * matT;
+
+	D3DXMATRIXA16 matTT;
+	D3DXMatrixTranslation(&matTT, -0.2f, 0, 0);
+	m_vecSkinnedMesh[i].RT = matR * matT;
 }
