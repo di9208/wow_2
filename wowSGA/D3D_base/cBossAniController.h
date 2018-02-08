@@ -38,5 +38,8 @@ public:
 	void Collision(cOBB* PlayerBox);
 	void skillRender();
 	cOBB* getOBB( ) { return m_pBossOBB; }
+	D3DXVECTOR3 getOBBCenter();
+	float getOBBhalf();
+	E_BOSS_STATE getCondition() { return cBoss_STATE; }
 };
 
