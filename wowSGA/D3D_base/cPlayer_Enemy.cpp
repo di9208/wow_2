@@ -181,6 +181,7 @@ void cPlayer_Enemy::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 				//m_Player->setUI(true);
 				m_Player->setHp(m_EnemyControl->getALLEnemyCenter()[i].HP,
 					m_EnemyControl->getALLEnemyCenter()[i].Max_HP);
+				m_Player->checkUI();
 				break;
 			}
 		}

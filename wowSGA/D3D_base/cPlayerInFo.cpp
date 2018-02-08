@@ -89,12 +89,6 @@ void cPlayerInFo::Setup(cSkinnedMesh* playerSkinned, D3DXMATRIXA16* playerWorld)
 
 void cPlayerInFo::Update(condition* pCondition, D3DXMATRIXA16* pMatWorld)
 {
-	if (g_pKeyManager->isOnceKeyDown('Q'))
-	{
-		if (m_PlayerInFo.HP > 0)m_PlayerInFo.HP -= 10;
-		ax = m_PlayerInFo.HP;
-		*pCondition = HURT;
-	}
 	if (g_pKeyManager->isOnceKeyDown('E'))
 	{
 		if (close_button->Gethidden())
@@ -148,7 +142,7 @@ void cPlayerInFo::SetFont()
 	strcpy_s(stFD.FaceName, "FRIZQT__");
 
 	D3DXCreateFontIndirect(g_pD3DDevice, &stFD, &m_pFont);
-
+	D3DXCreateFontIndirect(g_pD3DDevice, &stFD, &m_HpFont);
 	stFD.Height = 30;
 	stFD.Width = 15;
 	AddFontResource("font/umberto.ttf");

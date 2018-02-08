@@ -297,6 +297,7 @@ void cEnemyControl::BossSetup()
 	stBoss1.stat.ATK = 100;
 	stBoss1.stat.DEF = 20;
 	stBoss1.stat.HP = 500;
+	stBoss1.stat.Max_HP = 500;
 	stBoss1.chk = false;
 	stBoss1.kind = BOSS_ARTHAS;
 	stBoss1.e_boss_state = E_BOSS_START;

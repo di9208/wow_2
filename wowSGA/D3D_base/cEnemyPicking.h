@@ -16,8 +16,8 @@ class cEnemyPicking
 	LPD3DXFONT					m_HpFont;
 	D3DXIMAGE_INFO				m_HPinfo;
 	LPDIRECT3DTEXTURE9			m_HP;
-	int							m_HPint;
-	int							m_MaxHPint;
+	float							m_HPint;
+	float							m_MaxHPint;
 public:
 	cEnemyPicking();
 	~cEnemyPicking();
@@ -27,10 +27,8 @@ public:
 	void Render();
 	void SetFont();
 	void SetUI();
-	void RenderUI();
-	void RenderFont();
 
-	void DistanceSet(D3DXVECTOR3 Player, D3DXVECTOR3 Enemy);
+	void RenderFont();
 
 	void HPset(float hp, float maxHp);
 

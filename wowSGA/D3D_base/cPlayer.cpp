@@ -123,7 +123,6 @@ void cPlayer::SetPlayerPick(std::vector<ST_PC_VERTEX> m_vecVertex)
 void cPlayer::connet_shop_test_class(shop_TEST_CLASS * connect_shop_test)
 {
 	m_playerInFo->getItem(connect_shop_test);
-	connect_shop_test->setting_playerinfo(m_playerInFo);
 }
 void cPlayer::setUI(bool check)
 {
@@ -133,6 +132,11 @@ void cPlayer::setUI(bool check)
 void cPlayer::setHp(int hp, int maxHP)
 {
 	m_EnemyPicking->HPset(hp, maxHP);
+}
+
+void cPlayer::checkUI()
+{
+	return m_EnemyPicking->SetUiOn(true);
 }
 
 cOBB * cPlayer::getWeapon()
