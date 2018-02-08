@@ -1,5 +1,6 @@
 #pragma once
 #include "cEnemyManager.h"
+#include "cUnit.h"
 
 class cBoneSpider;
 class cArchDruid;
@@ -60,6 +61,8 @@ private:
 
 private:
 	SYNTHESIZE(std::vector<stBoss>, m_vecBoss, vecBoss);
+
+
 	stBoss				stBoss;
 	D3DXMATRIXA16		matR;
 	//======================================================
@@ -124,13 +127,41 @@ public:
 	void SummonsEnemy();
 	cEnemyControl();
 	~cEnemyControl();
-
+	//-------------------------------------------------------------------------------
 	int getWolfVectorSize();
 	cOBB* getWolfOBB(int i);
 
+	MONSTER_STATUS getWolfCondition(int i);
+
+	void setWolfDamageCheck(int i, bool check);
+	bool getWolfDamageCheck(int i);
+
+	void setWolfTimeCheck(int i, bool check);
+	bool getWolfTimeCheck(int i);
+
+	void  setWolfDamageTimeCheck(int i, float time);
+	float getWolfDamageTimeCheck(int i);
+	//===============================================================================
 	int getSpiderVectorSize();
 	cOBB* getSpiderOBB(int i);
 
+	MONSTER_STATUS getSpiderCondition(int i);
+
+	void setSpiderDamageCheck(int i, bool check);
+	bool getSpiderDamageCheck(int i);
+
+	void setSpiderTimeCheck(int i, bool check);
+	bool getSpiderTimeCheck(int i);
+
+	void  setSpiderDamageTimeCheck(int i, float time);
+	float getSpiderDamageTimeCheck(int i);
+	//=========================================================================
 	cOBB* getBossOBB();
+	E_BOSS_STATE getBossCondition();
+	MONSTER_KIND getArthasKind() { return m_vecBoss[0].kind; }
+	float getMonsterHP() { return m_vecBoss[0].stat.HP; }
+	float getMonsterMaxHP() { return m_vecBoss[0].stat.Max_HP; }
+	//==================================================================
+	std::vector<Enemy_Sphere> getALLEnemyCenter();
 };
 

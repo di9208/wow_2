@@ -23,7 +23,6 @@ class item_class
 		using_item	//Æ÷¼Ç
 	};
 
-
 	struct item_option
 	{
 		int ATK;

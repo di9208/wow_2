@@ -11,6 +11,11 @@ class cPlayer_Enemy
 	cEnemyControl*	m_EnemyControl;
 	cStage1*		m_Stage1;
 	cFrustum*		m_Frustum;
+
+	//===================================
+	bool			RichKing;
+	bool			RichKingCheck;
+	float			RichKingTime;
 public:
 	cPlayer_Enemy();
 	~cPlayer_Enemy();
