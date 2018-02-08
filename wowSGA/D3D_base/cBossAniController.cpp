@@ -198,6 +198,7 @@ void cBossAniController::skillRender()
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.f);
 	D3DXMatrixTranslation(&matT, m_vBossPos.x, m_vBossPos.y, m_vBossPos.z);
 	World = matS * matR * matT;
+	m_pSkinnedMeshSkill2->setAnimationSpeed(0.1f);
 	m_pSkinnedMeshSkill2->Render(NULL, &World);
 
 

@@ -151,7 +151,6 @@
     <ClInclude Include="cActionSeq.h" />
     <ClInclude Include="cAllocateHierarchy.h" />
     <ClInclude Include="cArchDruid.h" />
-    <ClInclude Include="cArthasPaticle.h" />
     <ClInclude Include="cAseLoader.h" />
     <ClInclude Include="cAseNode.h" />
     <ClInclude Include="cBoneSpider.h" />
@@ -235,7 +234,6 @@
     <ClCompile Include="cActionSeq.cpp" />
     <ClCompile Include="cAllocateHierarchy.cpp" />
     <ClCompile Include="cArchDruid.cpp" />
-    <ClCompile Include="cArthasPaticle.cpp" />
     <ClCompile Include="cAseLoader.cpp" />
     <ClCompile Include="cAseNode.cpp" />
     <ClCompile Include="cBoneSpider.cpp" />
