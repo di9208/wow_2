@@ -350,7 +350,7 @@ void cPlayerInFo::getItem(shop_TEST_CLASS* iven_item)
 
 				for (int i = 0; i < player_Equite_vector.size(); i++)
 				{
-					if (player_Equite_vector[i]->GetI_type() == iven_item->get_inven()->Getvector_inven()[iven_item->Getpick_number()]->GetI_type())
+					if (player_Equite_vector[i]->Get_Itype() == iven_item->get_inven()->Getvector_inven()[iven_item->Getpick_number()]->Get_Itype())
 					{
 						item_class* tmep;
 						tmep = new item_class;
@@ -437,7 +437,7 @@ void cPlayerInFo::setting_EQUIT_UI()
 	{
 		char chartext[1024];
 
-		sprintf(chartext, "shop_data/%s", player_Equite_vector[i]->GetI_image().c_str());
+		sprintf(chartext, "shop_data/%s", player_Equite_vector[i]->Get_Iimage().c_str());
 
 		item_slot[i]->SetTexture(chartext);
 		item_slot[i]->SetPos(D3DXVECTOR3(m_stats_UI[i].m_x, m_stats_UI[i].m_y, 0));
@@ -451,8 +451,8 @@ void cPlayerInFo::EQUIT_ITEM()
 	int def = 0;
 	for (int i = 0; i < player_Equite_vector.size(); i++)
 	{
-		atk += player_Equite_vector[i]->GetI_option().ATK;
-		def += player_Equite_vector[i]->GetI_option().DEF;
+		atk += player_Equite_vector[i]->Get_Ioption().ATK;
+		def += player_Equite_vector[i]->Get_Ioption().DEF;
 	}
 	m_PlayerInFo.ATK = atk + curATK;
 	m_PlayerInFo.DEF = def + curDEF;

@@ -134,9 +134,9 @@ void shop_class::buy(IN int nums, OUT int & money, OUT item_class* buyitem)
 {
 	for (int i = 0; i < v_shop_sell_Things.size(); i++)
 	{
-		if (v_shop_sell_Things[i]->GetI_num() == nums)
+		if (v_shop_sell_Things[i]->Get_Inum() == nums)
 		{
-			if (money - v_shop_sell_Things[i]->GetI_option().Price < 0)
+			if (money - v_shop_sell_Things[i]->Get_Ioption().Price < 0)
 			{
 				break;
 				//::MessageBox(0, "Àú·± µ·ÀÌ ¾ø¾î¿ä ¤»", "»óÁ¡ ¿Ð", 0);
@@ -144,7 +144,7 @@ void shop_class::buy(IN int nums, OUT int & money, OUT item_class* buyitem)
 			else
 			{
 				*buyitem = *v_shop_sell_Things[i];
-				money -= v_shop_sell_Things[i]->GetI_option().Price;
+				money -= v_shop_sell_Things[i]->Get_Ioption().Price;
 			}
 		}
 	}
@@ -154,10 +154,10 @@ void shop_class::sell(IN int nums, OUT int & money)
 {
 	for (int i = 0; i < v_shop_sell_Things.size(); i++)
 	{
-		if (v_shop_sell_Things[i]->GetI_num() == nums)
+		if (v_shop_sell_Things[i]->Get_Inum() == nums)
 		{
 			before_selling_Things.push_back(v_shop_sell_Things[i]);
-			money += v_shop_sell_Things[i]->GetI_option().Price;
+			money += v_shop_sell_Things[i]->Get_Ioption().Price;
 		}
 	}
 }
@@ -166,11 +166,11 @@ void shop_class::rebuy(IN int nums, OUT int & money, OUT item_class* buyitem)
 {
 	for (int i = 0; i < v_shop_sell_Things.size(); i++)
 	{
-		if (v_shop_sell_Things[i]->GetI_num() == nums)
+		if (v_shop_sell_Things[i]->Get_Inum() == nums)
 		{
-			float seal = v_shop_sell_Things[i]->GetI_option().Price * 0.25;
+			float seal = v_shop_sell_Things[i]->Get_Ioption().Price * 0.25;
 
-			if (money - v_shop_sell_Things[i]->GetI_option().Price - seal < 0)
+			if (money - v_shop_sell_Things[i]->Get_Ioption().Price - seal < 0)
 			{
 				break;
 				//::MessageBox(0, "Àú·± µ·ÀÌ ¾ø¾î¿ä ¤»", "»óÁ¡ ¿Ð", 0);
@@ -178,7 +178,7 @@ void shop_class::rebuy(IN int nums, OUT int & money, OUT item_class* buyitem)
 			else
 			{
 				*buyitem = *v_shop_sell_Things[i];
-				money -= v_shop_sell_Things[i]->GetI_option().Price - seal;
+				money -= v_shop_sell_Things[i]->Get_Ioption().Price - seal;
 			}
 		}
 	}
@@ -727,24 +727,24 @@ void shop_class::setting_show_item_UI()
 	{
 		if (v_shop_sell_Things.size() <= i) break;
 
-		item_slot[i % 10].item_num = v_shop_sell_Things[i]->GetI_num();
+		item_slot[i % 10].item_num = v_shop_sell_Things[i]->Get_Inum();
 
 		char chartext[1024];
-		sprintf(chartext, "shop_data/%s", v_shop_sell_Things[i]->GetI_image().c_str());
+		sprintf(chartext, "shop_data/%s", v_shop_sell_Things[i]->Get_Iimage().c_str());
 
 		item_slot[i % 10].item_slot->SetTexture(chartext);
 		item_slot[i % 10].item_slot->SetScal(D3DXVECTOR3(0.58, 0.58, 0));
 		item_slot[i % 10].item_slot->SetPos(D3DXVECTOR3(Shop_UI->GetPos().x + 24 + 160 * (i % 2), Shop_UI->GetPos().y + 80 + 48 * (i / 2), 0));
 
-		sprintf(chartext, "%s", (v_shop_sell_Things[i]->GetI_name()));
+		//sprintf(chartext, "%s", (v_shop_sell_Things[i]->GetI_name()));
 
-		item_slot[i % 10].item_Main_name->SetupText(chartext, ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
+		item_slot[i % 10].item_Main_name->SetupText(std::string(v_shop_sell_Things[i]->Get_Iname()), ST_SIZE(150, 25), cFontManager::FT_STORE, D3DXCOLOR(255, 255, 0, 255));
 		item_slot[i % 10].item_Main_name->SetPos(D3DXVECTOR3(Shop_UI->GetPos().x + 70 + 160 * (i % 2), Shop_UI->GetPos().y + 80 + 48 * (i / 2), 0));
 
 		setting_moneyFram(Shop_UI->GetPos().x + 70 + 160 * (i % 2),
 			Shop_UI->GetPos().y + 80 + 48 * (i / 2),
 			i,
-			v_shop_sell_Things[i]->GetI_option().Price);
+			v_shop_sell_Things[i]->Get_Ioption().Price);
 	}
 }
 

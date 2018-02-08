@@ -110,9 +110,9 @@ void inventory::Setting_items()
 
 		char chartext[1024];
 
-		sprintf(chartext, "shop_data/%s", V_INVEN[i]->GetI_image().c_str());
+		sprintf(chartext, "shop_data/%s", V_INVEN[i]->Get_Iimage().c_str());
 
-		item_slot[i].item_num = V_INVEN[i]->GetI_num();
+		item_slot[i].item_num = V_INVEN[i]->Get_Inum();
 
 		item_slot[i].item_slot->SetTexture(chartext);
 		item_slot[i].item_slot->SetPos(D3DXVECTOR3(inven_UI->GetPos().x + 18 + (i % 4) * 42, inven_UI->GetPos().y + 66 + (i / 4) * 42, 0));

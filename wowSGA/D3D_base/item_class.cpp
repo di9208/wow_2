@@ -4,22 +4,7 @@
 
 item_class::item_class()
 {
-	ZeroMemory(&Io, sizeof(item_option));
-	ZeroMemory(&Iw, sizeof(item_where));
-	ZeroMemory(&It, sizeof(item_type));
-	ZeroMemory(&In, sizeof(std::string));
-	ZeroMemory(&Ist, sizeof(std::string));
-	ZeroMemory(&Rc, sizeof(RECT));
-
-	Inum = 0;
-	Ix = 0;
-	Iy = 0;
-	IW = 0;
-	IH = 0;
-	Iv = 0;
-	Ie = NULL;
-	Ii = "";
-	Ipicking = false;
+	//Ipicking = false;
 }
 
 
