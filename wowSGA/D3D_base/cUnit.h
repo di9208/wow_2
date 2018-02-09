@@ -15,7 +15,7 @@ struct TagUnit
 	float		Int;	//Áö´É
 
 	bool		Death;	//»ç¸Á
-
+	bool		Hurt;
 	float		Exp;	//°æÇèÄ¡
 	float		Gold;	//µ·
 };

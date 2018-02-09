@@ -17,7 +17,9 @@ cPlayer::cPlayer()
 	m_playerInFo(NULL),
 	m_EnemyPos(0, 0, 0),
 	m_playerPicking(NULL),
-	m_EnemyPicking(NULL)
+	m_EnemyPicking(NULL),
+	weaponNUM(1),
+	WeaponNUMCheck(0)
 {
 }
 
@@ -67,15 +69,20 @@ void cPlayer::Update(iMap* m_map)
 		m_playerSkill->Update(&m_chractor_condition, m_playerAnimController->GetAniCheck());
 
 	if (m_Weapon)
+	{	
 		m_Weapon->Update(&m_matWorld, m_playerAnimController->GetFindBONE("character_human_male_humanmale_hd_bone_110"));
-
+		
+		
+	}
 	D3DXMATRIXA16 mat, matR, matS;
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
 	D3DXMatrixScaling(&matS, 0.15f, 0.15f, 0.15f);
 	mat = matR * m_matWorld;
 
 	if (m_playerInFo)
+	{
 		m_playerInFo->Update(&m_chractor_condition, &m_matWorld);
+	}
 
 
 

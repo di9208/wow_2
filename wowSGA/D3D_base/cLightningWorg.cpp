@@ -39,13 +39,17 @@ cLightningWorg::~cLightningWorg()
 
 void cLightningWorg::getWeaponHit(int i, cOBB * PlayerWeapon)
 {
-	if (PlayerWeapon)
+	if (m_vecSkinnedMesh[i].Hurt == false)
 	{
-		if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
+		if (PlayerWeapon)
 		{
-			if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
+			if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
 			{
-				m_vecSkinnedMesh[i].t.HP -= 10;
+				if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
+				{
+					m_vecSkinnedMesh[i].t.HP -= 10;
+					m_vecSkinnedMesh[i].Hurt = true;
+				}
 			}
 		}
 	}

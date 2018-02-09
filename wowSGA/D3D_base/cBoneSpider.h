@@ -37,7 +37,7 @@ class cBoneSpider : public cUnit
 		bool		Damage;
 		float		Damage_time;
 		float		TimeCheck;
-
+		bool		Hurt;
 		//몬스터 인식용
 		D3DXVECTOR3					m_vPos;
 		D3DXVECTOR3					m_vDir;
@@ -124,6 +124,7 @@ public:
 	float getMonsterMaxHP(int i) { return m_vecSkinnedMesh[i].MaxHP; }
 
 	void getWeaponHit(int i, cOBB * PlayerWeapon);
+	void setHurt(int i, bool check) { m_vecSkinnedMesh[i].Hurt = check; };
 
 	cBoneSpider();
 	~cBoneSpider();

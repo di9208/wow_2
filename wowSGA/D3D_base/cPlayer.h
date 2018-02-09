@@ -23,7 +23,8 @@ class cPlayer :public cCharacter
 	cEnemyPicking*			m_EnemyPicking;
 	D3DXVECTOR3				m_EnemyPos;
 	
-
+	int weaponNUM;
+	int WeaponNUMCheck;
 public:
 	cPlayer();
 	~cPlayer();

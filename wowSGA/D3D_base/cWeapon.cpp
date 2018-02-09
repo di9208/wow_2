@@ -13,6 +13,7 @@ cWeapon::cWeapon()
 	, m_changeTime(m_changeTime)
 	, m_weaponOBB(NULL)
 	, m_hp(100)
+	, m_Equip(true)
 {
 
 }
@@ -39,7 +40,7 @@ void cWeapon::Setup(D3DXMATRIXA16* c_charactor, ST_BONE* c_hand, D3DXMATRIXA16* 
 
 	D3DXMATRIXA16  matR, matS, World;
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
-	D3DXMatrixScaling(&matS, 0.015f, 0.015f, 0.015f);
+	D3DXMatrixScaling(&matS, 0.025f, 0.025f, 0.025f);
 	D3DXMatrixIdentity(&World);
 	World = matS * matR;
 	D3DXMatrixIdentity(&m_World);

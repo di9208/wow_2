@@ -72,6 +72,8 @@ private:
 	LPD3DXSPRITE UI_sprite;
 	shop_TEST_CLASS* inven_copy;
 	SYNTHESIZE(cUIButton*, close_button, Equite_window);
+	bool	m_hurt;
+	SYNTHESIZE(bool, m_EQUIP, EQUIP);
 public:
 	cPlayerInFo();
 	~cPlayerInFo();
@@ -97,4 +99,6 @@ public:
 	void EQUIT_ITEM();
 
 	void UnEquite_Item();
+
+	int findItemNUM();
 };

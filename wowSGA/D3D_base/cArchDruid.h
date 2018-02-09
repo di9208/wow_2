@@ -137,10 +137,9 @@ public:
 	void getWeaponHit(int i, cOBB * PlayerWeapon);
 	void setHurt(int i, bool check) { m_vecSkinnedMesh[i].Hurt = check; };
 
-
 	int getVectorSize() { return m_vecSkinnedMesh.size(); }
 	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].MonsterOBB; }
-
+	cOBB* getBULLET(int i) { return m_vecSkinnedMesh[i].MonsterAttackOBB; }
 	cArchDruid();
 	~cArchDruid();
 };

@@ -24,6 +24,8 @@ cPlayerInFo::cPlayerInFo()
 	, m_HpFont(NULL)
 	, curATK(0)
 	, curDEF(0)
+	, m_hurt(false)
+	, m_EQUIP(false)
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -89,6 +91,17 @@ void cPlayerInFo::Setup(cSkinnedMesh* playerSkinned, D3DXMATRIXA16* playerWorld)
 
 void cPlayerInFo::Update(condition* pCondition, D3DXMATRIXA16* pMatWorld)
 {
+	if (m_hurt)
+	{
+		/*if (m_PlayerInFo.HP > 0)m_PlayerInFo.HP -= 10;
+		ax = m_PlayerInFo.HP;*/
+		*pCondition = HURT;
+		m_hurt = false;
+		if (m_PlayerInFo.HP <= 0)
+		{
+			*pCondition = DEATH;
+		}
+	}
 	if (g_pKeyManager->isOnceKeyDown('E'))
 	{
 		if (close_button->Gethidden())
@@ -337,6 +350,7 @@ void cPlayerInFo::Collsion(cOBB * EnemyBox)
 			{
 				m_PlayerInFo.HP -= 10;
 				ax = m_PlayerInFo.HP;
+				m_hurt = true;
 			}
 			else
 			{
@@ -499,9 +513,23 @@ void cPlayerInFo::UnEquite_Item()
 			{
 				inven_copy->get_inven()->Add_inven(player_Equite_vector[i]);
 				player_Equite_vector.erase(player_Equite_vector.begin() + i);
+			
 			}
 		}
 	}
+}
+
+int cPlayerInFo::findItemNUM()
+{
+	if (player_Equite_vector.size() > 0)
+	{
+		return 	player_Equite_vector.back()->Get_Inum();
+	}
+	else
+	{
+		return 0;
+	}
+	
 }
 
 void cPlayerInFo::SetUI()

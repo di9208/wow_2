@@ -93,6 +93,27 @@ void cEnemyPicking::Update(MONSTER_KIND monster)
 			NULL,
 			&m_EnemyIcon);
 	}
+	break;
+	case KIND_DRUID:
+	{
+		SAFE_RELEASE(m_EnemyIcon);
+		D3DXCreateTextureFromFileEx(
+			g_pD3DDevice,
+			"player/druid.png",
+			D3DX_DEFAULT_NONPOW2,
+			D3DX_DEFAULT_NONPOW2,
+			D3DX_DEFAULT,
+			0,
+			D3DFMT_UNKNOWN,
+			D3DPOOL_MANAGED,
+			D3DX_FILTER_NONE,
+			D3DX_DEFAULT,
+			0,
+			&m_EnemyIcon_info,
+			NULL,
+			&m_EnemyIcon);
+	}
+	break;
 	}
 }
 

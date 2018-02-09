@@ -6,6 +6,24 @@
 #include "cUIImage.h"
 #include <time.h>
 
+void cArchDruid::getWeaponHit(int i, cOBB * PlayerWeapon)
+{
+	if (m_vecSkinnedMesh[i].Hurt == false)
+	{
+		if (PlayerWeapon)
+		{
+			if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
+			{
+				if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
+				{
+					m_vecSkinnedMesh[i].t.HP -= 10;
+					m_vecSkinnedMesh[i].Hurt = true;
+				}
+			}
+		}
+	}
+}
+
 cArchDruid::cArchDruid()
 : m_vecSkinnedMesh(NULL)
 , m_pFont(NULL)

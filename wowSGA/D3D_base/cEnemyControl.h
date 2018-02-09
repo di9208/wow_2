@@ -26,6 +26,7 @@ struct stBoss
 	int						count;				// 보스접근후 모션쓰기위한 카운트
 	bool					chk;				// 접근했는지 안했는지
 	bool					chkDist;			// 거리관련 불값
+	bool					Hurt;
 	E_BOSS_STATE			e_boss_state;		// 보스 상태
 	E_BOSS_RAG_STATE		e_boss_rag_state;	// 라그 상태
 	cParticle*				particle;			// 리치왕 파티클
@@ -169,7 +170,7 @@ public:
 	//===========================================================
 	int getDruidVectorSize();
 	cOBB* getDruidOBB(int i);
-
+	cOBB* getBulletOBB(int i);
 	MONSTER_STATUS getDruidCondition(int i);
 
 	void setDruidDamageCheck(int i, bool check);
@@ -186,11 +187,19 @@ public:
 	MONSTER_KIND getArthasKind() { return m_vecBoss[0].kind; }
 	float getMonsterHP() { return m_vecBoss[0].stat.HP; }
 	float getMonsterMaxHP() { return m_vecBoss[0].stat.Max_HP; }
+	//-----------------------------------------------------
+	cOBB* getRagOBB();
+	E_BOSS_RAG_STATE getRagCondition();
+	MONSTER_KIND getRagKind() { return m_vecBoss_rag[0].kind; }
+	float getRagHP() { return m_vecBoss_rag[0].stat.HP; }
+	float getRagMaxHP() { return m_vecBoss_rag[0].stat.Max_HP; }
 	//==================================================================
 	std::vector<Enemy_Sphere> getALLEnemyCenter();
 
 	//무기충돌----------------------------------------------------
 	void WeaponHit(cOBB * PlayerWeapon);
 	void getWeaponHitBOSS(cOBB * PlayerWeapon);
+	void WeaponHit_AFTER(cOBB * PlayerWeapon);
+	void getWeaponHitBOSS_After();
 };
 
