@@ -38,7 +38,7 @@ cBoneSpider::~cBoneSpider()
 	}
 }
 
-void cBoneSpider::getWeaponHit(int i, cOBB * PlayerWeapon)
+void cBoneSpider::getWeaponHit(int i, cOBB * PlayerWeapon,float Damage)
 {
 	if (m_vecSkinnedMesh[i].Hurt == false)
 	{
@@ -48,7 +48,7 @@ void cBoneSpider::getWeaponHit(int i, cOBB * PlayerWeapon)
 			{
 				if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
 				{
-					m_vecSkinnedMesh[i].t.HP -= 10;
+					m_vecSkinnedMesh[i].t.HP -= Damage;
 					m_vecSkinnedMesh[i].Hurt = true;
 				}
 			}

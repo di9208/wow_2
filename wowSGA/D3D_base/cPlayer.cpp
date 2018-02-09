@@ -113,9 +113,9 @@ void cPlayer::UpdatePicking(MONSTER_KIND monster)
 }
 
 
-void cPlayer::Collsion(cOBB * EnemyBox)
+void cPlayer::Collsion(cOBB * EnemyBox,float Damage)
 {
-	m_playerInFo->Collsion(EnemyBox);
+	m_playerInFo->Collsion(EnemyBox, Damage);
 }
 
 void cPlayer::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -149,6 +149,11 @@ void cPlayer::setHp(int hp, int maxHP)
 void cPlayer::checkUI()
 {
 	return m_EnemyPicking->SetUiOn(true);
+}
+
+float cPlayer::getPlayerATK()
+{
+	return m_playerInFo->GetPlayerInFo().ATK;
 }
 
 cOBB * cPlayer::getWeapon()

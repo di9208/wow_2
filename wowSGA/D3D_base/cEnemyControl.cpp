@@ -56,6 +56,11 @@ cOBB * cEnemyControl::getWolfOBB(int i)
 	return m_pWorg->getOBB(i);
 }
 
+float cEnemyControl::getWolfATK(int i)
+{
+	return m_pWorg->getATK(i);
+}
+
 MONSTER_STATUS cEnemyControl::getWolfCondition(int i)
 {
 	return m_pWorg->getCondition(i);
@@ -99,6 +104,11 @@ int cEnemyControl::getSpiderVectorSize()
 cOBB * cEnemyControl::getSpiderOBB(int i)
 {
 	return m_pSpider->getOBB(i);
+}
+
+float cEnemyControl::getSpiderATK(int i)
+{
+	return m_pSpider->getATK(i);
 }
 
 MONSTER_STATUS cEnemyControl::getSpiderCondition(int i)
@@ -230,6 +240,16 @@ std::vector<Enemy_Sphere> cEnemyControl::getALLEnemyCenter()
 		m_sphre.Max_HP = m_pSpider->getMonsterMaxHP(i);
 		ALL_Mon.push_back(m_sphre);
 	}
+	for (int i = 0; i < getDruidVectorSize(); i++)
+	{
+		m_sphre.vCenter = m_pDruid->getOBBCenter(i);
+		m_sphre.bIsPicked = false;
+		m_sphre.fRadius = m_pDruid->getOBBhalf(i);
+		m_sphre.Mons = m_pDruid->getMonsterKind();
+		m_sphre.HP = m_pDruid->getMonsterHP(i);
+		m_sphre.Max_HP = m_pDruid->getMonsterMaxHP(i);
+		ALL_Mon.push_back(m_sphre);
+	}
 	m_sphre.vCenter = m_pBossAniController->getOBBCenter();
 	m_sphre.bIsPicked = false;
 	m_sphre.fRadius = m_pBossAniController->getOBBhalf();
@@ -240,15 +260,15 @@ std::vector<Enemy_Sphere> cEnemyControl::getALLEnemyCenter()
 	return ALL_Mon;
 }
 
-void cEnemyControl::WeaponHit(cOBB * PlayerWeapon)
+void cEnemyControl::WeaponHit(cOBB * PlayerWeapon, float damage)
 {
 	for (int i = 0; i < getSpiderVectorSize(); i++)
 	{
-		m_pSpider->getWeaponHit(i, PlayerWeapon);
+		m_pSpider->getWeaponHit(i, PlayerWeapon,damage);
 	}
 	for (int i = 0; i < getWolfVectorSize(); i++)
 	{
-		m_pWorg->getWeaponHit(i, PlayerWeapon);
+		m_pWorg->getWeaponHit(i, PlayerWeapon, damage);
 	}
 	getWeaponHitBOSS(PlayerWeapon);
 }
@@ -287,6 +307,11 @@ void cEnemyControl::WeaponHit_AFTER(cOBB * PlayerWeapon)
 void cEnemyControl::getWeaponHitBOSS_After()
 {
 	m_vecBoss[0].stat.Hurt = false;
+}
+
+float cEnemyControl::Boss_ATK()
+{
+	return m_vecBoss[0].stat.ATK;
 }
 
 
@@ -404,7 +429,7 @@ void cEnemyControl::BossSetup()
 	m_pBossSkill = new cBossSkill;
 	stBoss		stBoss1;
 	stBoss1.count = 0;
-	stBoss1.stat.ATK = 100;
+	stBoss1.stat.ATK = 20;
 	stBoss1.stat.DEF = 20;
 	stBoss1.stat.HP = 500;
 	stBoss1.stat.Max_HP = 500;

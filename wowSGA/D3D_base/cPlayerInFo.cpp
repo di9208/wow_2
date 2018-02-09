@@ -340,7 +340,7 @@ void cPlayerInFo::RenderPlayerStat()
 	m_pSprite->End();
 }
 
-void cPlayerInFo::Collsion(cOBB * EnemyBox)
+void cPlayerInFo::Collsion(cOBB * EnemyBox, int Damage)
 {
 	if (EnemyBox)
 	{
@@ -348,7 +348,7 @@ void cPlayerInFo::Collsion(cOBB * EnemyBox)
 		{
 			if (m_playerOBB->IsCollision(m_playerOBB, EnemyBox))
 			{
-				m_PlayerInFo.HP -= 10;
+				if(m_PlayerInFo.HP>0)m_PlayerInFo.HP -= Damage;
 				ax = m_PlayerInFo.HP;
 				m_hurt = true;
 			}

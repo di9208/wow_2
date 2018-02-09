@@ -7,7 +7,7 @@
 	*ITEM_SUBTEXT "긴 검이다."
 	*ITEM_IMAGE "inv-sword_53.PNG" 
 		*ITEM_OPTION {
-			*ATK 100
+			*ATK 10
 			*DEF 0
 			*ATK_SPEED 0.5
 			*PRICE 38
@@ -25,7 +25,7 @@
 	*ITEM_SUBTEXT "망치다."
 	*ITEM_IMAGE "INV_Hammer_17.PNG" 
 		*ITEM_OPTION {
-			*ATK 200
+			*ATK 20
 			*DEF 0
 			*ATK_SPEED 0.2
 			*PRICE 60
@@ -43,7 +43,7 @@
 	*ITEM_SUBTEXT "도끼다."
 	*ITEM_IMAGE "INV_Axe_1h_DeathwingRaidDW_D_01.PNG" 
 		*ITEM_OPTION {
-			*ATK 300
+			*ATK 30
 			*DEF 0
 			*ATK_SPEED 0.1
 			*PRICE 100
