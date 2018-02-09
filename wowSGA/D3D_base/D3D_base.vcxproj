@@ -181,6 +181,7 @@
     <ClInclude Include="cMainLoading.h" />
     <ClInclude Include="cMap.h" />
     <ClInclude Include="cMaptool.h" />
+    <ClInclude Include="cMonsterBombParticle.h" />
     <ClInclude Include="cMonsterParticle.h" />
     <ClInclude Include="cMtlTex.h" />
     <ClInclude Include="cNpc.h" />
@@ -270,6 +271,7 @@
     <ClCompile Include="cMainLoading.cpp" />
     <ClCompile Include="cMap.cpp" />
     <ClCompile Include="cMaptool.cpp" />
+    <ClCompile Include="cMonsterBombParticle.cpp" />
     <ClCompile Include="cMonsterParticle.cpp" />
     <ClCompile Include="cMtlTex.cpp" />
     <ClCompile Include="cNpc.cpp" />

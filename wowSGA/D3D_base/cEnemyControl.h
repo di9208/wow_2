@@ -171,6 +171,7 @@ public:
 	int getDruidVectorSize();
 	cOBB* getDruidOBB(int i);
 	cOBB* getBulletOBB(int i);
+	float getDruidATK(int i);
 	MONSTER_STATUS getDruidCondition(int i);
 
 	void setDruidDamageCheck(int i, bool check);

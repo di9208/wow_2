@@ -1,0 +1,4 @@
+﻿  cPlayer_Enemy.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer_enemy.cpp(36): warning C4316: 'cPlayer': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer_enemy.cpp(39): warning C4316: 'cEnemyControl': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  D3D_base.vcxproj -> C:\Users\준\Documents\GitHub\wow_2\wowSGA\Debug\D3D_base.exe

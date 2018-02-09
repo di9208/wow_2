@@ -39,7 +39,7 @@ cArchDruid::~cArchDruid()
 	}
 }
 
-void cArchDruid::getWeaponHit(int i, cOBB * PlayerWeapon)
+void cArchDruid::getWeaponHit(int i, cOBB * PlayerWeapon,float Damage)
 {
 	if (m_vecSkinnedMesh[i].Hurt == false)
 	{
@@ -49,7 +49,7 @@ void cArchDruid::getWeaponHit(int i, cOBB * PlayerWeapon)
 			{
 				if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
 				{
-					m_vecSkinnedMesh[i].t.HP -= 10;
+					m_vecSkinnedMesh[i].t.HP -= Damage;
 					m_vecSkinnedMesh[i].Hurt = true;
 				}
 			}
@@ -66,9 +66,9 @@ void cArchDruid::addMonster(float x, float y, float z){
 	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::KIND_DRUID;
 	Monster.m_vPos = D3DXVECTOR3(x, y + 1, z);
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
-	Monster.t.HP = 100;
+	Monster.t.HP = 200;
 	Monster.MaxHP = 100;
-	Monster.t.ATK = 20;
+	Monster.t.ATK = 10;
 	Monster.t.DEF = 10;
 	Monster.t.Speed = 0.03f;
 	Monster.attackSpeed = 150;

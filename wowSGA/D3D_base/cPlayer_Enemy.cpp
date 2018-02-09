@@ -52,7 +52,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 		m_Player->Update(pMap);
 		//m_Player->Collsion(m_EnemyControl->getRagOBB());
 		//µå·ç
-		/*for (int i = 0; i < m_EnemyControl->getDruidVectorSize(); i++)
+		for (int i = 0; i < m_EnemyControl->getDruidVectorSize(); i++)
 		{
 			if (m_EnemyControl->getDruidCondition(i) == MONSTER_ATTACK || m_EnemyControl->getDruidCondition(i) == MONSTER_ATTACK)
 			{
@@ -65,7 +65,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 				{
 					if (m_EnemyControl->getDruidDamageTimeCheck(i) + 0.3f < g_pTimeManager->GetLastUpdateTime())
 					{
-						m_Player->Collsion(m_EnemyControl->getBulletOBB(i));
+						m_Player->Collsion(m_EnemyControl->getBulletOBB(i),m_EnemyControl->getDruidATK(i));
 						m_EnemyControl->setDruidDamageCheck(i, true);
 					}
 				}
@@ -75,7 +75,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 				m_EnemyControl->setDruidDamageCheck(i, false);
 				m_EnemyControl->setDruidTimeCheck(i, false);
 			}
-		}*/
+		}
 		////´Á´ë
 		for (int i = 0; i < m_EnemyControl->getWolfVectorSize(); i++)
 		{

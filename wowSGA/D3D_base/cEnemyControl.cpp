@@ -162,6 +162,11 @@ cOBB * cEnemyControl::getBulletOBB(int i)
 	return m_pDruid->getBULLET(i);
 }
 
+float cEnemyControl::getDruidATK(int i)
+{
+	return m_pDruid->getATK(i);
+}
+
 MONSTER_STATUS cEnemyControl::getDruidCondition(int i)
 {
 	return m_pDruid->getCondition(i);
@@ -270,6 +275,10 @@ void cEnemyControl::WeaponHit(cOBB * PlayerWeapon, float damage)
 	for (int i = 0; i < getWolfVectorSize(); i++)
 	{
 		m_pWorg->getWeaponHit(i, PlayerWeapon, damage);
+	}
+	for (int i = 0; i < getDruidVectorSize(); i++)
+	{
+		m_pDruid->getWeaponHit(i, PlayerWeapon,damage);
 	}
 	getWeaponHitBOSS(PlayerWeapon);
 }
@@ -402,7 +411,7 @@ void cEnemyControl::Render() {
 	BossRender();
 	if (m_pFont)
 	{
-		char str[128];
+		/*char str[128];
 		sprintf(str, "bossHP : %f ", m_vecBoss[0].stat.HP);
 
 		std::string sText(str);
@@ -414,7 +423,7 @@ void cEnemyControl::Render() {
 			sText.length(),
 			&rc,
 			DT_LEFT | DT_TOP | DT_NOCLIP,
-			D3DCOLOR_XRGB(255, 255, 255));
+			D3DCOLOR_XRGB(255, 255, 255));*/
 	}
 
 }

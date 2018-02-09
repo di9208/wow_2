@@ -123,7 +123,7 @@ public:
 
 	D3DXVECTOR3 getOBBCenter(int i);
 	float getOBBhalf(int i);
-
+	float getATK(int i) { return m_vecSkinnedMesh[i].t.ATK; }
 	MONSTER_STATUS getCondition(int i) { return m_vecSkinnedMesh[i].ENUM_MONSTER; }
 
 	void setDamageCheck(int i, bool check) { m_vecSkinnedMesh[i].Damage = check; }
@@ -142,7 +142,7 @@ public:
 
 	//==========================================================================================
 
-	void getWeaponHit(int i, cOBB * PlayerWeapon);
+	void getWeaponHit(int i, cOBB * PlayerWeapon, float Damage);
 	void setHurt(int i, bool check) { m_vecSkinnedMesh[i].Hurt = check; };
 
 
