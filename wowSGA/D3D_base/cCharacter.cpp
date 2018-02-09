@@ -32,11 +32,11 @@ void cCharacter::Update(iMap* pMap, bool animCheck)
 	Roll(animCheck);
 	if (GetKeyState('A') & 0x8000)
 	{
-		m_fRotY -= 0.1f;
+		if (m_chractor_condition != DEATH)m_fRotY -= 0.1f;
 	}
 	if (GetKeyState('D') & 0x8000)
 	{
-		m_fRotY += 0.1f;
+		if (m_chractor_condition != DEATH)	m_fRotY += 0.1f;
 	}
 	D3DXVECTOR3 vTempPos = m_vPos;
 	if (g_pKeyManager->isStayKeyDown('W'))

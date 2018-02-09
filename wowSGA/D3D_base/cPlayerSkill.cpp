@@ -33,7 +33,7 @@ void cPlayerSkill::Update(condition * pCondition, bool animCheck)
 	{
 		if (*pCondition == IDLE || *pCondition == RUN || *pCondition == BACKWALK)
 		{
-			if (cool_time[0] + 3.5f<g_pTimeManager->GetLastUpdateTime() || cool_time[0] == 0)			//ÄðÅ¸ÀÓ 1.5ÃÊ
+			if (cool_time[0] + 1.5f<g_pTimeManager->GetLastUpdateTime() || cool_time[0] == 0)			//ÄðÅ¸ÀÓ 1.5ÃÊ
 			{
 				*pCondition = ATTACK;
 				cool_time[0] = g_pTimeManager->GetLastUpdateTime();
@@ -44,14 +44,14 @@ void cPlayerSkill::Update(condition * pCondition, bool animCheck)
 	}
 	if (m_coolTime_UI[0].check == true)
 	{
-		if (cool_time[0] + 3.5f < g_pTimeManager->GetLastUpdateTime())			//ÄðÅ¸ÀÓ 1.5ÃÊ
+		if (cool_time[0] + 1.5f < g_pTimeManager->GetLastUpdateTime())			//ÄðÅ¸ÀÓ 1.5ÃÊ
 		{
 			m_coolTime_UI[0].check = false;
 		}
 		else
 		{
 			float time_alpha = 200;
-			time_alpha = time_alpha - ((g_pTimeManager->GetLastUpdateTime() - cool_time[0]) / 3.5f) * 200;
+			time_alpha = time_alpha - ((g_pTimeManager->GetLastUpdateTime() - cool_time[0]) / 1.5f) * 200;
 			m_coolTime_UI[0].alpha = time_alpha;
 		}
 	}
@@ -59,24 +59,52 @@ void cPlayerSkill::Update(condition * pCondition, bool animCheck)
 	{
 		if (*pCondition == IDLE || *pCondition == RUN || *pCondition == BACKWALK)
 		{
-			if (cool_time[1] + 4.0f < g_pTimeManager->GetLastUpdateTime())			//ÄðÅ¸ÀÓ 4.0ÃÊ
+			if (cool_time[1] + 2.0f < g_pTimeManager->GetLastUpdateTime())			//ÄðÅ¸ÀÓ 4.0ÃÊ
 			{
 				*pCondition = SKILL_2;
 				cool_time[1] = g_pTimeManager->GetLastUpdateTime();
 				m_coolTime_UI[1].check = true;
+				m_coolTime_UI[1].alpha = 200;
 			}
+		}
+	}	
+	if (m_coolTime_UI[1].check == true)
+	{
+		if (cool_time[1] + 2.0f < g_pTimeManager->GetLastUpdateTime())			//ÄðÅ¸ÀÓ 1.5ÃÊ
+		{
+			m_coolTime_UI[1].check = false;
+		}
+		else
+		{
+			float time_alpha = 200;
+			time_alpha = time_alpha - ((g_pTimeManager->GetLastUpdateTime() - cool_time[1]) / 2.0f) * 200;
+			m_coolTime_UI[1].alpha = time_alpha;
 		}
 	}
 	if (g_pKeyManager->isOnceKeyDown('3'))
 	{
 		if (*pCondition == IDLE || *pCondition == RUN || *pCondition == BACKWALK)
 		{
-			if (cool_time[2] + 5.0f < g_pTimeManager->GetLastUpdateTime())			//ÄðÅ¸ÀÓ 5.0ÃÊ
+			if (cool_time[2] + 4.0f < g_pTimeManager->GetLastUpdateTime())			//ÄðÅ¸ÀÓ 5.0ÃÊ
 			{
 				*pCondition = BREATH;
 				cool_time[2] = g_pTimeManager->GetLastUpdateTime();
 				m_coolTime_UI[2].check = true;
+				m_coolTime_UI[2].alpha = 200;
 			}
+		}
+	}
+	if (m_coolTime_UI[2].check == true)
+	{
+		if (cool_time[2] + 4.0f < g_pTimeManager->GetLastUpdateTime())			//ÄðÅ¸ÀÓ 1.5ÃÊ
+		{
+			m_coolTime_UI[2].check = false;
+		}
+		else
+		{
+			float time_alpha = 200;
+			time_alpha = time_alpha - ((g_pTimeManager->GetLastUpdateTime() - cool_time[2]) / 4.0f) * 200;
+			m_coolTime_UI[2].alpha = time_alpha;
 		}
 	}
 	if (g_pKeyManager->isOnceKeyDown('4'))
@@ -88,7 +116,21 @@ void cPlayerSkill::Update(condition * pCondition, bool animCheck)
 				*pCondition = BUFF;
 				cool_time[3] = g_pTimeManager->GetLastUpdateTime();
 				m_coolTime_UI[3].check = true;
+				m_coolTime_UI[3].alpha = 200;
 			}
+		}
+	}
+	if (m_coolTime_UI[3].check == true)
+	{
+		if (cool_time[3] + 4.5f < g_pTimeManager->GetLastUpdateTime())			//ÄðÅ¸ÀÓ 1.5ÃÊ
+		{
+			m_coolTime_UI[3].check = false;
+		}
+		else
+		{
+			float time_alpha = 200;
+			time_alpha = time_alpha - ((g_pTimeManager->GetLastUpdateTime() - cool_time[3]) / 4.5f) * 200;
+			m_coolTime_UI[3].alpha = time_alpha;
 		}
 	}
 

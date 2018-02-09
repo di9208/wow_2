@@ -75,6 +75,10 @@ private:
 	SYNTHESIZE(cUIButton*, close_button, Equite_window);
 	bool	m_hurt;
 	SYNTHESIZE(bool, m_EQUIP, EQUIP);
+
+	bool m_buff;
+	//bool change_weapon;
+	SYNTHESIZE(bool, m_change_weapon, change_weapon);
 public:
 	cPlayerInFo();
 	~cPlayerInFo();

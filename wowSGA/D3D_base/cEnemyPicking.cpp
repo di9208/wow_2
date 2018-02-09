@@ -114,6 +114,26 @@ void cEnemyPicking::Update(MONSTER_KIND monster)
 			&m_EnemyIcon);
 	}
 	break;
+	case KIND_BOSS_RAGNALOS:
+	{
+		SAFE_RELEASE(m_EnemyIcon);
+		D3DXCreateTextureFromFileEx(
+			g_pD3DDevice,
+			"player/rag.png",
+			D3DX_DEFAULT_NONPOW2,
+			D3DX_DEFAULT_NONPOW2,
+			D3DX_DEFAULT,
+			0,
+			D3DFMT_UNKNOWN,
+			D3DPOOL_MANAGED,
+			D3DX_FILTER_NONE,
+			D3DX_DEFAULT,
+			0,
+			&m_EnemyIcon_info,
+			NULL,
+			&m_EnemyIcon);
+	}
+	break;
 	}
 }
 
@@ -216,7 +236,14 @@ void cEnemyPicking::RenderFont()
 	if (m_HpFont)
 	{
 		char str[128];
-		sprintf(str, "HP: %.0f / %.0f", m_HPint, m_MaxHPint);
+		if (m_HPint > 0)
+		{
+			sprintf(str, "HP: %.0f / %.0f", m_HPint, m_MaxHPint);
+		}
+		else
+		{
+			sprintf(str, "Á×À½");
+		}
 
 		std::string sText(str);
 
@@ -266,6 +293,7 @@ void cEnemyPicking::Render()
 			D3DCOLOR_ARGB(255, 255, 255, 255));
 
 		float a = (float)m_HPint / (float)m_MaxHPint;
+		if (a < 0)a = 0;
 		RECT rc = { 0,0,m_HPinfo.Width*a,m_HPinfo.Height };
 		m_pSprite->Draw(m_HP,
 			&rc, //&rc,

@@ -64,10 +64,23 @@ void cPlayer::Setup(float x, float y, float z)
 
 void cPlayer::Update(iMap* m_map)
 {
-	cCharacter::Update(m_map, m_playerAnimController->GetAniCheck());
+	if (m_chractor_condition != DEATH)
+	{
+		cCharacter::Update(m_map, m_playerAnimController->GetAniCheck());
 
-	if (m_playerAnimController)
-		m_playerAnimController->Update(&m_chractor_condition);
+		if (m_playerAnimController)
+			m_playerAnimController->Update(&m_chractor_condition);
+
+		if (m_playerInFo)
+		{
+			m_playerInFo->Update(&m_chractor_condition, &m_matWorld);
+			if(m_playerInFo->Getchange_weapon())
+			{
+				m_Weapon->change(m_playerInFo->findItemNUM());
+				m_playerInFo->Setchange_weapon(false);
+			}
+		}
+	}
 
 	if (m_playerSkill)
 		m_playerSkill->Update(&m_chractor_condition, m_playerAnimController->GetAniCheck());
@@ -82,15 +95,6 @@ void cPlayer::Update(iMap* m_map)
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
 	D3DXMatrixScaling(&matS, 0.15f, 0.15f, 0.15f);
 	mat = matR * m_matWorld;
-
-	if (m_playerInFo)
-	{
-		m_playerInFo->Update(&m_chractor_condition, &m_matWorld);
-	}
-
-
-
-	//Collsion(m_DummyBox->GetOBB());
 }
 
 void cPlayer::Render()

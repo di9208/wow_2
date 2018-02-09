@@ -30,11 +30,13 @@ public:
 	void Setup(D3DXMATRIXA16* c_charactor, ST_BONE* c_hand, D3DXMATRIXA16* player);
 	void Update(D3DXMATRIXA16* world, ST_BONE* c_hand);
 	void Render(D3DXMATRIXA16* world);
-	void Change_Weapon();
+	void Change_Weapon(int n);
 
 	void collsion(cOBB * EnemyBox);
 
 	void SetFont();
 	void RenderFont();
+
+	void change(int n);
 };
 

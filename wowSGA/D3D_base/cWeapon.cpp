@@ -61,16 +61,6 @@ void cWeapon::Update(D3DXMATRIXA16* world, ST_BONE* c_hand)
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
 
 
-	if (g_pKeyManager->isOnceKeyDown(VK_TAB))
-	{
-		m_WeaponNum++;
-		if (m_changeTime == NULL)
-		{
-			m_changeTime = g_pTimeManager->GetEllapsedTime();
-		}
-		Change_Weapon();
-	}
-
 
 
 	//matR = matR1;
@@ -122,12 +112,12 @@ void cWeapon::Render(D3DXMATRIXA16* world)
 	RenderFont();
 }
 
-void cWeapon::Change_Weapon()
+void cWeapon::Change_Weapon(int n)
 {
 	SAFE_DELETE(m_pSkinnedMesh);
 	m_pSkinnedMesh = new cSkinnedMesh();
 
-	switch (m_WeaponNum % 3)
+	switch (n % 3)
 	{
 	case 0:
 		m_pSkinnedMesh->Setup("Weapon", "doom.X");
@@ -198,6 +188,19 @@ void cWeapon::RenderFont()
 		//	&rc,
 		//	DT_LEFT | DT_TOP | DT_NOCLIP,
 		//	D3DCOLOR_XRGB(255, 255, 0));
+	}
+}
+
+void cWeapon::change(int n)
+{
+	
+	{
+
+		if (m_changeTime == NULL)
+		{
+			m_changeTime = g_pTimeManager->GetEllapsedTime();
+		}
+		Change_Weapon(n);
 	}
 }
 

@@ -264,6 +264,14 @@ std::vector<Enemy_Sphere> cEnemyControl::getALLEnemyCenter()
 	m_sphre.HP = getMonsterHP();
 	m_sphre.Max_HP = getMonsterMaxHP();
 	ALL_Mon.push_back(m_sphre);
+
+	m_sphre.vCenter = m_pBossRagController->getOBBCenter();
+	m_sphre.bIsPicked = false;
+	m_sphre.fRadius = m_pBossRagController->getOBBhalf();
+	m_sphre.Mons = getRagKind();
+	m_sphre.HP = getRagHP();
+	m_sphre.Max_HP = getRagMaxHP();
+	ALL_Mon.push_back(m_sphre);
 	return ALL_Mon;
 }
 
@@ -281,18 +289,23 @@ void cEnemyControl::WeaponHit(cOBB * PlayerWeapon, float damage)
 	{
 		m_pDruid->getWeaponHit(i, PlayerWeapon,damage);
 	}
-	getWeaponHitBOSS(PlayerWeapon);
+	getWeaponHitBOSS(PlayerWeapon,damage);
+	getWeaponHitRag(PlayerWeapon, damage);
 }
 
-void cEnemyControl::getWeaponHitBOSS(cOBB * PlayerWeapon)
+void cEnemyControl::getWeaponHitBOSS(cOBB * PlayerWeapon,float damage)
 {
-	if (PlayerWeapon)
+	if (m_vecBoss[0].stat.Hurt == false)
 	{
-		if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
+		if (PlayerWeapon)
 		{
-			if (PlayerWeapon->IsCollision(m_pBossAniController->GetBossOBB(), PlayerWeapon))
+			if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
 			{
-				m_vecBoss[0].stat.HP -= 100;
+				if (PlayerWeapon->IsCollision(m_pBossAniController->GetBossOBB(), PlayerWeapon))
+				{
+					m_vecBoss[0].stat.HP -= damage;
+					m_vecBoss[0].stat.Hurt = true;
+				}
 			}
 		}
 	}
@@ -313,6 +326,7 @@ void cEnemyControl::WeaponHit_AFTER(cOBB * PlayerWeapon)
 		m_pDruid->setHurt(i, false);
 	}
 	getWeaponHitBOSS_After();
+	getWeaponHitRag_After();
 }
 
 void cEnemyControl::getWeaponHitBOSS_After()
@@ -320,7 +334,35 @@ void cEnemyControl::getWeaponHitBOSS_After()
 	m_vecBoss[0].stat.Hurt = false;
 }
 
+void cEnemyControl::getWeaponHitRag(cOBB * PlayerWeapon, float damage)
+{
+	if (m_vecBoss_rag[0].stat.Hurt == false)
+	{
+		if (PlayerWeapon)
+		{
+			if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
+			{
+				if (PlayerWeapon->IsCollision(m_pBossRagController->getOBB(), PlayerWeapon))
+				{
+					m_vecBoss_rag[0].stat.HP -= damage;
+					m_vecBoss_rag[0].stat.Hurt = true;
+				}
+			}
+		}
+	}
+}
+
+void cEnemyControl::getWeaponHitRag_After()
+{
+	m_vecBoss_rag[0].stat.Hurt = false;
+}
+
 float cEnemyControl::Boss_ATK()
+{
+	return m_vecBoss[0].stat.ATK;
+}
+
+float cEnemyControl::Rag_ATK()
 {
 	return m_vecBoss[0].stat.ATK;
 }
@@ -469,6 +511,7 @@ void cEnemyControl::BossSetup(std::vector<tagMon> Monster)
 	stBoss_rag.stat.ATK = 100;
 	stBoss_rag.stat.DEF = 20;
 	stBoss_rag.stat.HP = 500;
+	stBoss_rag.stat.Max_HP = 500;
 	stBoss_rag.chk = false;
 	stBoss_rag.kind = KIND_BOSS_RAGNALOS;
 	stBoss_rag.e_boss_rag_state = E_BOSS_RAG_STAND;

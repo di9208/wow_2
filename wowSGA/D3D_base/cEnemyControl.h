@@ -201,9 +201,14 @@ public:
 
 	//무기충돌----------------------------------------------------
 	void WeaponHit(cOBB * PlayerWeapon, float damage);
-	void getWeaponHitBOSS(cOBB * PlayerWeapon);
+	void getWeaponHitBOSS(cOBB * PlayerWeapon, float damage);
 	void WeaponHit_AFTER(cOBB * PlayerWeapon);
 	void getWeaponHitBOSS_After();
+
+	void getWeaponHitRag(cOBB * PlayerWeapon, float damage);
+	void getWeaponHitRag_After();
+
 	float Boss_ATK();
+	float Rag_ATK();
 };
 

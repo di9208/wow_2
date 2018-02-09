@@ -22,6 +22,11 @@ class cPlayer_Enemy
 	bool			Player_Attack;
 	//===================================================
 	int				Enemy_NUM;
+
+	//=-==============================
+	bool			Rag;
+	bool			RagCheck;
+	float			RagTime;
 public:
 	cPlayer_Enemy();
 	~cPlayer_Enemy();

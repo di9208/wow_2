@@ -26,6 +26,8 @@ cPlayerInFo::cPlayerInFo()
 	, curDEF(0)
 	, m_hurt(false)
 	, m_EQUIP(false)
+	, m_buff(false)
+	, m_change_weapon(false)
 {
 	for (int i = 0; i < 5; i++)
 	{
@@ -102,6 +104,30 @@ void cPlayerInFo::Update(condition* pCondition, D3DXMATRIXA16* pMatWorld)
 			*pCondition = DEATH;
 		}
 	}
+	if(*pCondition == BUFF)
+	{
+		int m_hill = 10;
+		if (m_buff == false)
+		{
+			if (m_PlayerInFo.HP < m_PlayerInFo.Max_HP)
+			{
+				if (m_PlayerInFo.HP + m_hill < m_PlayerInFo.Max_HP)
+				{
+					m_PlayerInFo.HP += m_hill;
+				}
+				else if (m_PlayerInFo.HP + m_hill >= m_PlayerInFo.Max_HP)
+				{
+					m_PlayerInFo.HP = m_PlayerInFo.Max_HP;
+				}
+			}
+			m_buff = true;
+		}
+	}
+	else
+	{
+		m_buff = false;
+	}
+
 	if (g_pKeyManager->isOnceKeyDown('E'))
 	{
 		if (close_button->Gethidden())
@@ -214,9 +240,9 @@ void cPlayerInFo::RenderUI()
 	}
 
 
-
-
-	RECT rc = { 0,0,m_HP_info.Width*(ax / m_PlayerInFo.Max_HP),m_HP_info.Height };
+	float h_width = m_HP_info.Width*(m_PlayerInFo.HP / m_PlayerInFo.Max_HP);
+	if (h_width < 0)h_width = 0;
+	RECT rc = { 0,0,h_width,m_HP_info.Height };
 	m_pSprite->Draw(m_HP,
 		&rc, //&rc,
 		&D3DXVECTOR3(m_HP_info.Width / 2.0f, m_HP_info.Height / 2.0, 0),
@@ -257,7 +283,7 @@ void cPlayerInFo::RenderFontSysytem()
 {
 	if (m_systemFont)
 	{
-		char str[128];
+		/*char str[128];
 		sprintf(str, "1   2    3    4     5");
 
 		std::string sText(str);
@@ -270,13 +296,19 @@ void cPlayerInFo::RenderFontSysytem()
 			sText.length(),
 			&rc,
 			DT_LEFT | DT_TOP | DT_NOCLIP,
-			D3DCOLOR_XRGB(255, 255, 255));
+			D3DCOLOR_XRGB(255, 255, 255));*/
 	}
 	if (m_HpFont)
 	{
 		char str[128];
-		sprintf(str, "HP: %.0f / %.0f", m_PlayerInFo.HP, m_PlayerInFo.Max_HP);
-
+		if (m_PlayerInFo.HP > 0)
+		{
+			sprintf(str, "HP: %.0f / %.0f", m_PlayerInFo.HP, m_PlayerInFo.Max_HP);
+		}
+		else
+		{
+			sprintf(str, "Á×À½");
+		}
 		std::string sText(str);
 
 		RECT rc;
@@ -393,6 +425,7 @@ void cPlayerInFo::getItem(shop_TEST_CLASS* iven_item)
 						*iven_item->get_inven()->Getvector_inven()[iven_item->Getpick_number()] = *tmep;
 
 						is_sametype = true;
+						m_change_weapon = true;
 						break;
 					}
 				}

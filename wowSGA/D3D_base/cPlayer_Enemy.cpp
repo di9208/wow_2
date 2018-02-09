@@ -19,6 +19,10 @@ cPlayer_Enemy::cPlayer_Enemy()
 	, RichKingCheck(false)
 	, Player_Attack(false)
 	, Enemy_NUM(999)
+	, Rag(false)
+	, RagCheck(false)
+	, RagTime(0.0f)
+
 {
 }
 
@@ -126,8 +130,30 @@ void cPlayer_Enemy::Update(iMap* pMap)
 				m_EnemyControl->setSpiderTimeCheck(i, false);
 			}
 		}
-		//드루이드
-
+		//라그
+		if (m_EnemyControl->getRagCondition() == E_BOSS_ATT)
+		{
+			float cool;
+			if (m_EnemyControl->getRagCondition() == E_BOSS_ATT)cool = 0.0f;
+			if (!RagCheck)
+			{
+				RagTime = g_pTimeManager->GetLastUpdateTime();
+				RagCheck = true;
+			}
+			if (!Rag)
+			{
+				if (RagTime + cool < g_pTimeManager->GetLastUpdateTime())
+				{
+					m_Player->Collsion(m_EnemyControl->getRagOBB(), m_EnemyControl->Rag_ATK());
+					Rag = true;
+				}
+			}
+		}
+		else
+		{
+			Rag = false;
+			RagCheck = false;
+		}
 		////리치왕
 		if (m_EnemyControl->getBossCondition() == E_BOSS_ATT || m_EnemyControl->getBossCondition() == E_BOSS_ATT2)
 		{
