@@ -18,11 +18,12 @@ private:
 	SYNTHESIZE(ST_SPHERE, PmeshInfo, M_info);
 	LPD3DXMESH m_mesh;
 	SYNTHESIZE(bool, ispickinged, RAYPICK);
+	D3DXVECTOR3 m_pos;
 public:
 	cNpc();
 	~cNpc();
 
-	void Setup();
+	void Setup(D3DXVECTOR3 pos);
 	void update();
 	void render();
 

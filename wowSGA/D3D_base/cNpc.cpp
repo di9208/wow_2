@@ -21,8 +21,9 @@ cNpc::~cNpc()
 	m_mesh->Release();
 }
 
-void cNpc::Setup()
+void cNpc::Setup(D3DXVECTOR3 pos)
 {
+	
 	m_npcAnicontroller = new cNpc_AniController;
 	m_npcAnicontroller->Setup();
 
@@ -30,7 +31,9 @@ void cNpc::Setup()
 	m_npc_info->setup();
 
 	D3DXCreateSphere(g_pD3DDevice, 0.8f, 20, 20, &m_mesh, NULL);
-	PmeshInfo.fRadius = 0.8f * 0.1f;
+	PmeshInfo.fRadius = 0.8f;
+
+	m_pos = pos;
 
 	ispickinged = false;
 }
@@ -58,9 +61,11 @@ void cNpc::render()
 	D3DXMatrixIsIdentity(&matworld);
 	D3DXMatrixIsIdentity(&matT);
 
-	D3DXMatrixTranslation(&matT, 5.0f, 0.9f, 0.0f);
+	D3DXMatrixTranslation(&matT, m_pos.x, m_pos.y+0.85f, m_pos.z);
 	D3DXMatrixRotationY(&matR, D3DX_PI / 2.0f);
 	D3DXMatrixScaling(&matS, 0.1f, 0.1f, 0.1f);
+
+	
 
 	matworld = m_matWorld * matR;
 
@@ -68,7 +73,6 @@ void cNpc::render()
 	matworld._42 += matT._42;
 	matworld._43 += matT._43;
 
-	matworld *= matS;
 
 	PmeshInfo.vCenter = D3DXVECTOR3(matworld._41, matworld._42, matworld._43);
 

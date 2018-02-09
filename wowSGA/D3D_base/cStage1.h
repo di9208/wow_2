@@ -23,6 +23,7 @@ private:
 	
 	cSkyBox * m_skybox;
 	SYNTHESIZE(D3DXVECTOR3, Playerpos, playerpos);
+	SYNTHESIZE(D3DXVECTOR3, NPCpos, npcpos);
 	SYNTHESIZE_REF(std::vector<tagMon>, m_vecMonster, Monster);
 
 private:

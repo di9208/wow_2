@@ -31,6 +31,8 @@ private:
 	SYNTHESIZE(bool, m_worg, worg);
 	SYNTHESIZE(bool, m_lichking, lichking);
 	SYNTHESIZE(bool, m_rag, rag);
+	SYNTHESIZE(bool, m_tau, tau);
+	SYNTHESIZE(bool, m_tree, tree);
 public:
 	cMapTool_UI();
 	~cMapTool_UI();

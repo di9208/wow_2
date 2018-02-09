@@ -21,6 +21,7 @@ cEnemyControl::cEnemyControl()
 	, delay2(0)
 	, m_pFont(NULL)
 	, m_pBossRagController(NULL)
+	, isboss(false)
 {
 	D3DXMatrixIdentity(&m_world);
 	D3DXMatrixIdentity(&matR);
@@ -324,8 +325,15 @@ void cEnemyControl::SetUp(std::vector<tagMon> Monster) {
 	if (m_pDruid) m_pDruid->SetUp();
 	if (m_pWorg) m_pWorg->SetUp();
 
-	BossSetup();
-
+	for (int i = 0; i < Monster.size(); i++)
+	{
+		if (Monster[i].kind == KIND_BOSS_ARTHAS)
+		{
+			isboss = true;
+		}
+	}
+	
+	BossSetup(Monster);
 	D3DXFONT_DESC stFD;
 	ZeroMemory(&stFD, sizeof(D3DXFONT_DESC));
 	stFD.Height = 50;
@@ -346,9 +354,12 @@ void cEnemyControl::SetUp(std::vector<tagMon> Monster) {
 }
 
 void cEnemyControl::Update(D3DXVECTOR3 d, iMap* pMap) {
-	BossUpdate();
-	BossPlayerRot(d);
-	BossRagPlayerRot(d);
+	if (isboss)
+	{
+		BossUpdate();
+		BossPlayerRot(d);
+		BossRagPlayerRot(d);
+	}
 	//enemy
 	if (m_pSpider) {
 		m_pSpider->Update(pMap);
@@ -372,8 +383,10 @@ void cEnemyControl::Render() {
 	if (m_pSpider) m_pSpider->Render();
 	if (m_pDruid) m_pDruid->Render();
 	if (m_pWorg) m_pWorg->Render();
-
-	BossRender();
+	if (isboss)
+	{
+		BossRender();
+	}
 	if (m_pFont)
 	{
 		char str[128];
@@ -393,13 +406,13 @@ void cEnemyControl::Render() {
 
 }
 
-void cEnemyControl::BossSetup()
+void cEnemyControl::BossSetup(std::vector<tagMon> Monster)
 {
 	m_pBossAniController = new cBossAniController();
-	m_pBossAniController->SetUp();
+	m_pBossAniController->SetUp(Monster);
 
 	m_pBossRagController = new cBossRagController();
-	m_pBossRagController->SetUp();
+	m_pBossRagController->SetUp(Monster);
 
 	m_pBossSkill = new cBossSkill;
 	stBoss		stBoss1;

@@ -31,7 +31,7 @@ public:
 	cBossAniController();
 	~cBossAniController();
 
-	void SetUp();
+	void SetUp(std::vector<tagMon> Monster);
 	void Update(E_BOSS_STATE* pState);
 	void Render(D3DXMATRIXA16& m_world);
 	

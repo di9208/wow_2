@@ -51,13 +51,13 @@ void cMainLoading::Update()
 	g_pTimeManager->Update();
 	Root->Update();
 	static float j = 0.0f;
-	 j += g_pTimeManager->GetEllapsedTime()*4.5f;
+	 j += g_pTimeManager->GetEllapsedTime()/2.0f;
 	Root->GetChild()[0]->SetScal(D3DXVECTOR3(j,1,0));
 	
 	m_loading->update();
 	if (m_loading->loadingdone())
 	{
-		if(j>=1)
+		
 		g_pSceneManager->changescene("Scene1");
 	}
 }
@@ -70,8 +70,7 @@ void cMainLoading::Render()
 void cMainLoading::Loading()
 {
 	g_pSkinnedMeshManager->Setup("player", "player", "player.x");
-	g_pSkinnedMeshManager->Setup("NPC", "tawo", "testtawoo.x");
-
+	g_pSkinnedMeshManager->Setup("NPC", "tawo", "testtawoo.X");
 	////
 	g_pSkinnedMeshManager->Setup("¸®Ä¡¿Õ", "Monster/boss/Arthaslichking", "arthas2.x");
 	g_pSkinnedMeshManager->Setup("½ºÅ³", "Monster/boss/Arthaslichking", "skill.x");

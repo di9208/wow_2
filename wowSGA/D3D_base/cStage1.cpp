@@ -30,7 +30,7 @@ void cStage1::SetMap()
 {
 	int size;
 	FILE * fp;
-	fp = fopen("Stage111.txt", "r");
+	fp = fopen("final.txt", "r");
 	//m_pTexture = g_pTextureManager->GetTexture("HeightMapData/selectblend.png");
 
 	fscanf(fp, "%d", &size);
@@ -88,6 +88,11 @@ void cStage1::SetMap()
 	if (strr[0] == 'P')
 	{
 		fscanf(fp, "%f %f %f\n", &Playerpos.x, &Playerpos.y, &Playerpos.z);
+	}
+	fscanf(fp, "%s\n", strr);
+	if (strr[0] == 'N')
+	{
+		fscanf(fp, "%f %f %f\n", &NPCpos.x, &NPCpos.y, &NPCpos.z);
 	}
 	fscanf(fp, "%s\n", strr);
 	if (strr[0] == 'M')

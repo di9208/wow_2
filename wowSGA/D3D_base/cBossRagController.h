@@ -26,7 +26,7 @@ public:
 	cBossRagController();
 	~cBossRagController();
 
-	void SetUp();
+	void SetUp(std::vector<tagMon> Monster);
 	void Update(E_BOSS_RAG_STATE* pStateRag);
 	void Render(D3DXMATRIXA16  &m_world);
 

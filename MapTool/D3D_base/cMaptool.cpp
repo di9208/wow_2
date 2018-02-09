@@ -19,6 +19,8 @@ cMaptool::cMaptool()
 	, m_isPlayerExist(false)
 	, m_isMonsterExist(false)
 	, m_monsterTranslation(false)
+	, m_NPCTranslation(false)
+	, m_isNPCExist(false)
 {
 	
 }
@@ -224,14 +226,14 @@ void cMaptool::Update()
 	
 	r = cRay::RayAtWorldSpace(p.x, p.y);
 	
-	if (m_UI->Getupthow() || m_UI->Getdownthow() || m_UI->Getflat() || m_playerTranslation || m_monsterTranslation)
+	if (m_UI->Getupthow() || m_UI->Getdownthow() || m_UI->Getflat() || m_playerTranslation || m_monsterTranslation || m_NPCTranslation)
 	{
 		for (int i = 0; i < vecindex.size(); i += 3)
 		{
 
 			if (r.IsPicked(Mapvertex[vecindex[i]].p, Mapvertex[vecindex[i + 1]].p, Mapvertex[vecindex[i + 2]].p, d1))
 			{
-				if (!m_playerTranslation &&!m_monsterTranslation)
+				if (!m_playerTranslation &&!m_monsterTranslation&&!m_NPCTranslation)
 				{
 					if (g_pKeyManager->isStayKeyDown(VK_RBUTTON))
 					{
@@ -312,92 +314,11 @@ void cMaptool::RenderMap()
 	g_pD3DDevice->SetTexture(0, m_tex1);
 	g_pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, (_col*_row), 0, m_polygon);
 	
-	if (g_pKeyManager->isOnceKeyDown('M') && m_isPlayerExist)
-	{
-		if (!m_playerTranslation)
-		{
-			m_playerTranslation = true;
-			return;
-		}
-		if (m_playerTranslation)
-		{
-			m_playerTranslation = false;
-			Playerpos = D3DXVECTOR3(d1.x, d1.y, d1.z);
-			return;
-		}
-	}
-	if (m_playerTranslation && m_isPlayerExist)
-	{
-		
-		D3DXMATRIXA16 matT;
-		D3DXMatrixTranslation(&matT, d1.x, d1.y, d1.z);
-		m_player->Gettt() = matT;
-	}
-	if (!m_playerTranslation && m_isPlayerExist)
-	{
-
-		D3DXMATRIXA16 matT;
-		D3DXMatrixTranslation(&matT, Playerpos.x, Playerpos.y, Playerpos.z);
-		m_player->Gettt() = matT;
-	}
-	if (m_isPlayerExist)
-	{
-		m_player->Render();
-	}
-
-
-	if (m_vecMonster.size() != 0)
-	{
-		for (int i = 0; i < m_vecMonster.size(); i++)
-		{
-			if (m_vecMonster[i].Translation)
-			{
-
-				D3DXMATRIXA16 matT;
-				D3DXMatrixTranslation(&matT, d1.x, d1.y, d1.z);
-				m_vecMonster[i].monster->Gettt() = matT;
-				m_vecMonster[i].sphere.vCenter = D3DXVECTOR3(d1.x, d1.y, d1.z);
-
-			}
-			if (!m_vecMonster[i].Translation)
-			{
-				D3DXMATRIXA16 matT;
-				D3DXMatrixTranslation(&matT, m_vecMonster[i].sphere.vCenter.x, m_vecMonster[i].sphere.vCenter.y, m_vecMonster[i].sphere.vCenter.z);
-				m_vecMonster[i].monster->Gettt() = matT;
-			}
-		}
-		if (g_pKeyManager->isOnceKeyDown(VK_RBUTTON))
-		{
-			for (int i = 0; i < m_vecMonster.size(); i++)
-			{
-				cRay ra = cRay::RayAtWorldSpace(p.x, p.y);
-			
-				if (ra.IsPicked(&m_vecMonster[i].sphere))
-				{
-					if (!m_vecMonster[i].Translation)
-					{
-						m_monsterTranslation = true;
-						m_vecMonster[i].Translation = true;
-						break;
-					}
-					if (m_vecMonster[i].Translation)
-					{
-						m_monsterTranslation = false;
-						m_vecMonster[i].Translation = false;
-						break;
-					}
-				}
-			}
-		}
-		
-		for (int i = 0; i < m_vecMonster.size(); i++)
-		{
-			m_vecMonster[i].monster->Render();
-		}
-	}
-
-
-
+	
+	PlayerRender();
+	NPCRender();
+	MonsterRender();
+	
 }
 void cMaptool::RenderCircle()
 {
@@ -779,6 +700,11 @@ void cMaptool::SAVE()
 			fprintf(fp, "%s\n", "P");
 			fprintf(fp, "%f %f %f\n", Playerpos.x, Playerpos.y, Playerpos.z);
 		}
+		if (m_isNPCExist)
+		{
+			fprintf(fp, "%s\n", "N");
+			fprintf(fp, "%f %f %f\n", NPCpos.x, NPCpos.y, NPCpos.z);
+		}
 		if (m_vecMonster.size() != 0)
 		{
 			fprintf(fp, "%s\n", "M");
@@ -914,6 +840,11 @@ void cMaptool::LOAD()
 				fscanf(fp, "%f %f %f\n", &Playerpos.x, &Playerpos.y, &Playerpos.z);
 			}
 			fscanf(fp, "%s\n", strr);
+			if (strr[0] == 'N')
+			{
+				fscanf(fp, "%f %f %f\n", &NPCpos.x, &NPCpos.y, &NPCpos.z);
+			}
+			fscanf(fp, "%s\n", strr);
 			if (strr[0] == 'M')
 			{
 				while (true)
@@ -961,6 +892,20 @@ void cMaptool::LOAD()
 		matW = matS * matR*matTT;
 		m_player->Getmm() = matW;
 		m_player->Gettt() = matT;
+
+		m_NPC = new cMapToolObject;
+		m_isNPCExist = true;
+		m_NPCTranslation = false;
+		m_NPC->Setup("NPC");
+	
+		
+		D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+		D3DXMatrixScaling(&matS, 0.01f, 0.01f, 0.01f);
+		D3DXMatrixTranslation(&matT, NPCpos.x, NPCpos.y, NPCpos.z);
+		D3DXMatrixTranslation(&matTT, 0, 0, 0);
+		matW = matS * matR* matTT;
+		m_NPC->Getmm() = matW;
+		m_NPC->Gettt() = matT;
 
 		void* vp;
 		m_vb->Lock(0, _col*_row * sizeof(ST_PTN_VERTEX), (void**)&vp, 0);
@@ -1051,9 +996,12 @@ void cMaptool::Terrain()
 
 void cMaptool::Object()
 {
-	if (m_UI->Getobject())
+	if (m_UI->Gettree())
 	{
 		
+
+
+		m_UI->Settree(false);
 	}
 
 }
@@ -1076,6 +1024,26 @@ void cMaptool::Unit()
 		m_player->Getmm() = matW;
 
 		m_UI->Setplayer(false);
+	}
+	if (m_UI->Gettau())
+	{
+		if (!m_isNPCExist)
+				m_NPC = new cMapToolObject;
+
+		m_isNPCExist = true;
+		m_NPCTranslation = true;
+		m_NPC->Setup("NPC");
+	
+		D3DXMATRIXA16 matT, matS, matR, matW;
+		D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+		D3DXMatrixScaling(&matS, 0.005f, 0.005f, 0.005f);
+		D3DXMatrixTranslation(&matT, 0, 0, 0);
+		matW = matS * matR* matT;
+		
+		m_NPC->Getmm() = matW;
+		
+
+		m_UI->Settau(false);
 	}
 	if (m_UI->Getspider())
 	{
@@ -1228,10 +1196,145 @@ void cMaptool::Unit()
 
 		m_UI->Setrag(false);
 	}
+
+	
 }
 
 void cMaptool::loadMonster()
 {
+
+}
+
+void cMaptool::PlayerRender()
+{
+	if (g_pKeyManager->isOnceKeyDown('M') && m_isPlayerExist)
+	{
+		if (!m_playerTranslation)
+		{
+			m_playerTranslation = true;
+			return;
+		}
+		if (m_playerTranslation)
+		{
+			m_playerTranslation = false;
+			Playerpos = D3DXVECTOR3(d1.x, d1.y, d1.z);
+			return;
+		}
+	}
+	if (m_playerTranslation && m_isPlayerExist)
+	{
+
+		D3DXMATRIXA16 matT;
+		D3DXMatrixTranslation(&matT, d1.x, d1.y, d1.z);
+		m_player->Gettt() = matT;
+	}
+
+	if (!m_playerTranslation && m_isPlayerExist)
+	{
+
+		D3DXMATRIXA16 matT;
+		D3DXMatrixTranslation(&matT, Playerpos.x, Playerpos.y, Playerpos.z);
+		m_player->Gettt() = matT;
+	}
+	if (m_isPlayerExist)
+	{
+		m_player->Render();
+	}
+}
+
+void cMaptool::NPCRender()
+{
+	if (g_pKeyManager->isOnceKeyDown('N') && m_isNPCExist)
+	{
+		if (!m_NPCTranslation)
+		{
+			m_NPCTranslation = true;
+			return;
+		}
+		if (m_NPCTranslation)
+		{
+			m_NPCTranslation = false;
+			NPCpos = D3DXVECTOR3(d1.x, d1.y, d1.z);
+			return;
+		}
+	}
+	if (m_NPCTranslation && m_isNPCExist)
+	{
+
+		D3DXMATRIXA16 matT;
+		D3DXMatrixTranslation(&matT, d1.x, d1.y, d1.z);
+		m_NPC->Gettt() = matT;
+	}
+
+	if (!m_NPCTranslation && m_isNPCExist)
+	{
+
+		D3DXMATRIXA16 matT;
+		D3DXMatrixTranslation(&matT, NPCpos.x, NPCpos.y, NPCpos.z);
+		m_NPC->Gettt() = matT;
+	}
+	if (m_isNPCExist)
+	{
+		m_NPC->Render();
+	}
+}
+
+void cMaptool::MonsterRender()
+{
+	if (m_vecMonster.size() != 0)
+	{
+		for (int i = 0; i < m_vecMonster.size(); i++)
+		{
+			if (m_vecMonster[i].Translation)
+			{
+
+				D3DXMATRIXA16 matT;
+				D3DXMatrixTranslation(&matT, d1.x, d1.y, d1.z);
+				m_vecMonster[i].monster->Gettt() = matT;
+				m_vecMonster[i].sphere.vCenter = D3DXVECTOR3(d1.x, d1.y, d1.z);
+
+			}
+			if (!m_vecMonster[i].Translation)
+			{
+				D3DXMATRIXA16 matT;
+				D3DXMatrixTranslation(&matT, m_vecMonster[i].sphere.vCenter.x, m_vecMonster[i].sphere.vCenter.y, m_vecMonster[i].sphere.vCenter.z);
+				m_vecMonster[i].monster->Gettt() = matT;
+			}
+		}
+		if (g_pKeyManager->isOnceKeyDown(VK_RBUTTON))
+		{
+			for (int i = 0; i < m_vecMonster.size(); i++)
+			{
+				cRay ra = cRay::RayAtWorldSpace(p.x, p.y);
+
+				if (ra.IsPicked(&m_vecMonster[i].sphere))
+				{
+					if (!m_vecMonster[i].Translation)
+					{
+						m_monsterTranslation = true;
+						m_vecMonster[i].Translation = true;
+						break;
+					}
+					if (m_vecMonster[i].Translation)
+					{
+						m_monsterTranslation = false;
+						m_vecMonster[i].Translation = false;
+						break;
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < m_vecMonster.size(); i++)
+		{
+			m_vecMonster[i].monster->Render();
+		}
+	}
+}
+
+void cMaptool::ObjectRender()
+{
+
 
 }
 

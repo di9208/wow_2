@@ -18,8 +18,8 @@ cNpc_AniController::~cNpc_AniController()
 
 void cNpc_AniController::Setup()
 {
-	m_NPC_SkinnedMesh = new cSkinnedMesh;
-	m_NPC_SkinnedMesh->Setup("tawo", "testtawoo.x");
+
+	m_NPC_SkinnedMesh = g_pSkinnedMeshManager->Find("NPC");
 }
 
 void cNpc_AniController::Update(NPC_State * Nstate)

@@ -70,6 +70,7 @@ void cMainLoading::Render()
 
 void cMainLoading::Loading()
 {
+	g_pSkinnedMeshManager->Setup("NPC", "MapTool_Unit", "testtawoo.X");
 	g_pSkinnedMeshManager->Setup("player", "MapTool_Unit", "player.X");
 	g_pSkinnedMeshManager->Setup("lichking", "MapTool_Unit", "arthas.X");
 	g_pSkinnedMeshManager->Setup("bonespider1", "MapTool_Unit", "bonespider.X");

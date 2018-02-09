@@ -21,7 +21,9 @@ enum BUTTONTAG
 	TAG_WORG,
 	TAG_DRUID,
 	TAG_RAG,
-	TAG_DELETE
+	TAG_DELETE,
+	TAG_TAUREN,
+	TAG_TREE
 };
 class cUIObject :public cObject
 {

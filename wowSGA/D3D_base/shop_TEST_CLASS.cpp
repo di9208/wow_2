@@ -36,7 +36,7 @@ shop_TEST_CLASS::~shop_TEST_CLASS()
 	//_mouse->Destroy();
 }
 
-void shop_TEST_CLASS::Setup()
+void shop_TEST_CLASS::Setup(D3DXVECTOR3 pos)
 {
 	D3DXCreateSprite(g_pD3DDevice, &UI_sprite);
 
@@ -46,7 +46,7 @@ void shop_TEST_CLASS::Setup()
 	g_pSoundManager->addSound("buythings", "sound/shop&inven/아이템사기나 줍기.mp3", true, false);
 
 	_npc = new cNpc;
-	_npc->Setup();
+	_npc->Setup(pos);
 
 	_shops = new shop_class;
 	_shops->Setup();

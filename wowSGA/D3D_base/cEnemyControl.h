@@ -117,6 +117,8 @@ private:
 	int						delay1;
 	int						delay2;
 
+	bool isboss;
+
 public:
 	void SetUp(std::vector<tagMon> Monster);
 	void Update(D3DXVECTOR3 d, iMap* pMap);
@@ -124,7 +126,7 @@ public:
 
 
 	//boss
-	void BossSetup();						//보스 세팅 (x파일 등)
+	void BossSetup(std::vector<tagMon> Monster);						//보스 세팅 (x파일 등)
 	void BossUpdate();						//보스 업데이트 (스킬 등)
 	void BossRender();						//렌더
 	void BossPlayerCheck();					//플레이어와의 체크

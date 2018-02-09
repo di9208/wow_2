@@ -25,7 +25,14 @@ private:
 	bool m_isPlayerExist;
 	bool m_playerTranslation;
 	bool m_monsterTranslation;
+
+	cMapToolObject* m_NPC;
+	bool m_isNPCExist;
+	bool m_NPCTranslation;
+	///bool m_monsterTranslation;
+
 	D3DXVECTOR3 Playerpos;
+	D3DXVECTOR3 NPCpos;
 	POINT p;
 	struct tagMonster
 	{
@@ -117,5 +124,10 @@ public:
 	void Unit();
 
 	void loadMonster();
+
+	void PlayerRender();
+	void NPCRender();
+	void MonsterRender();
+	void ObjectRender();
 };
 

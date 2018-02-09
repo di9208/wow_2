@@ -26,15 +26,18 @@ cBossAniController::~cBossAniController()
 	SAFE_DELETE(m_pBossOBB);
 }
 
-void cBossAniController::SetUp()
+void cBossAniController::SetUp(std::vector<tagMon> Monster)
 {
-	g_pSkinnedMeshManager->Setup("리치왕", "Monster/boss/Arthaslichking", "arthas2.x");
-	m_pSkinnedMesh = g_pSkinnedMeshManager->Find("리치왕");
 	
-	g_pSkinnedMeshManager->Setup("스킬", "Monster/boss/Arthaslichking", "skill.x");
+	for (int i = 0; i < Monster.size(); i++)
+	{
+		if (Monster[i].kind == KIND_BOSS_ARTHAS)
+		{
+			m_vBossPos = Monster[i].pos;
+		}
+	}
+	m_pSkinnedMesh = g_pSkinnedMeshManager->Find("리치왕");
 	m_pSkinnedMeshSkill = g_pSkinnedMeshManager->Find("스킬");
-
-	g_pSkinnedMeshManager->Setup("아이스노바", "Monster/boss/Arthaslichking", "icenova.x");
 	m_pSkinnedMeshSkill2 = g_pSkinnedMeshManager->Find("아이스노바");
 
 

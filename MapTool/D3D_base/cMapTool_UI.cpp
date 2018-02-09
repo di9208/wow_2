@@ -32,7 +32,9 @@ cMapTool_UI::cMapTool_UI()
 	m_lichking(false),
 	m_druid(false),
 	m_worg(false),
-	m_rag(false)
+	m_rag(false),
+	m_tau(false),
+	m_tree(false)
 
 {
 }
@@ -201,6 +203,12 @@ void cMapTool_UI::SetupTab2()
 	temp6->SetPos(temp6->GetPos() + D3DXVECTOR3(200, 60, 0));
 	Root2->AddChild(temp6);
 
+	cUIButton* temp7 = new cUIButton;
+	temp7->SetTexture("MapTool_UI/Tauren_Up.png", "MapTool_UI/Tauren_Over.png", "MapTool_UI/Tauren_Down.png");
+	temp7->SetTag(TAG_TAUREN);
+	temp7->SetDelegate(this);
+	temp7->SetPos(temp7->GetPos() + D3DXVECTOR3(100, 180, 0));
+	Root2->AddChild(temp7);
 	/*cUIButton* temp1 = new cUIButton;
 	temp1->SetTexture("t1", "MapTool_UI/Flattening_Up.png", "MapTool_UI/Flattening_Over.png", "MapTool_UI/Flattening_Down.png");
 	temp1->SetTag(TAG_FLATTENING);
@@ -350,9 +358,9 @@ void cMapTool_UI::Terrain(cUIButton * pSender)
 
 void cMapTool_UI::Object(cUIButton * pSender)
 {
-	if (pSender->GetTag() == TAG_OBJECT)
+	if (pSender->GetTag() == TAG_TREE)
 	{
-		Setbool(m_object);
+		Setbool(m_tree);
 	}
 }
 
@@ -383,6 +391,10 @@ void cMapTool_UI::Unit(cUIButton * pSender)
 		Setbool(m_rag);
 	}
 
+	if (pSender->GetTag() == TAG_TAUREN)
+	{
+		Setbool(m_tau);
+	}
 }
 
 void cMapTool_UI::Setbool(bool &bf)
@@ -400,6 +412,8 @@ void cMapTool_UI::Setbool(bool &bf)
 	m_lichking = false;
 	m_worg = false;
 	m_rag = false;
+	m_tau = false;
+	m_tree = false;
 	bf = true;
 }
 

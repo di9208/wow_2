@@ -55,7 +55,7 @@ void cScene1::Setup()
 	m_Player_Enemy->Setup(m_Stage1->Getplayerpos().x, m_Stage1->Getplayerpos().y, m_Stage1->Getplayerpos().z, m_Stage1->GetMonster());
 
 	m_shop_TEST_CLASS = new shop_TEST_CLASS;
-	m_shop_TEST_CLASS->Setup();
+	m_shop_TEST_CLASS->Setup(m_Stage1->Getnpcpos());
 
 	m_Frustum = new cFrustum();
 }

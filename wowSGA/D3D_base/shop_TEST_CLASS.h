@@ -49,7 +49,7 @@ public:
 	shop_TEST_CLASS();
 	~shop_TEST_CLASS();
 
-	void Setup();
+	void Setup(D3DXVECTOR3 pos);
 	void Update();
 	void Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

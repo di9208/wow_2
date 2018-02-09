@@ -25,16 +25,23 @@ cBossRagController::~cBossRagController()
 	SAFE_DELETE(m_pBossRagOBB);
 }
 
-void cBossRagController::SetUp()
+void cBossRagController::SetUp(std::vector<tagMon> Monster)
 {
-	g_pSkinnedMeshManager->Setup("라그나로스", "Monster/boss/ragnaros", "ragnaros2.X");
+	for (int i = 0; i < Monster.size(); i++)
+	{
+		if (Monster[i].kind == KIND_BOSS_RAGNALOS)
+		{
+			m_vBossPos = Monster[i].pos;
+		}
+	}
+	//g_pSkinnedMeshManager->Setup("라그나로스", "Monster/boss/ragnaros", "ragnaros2.X");
 	m_pSkinnedMesh_rag = g_pSkinnedMeshManager->Find("라그나로스");
 	
-	g_pSkinnedMeshManager->Setup("스킬1", "Monster/boss/ragnaros", "ragSkill1.x");
+	//g_pSkinnedMeshManager->Setup("스킬1", "Monster/boss/ragnaros", "ragSkill1.x");
 	m_pSkinnedMesh_rag_skill1 = g_pSkinnedMeshManager->Find("스킬1");
 	m_pSkinnedMesh_rag_skill1->Play("rag1");
 
-	g_pSkinnedMeshManager->Setup("스킬2", "Monster/boss/ragnaros", "ragSkill2.x");
+	//g_pSkinnedMeshManager->Setup("스킬2", "Monster/boss/ragnaros", "ragSkill2.x");
 	m_pSkinnedMesh_rag_skill2 = g_pSkinnedMeshManager->Find("스킬2");
 	m_pSkinnedMesh_rag_skill2->Play("rag2");
 
