@@ -146,6 +146,11 @@ cOBB * cEnemyControl::getDruidOBB(int i)
 	return m_pDruid->getOBB(i);
 }
 
+cOBB * cEnemyControl::getBulletOBB(int i)
+{
+	return m_pDruid->getBULLET(i);
+}
+
 MONSTER_STATUS cEnemyControl::getDruidCondition(int i)
 {
 	return m_pDruid->getCondition(i);
@@ -189,6 +194,16 @@ cOBB * cEnemyControl::getBossOBB()
 E_BOSS_STATE cEnemyControl::getBossCondition()
 {
 	return m_pBossAniController->getCondition();
+}
+
+cOBB * cEnemyControl::getRagOBB()
+{
+	return m_pBossRagController->getOBB();
+}
+
+E_BOSS_RAG_STATE cEnemyControl::getRagCondition()
+{
+	return m_pBossRagController->getCondition();
 }
 
 std::vector<Enemy_Sphere> cEnemyControl::getALLEnemyCenter()
@@ -250,6 +265,28 @@ void cEnemyControl::getWeaponHitBOSS(cOBB * PlayerWeapon)
 			}
 		}
 	}
+}
+
+void cEnemyControl::WeaponHit_AFTER(cOBB * PlayerWeapon)
+{
+	for (int i = 0; i < getSpiderVectorSize(); i++)
+	{
+		m_pSpider->setHurt(i, false);
+	}
+	for (int i = 0; i < getWolfVectorSize(); i++)
+	{
+		m_pWorg->setHurt(i, false);
+	}
+	for (int i = 0; i < getDruidVectorSize(); i++)
+	{
+		m_pDruid->setHurt(i, false);
+	}
+	getWeaponHitBOSS_After();
+}
+
+void cEnemyControl::getWeaponHitBOSS_After()
+{
+	m_vecBoss[0].stat.Hurt = false;
 }
 
 
