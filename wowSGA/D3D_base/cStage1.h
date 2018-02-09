@@ -1,5 +1,8 @@
 #pragma once
 #include "iMap.h"
+#include "cUnit.h"
+#include "cSkyBox.h"
+
 class cQuadTree;
 class cFrustum;
 
@@ -18,6 +21,9 @@ private:
 
 	std::vector<int> m_vecindex;
 	
+	cSkyBox * m_skybox;
+	SYNTHESIZE(D3DXVECTOR3, Playerpos, playerpos);
+	SYNTHESIZE_REF(std::vector<tagMon>, m_vecMonster, Monster);
 
 private:
 	cQuadTree * m_QuadTree;
@@ -32,6 +38,7 @@ public:
 	void SetMaterial();
 	void Draw(cFrustum* f);
 	void Render();
+	void SkyRender(D3DXVECTOR3 camera);
 
 	bool GetHeight(IN float x, OUT float& y, IN float z);
 };

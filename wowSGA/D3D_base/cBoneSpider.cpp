@@ -127,6 +127,74 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 	//SetupUI(0, 4);
 }
 
+void cBoneSpider::addMonster(std::string key, float x, float y, float z)
+{
+	EnemySkinnedMesh Monster;
+
+	Monster.m = g_pSkinnedMeshManager->Find(key);
+	
+	Monster.ENUM_MONSTER = MONSTER_STATUS::MONSTER_STAND;
+	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::KIND_SPIDER;
+	Monster.m_vPos = D3DXVECTOR3(x, y + 0.3, z);
+	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
+	Monster.t.HP = 80;
+	Monster.MaxHP = 80;
+	Monster.t.ATK = 8;
+	Monster.t.DEF = 8;
+	Monster.t.Speed = 0.07f;
+	Monster.attackSpeed = 110;
+	Monster.t.Gold = rand() % 100 + 1500;
+	Monster.m_Sphere.vCenter = D3DXVECTOR3(x, y + 0.3, z);
+	Monster.m_Sphere.fRadius = 10.f;
+	Monster.m_Sphere.bIsPicked = false;
+	Monster.MaxRange = 10.f;
+	Monster.range = 1.5f;
+	Monster.time = 0;
+	Monster.death = false;
+	Monster.deathTime = 0;
+	Monster.attackTime = 100;
+	Monster.termCount = 0;
+	Monster.RunCount = rand() % 250 + 10;
+	Monster.Damage = false;
+	Monster.Damage_time = 0.0f;
+	Monster.TimeCheck = 0.0f;
+
+	Monster.Particle = new cMonsterParticle(512, 20);
+	Monster.Particle->init("Particle/alpha_tex.tga");
+	D3DXMatrixIdentity(&Monster.matWorld);
+	D3DXMATRIXA16 matTT, matSS;
+	D3DXMatrixScaling(&matSS, 0.0f, 0.0f, 0.0f);
+	D3DXMatrixTranslation(&matTT, x, y + 0.3, z);
+	Monster.matWorld = matSS * matTT;
+
+	ZeroMemory(&Monster.m_stMtlNone, sizeof(D3DMATERIAL9));
+	Monster.m_stMtlNone.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	Monster.m_stMtlNone.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	Monster.m_stMtlNone.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+
+	ZeroMemory(&Monster.m_stMtlPicked, sizeof(D3DMATERIAL9));
+	Monster.m_stMtlPicked.Ambient = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
+	Monster.m_stMtlPicked.Diffuse = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
+	Monster.m_stMtlPicked.Specular = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
+
+	D3DXMATRIXA16	World, matS, matR, matT;
+	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
+	D3DXMatrixScaling(&matS, 0.009f, 0.009f, 0.009f);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixTranslation(&matT, 0, 0, -0.3);
+	World = matS * matR * matT;
+
+	Monster.MonsterOBB = new cOBB;
+	Monster.MonsterOBB->Setup(Monster.m, &World);
+
+
+
+	D3DXCreateSphere(g_pD3DDevice, Monster.m_Sphere.fRadius, 10, 10,
+		&Monster.m_pMeshSphere, NULL);
+
+	m_vecSkinnedMesh.push_back(Monster);
+}
+
 
 void cBoneSpider::SetUp() {
 

@@ -290,15 +290,35 @@ void cEnemyControl::getWeaponHitBOSS_After()
 }
 
 
-void cEnemyControl::SetUp() {
+void cEnemyControl::SetUp(std::vector<tagMon> Monster) {
+	
 	m_pSpider = new cBoneSpider;
-	//m_pSpider->addMonster(1, 0, 4);
+	for (int i = 0; i < Monster.size(); i++)
+	{
+		if (Monster[i].kind == KIND_SPIDER)
+		{
+			m_pSpider->addMonster(Monster[i].name, Monster[i].pos.x, Monster[i].pos.y, Monster[i].pos.z);
+		}
+	}
 
 	m_pDruid = new cArchDruid;
-	//m_pDruid->addMonster(-4, 0, -4);
+	for (int i = 0; i < Monster.size(); i++)
+	{
+		if (Monster[i].kind == KIND_DRUID)
+		{
+			m_pDruid->addMonster(Monster[i].name, Monster[i].pos.x, Monster[i].pos.y, Monster[i].pos.z);
+		}
+	}
 
 	m_pWorg = new cLightningWorg;
-	//m_pWorg->addMonster(4, 0, -4);
+	for (int i = 0; i < Monster.size(); i++)
+	{
+		if (Monster[i].kind == KIND_WORG)
+		{
+			m_pWorg->addMonster(Monster[i].name, Monster[i].pos.x, Monster[i].pos.y, Monster[i].pos.z);
+		}
+	}
+	
 
 	if (m_pSpider) m_pSpider->SetUp();
 	if (m_pDruid) m_pDruid->SetUp();

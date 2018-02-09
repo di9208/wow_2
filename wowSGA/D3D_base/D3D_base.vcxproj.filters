@@ -250,6 +250,7 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
+    <ClCompile Include="cSkyBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cCamera.h">
@@ -513,6 +514,7 @@
     <ClInclude Include="soundManager.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
+    <ClInclude Include="cSkyBox.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3D_base.ico">

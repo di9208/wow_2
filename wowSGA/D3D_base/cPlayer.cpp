@@ -33,10 +33,14 @@ cPlayer::~cPlayer()
 	SAFE_DELETE(m_EnemyPicking);
 }
 
-void cPlayer::Setup()
+void cPlayer::Setup(float x, float y, float z)
 {
+	m_vPos.x = x;
+	m_vPos.y = y;
+	m_vPos.z = z;
+
 	m_playerAnimController = new cPlayerAniController();
-	m_playerAnimController->Setup();
+	m_playerAnimController->Setup(x, y, z);
 
 	m_playerSkill = new cPlayerSkill();
 	m_playerSkill->Setup();

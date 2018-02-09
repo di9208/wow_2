@@ -14,11 +14,12 @@ private:
 	
 	SYNTHESIZE_REF(D3DXMATRIXA16, T, tt);
 	SYNTHESIZE_REF(D3DXMATRIXA16, m, mm);
+	SYNTHESIZE_REF(D3DXMATRIXA16, s, ss);
 public:
 	cMapToolObject();
 	~cMapToolObject();
 
-	void Setup();
+	void Setup(std::string keyname);
 	void SetObject(char * folder, char* file);
 	void Update();
 	void Render();

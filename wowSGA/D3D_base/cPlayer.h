@@ -29,7 +29,7 @@ public:
 	cPlayer();
 	~cPlayer();
 
-	void Setup();
+	void Setup(float x, float y, float z);
 	void Update(iMap* m_map);
 	void Render();
 	void UpdatePicking(MONSTER_KIND monster);

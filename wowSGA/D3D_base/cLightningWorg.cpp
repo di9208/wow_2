@@ -118,6 +118,70 @@ void cLightningWorg::addMonster(float x, float y, float z) {
 	m_vecSkinnedMesh.push_back(Monster);
 }
 
+void cLightningWorg::addMonster(std::string key, float x, float y, float z)
+{
+
+	EnemySkinnedMesh Monster;
+	Monster.m = g_pSkinnedMeshManager->Find(key);
+	//Monster.m->Setup("Monster/lightningworg", "1.x");
+	Monster.ENUM_MONSTER = MONSTER_STATUS::MONSTER_STAND;
+	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::KIND_WORG;
+	Monster.m_vPos = D3DXVECTOR3(x, y + 0.45, z);
+	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
+	Monster.t.HP = 50;
+	Monster.MaxHP = 50;
+	Monster.t.ATK = 3;
+	Monster.t.DEF = 5;
+	Monster.t.Speed = 0.08f;
+	Monster.attackSpeed = 130;
+	Monster.t.Gold = rand() % 100 + 1500;
+	Monster.m_Sphere.vCenter = D3DXVECTOR3(x, y + 0.45, z);
+	Monster.m_Sphere.fRadius = 10.f;
+	Monster.m_Sphere.bIsPicked = false;
+	Monster.MaxRange = 18.f;
+	Monster.range = 1.f;
+	Monster.time = 0;
+	Monster.death = false;
+	Monster.deathTime = 0;
+	Monster.attackTime = 100;
+	Monster.termCount = 0;
+	Monster.RunCount = rand() % 250 + 10;
+
+	Monster.Particle = new cMonsterParticle(512, 25);
+	Monster.Particle->init("Particle/alpha_tex.tga");
+	D3DXMatrixIdentity(&Monster.matWorld);
+	D3DXMATRIXA16 matTT, matSS;
+	D3DXMatrixScaling(&matSS, 0.0f, 0.0f, 0.0f);
+	D3DXMatrixTranslation(&matTT, x, y + 0.45, z);
+	Monster.matWorld = matSS * matTT;
+
+	ZeroMemory(&Monster.m_stMtlNone, sizeof(D3DMATERIAL9));
+	Monster.m_stMtlNone.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	Monster.m_stMtlNone.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	Monster.m_stMtlNone.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+
+	ZeroMemory(&Monster.m_stMtlPicked, sizeof(D3DMATERIAL9));
+	Monster.m_stMtlPicked.Ambient = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
+	Monster.m_stMtlPicked.Diffuse = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
+	Monster.m_stMtlPicked.Specular = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
+
+	D3DXMATRIXA16	World, matS, matR, matT;
+	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
+	D3DXMatrixScaling(&matS, 0.011f, 0.011f, 0.011f);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixTranslation(&matT, 0, 0.35f, 0.3);
+	World = matS * matR * matT;
+
+	Monster.MonsterOBB = new cOBB;
+	Monster.MonsterOBB->Setup(Monster.m, &World);
+
+	D3DXCreateSphere(g_pD3DDevice, Monster.m_Sphere.fRadius, 10, 10,
+		&Monster.m_pMeshSphere, NULL);
+
+	m_vecSkinnedMesh.push_back(Monster);
+
+}
+
 
 void cLightningWorg::SetUp() {
 	D3DXFONT_DESC stFD;

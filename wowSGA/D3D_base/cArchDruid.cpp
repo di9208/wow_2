@@ -138,6 +138,87 @@ void cArchDruid::addMonster(float x, float y, float z){
 	m_vecSkinnedMesh.push_back(Monster);
 }
 
+void cArchDruid::addMonster(std::string key, float x, float y, float z)
+{
+	Monster.m = g_pSkinnedMeshManager->Find(key);
+	
+	//Monster.m->Setup("Monster/archdruid", "1.x");
+	Monster.ENUM_MONSTER = MONSTER_STATUS::MONSTER_STAND;
+	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::KIND_DRUID;
+	Monster.m_vPos = D3DXVECTOR3(x, y + 1, z);
+	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
+	Monster.t.HP = 100;
+	Monster.MaxHP = 100;
+	Monster.t.ATK = 20;
+	Monster.t.DEF = 10;
+	Monster.t.Speed = 0.03f;
+	Monster.attackSpeed = 150;
+	Monster.t.Gold = rand() % 100 + 1500;
+	Monster.m_Sphere.vCenter = D3DXVECTOR3(x, y + 1, z);
+	Monster.m_Sphere.fRadius = 0.5f;
+	Monster.m_Sphere.bIsPicked = false;
+	Monster.b = new cSkinnedMesh;
+	Monster.b->Setup("Monster/archdruid", "1.x");
+	Monster.MaxRange = 16.f;
+	Monster.range = 2.f;
+	Monster.time = 0;
+	Monster.death = false;
+	Monster.deathTime = 0;
+	Monster.attackTime = 100;
+	Monster.termCount = 0;
+	Monster.RunCount = rand() % 250 + 10;
+	Monster.m_rangeCheck = false;
+	Monster.m_rangeSphere.vCenter = D3DXVECTOR3(x, y + 3, z);
+	Monster.m_rangeSphere.fRadius = 0.2f;
+	Monster.m_rangeSphere.bIsPicked = false;
+
+	Monster.Particle = new cMonsterParticle(512, 40);
+	Monster.Particle->init("Particle/alpha_tex.tga");
+	D3DXMatrixIdentity(&Monster.matWorld);
+	D3DXMATRIXA16 matTT, matSS;
+	D3DXMatrixScaling(&matSS, 0.0f, 0.0f, 0.0f);
+	D3DXMatrixTranslation(&matTT, x, y + 0.3, z);
+	Monster.matWorld = matSS * matTT;
+
+	ZeroMemory(&Monster.m_stMtlNone, sizeof(D3DMATERIAL9));
+	Monster.m_stMtlNone.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	Monster.m_stMtlNone.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+	Monster.m_stMtlNone.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.0f);
+
+	ZeroMemory(&Monster.m_stMtlPicked, sizeof(D3DMATERIAL9));
+	Monster.m_stMtlPicked.Ambient = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
+	Monster.m_stMtlPicked.Diffuse = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
+	Monster.m_stMtlPicked.Specular = D3DXCOLOR(0.0f, 0.8f, 0.8f, 1.0f);
+
+	D3DXMATRIXA16	World, matS, matR, matT;
+	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
+	D3DXMatrixScaling(&matS, 0.004f, 0.004f, 0.004f);
+	D3DXMatrixIdentity(&matT);
+	D3DXMatrixTranslation(&matT, 0, 0.5, -0.7);
+	World = matS * matR * matT;
+
+	Monster.MonsterOBB = new cOBB;
+	Monster.MonsterOBB->Setup(Monster.m, &World);
+
+	D3DXMATRIXA16	World2, matS2, matR2, matT2;
+	D3DXMatrixRotationX(&matR2, D3DX_PI / 2.0f);
+	D3DXMatrixScaling(&matS2, 0.001f, 0.001f, 0.001f);
+	D3DXMatrixIdentity(&matT2);
+	D3DXMatrixTranslation(&matT2, 0, 1.5, -0.2);
+	World2 = matS2 * matR2 * matT2;
+
+	Monster.MonsterAttackOBB = new cOBB;
+	Monster.MonsterAttackOBB->Setup(Monster.b, &World2);
+
+	D3DXCreateSphere(g_pD3DDevice, Monster.m_Sphere.fRadius, 10, 10,
+		&Monster.m_pMeshSphere, NULL);
+
+	D3DXCreateSphere(g_pD3DDevice, Monster.m_rangeSphere.fRadius, 10, 10,
+		&Monster.m_rangeMesh, NULL);
+
+	m_vecSkinnedMesh.push_back(Monster);
+}
+
 
 void cArchDruid::SetUp(){
 	D3DXFONT_DESC stFD;

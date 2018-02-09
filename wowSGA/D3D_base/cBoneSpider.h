@@ -91,6 +91,7 @@ public:
 	void MonsterInsic(D3DXVECTOR3 d);
 
 	void addMonster(float x, float y, float z);
+	void addMonster(std::string key,float x, float y, float z);
 	void HarmDamage(int Damage, size_t i);
 	void MonsterAI(size_t i);
 	void MonsterStatus(size_t i);

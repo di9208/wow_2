@@ -198,7 +198,7 @@ void cSkinnedMesh::Render(LPD3DXFRAME pFrame, D3DXMATRIXA16* m_Word)
 			if (m_Word)
 			{
 				g_pD3DDevice->SetTransform(D3DTS_WORLD,
-					&(pBone->matCombinedTransformMatrix *(*m_Word)));
+					&(*pBone->matCombinedTransformMatrix *(*m_Word)));
 			}
 			else
 			{

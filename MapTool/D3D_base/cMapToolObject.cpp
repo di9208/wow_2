@@ -3,20 +3,21 @@
 
 
 cMapToolObject::cMapToolObject()
-{m_mesh = new cSkinnedMesh();
+{
+	D3DXMatrixIdentity(&s);
 }
 
 
 cMapToolObject::~cMapToolObject()
 {
 	//SAFE_DELETE(m_obj);
+	
 }
 
-void cMapToolObject::Setup()
+void cMapToolObject::Setup(std::string keyname)
 {
-	
-	m_mesh = g_pSkinnedMeshManager->Find("f");
-	//this->SetObject("Object", "player.X");
+	m_mesh = g_pSkinnedMeshManager->Find(keyname);
+
 }
 
 void cMapToolObject::SetObject(char * folder, char* file)

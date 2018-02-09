@@ -118,7 +118,7 @@ private:
 	int						delay2;
 
 public:
-	void SetUp();
+	void SetUp(std::vector<tagMon> Monster);
 	void Update(D3DXVECTOR3 d, iMap* pMap);
 	void Render();
 

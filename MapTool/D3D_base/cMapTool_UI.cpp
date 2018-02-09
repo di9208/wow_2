@@ -26,7 +26,13 @@ cMapTool_UI::cMapTool_UI()
 	m_tab1(false),
 	m_tab2(false),
 	m_tab3(false),
-	m_object(false)
+	m_object(false),
+	m_player(false),
+	m_spider(false),
+	m_lichking(false),
+	m_druid(false),
+	m_worg(false),
+	m_rag(false)
 
 {
 }
@@ -63,21 +69,12 @@ void cMapTool_UI::SetupRoot()
 
 	Root2 = tabbutton2;
 
-	//Tab3
-	cUIButton* tabbutton3 = new cUIButton;
-	tabbutton3->SetTexture("tab3", "MapTool_UI/Tab_Button.png", "MapTool_UI/Tab_Button.png", "MapTool_UI/Tab_Button.png");
-	tabbutton3->SetTag(TAG_TAB3);
-	tabbutton3->SetPos(tabbutton3->GetPos() + D3DXVECTOR3(1500, 445, 0.5f));
-	tabbutton3->SetDelegate(this);
-
-	Root3 = tabbutton3;
 }
 
 void cMapTool_UI::SetupUI()
 {
 	SetupTab1();
 	SetupTab2();
-	SetupTab3();
 }
 
 void cMapTool_UI::SetupImage()
@@ -124,6 +121,34 @@ void cMapTool_UI::SetupTab1()
 	temp2->SetDelegate(this);
 	temp2->SetPos(temp2->GetPos() + D3DXVECTOR3(120, 180, 0));
 	Root->AddChild(temp2);
+
+	cUIButton* temp4 = new cUIButton;
+	temp4->SetTexture("t1", "MapTool_UI/Flattening_Up.png", "MapTool_UI/Flattening_Over.png", "MapTool_UI/Flattening_Down.png");
+	temp4->SetTag(TAG_FLATTENING);
+	temp4->SetDelegate(this);
+	temp4->SetPos(temp4->GetPos() + D3DXVECTOR3(220, 30, 0));
+	Root->AddChild(temp4);
+
+	cUIButton* temp5 = new cUIButton;
+	temp5->SetTexture("t2", "MapTool_UI/UpThrow_Up.png", "MapTool_UI/UpThrow_Over.png", "MapTool_UI/UpThrow_Down.png");
+	temp5->SetTag(TAG_UPTHROW);
+	temp5->SetDelegate(this);
+	temp5->SetPos(temp5->GetPos() + D3DXVECTOR3(220, 80, 0));
+	Root->AddChild(temp5);
+
+	cUIButton* temp3 = new cUIButton;
+	temp3->SetTexture("t3", "MapTool_UI/DownThow_Up.png", "MapTool_UI/DownThow_Over.png", "MapTool_UI/DownThow_Down.png");
+	temp3->SetTag(TAG_DOWNTHROW);
+	temp3->SetDelegate(this);
+	temp3->SetPos(temp3->GetPos() + D3DXVECTOR3(220, 130, 0));
+	Root->AddChild(temp3);
+
+	cUIButton* temp7 = new cUIButton;
+	temp7->SetTexture("MapTool_UI/Delete_Up.png", "MapTool_UI/Delete_Over.png", "MapTool_UI/Delete_Down.png");
+	temp7->SetTag(TAG_DELETE);
+	temp7->SetDelegate(this);
+	temp7->SetPos(temp7->GetPos() + D3DXVECTOR3(220, 180, 0));
+	Root->AddChild(temp7);
 }
 
 void cMapTool_UI::SetupTab2()
@@ -135,6 +160,48 @@ void cMapTool_UI::SetupTab2()
 	Root2->AddChild(tab2);
 
 	cUIButton* temp1 = new cUIButton;
+	temp1->SetTexture("MapTool_UI/Player_Up.png", "MapTool_UI/Player_Over.png", "MapTool_UI/Player_Down.png");
+	temp1->SetTag(TAG_PLAYER);
+	temp1->SetDelegate(this);
+	temp1->SetPos(temp1->GetPos() + D3DXVECTOR3(100, -180, 0));
+	Root2->AddChild(temp1);
+
+	cUIButton* temp2 = new cUIButton;
+	temp2->SetTexture("MapTool_UI/LichKing_Up.png", "MapTool_UI/LichKing_Over.png", "MapTool_UI/LichKing_Down.png");
+	temp2->SetTag(TAG_LICHKING);
+	temp2->SetDelegate(this);
+	temp2->SetPos(temp2->GetPos() + D3DXVECTOR3(200, -180, 0));
+	Root2->AddChild(temp2);
+
+	cUIButton* temp3 = new cUIButton;
+	temp3->SetTexture("MapTool_UI/Ragnaros_Up.png", "MapTool_UI/Ragnaros_Over.png", "MapTool_UI/Ragnaros_Down.png");
+	temp3->SetTag(TAG_RAG);
+	temp3->SetDelegate(this);
+	temp3->SetPos(temp3->GetPos() + D3DXVECTOR3(100, -60, 0));
+	Root2->AddChild(temp3);
+
+	cUIButton* temp4 = new cUIButton;
+	temp4->SetTexture("MapTool_UI/Spider_Up.png", "MapTool_UI/Spider_Over.png", "MapTool_UI/Spider_Down.png");
+	temp4->SetTag(TAG_BONESPIDER);
+	temp4->SetDelegate(this);
+	temp4->SetPos(temp4->GetPos() + D3DXVECTOR3(200, -60, 0));
+	Root2->AddChild(temp4);
+
+	cUIButton* temp5 = new cUIButton;
+	temp5->SetTexture("MapTool_UI/Druid_Up.png", "MapTool_UI/Druid_Over.png", "MapTool_UI/Druid_Down.png");
+	temp5->SetTag(TAG_DRUID);
+	temp5->SetDelegate(this);
+	temp5->SetPos(temp5->GetPos() + D3DXVECTOR3(100, 60, 0));
+	Root2->AddChild(temp5);
+
+	cUIButton* temp6 = new cUIButton;
+	temp6->SetTexture("MapTool_UI/Worg_Up.png", "MapTool_UI/Worg_Over.png", "MapTool_UI/Worg_Down.png");
+	temp6->SetTag(TAG_WORG);
+	temp6->SetDelegate(this);
+	temp6->SetPos(temp6->GetPos() + D3DXVECTOR3(200, 60, 0));
+	Root2->AddChild(temp6);
+
+	/*cUIButton* temp1 = new cUIButton;
 	temp1->SetTexture("t1", "MapTool_UI/Flattening_Up.png", "MapTool_UI/Flattening_Over.png", "MapTool_UI/Flattening_Down.png");
 	temp1->SetTag(TAG_FLATTENING);
 	temp1->SetDelegate(this);
@@ -153,23 +220,12 @@ void cMapTool_UI::SetupTab2()
 	temp3->SetTag(TAG_DOWNTHROW);
 	temp3->SetDelegate(this);
 	temp3->SetPos(temp3->GetPos() + D3DXVECTOR3(120, -90, 0));
-	Root2->AddChild(temp3);
+	Root2->AddChild(temp3);*/
 }
 
 void cMapTool_UI::SetupTab3()
 {
-	cUIImage * tab3 = new cUIImage;
-	tab3->SetTexture("MapTool_UI/Tab_Table3.png");
-	tab3->SetTag(TAG_IMAGE);
-	tab3->SetPos(tab3->GetPos() + D3DXVECTOR3(0, -385, 0));
-	Root3->AddChild(tab3);
-
-	cUIButton* temp = new cUIButton;
-	temp->SetTexture("t77", "MapTool_UI/DownThow_Up.png", "MapTool_UI/DownThow_Over.png", "MapTool_UI/DownThow_Down.png");
-	temp->SetTag(TAG_OB);
-	temp->SetDelegate(this);
-	temp->SetPos(temp->GetPos() + D3DXVECTOR3(120, -320, 0));
-	Root3->AddChild(temp);
+	
 }
 
 
@@ -177,7 +233,6 @@ void cMapTool_UI::Update()
 {
 	Root2->Update();
 	Root->Update();
-	Root3->Update();
 }
 
 void cMapTool_UI::Render(LPD3DXSPRITE pSprite)
@@ -187,7 +242,6 @@ void cMapTool_UI::Render(LPD3DXSPRITE pSprite)
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matW);
 	Root->Render(pSprite);
 	Root2->Render(pSprite);
-	Root3->Render(pSprite);
 }
 
 void cMapTool_UI::OnClick(cUIButton * pSender)
@@ -199,6 +253,7 @@ void cMapTool_UI::OnClick(cUIButton * pSender)
 	SkyBoxT(pSender);
 	Terrain(pSender);
 	Object(pSender);
+	Unit(pSender);
 }
 
 void cMapTool_UI::TabShowHide(cUIButton * pSender)
@@ -227,10 +282,10 @@ void cMapTool_UI::TabShowHide(cUIButton * pSender)
 					return;
 				m_tab3 = true;
 			}
-			pSender->SetPos(pSender->GetPos() + D3DXVECTOR3(-150, 0, -0.5f));
+			pSender->SetPos(pSender->GetPos() + D3DXVECTOR3(-300, 0, -0.5f));
 			return;
 		}
-		if (pSender->GetPos().x == 1350)
+		if (pSender->GetPos().x == 1200)
 		{
 			if (pSender->GetTag() == TAG_TAB1)
 				m_tab1 = false;
@@ -238,7 +293,7 @@ void cMapTool_UI::TabShowHide(cUIButton * pSender)
 				m_tab2 = false;
 			if (pSender->GetTag() == TAG_TAB3)
 				m_tab3 = false;
-			pSender->SetPos(pSender->GetPos() + D3DXVECTOR3(150, 0, 0.5f));
+			pSender->SetPos(pSender->GetPos() + D3DXVECTOR3(300, 0, 0.5f));
 			return;
 		}
 	}
@@ -248,11 +303,7 @@ void cMapTool_UI::Save(cUIButton * pSender)
 {
 	if (pSender->GetTag() == TAG_SAVE)
 	{
-		m_save = true;
-		m_upthow = false;
-		m_downthow = false;
-		m_flat = false;
-		m_object = false;
+		Setbool(m_save);
 	}
 }
 
@@ -260,11 +311,7 @@ void cMapTool_UI::Load(cUIButton * pSender)
 {
 	if (pSender->GetTag() == TAG_LOAD)
 	{
-		m_load = true;
-		m_upthow = false;
-		m_downthow = false;
-		m_flat = false;
-		m_object = false;
+		Setbool(m_load);
 	}
 }
 
@@ -272,24 +319,15 @@ void cMapTool_UI::Landscape(cUIButton * pSender)
 {
 	if (pSender->GetTag() == TAG_UPTHROW)
 	{
-		m_upthow = true;
-		m_downthow = false;
-		m_flat = false;
-		m_object = false;
+		Setbool(m_upthow);
 	}
 	if (pSender->GetTag() == TAG_DOWNTHROW)
 	{
-		m_downthow = true;
-		m_upthow = false;
-		m_flat = false;
-		m_object = false;
+		Setbool(m_downthow);
 	}
 	if (pSender->GetTag() == TAG_FLATTENING)
 	{
-		m_flat = true;
-		m_upthow = false;
-		m_downthow = false;
-		m_object = false;
+		Setbool(m_flat);
 	}
 
 }
@@ -298,11 +336,7 @@ void cMapTool_UI::SkyBoxT(cUIButton * pSender)
 {
 	if (pSender->GetTag() == TAG_SKYBOX)
 	{
-		m_skybox = true;
-		m_upthow = false;
-		m_downthow = false;
-		m_flat = false;
-		m_object = false;
+		Setbool(m_skybox);
 	}
 }
 
@@ -310,23 +344,62 @@ void cMapTool_UI::Terrain(cUIButton * pSender)
 {
 	if (pSender->GetTag() == TAG_TERRAIN)
 	{
-		m_terrain = true;
-		m_upthow = false;
-		m_downthow = false;
-		m_flat = false;
-		m_object = false;
+		Setbool(m_terrain);
 	}
 }
 
 void cMapTool_UI::Object(cUIButton * pSender)
 {
-	if (pSender->GetTag() == TAG_OB)
+	if (pSender->GetTag() == TAG_OBJECT)
 	{
-		m_object = true;
-		m_terrain = false;
-		m_upthow = false;
-		m_downthow = false;
-		m_flat = false;
+		Setbool(m_object);
 	}
+}
+
+void cMapTool_UI::Unit(cUIButton * pSender)
+{
+	if (pSender->GetTag() == TAG_PLAYER)
+	{
+		Setbool(m_player);
+	}
+	if (pSender->GetTag() == TAG_BONESPIDER)
+	{
+		Setbool(m_spider);
+	}
+	if (pSender->GetTag() == TAG_DRUID)
+	{
+		Setbool(m_druid);
+	}
+	if (pSender->GetTag() == TAG_LICHKING)
+	{
+		Setbool(m_lichking);
+	}
+	if (pSender->GetTag() == TAG_WORG)
+	{
+		Setbool(m_worg);
+	}
+	if (pSender->GetTag() == TAG_RAG)
+	{
+		Setbool(m_rag);
+	}
+
+}
+
+void cMapTool_UI::Setbool(bool &bf)
+{
+	m_save = false;
+	m_load = false;
+	m_player = false;
+	m_object = false;
+	m_terrain = false;
+	m_upthow = false;
+	m_downthow = false;
+	m_flat = false;
+	m_spider = false;
+	m_druid = false;
+	m_lichking = false;
+	m_worg = false;
+	m_rag = false;
+	bf = true;
 }
 

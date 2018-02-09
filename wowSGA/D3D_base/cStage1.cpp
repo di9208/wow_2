@@ -13,11 +13,14 @@ cStage1::~cStage1()
 	SAFE_RELEASE(m_vb);
 	SAFE_RELEASE(m_ib);
 	SAFE_DELETE(m_QuadTree);
+	SAFE_DELETE(m_skybox);
 	SAFE_RELEASE(m_pTexture);
 }
 
 void cStage1::Setup()
 {
+	m_skybox = new cSkyBox;
+	m_skybox->Setup();
 	SetMap();
 	m_QuadTree = new cQuadTree(m_col, m_row);
 	SetQuad();
@@ -27,8 +30,8 @@ void cStage1::SetMap()
 {
 	int size;
 	FILE * fp;
-	fp = fopen("Stage1.txt", "r");
-	m_pTexture = g_pTextureManager->GetTexture("HeightMapData/selectblend.png");
+	fp = fopen("Stage111.txt", "r");
+	//m_pTexture = g_pTextureManager->GetTexture("HeightMapData/selectblend.png");
 
 	fscanf(fp, "%d", &size);
 
@@ -54,6 +57,62 @@ void cStage1::SetMap()
 		fscanf(fp, "%f %f\n", &v.x, &v.y);
 		MapVertex[i].t = v;
 	}
+	std::string tex;
+
+	char astr[2048];
+	fscanf(fp, "%s\n", astr);
+	tex = std::string(astr);
+	m_skybox->setTex(g_pTextureManager->GetTexture(tex), 0);
+	fscanf(fp, "%s\n", astr);
+	tex = std::string(astr);
+	m_skybox->setTex(g_pTextureManager->GetTexture(tex), 1);
+	fscanf(fp, "%s\n", astr);
+	tex = std::string(astr);
+	m_skybox->setTex(g_pTextureManager->GetTexture(tex), 2);
+	fscanf(fp, "%s\n", astr);
+	tex = std::string(astr);
+	m_skybox->setTex(g_pTextureManager->GetTexture(tex), 3);
+	fscanf(fp, "%s\n", astr);
+	tex = std::string(astr);
+	m_skybox->setTex(g_pTextureManager->GetTexture(tex), 4);
+	fscanf(fp, "%s\n", astr);
+	tex = std::string(astr);
+	m_skybox->setTex(g_pTextureManager->GetTexture(tex), 5);
+	fscanf(fp, "%s\n", astr);
+	tex = std::string(astr);
+	m_pTexture = g_pTextureManager->GetTexture(tex);
+	char strr[1024];
+	int number = 0;
+
+	fscanf(fp, "%s\n", strr);
+	if (strr[0] == 'P')
+	{
+		fscanf(fp, "%f %f %f\n", &Playerpos.x, &Playerpos.y, &Playerpos.z);
+	}
+	fscanf(fp, "%s\n", strr);
+	if (strr[0] == 'M')
+	{
+		while (true)
+		{
+			MONSTER_KIND k;
+			tagMon mm;
+			fscanf(fp, "%d\n", &k);
+			if (feof(fp))
+				break;
+			mm.kind = k;
+
+			fscanf(fp, "%s\n", strr);
+
+			mm.name = std::string(strr);
+			D3DXVECTOR3 vc;
+			fscanf(fp, "%f %f %f\n", &vc.x, &vc.y, &vc.z);
+			mm.pos = vc;
+
+			m_vecMonster.push_back(mm);
+		}
+	}
+
+
 	fclose(fp);
 
 	
@@ -99,6 +158,26 @@ void cStage1::Draw(cFrustum * f)
 
 void cStage1::Render()
 {
+	SetMaterial();
+	float strat = 30.0f;
+	float end = 80.0f;
+	float den = 0.07f;
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+
+	g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
+
+	//g_pD3DDevice->SetRenderState(D3DRS_FOGTABLEMODE, D3DFOG_LINEAR);
+
+
+
+	g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, *(DWORD*)(&strat));
+
+	g_pD3DDevice->SetRenderState(D3DRS_FOGEND, *(DWORD*)(&end));
+
+	//g_pD3DDevice->SetRenderState(D3DRS_FOGDENSITY, *(DWORD*)(&den));
+	g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, 0x00CCCCCC);
+	g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
+	g_pD3DDevice->SetRenderState(D3DRS_RANGEFOGENABLE, true);
 	D3DXMATRIXA16 WOLRD;
 	SetMaterial();
 	D3DXMatrixIdentity(&WOLRD);
@@ -109,6 +188,11 @@ void cStage1::Render()
 	g_pD3DDevice->SetTexture(0, m_pTexture);
 	g_pD3DDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, (m_col*m_row), 0, m_Polygon);
 
+}
+
+void cStage1::SkyRender(D3DXVECTOR3 camera)
+{
+	m_skybox->Render(camera);
 }
 
 bool cStage1::GetHeight(IN float x, OUT float& y, IN float z)

@@ -31,13 +31,13 @@ cPlayer_Enemy::~cPlayer_Enemy()
 	SAFE_DELETE(m_Frustum);
 }
 
-void cPlayer_Enemy::Setup()
+void cPlayer_Enemy::Setup(float x, float y, float z, std::vector<tagMon> Monster)
 {
 	m_Player = new cPlayer();
-	m_Player->Setup();
+	m_Player->Setup(x, y, z);
 
 	m_EnemyControl = new cEnemyControl();
-	m_EnemyControl->SetUp();
+	m_EnemyControl->SetUp(Monster);
 
 	//m_Stage1 = new cStage1();
 	//m_Stage1->Setup();
@@ -214,4 +214,14 @@ void cPlayer_Enemy::connet_shop(shop_TEST_CLASS * _connectSHOP)
 {
 	if (m_Player)
 		m_Player->connet_shop_test_class(_connectSHOP);
+}
+
+D3DXVECTOR3 cPlayer_Enemy::Getpos()
+{
+	return m_Player->GetPosition();
+}
+
+float cPlayer_Enemy::Getrot()
+{
+	return m_Player->GetRotY();
 }

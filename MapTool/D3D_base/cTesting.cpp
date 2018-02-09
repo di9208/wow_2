@@ -102,7 +102,7 @@ void cTesting::Render()
 	g_pD3DDevice->BeginScene();
 
 
-	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 
 	/*if (g_pKeyManager->isToggleKey('Q'))
 		m_sky->Render(m_pCamera->GetEye());*/

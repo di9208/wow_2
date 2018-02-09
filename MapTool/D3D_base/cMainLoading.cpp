@@ -70,6 +70,33 @@ void cMainLoading::Render()
 
 void cMainLoading::Loading()
 {
+	g_pSkinnedMeshManager->Setup("player", "MapTool_Unit", "player.X");
+	g_pSkinnedMeshManager->Setup("lichking", "MapTool_Unit", "arthas.X");
+	g_pSkinnedMeshManager->Setup("bonespider1", "MapTool_Unit", "bonespider.X");
+	g_pSkinnedMeshManager->Setup("bonespider2", "MapTool_Unit", "bonespider.X");
+	g_pSkinnedMeshManager->Setup("bonespider3", "MapTool_Unit", "bonespider.X");
+	g_pSkinnedMeshManager->Setup("bonespider4", "MapTool_Unit", "bonespider.X");
+	g_pSkinnedMeshManager->Setup("bonespider5", "MapTool_Unit", "bonespider.X");
+	g_pSkinnedMeshManager->Setup("bonespider6", "MapTool_Unit", "bonespider.X");
+	g_pSkinnedMeshManager->Setup("bonespider7", "MapTool_Unit", "bonespider.X");
+	g_pSkinnedMeshManager->Setup("bonespider8", "MapTool_Unit", "bonespider.X");
+	g_pSkinnedMeshManager->Setup("bonespider9", "MapTool_Unit", "bonespider.X");
+	g_pSkinnedMeshManager->Setup("bonespider10", "MapTool_Unit", "bonespider.X");
+	g_pSkinnedMeshManager->Setup("druid1", "MapTool_Unit", "druid.X");
+	g_pSkinnedMeshManager->Setup("druid2", "MapTool_Unit", "druid.X");
+	g_pSkinnedMeshManager->Setup("druid3", "MapTool_Unit", "druid.X");
+	g_pSkinnedMeshManager->Setup("druid4", "MapTool_Unit", "druid.X");
+	g_pSkinnedMeshManager->Setup("druid5", "MapTool_Unit", "druid.X");
+	g_pSkinnedMeshManager->Setup("druid6", "MapTool_Unit", "druid.X");
+	g_pSkinnedMeshManager->Setup("worg1", "MapTool_Unit", "worg.X");
+	g_pSkinnedMeshManager->Setup("worg2", "MapTool_Unit", "worg.X");
+	g_pSkinnedMeshManager->Setup("worg3", "MapTool_Unit", "worg.X");
+	g_pSkinnedMeshManager->Setup("worg4", "MapTool_Unit", "worg.X");
+	g_pSkinnedMeshManager->Setup("worg5", "MapTool_Unit", "worg.X");
+	g_pSkinnedMeshManager->Setup("worg6", "MapTool_Unit", "worg.X");
+	g_pSkinnedMeshManager->Setup("worg7", "MapTool_Unit", "worg.X");
+	g_pSkinnedMeshManager->Setup("worg8", "MapTool_Unit", "worg.X");
+	g_pSkinnedMeshManager->Setup("rag", "MapTool_Unit", "ragnaros.X");
 
 }
 
