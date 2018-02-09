@@ -38,6 +38,7 @@ class cLightningWorg : public cUnit
 		float		Damage_time;
 		float		TimeCheck;
 		bool		Hurt;
+
 		//몬스터 인식용
 		D3DXVECTOR3					m_vPos;
 		D3DXVECTOR3					m_vDir;
@@ -73,10 +74,12 @@ private:
 	D3DXVECTOR3	m_vPlayerPos;
 	//폰트
 	LPD3DXFONT	m_pFont;
+	LPD3DXFONT	m_pFont2;
 
 	//아이템창 ui
 	LPD3DXSPRITE				m_pSprite;
 	LPD3DXSPRITE				m_pInvectory;
+	size_t						m_MonsterItem;
 
 public:
 	void SetUp();
@@ -92,7 +95,7 @@ public:
 	void MonsterDeath(size_t i);
 
 	void SetupUI(size_t j);
-	void RenderUI();
+	void RenderUI(size_t i);
 
 	void SphereRender(size_t i, D3DXMATRIXA16& m_matWorld);
 

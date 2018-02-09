@@ -2,19 +2,20 @@
 #include "cBoneSpider.h"
 #include "cSkinnedMesh.h"
 #include "iMap.h"
-#include <time.h>
 #include "cOBB.h"
+#include <time.h>
 #include "cUIImage.h"
 
 
 cBoneSpider::cBoneSpider()
 	: m_vecSkinnedMesh(NULL)
 	, m_pFont(NULL)
+	, m_pFont2(NULL)
 	, m_pSprite(NULL)
 	, Root(nullptr)
 {
 	g_pSoundManager->Setup();
-	g_pSoundManager->addSound("SpiderHit", "sound/monster/bonespider/wound.mp3", true, false);
+	g_pSoundManager->addSound("SpiderHit", "sound/monster/bonespider/wound.mp3", false, false);
 	D3DXMatrixIdentity(&matWorld);
 	m_pSkillOn = false;
 	nCount = 0;
@@ -23,6 +24,7 @@ cBoneSpider::cBoneSpider()
 cBoneSpider::~cBoneSpider()
 {
 	SAFE_RELEASE(m_pFont);
+	SAFE_RELEASE(m_pFont2);
 	SAFE_RELEASE(m_pSprite);
 	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++)
 	{
@@ -52,7 +54,6 @@ void cBoneSpider::getWeaponHit(int i, cOBB * PlayerWeapon)
 			}
 		}
 	}
-
 }
 
 void cBoneSpider::addMonster(float x, float y, float z) {
@@ -134,18 +135,18 @@ void cBoneSpider::SetUp() {
 	D3DXCreateSprite(g_pD3DDevice, &m_pSprite);
 
 	ZeroMemory(&stFD, sizeof(D3DXFONT_DESC));
-	stFD.Height = 50;
-	stFD.Width = 25;
+	stFD.Height = 20;
+	stFD.Width = 10;
 	stFD.Weight = FW_MEDIUM;
 	stFD.Italic = false;
 	stFD.CharSet = DEFAULT_CHARSET;
 	stFD.OutputPrecision = OUT_DEFAULT_PRECIS;
 	stFD.PitchAndFamily = FF_DONTCARE;
 
-	//strcpy_s(stFD.FaceName, "굴림체");
+	strcpy_s(stFD.FaceName, "굴림체");
 
-	AddFontResource("font/umberto.ttf");
-	strcpy_s(stFD.FaceName, "umberto");
+	//AddFontResource("font/umberto.ttf");
+	//strcpy_s(stFD.FaceName, "umberto");
 
 	D3DXCreateFontIndirect(g_pD3DDevice, &stFD, &m_pFont);
 }
@@ -186,7 +187,7 @@ void cBoneSpider::Render() {
 
 
 		if (m_vecSkinnedMesh[i].death) {
-			RenderUI();
+			RenderUI(i);
 		}
 	}
 }
@@ -204,10 +205,6 @@ void cBoneSpider::HarmDamage(int Damage, size_t i) {
 
 //거미 상태
 void cBoneSpider::MonsterStatus(size_t i) {
-	//Z키를 누르면 체력 100 달게 함
-	if (g_pKeyManager->isOnceKeyDown('Z')) {
-		HarmDamage(205, 0);
-	}
 	switch (m_vecSkinnedMesh[i].ENUM_MONSTER)
 	{
 	case MONSTER_STAND:
@@ -232,27 +229,64 @@ void cBoneSpider::MonsterStatus(size_t i) {
 
 }
 
-void cBoneSpider::SetupUI(size_t a) {
+void cBoneSpider::SetupUI(size_t m_MonsterItem) {
 	cUIImage* main = new cUIImage;
 	main->SetTexture("bonespiderInven","UI/UI_Enemy_Invectory.png");
 	main->SetPos(D3DXVECTOR3(20, 150, 0));
 
 	Root = main;
-	for (size_t j = 0; j < a; j++)
+	if (m_MonsterItem >= 0)
 	{
 		cUIImage* item = new cUIImage;
 		char str[1024];
-		itoa(j, str, 10);
-		std::string key = std::string("sword") + std::string(str);
-		item->SetTexture(key, "UI/sword.png");
-		item->SetPos(D3DXVECTOR3(41, (80 * j) + 181 + (j * 14), 0));
+		itoa(0, str, 10);
+		std::string key = std::string("gold") + std::string(str);
+		item->SetTexture(key, "UI/gold.png");
+		item->SetPos(D3DXVECTOR3(27, (44) + 51 + (14), 0));
+		Root->AddChild(item);
+	}
+	if (m_MonsterItem >= 1)
+	{
+		cUIImage* item = new cUIImage;
+		char str[1024];
+		itoa(1, str, 10);
+		std::string key = std::string("spider") + std::string(str);
+		item->SetTexture(key, "UI/spider.png");
+		item->SetPos(D3DXVECTOR3(27, (44 * 2) + 50 + (2 * 14), 0));
 		Root->AddChild(item);
 	}
 }
 
-void cBoneSpider::RenderUI() {
+void cBoneSpider::RenderUI(size_t i) {
 	if (Root)
 		Root->Render(m_pSprite);
+	if (m_pFont && m_MonsterItem >= 0)
+	{
+		char str[128];
+		sprintf(str, "골드 : %.f ", m_vecSkinnedMesh[i].t.Gold);
+
+		std::string sText(str);
+		RECT rc;
+		SetRect(&rc, 110, 150 + 120, 300, 200);
+		m_pFont->DrawText(NULL,
+			sText.c_str(),
+			sText.length(),
+			&rc,
+			DT_LEFT | DT_TOP | DT_NOCLIP,
+			D3DCOLOR_XRGB(255, 255, 255));
+	}
+	if (m_pFont2 && m_MonsterItem >= 1)
+	{
+		std::string sText("거미줄");
+		RECT rc;
+		SetRect(&rc, 110, 150 + 180, 300, 200);
+		m_pFont->DrawText(NULL,
+			sText.c_str(),
+			sText.length(),
+			&rc,
+			DT_LEFT | DT_TOP | DT_NOCLIP,
+			D3DCOLOR_XRGB(255, 255, 255));
+	}
 }
 
 void cBoneSpider::MonsterDeath(size_t i) {
@@ -261,17 +295,12 @@ void cBoneSpider::MonsterDeath(size_t i) {
 
 
 	if (!m_vecSkinnedMesh[i].death) {
-		size_t a = rand() % 4 + 1;
-		SetupUI(a);
+		m_MonsterItem = rand() % 2;
+		SetupUI(m_MonsterItem);
 		m_vecSkinnedMesh[i].death = true;
 	}
 	//죽는 모션 후 일정시간이 지나면 해당 애니메이션은 정지시킨다.
 	else {
-		m_vecSkinnedMesh[i].Particle = new cMonsterParticle(512, 20);
-		m_vecSkinnedMesh[i].Particle->init("Particle/alpha_tex.tga");
-		m_vecSkinnedMesh[i].Particle->reset();
-
-
 		if (m_vecSkinnedMesh[i].deathTime > 1000) {
 			SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
 			SAFE_DELETE(m_vecSkinnedMesh[i].m);

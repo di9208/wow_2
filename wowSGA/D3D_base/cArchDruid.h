@@ -87,6 +87,8 @@ private:
 	D3DXVECTOR3	m_vPlayerPos;
 	//폰트
 	LPD3DXFONT	m_pFont;
+	LPD3DXFONT	m_pFont2;
+	size_t		m_MonsterItem;
 
 	//아이템창 ui
 	LPD3DXSPRITE				m_pSprite;
@@ -106,7 +108,7 @@ public:
 	void MonsterDeath(size_t i);
 
 	void SetupUI(size_t j);
-	void RenderUI();
+	void RenderUI(size_t i);
 
 	void SphereRender(size_t i);
 	void RangeSphere(size_t i);
@@ -137,9 +139,12 @@ public:
 	void getWeaponHit(int i, cOBB * PlayerWeapon);
 	void setHurt(int i, bool check) { m_vecSkinnedMesh[i].Hurt = check; };
 
+
 	int getVectorSize() { return m_vecSkinnedMesh.size(); }
 	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].MonsterOBB; }
+
 	cOBB* getBULLET(int i) { return m_vecSkinnedMesh[i].MonsterAttackOBB; }
+
 	cArchDruid();
 	~cArchDruid();
 };

@@ -302,6 +302,7 @@ void cEnemyControl::SetUp() {
 
 	if (m_pSpider) m_pSpider->SetUp();
 	if (m_pDruid) m_pDruid->SetUp();
+	if (m_pWorg) m_pWorg->SetUp();
 
 	BossSetup();
 
