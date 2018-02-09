@@ -30,7 +30,8 @@ cEnemyControl::cEnemyControl()
 	g_pSoundManager->addSound("arthas_whirlwind", "sound/boss/arthas_whirlwind.wav", true, false);
 	g_pSoundManager->addSound("ragnaros_att", "sound/boss/ragnaros_att.wav", true, false);
 	g_pSoundManager->addSound("ragnaros_death", "sound/boss/ragnaros_death.ogg", true, false);
-
+	g_pSoundManager->addSound("ragnaros_start", "sound/boss/ragnaros_start.wav", true, false);
+	g_pSoundManager->addSound("arthas_att2", "sound/boss/arthas_att2.mp3", true, false);
 }
 
 cEnemyControl::~cEnemyControl()
@@ -566,6 +567,7 @@ void cEnemyControl::BossPlayerCheck()
 					m_vecBoss[0].count += 5;
 					if (m_vecBoss[0].count > 6)
 					{
+						g_pSoundManager->play("arthas_att2", 1.f);
 						m_vecBoss[0].e_boss_state = E_BOSS_ATT2;
 					}
 					if (m_vecBoss[0].stat.HP <= 100)
@@ -587,142 +589,6 @@ void cEnemyControl::BossPlayerCheck()
 		}
 
 	}
-	/*if (m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
-	{
-	m_pBossAniController->SetBossDir(dv);
-	}*/
-	//if (m_vPlayerPos != D3DXVECTOR3(0, 0, 0) && m_vecBoss[0].e_boss_state != E_BOSS_DEATH)
-	//{
-	//	for (size_t i = 0; i < m_vecBoss.size(); i++)
-	//	{
-	//		m_vecBoss[i].m_vPos = m_pBossAniController->GetvBossPos();
-	//		
-	//		
-	//		m_vecBoss[i].pb = m_vPlayerPos - m_vecBoss[i].m_vPos;
-	//		m_vecBoss[i].dist = fabs(D3DXVec3Length(&m_vecBoss[i].pb));
-	//		D3DXVECTOR3 vDir = m_vPlayerPos - m_vecBoss[i].m_vPos;
-
-	//		//vDir.y = m_vecBoss[i].m_vDir.y = 0.f;
-
-	//		D3DXVec3Normalize(&vDir, &vDir);
-
-	//		if (m_vecBoss[i].dist <= 7.f)
-	//		{
-	//			m_vecBoss[i].count++;
-	//			if (m_vecBoss[i].count > 100)
-	//			{
-	//				m_vecBoss[i].chk = true;	
-	//				
-	//				m_vecBoss[i].e_boss_state = E_BOSS_WALK;
-	//			}
-	//		}
-	//		else
-	//		{
-	//			if (m_vecBoss[i].chk)
-	//			{
-	//				D3DXVec3Normalize(&v, &m_vecBoss[i].pb);
-	//			}
-	//			m_vecBoss[i].chk = false;
-	//			//m_vecBoss[i].chkDist = false;
-	//		}
-	//		if (!m_vecBoss[i].chk && m_vecBoss[i].dist > 7.f)
-	//		{
-	//			//if (m_vecBoss[i].chkDist)
-	//			{
-	//				m_pBossAniController->SetBossDir(v);
-	//				return; 
-	//			}
-
-	//		}
-	//		if (m_vecBoss[i].chk)
-	//		{
-	//			//if (!m_vecBoss[i].chk) return;
-
-	//			//m_vecBoss[i].chkDist = true;
-	//			D3DXMATRIXA16 matT, matR;
-	//			D3DXMatrixIdentity(&matT);
-	//			D3DXMatrixIdentity(&matR);
-
-	//			
-	//			//D3DXVec3Normalize(&m_vecBoss[i].m_vDir, &m_vecBoss[i].m_vDir);
-
-	//			//float fDot = D3DXVec3Dot(&vDir, &m_vecBoss[i].m_vDir);
-
-	//			if (m_vecBoss[i].dist <= 2.f)
-	//			{
-	//				m_vecBoss[i].count = 0;
-	//				skillDelay++;
-	//				if (skillDelay > 5)
-	//				{
-	//					delay1 = rand() % 15;
-	//					delay2 = rand() % 15;
-	//					if (delay1 > 1 && delay1 < 7)
-	//					{
-	//						m_vecBoss[i].e_boss_state = E_BOSS_ATT;
-	//						if (m_vecBoss[i].stat.HP <= 50)
-	//						{
-	//							m_vecBoss[i].e_boss_state = E_BOSS_WHIRLWIND;
-	//						}
-	//						m_vecBoss[i].chk = false;
-	//					}
-	//					if (delay2 > 8 && delay2 < 15)
-	//					{
-	//						m_vecBoss[i].e_boss_state = E_BOSS_ATT2;
-	//						if (m_vecBoss[i].stat.HP <= 100)
-	//						{
-	//							m_vecBoss[i].e_boss_state = E_BOSS_SPELL2;
-	//						}
-	//						m_vecBoss[i].chk = false;
-	//					}
-	//					skillDelay = 0;
-	//				}
-	//				return;
-
-	//			}
-	//			else
-	//			{
-	//				m_vecBoss[i].m_vPos = m_vecBoss[i].m_vPos +(vDir * 0.1f);
-	//				m_pBossAniController->SetvBossPos(m_vecBoss[i].m_vPos);
-	//			/*	if (fDot <= 0.95f)
-	//				{
-	//					D3DXVECTOR3 vCross;
-	//					D3DXVec3Cross(&vCross, &m_vecBoss[i].m_vDir, &vDir);
-	//					D3DXVec3Normalize(&vCross, &vCross);
-
-	//					if (vCross.y > 0.f)
-	//					{
-	//						D3DXMATRIXA16 matR;
-	//						D3DXMatrixIdentity(&matR);
-	//						D3DXMatrixRotationY(&matR, 1.f);
-	//						D3DXVec3TransformNormal(&m_vecBoss[i].m_vDir, &m_vecBoss[i].m_vDir, &matR);
-	//					}
-	//					else
-	//					{
-	//						D3DXMATRIXA16 matR;
-	//						D3DXMatrixIdentity(&matR);
-	//						D3DXMatrixRotationY(&matR, -1.f);
-	//						D3DXVec3TransformNormal(&m_vecBoss[i].m_vDir, &m_vecBoss[i].m_vDir, &matR);
-	//					}
-	//				}
-	//				else
-	//				{
-	//					m_vecBoss[i].m_vDir = vDir;
-	//				}*/
-
-	//			}
-
-	//			m_pBossAniController->SetBossDir(vDir);
-	//		}
-
-	//		//D3DXVECTOR3 boss_playerPos;
-	//		//boss_playerPos = m_vPlayerPos - m_vecBoss[i].m_vPos;
-	//		//D3DXVec3Normalize(&boss_playerPos, &boss_playerPos);
-	//		
-
-	//		//D3DXVec3TransformNormal(&m_vecBoss[i].m_vDir, &m_vecBoss[i].m_vDir, &matR);
-
-	//	}
-	//}
 }
 
 void cEnemyControl::BossPlayerRot(D3DXVECTOR3 d)
@@ -870,6 +736,7 @@ void cEnemyControl::BossRagPlayerCheck()
 
 		if (Distance < 5.0f)
 		{
+			
 			skillDelay++;
 
 			if (skillDelay > 70)
@@ -896,6 +763,7 @@ void cEnemyControl::BossRagPlayerCheck()
 					{
 						m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_MERGE;
 					}
+					
 					//m_vecBoss_rag[0].chk = false;
 				}
 				if (delay2 > 8 && delay2 < 15)
@@ -911,6 +779,7 @@ void cEnemyControl::BossRagPlayerCheck()
 						m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_ATT;
 						m_vecBoss_rag[0].count = 0;
 					}
+					
 					//m_vecBoss_rag[0].chk = false;
 				}
 				skillDelay = 0;
