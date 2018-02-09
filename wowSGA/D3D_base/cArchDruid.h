@@ -4,6 +4,7 @@
 #include "cMonsterParticle.h"
 #include "cEnemyHitEffect.h"
 #include "cUIObject.h"
+#include "cMonsterBombParticle.h"
 
 class iMap;
 class cSkinnedMesh;
@@ -35,6 +36,8 @@ class cArchDruid : public cUnit
 		int			attackTime;
 		int			termCount;
 		int			RunCount;
+		int			m_bombcount;
+		bool		m_bomb;
 
 		bool		Damage;
 		float		Damage_time;
@@ -60,6 +63,7 @@ class cArchDruid : public cUnit
 		float						m_rangeDistance;
 		D3DXMATRIXA16				m_matR;
 		bool						m_rangeCheck;
+		cParticle*					cBombParticle;
 
 		//몬스터 아이템 ㅠ 0ㅠ
 		ST_MONSTER_ITEM						m_StItemSprite;
@@ -103,6 +107,7 @@ public:
 
 	void addMonster(float x, float y, float z);
 	void addMonster(std::string key, float x, float y, float z);
+
 	void HarmDamage(int Damage, size_t i);
 	void MonsterAI(size_t i);
 	void MonsterStatus(size_t i);
