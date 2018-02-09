@@ -1,4 +1,48 @@
-﻿  cPlayer_Enemy.cpp
-c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer_enemy.cpp(36): warning C4316: 'cPlayer': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer_enemy.cpp(39): warning C4316: 'cEnemyControl': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+﻿  cStage1.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(42): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(43): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(34): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 'fopen' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(40): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(49): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(55): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(61): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(67): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(70): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(73): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(76): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(79): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(82): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(85): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(91): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(94): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(96): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(99): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(101): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(108): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(113): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(117): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1193): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(216): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(217): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(219): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(221): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   D3D_base.vcxproj -> C:\Users\준\Documents\GitHub\wow_2\wowSGA\Debug\D3D_base.exe
