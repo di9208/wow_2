@@ -15,7 +15,7 @@ struct TagUnit
 	float		Int;	//Áö´É
 
 	bool		Death;	//»ç¸Á
-
+	bool		Hurt;
 	float		Exp;	//°æÇèÄ¡
 	float		Gold;	//µ·
 };
@@ -84,12 +84,18 @@ enum MONSTER_STATUS
 enum MONSTER_KIND
 {
 	KIND_SPIDER,
-	KIND_WORG,
-	KIND_DRUID,
 	KIND_BOSS_ARTHAS,
-	KIND_BOSS_RAGNALOS
+	KIND_DRUID,
+	KIND_BOSS_RAGNALOS,
+	KIND_WORG
+	
 };
-
+struct tagMon
+{
+	MONSTER_KIND kind;
+	D3DXVECTOR3 pos;
+	std::string name;
+};
 enum NPC_State
 {
 	NOTHING,

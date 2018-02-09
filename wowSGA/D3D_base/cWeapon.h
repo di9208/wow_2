@@ -10,7 +10,8 @@ class cWeapon
 	ST_BONE*			m_hand;
 	ST_BONE*			m_handle;
 
-	int					m_WeaponNum;
+	
+	SYNTHESIZE_REF(int, m_WeaponNum, WeaponNum);
 	SYNTHESIZE_REF(D3DXMATRIXA16, m_World, World);
 	SYNTHESIZE_REF(D3DXMATRIXA16, m_WorldTM, WorldTM);
 	SYNTHESIZE_REF(D3DXMATRIXA16, m_player, player);
@@ -21,6 +22,7 @@ class cWeapon
 
 	int					m_hp;
 	LPD3DXFONT					m_pFont;
+	SYNTHESIZE(bool, m_Equip, Equip);
 public:
 	cWeapon();
 	~cWeapon();

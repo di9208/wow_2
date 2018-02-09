@@ -69,7 +69,47 @@ void cMainLoading::Render()
 
 void cMainLoading::Loading()
 {
+	g_pSkinnedMeshManager->Setup("player", "player", "player.x");
+	g_pSkinnedMeshManager->Setup("NPC", "tawo", "testtawoo.x");
 
+	////
+	g_pSkinnedMeshManager->Setup("리치왕", "Monster/boss/Arthaslichking", "arthas2.x");
+	g_pSkinnedMeshManager->Setup("스킬", "Monster/boss/Arthaslichking", "skill.x");
+	g_pSkinnedMeshManager->Setup("아이스노바", "Monster/boss/Arthaslichking", "icenova.x");
+	g_pSkinnedMeshManager->Setup("라그나로스", "Monster/boss/ragnaros", "ragnaros2.X");
+	g_pSkinnedMeshManager->Setup("스킬1", "Monster/boss/ragnaros", "ragSkill1.x");
+	g_pSkinnedMeshManager->Setup("스킬2", "Monster/boss/ragnaros", "ragSkill2.x");
+	////
+	g_pSkinnedMeshManager->Setup("druid1", "Monster/archdruid", "1.x");
+	g_pSkinnedMeshManager->Setup("druid2", "Monster/archdruid", "1.x");
+	g_pSkinnedMeshManager->Setup("druid3", "Monster/archdruid", "1.x");
+	g_pSkinnedMeshManager->Setup("druid4", "Monster/archdruid", "1.x");
+	g_pSkinnedMeshManager->Setup("druid5", "Monster/archdruid", "1.x");
+	g_pSkinnedMeshManager->Setup("druid6", "Monster/archdruid", "1.x");
+	g_pSkinnedMeshManager->Setup("druid7", "Monster/archdruid", "1.x");
+	g_pSkinnedMeshManager->Setup("druid8", "Monster/archdruid", "1.x");
+	//g_pSkinnedMeshManager->Setup("druid1", "Monster/archdruid", "1.x");
+	////
+	g_pSkinnedMeshManager->Setup("bonespider1", "Monster/bonespider", "1.x");
+	g_pSkinnedMeshManager->Setup("bonespider2", "Monster/bonespider", "1.x");
+	g_pSkinnedMeshManager->Setup("bonespider3", "Monster/bonespider", "1.x");
+	g_pSkinnedMeshManager->Setup("bonespider4", "Monster/bonespider", "1.x");
+	g_pSkinnedMeshManager->Setup("bonespider5", "Monster/bonespider", "1.x");
+	g_pSkinnedMeshManager->Setup("bonespider6", "Monster/bonespider", "1.x");
+	g_pSkinnedMeshManager->Setup("bonespider7", "Monster/bonespider", "1.x");
+	g_pSkinnedMeshManager->Setup("bonespider8", "Monster/bonespider", "1.x");
+	g_pSkinnedMeshManager->Setup("bonespider9", "Monster/bonespider", "1.x");
+	g_pSkinnedMeshManager->Setup("bonespider10", "Monster/bonespider", "1.x");
+	//g_pSkinnedMeshManager->Setup("bonespider1", "Monster/bonespider", "1.x");
+	g_pSkinnedMeshManager->Setup("worg1", "Monster/lightningworg", "1.x");
+	g_pSkinnedMeshManager->Setup("worg2", "Monster/lightningworg", "1.x");
+	g_pSkinnedMeshManager->Setup("worg3", "Monster/lightningworg", "1.x");
+	g_pSkinnedMeshManager->Setup("worg4", "Monster/lightningworg", "1.x");
+	g_pSkinnedMeshManager->Setup("worg5", "Monster/lightningworg", "1.x");
+	g_pSkinnedMeshManager->Setup("worg6", "Monster/lightningworg", "1.x");
+	g_pSkinnedMeshManager->Setup("worg7", "Monster/lightningworg", "1.x");
+	g_pSkinnedMeshManager->Setup("worg8", "Monster/lightningworg", "1.x");
+	///
 }
 
 void cMainLoading::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)

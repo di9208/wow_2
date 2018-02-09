@@ -13,6 +13,10 @@ private:
 
 	D3DXVECTOR3*	m_pvTarget;
 
+	D3DXVECTOR3 m_pos;
+	D3DXVECTOR3 m_dir;
+	float RotY;
+
 public:
 	cCamera();
 	~cCamera();

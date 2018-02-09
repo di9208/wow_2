@@ -22,9 +22,6 @@
     <Filter Include="UI">
       <UniqueIdentifier>{a8ff84f9-ed02-4ee8-ab93-f32955e361e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{fcc19ee9-0307-47e0-8809-9899786619fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="보간">
       <UniqueIdentifier>{3e438b61-c67d-47f4-b242-9e7f258dbe05}</UniqueIdentifier>
     </Filter>
@@ -72,6 +69,9 @@
     </Filter>
     <Filter Include="unit\npc\shop">
       <UniqueIdentifier>{df3c3972-0271-424d-b3b6-5ef1bbb29889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="loader\Manager">
+      <UniqueIdentifier>{fcc19ee9-0307-47e0-8809-9899786619fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -145,16 +145,16 @@
       <Filter>loader\X-File</Filter>
     </ClInclude>
     <ClInclude Include="cTimeManager.h">
-      <Filter>Manager</Filter>
+      <Filter>loader\Manager</Filter>
     </ClInclude>
     <ClInclude Include="cTextureManager.h">
-      <Filter>Manager</Filter>
+      <Filter>loader\Manager</Filter>
     </ClInclude>
     <ClInclude Include="cFontManager.h">
-      <Filter>Manager</Filter>
+      <Filter>loader\Manager</Filter>
     </ClInclude>
     <ClInclude Include="cDeviceManager.h">
-      <Filter>Manager</Filter>
+      <Filter>loader\Manager</Filter>
     </ClInclude>
     <ClInclude Include="cUIButton.h">
       <Filter>UI</Filter>
@@ -193,7 +193,7 @@
       <Filter>gameobject</Filter>
     </ClInclude>
     <ClInclude Include="keyManager.h">
-      <Filter>Manager</Filter>
+      <Filter>loader\Manager</Filter>
     </ClInclude>
     <ClInclude Include="cMaptool.h">
       <Filter>mapTool</Filter>
@@ -318,16 +318,16 @@
       <Filter>loader\X-File</Filter>
     </ClCompile>
     <ClCompile Include="cDeviceManager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>loader\Manager</Filter>
     </ClCompile>
     <ClCompile Include="cFontManager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>loader\Manager</Filter>
     </ClCompile>
     <ClCompile Include="cTextureManager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>loader\Manager</Filter>
     </ClCompile>
     <ClCompile Include="cTimeManager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>loader\Manager</Filter>
     </ClCompile>
     <ClCompile Include="cUIButton.cpp">
       <Filter>UI</Filter>
@@ -366,7 +366,7 @@
       <Filter>gameobject</Filter>
     </ClCompile>
     <ClCompile Include="keyManager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>loader\Manager</Filter>
     </ClCompile>
     <ClCompile Include="cMaptool.cpp">
       <Filter>mapTool</Filter>

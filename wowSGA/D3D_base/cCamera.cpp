@@ -20,7 +20,7 @@ cCamera::~cCamera()
 {
 }
 
-void cCamera::Setup(D3DXVECTOR3* pvTarget)
+void cCamera::Setup(D3DXVECTOR3* pvTarget, float roty)
 {
 	D3DXMATRIXA16	matProj;
 
@@ -35,22 +35,25 @@ void cCamera::Setup(D3DXVECTOR3* pvTarget)
 	g_pD3DDevice->SetTransform(D3DTS_PROJECTION, &matProj);
 
 	m_pvTarget = pvTarget;
+	RotY = roty;
 }
 
 void cCamera::Update()
 {
-	D3DXMATRIXA16	matView, matR, matRX, matRY;
+	D3DXMATRIXA16	matView, matR, matRX, matRY, matRR;
 	D3DXMatrixRotationX(&matRX, m_vCamRotAngle.x);
 	D3DXMatrixRotationY(&matRY, m_vCamRotAngle.y);
 
 	matR = matRX * matRY;
 
-	m_vEye = D3DXVECTOR3(0, 0, -m_fCamDist);
+	m_vEye = D3DXVECTOR3(0, 3, -m_fCamDist);
 	D3DXVec3TransformCoord(&m_vEye, &m_vEye, &matR);
+	D3DXMatrixRotationY(&matRR, RotY);
+	D3DXVec3TransformCoord(&m_vEye, &m_vEye, &matRR);
 
 	if (m_pvTarget)
 	{
-		m_vLookAt = (*m_pvTarget);
+		m_vLookAt = (*m_pvTarget) + D3DXVECTOR3(0, 1.5f, 0);
 		m_vEye = m_vEye + (*m_pvTarget);
 	}
 

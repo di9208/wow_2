@@ -6,6 +6,7 @@
 #include "shop_TEST_CLASS.h"
 #include "cStage1.h"
 #include "cFrustum.h"
+#include "cSkyBox.h"
 
 cScene1::cScene1()
 	: m_pCamera(NULL)
@@ -45,16 +46,16 @@ void cScene1::Setup()
 	m_pGrid->Setup();
 
 	m_pCamera = new cCamera;
-	m_pCamera->Setup(NULL);
+	m_pCamera->Setup(NULL,0);
+
+	m_Stage1 = new cStage1;
+	m_Stage1->Setup();
 
 	m_Player_Enemy = new cPlayer_Enemy();
-	m_Player_Enemy->Setup();
+	m_Player_Enemy->Setup(m_Stage1->Getplayerpos().x, m_Stage1->Getplayerpos().y, m_Stage1->Getplayerpos().z, m_Stage1->GetMonster());
 
 	m_shop_TEST_CLASS = new shop_TEST_CLASS;
 	m_shop_TEST_CLASS->Setup();
-
-	m_Stage1 = new cStage1();
-	m_Stage1->Setup();
 
 	m_Frustum = new cFrustum();
 }
@@ -77,7 +78,10 @@ void cScene1::Update()
 	g_pTimeManager->Update();
 
 	if (m_pCamera)
+	{
+		m_pCamera->Setup(&m_Player_Enemy->Getpos(), m_Player_Enemy->Getrot());
 		m_pCamera->Update();
+	}
 
 	if (m_shop_TEST_CLASS)
 		m_shop_TEST_CLASS->Update();
@@ -94,6 +98,9 @@ void cScene1::Update()
 void cScene1::Render()
 {
 	// TODO : ±×¸®±â
+	if (m_Stage1)
+		m_Stage1->SkyRender(m_pCamera->GetEye());
+
 	if (m_pGrid)
 		m_pGrid->Render();
 

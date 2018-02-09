@@ -147,6 +147,11 @@ cOBB * cEnemyControl::getDruidOBB(int i)
 	return m_pDruid->getOBB(i);
 }
 
+cOBB * cEnemyControl::getBulletOBB(int i)
+{
+	return m_pDruid->getBULLET(i);
+}
+
 MONSTER_STATUS cEnemyControl::getDruidCondition(int i)
 {
 	return m_pDruid->getCondition(i);
@@ -190,6 +195,16 @@ cOBB * cEnemyControl::getBossOBB()
 E_BOSS_STATE cEnemyControl::getBossCondition()
 {
 	return m_pBossAniController->getCondition();
+}
+
+cOBB * cEnemyControl::getRagOBB()
+{
+	return m_pBossRagController->getOBB();
+}
+
+E_BOSS_RAG_STATE cEnemyControl::getRagCondition()
+{
+	return m_pBossRagController->getCondition();
 }
 
 std::vector<Enemy_Sphere> cEnemyControl::getALLEnemyCenter()
@@ -253,19 +268,62 @@ void cEnemyControl::getWeaponHitBOSS(cOBB * PlayerWeapon)
 	}
 }
 
+void cEnemyControl::WeaponHit_AFTER(cOBB * PlayerWeapon)
+{
+	for (int i = 0; i < getSpiderVectorSize(); i++)
+	{
+		m_pSpider->setHurt(i, false);
+	}
+	for (int i = 0; i < getWolfVectorSize(); i++)
+	{
+		m_pWorg->setHurt(i, false);
+	}
+	for (int i = 0; i < getDruidVectorSize(); i++)
+	{
+		m_pDruid->setHurt(i, false);
+	}
+	getWeaponHitBOSS_After();
+}
 
-void cEnemyControl::SetUp() {
+void cEnemyControl::getWeaponHitBOSS_After()
+{
+	m_vecBoss[0].stat.Hurt = false;
+}
+
+
+void cEnemyControl::SetUp(std::vector<tagMon> Monster) {
+	
 	m_pSpider = new cBoneSpider;
-	//m_pSpider->addMonster(1, 0, 4);
+	for (int i = 0; i < Monster.size(); i++)
+	{
+		if (Monster[i].kind == KIND_SPIDER)
+		{
+			m_pSpider->addMonster(Monster[i].name, Monster[i].pos.x, Monster[i].pos.y, Monster[i].pos.z);
+		}
+	}
 
 	m_pDruid = new cArchDruid;
-	//m_pDruid->addMonster(-4, 0, -4);
+	for (int i = 0; i < Monster.size(); i++)
+	{
+		if (Monster[i].kind == KIND_DRUID)
+		{
+			m_pDruid->addMonster(Monster[i].name, Monster[i].pos.x, Monster[i].pos.y, Monster[i].pos.z);
+		}
+	}
 
 	m_pWorg = new cLightningWorg;
-	//m_pWorg->addMonster(4, 0, -4);
+	for (int i = 0; i < Monster.size(); i++)
+	{
+		if (Monster[i].kind == KIND_WORG)
+		{
+			m_pWorg->addMonster(Monster[i].name, Monster[i].pos.x, Monster[i].pos.y, Monster[i].pos.z);
+		}
+	}
+	
 
 	if (m_pSpider) m_pSpider->SetUp();
 	if (m_pDruid) m_pDruid->SetUp();
+	if (m_pWorg) m_pWorg->SetUp();
 
 	BossSetup();
 

@@ -24,6 +24,13 @@ private:
 	SYNTHESIZE(bool, m_skybox, skybox);
 	SYNTHESIZE(bool, m_terrain, terrain);
 	SYNTHESIZE(bool, m_object, object);
+	SYNTHESIZE(bool, m_player, player);
+	///
+	SYNTHESIZE(bool, m_spider, spider);
+	SYNTHESIZE(bool, m_druid, druid);
+	SYNTHESIZE(bool, m_worg, worg);
+	SYNTHESIZE(bool, m_lichking, lichking);
+	SYNTHESIZE(bool, m_rag, rag);
 public:
 	cMapTool_UI();
 	~cMapTool_UI();
@@ -49,5 +56,10 @@ public:
 	void SkyBoxT(cUIButton * pSender);
 	void Terrain(cUIButton * pSender);
 	void Object(cUIButton* pSender);
+	void Unit(cUIButton* pSender);
+
+
+	void Setbool(bool& bf);
+
 };
 

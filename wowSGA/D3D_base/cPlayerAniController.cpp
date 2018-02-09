@@ -15,10 +15,12 @@ cPlayerAniController::~cPlayerAniController()
 	SAFE_DELETE(m_pSkinnedMesh);
 }
 
-void cPlayerAniController::Setup()
+void cPlayerAniController::Setup(float x, float y, float z)
 {
-	m_pSkinnedMesh = new cSkinnedMesh();
-	m_pSkinnedMesh->Setup("player", "player.x");
+	m_pSkinnedMesh = g_pSkinnedMeshManager->Find("player");
+	initPos.x = x;
+	initPos.y = y;
+	initPos.z = z;
 }
 
 void cPlayerAniController::Update(condition * pCondition)

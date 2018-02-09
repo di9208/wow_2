@@ -40,6 +40,11 @@ void shop_TEST_CLASS::Setup()
 {
 	D3DXCreateSprite(g_pD3DDevice, &UI_sprite);
 
+	g_pSoundManager->Setup();
+	g_pSoundManager->addSound("shopopend", "sound/shop&inven/상점열기.mp3", true, false);
+	g_pSoundManager->addSound("golds", "sound/shop&inven/골드.mp3", true, false);
+	g_pSoundManager->addSound("buythings", "sound/shop&inven/아이템사기나 줍기.mp3", true, false);
+
 	_npc = new cNpc;
 	_npc->Setup();
 
@@ -79,6 +84,7 @@ void shop_TEST_CLASS::Update()
 
 	if (_npc->GetRAYPICK())
 	{
+		g_pSoundManager->play("shopopend", 1.0f);
 		_shops->GetSHOP()->Sethidden(false);
 		_invens->GetINVEN()->Sethidden(false);
 		player_info_page->GetEquite_window()->Sethidden(true);
@@ -91,6 +97,7 @@ void shop_TEST_CLASS::Update()
 	{
 		if (g_pKeyManager->isOnceKeyDown('B'))
 		{
+			g_pSoundManager->play("shopopend", 1.0f);
 			_invens->GetINVEN()->Sethidden(false);
 		}
 	}
@@ -122,6 +129,8 @@ void shop_TEST_CLASS::Update()
 
 					_invens->SetMONEY(money_temp);
 					_invens->Add_inven(temp);
+
+					g_pSoundManager->play("buythings", 1.0f);
 				}
 			}
 		}
@@ -140,6 +149,7 @@ void shop_TEST_CLASS::Update()
 
 					_invens->SetMONEY(money_temp);
 					_invens->delete_inven(item_nums);
+					g_pSoundManager->play("golds", 1.0f);
 				}
 			}
 		}

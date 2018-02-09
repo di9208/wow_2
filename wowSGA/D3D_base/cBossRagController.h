@@ -34,5 +34,10 @@ public:
 
 	void skillRender();
 	void skillRender2();
+
+	cOBB* getOBB() { return m_pBossRagOBB; }
+	D3DXVECTOR3 getOBBCenter();
+	float getOBBhalf();
+	E_BOSS_RAG_STATE getCondition() { return cBoss_rag_state; }
 };
 

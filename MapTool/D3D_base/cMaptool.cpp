@@ -10,12 +10,15 @@ cMaptool::cMaptool()
 	:Heightmap(nullptr)
 	, m_radius(1.0f)
 	, m_QuadTree(nullptr)
-	, _col(5)
-	, _row(5)
-	, m_LandControl(0)
+	, _col(129)
+	, _row(129)
+	, m_LandControl(0.05f)
+	, m_UpDown(0.05f)
 	, m_tex1(nullptr)
 	, m_playerTranslation(false)
 	, m_isPlayerExist(false)
+	, m_isMonsterExist(false)
+	, m_monsterTranslation(false)
 {
 	
 }
@@ -30,6 +33,13 @@ cMaptool::~cMaptool()
 	SAFE_RELEASE(m_vb);
 	SAFE_RELEASE(m_ib);
 	SAFE_DELETE(m_UI);
+	SAFE_DELETE(m_player);
+	for (int i = 0; i < m_vecMonster.size(); i++)
+	{
+		SAFE_DELETE(m_vecMonster[i].monster);
+	}
+	m_vecMonster.clear();
+
 }
 
 void cMaptool::Setup()
@@ -208,20 +218,20 @@ void cMaptool::SetMaterial()
 
 void cMaptool::Update()
 {
-	POINT p;
+	
 	GetCursorPos(&p);
 	ScreenToClient(g_hWnd, &p);
 	
 	r = cRay::RayAtWorldSpace(p.x, p.y);
 	
-	if (m_UI->Getupthow() || m_UI->Getdownthow() || m_UI->Getflat()||m_playerTranslation)
+	if (m_UI->Getupthow() || m_UI->Getdownthow() || m_UI->Getflat() || m_playerTranslation || m_monsterTranslation)
 	{
 		for (int i = 0; i < vecindex.size(); i += 3)
 		{
 
 			if (r.IsPicked(Mapvertex[vecindex[i]].p, Mapvertex[vecindex[i + 1]].p, Mapvertex[vecindex[i + 2]].p, d1))
 			{
-				if (!m_playerTranslation)
+				if (!m_playerTranslation &&!m_monsterTranslation)
 				{
 					if (g_pKeyManager->isStayKeyDown(VK_RBUTTON))
 					{
@@ -259,14 +269,8 @@ void cMaptool::Update()
 
 		UpdateCircle();
 	}
-	if (g_pKeyManager->isOnceKeyDown(VK_ADD))
-	{
-		m_radius += 0.1f;
-	}
-	if (g_pKeyManager->isOnceKeyDown(VK_SUBTRACT))
-	{
-		m_radius -= 0.1f;
-	}
+
+
 
 	
 	m_UI->Update();
@@ -276,6 +280,7 @@ void cMaptool::Update()
 	SkyBoxT();
 	Terrain();
 	Object();
+	Unit();
 }
 
 void cMaptool::UpdateCircle()
@@ -299,7 +304,7 @@ void cMaptool::UpdateCircle()
 void cMaptool::RenderMap()
 {
 	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pD3DDevice->SetMaterial(&m_mt);
 	g_pD3DDevice->SetFVF(ST_PTN_VERTEX::FVF);
 	g_pD3DDevice->SetStreamSource(0, m_vb, 0, sizeof(ST_PTN_VERTEX));
@@ -317,6 +322,7 @@ void cMaptool::RenderMap()
 		if (m_playerTranslation)
 		{
 			m_playerTranslation = false;
+			Playerpos = D3DXVECTOR3(d1.x, d1.y, d1.z);
 			return;
 		}
 	}
@@ -327,9 +333,67 @@ void cMaptool::RenderMap()
 		D3DXMatrixTranslation(&matT, d1.x, d1.y, d1.z);
 		m_player->Gettt() = matT;
 	}
+	if (!m_playerTranslation && m_isPlayerExist)
+	{
+
+		D3DXMATRIXA16 matT;
+		D3DXMatrixTranslation(&matT, Playerpos.x, Playerpos.y, Playerpos.z);
+		m_player->Gettt() = matT;
+	}
 	if (m_isPlayerExist)
 	{
 		m_player->Render();
+	}
+
+
+	if (m_vecMonster.size() != 0)
+	{
+		for (int i = 0; i < m_vecMonster.size(); i++)
+		{
+			if (m_vecMonster[i].Translation)
+			{
+
+				D3DXMATRIXA16 matT;
+				D3DXMatrixTranslation(&matT, d1.x, d1.y, d1.z);
+				m_vecMonster[i].monster->Gettt() = matT;
+				m_vecMonster[i].sphere.vCenter = D3DXVECTOR3(d1.x, d1.y, d1.z);
+
+			}
+			if (!m_vecMonster[i].Translation)
+			{
+				D3DXMATRIXA16 matT;
+				D3DXMatrixTranslation(&matT, m_vecMonster[i].sphere.vCenter.x, m_vecMonster[i].sphere.vCenter.y, m_vecMonster[i].sphere.vCenter.z);
+				m_vecMonster[i].monster->Gettt() = matT;
+			}
+		}
+		if (g_pKeyManager->isOnceKeyDown(VK_RBUTTON))
+		{
+			for (int i = 0; i < m_vecMonster.size(); i++)
+			{
+				cRay ra = cRay::RayAtWorldSpace(p.x, p.y);
+			
+				if (ra.IsPicked(&m_vecMonster[i].sphere))
+				{
+					if (!m_vecMonster[i].Translation)
+					{
+						m_monsterTranslation = true;
+						m_vecMonster[i].Translation = true;
+						break;
+					}
+					if (m_vecMonster[i].Translation)
+					{
+						m_monsterTranslation = false;
+						m_vecMonster[i].Translation = false;
+						break;
+					}
+				}
+			}
+		}
+		
+		for (int i = 0; i < m_vecMonster.size(); i++)
+		{
+			m_vecMonster[i].monster->Render();
+		}
 	}
 
 
@@ -346,23 +410,43 @@ void cMaptool::RenderCircle()
 void cMaptool::Render(LPD3DXSPRITE pSprite,D3DXVECTOR3 camera)
 {
 	m_SkyBox->Render(camera);
+
+	float strat = 90.0f;
+	float end = 150.0f;
+	float den = 0.07f;
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
+	
+	g_pD3DDevice->SetRenderState(D3DRS_FOGVERTEXMODE, D3DFOG_LINEAR);
+
+	//g_pD3DDevice->SetRenderState(D3DRS_FOGTABLEMODE, D3DFOG_LINEAR);
+
+	g_pD3DDevice->SetRenderState(D3DRS_FOGSTART, *(DWORD*)(&strat));
+
+	g_pD3DDevice->SetRenderState(D3DRS_FOGEND, *(DWORD*)(&end));
+	
+	//g_pD3DDevice->SetRenderState(D3DRS_FOGDENSITY, *(DWORD*)(&den));
+	g_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, 0x00CCCCCC);
+	g_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, true);
+	g_pD3DDevice->SetRenderState(D3DRS_RANGEFOGENABLE, true);
+	
 	D3DXMATRIXA16	matWorld;
 	D3DXMatrixIdentity(&matWorld);
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	RenderMap();
 	//g_pD3DDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	
-	
+
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 	if (m_UI->Getupthow() || m_UI->Getdownthow() || m_UI->Getflat())
 		RenderCircle();
-
 	m_UI->Render(pSprite);
-	//g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
+	
 	D3DXMATRIXA16 matS, matT;
 	D3DXMatrixTranslation(&matT, -20, 0, 0);
 	D3DXMatrixScaling(&matS, 0.3f, 0.3f, 0.3f);
 	matWorld = matS * matT;
 	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matWorld);
+
+	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, false);
 
 }
 
@@ -631,6 +715,9 @@ void cMaptool::Draw(cFrustum *f)
 	
 	m_ib->Lock(0, (_col - 1)* (_row - 1) *2* sizeof(ST_INDEX), (void**)&pi, 0);
 	m_polygon = m_QuadTree->GenerateIndex(pi, Mapvertex, f);
+	
+	
+	
 	vecindex.resize(m_polygon * 3);
 	for (int i = 0; i < m_polygon*3; i++)
 	{
@@ -687,7 +774,66 @@ void cMaptool::SAVE()
 		fprintf(fp, "%s\n", m_SkyBox->Get8Way().top.c_str());
 		fprintf(fp, "%s\n", m_SkyBox->Get8Way().bottom.c_str());
 		fprintf(fp, "%s\n", m_stex.c_str());
+		if (m_isPlayerExist)
+		{
+			fprintf(fp, "%s\n", "P");
+			fprintf(fp, "%f %f %f\n", Playerpos.x, Playerpos.y, Playerpos.z);
+		}
+		if (m_vecMonster.size() != 0)
+		{
+			fprintf(fp, "%s\n", "M");
+			fprintf(fp, "%d\n", BONESPIDER);
+			for (int i = 0; i < m_vecMonster.size(); i++)
+			{
+				if (m_vecMonster[i].kind == BONESPIDER)
+				{
+					fprintf(fp, "%s\n", m_vecMonster[i].name.c_str());
+					fprintf(fp, "%f %f %f\n", m_vecMonster[i].sphere.vCenter.x, m_vecMonster[i].sphere.vCenter.y, m_vecMonster[i].sphere.vCenter.z);
+				}
+			}
 
+			fprintf(fp, "%d\n", DRUID);
+			for (int i = 0; i < m_vecMonster.size(); i++)
+			{
+				if (m_vecMonster[i].kind == DRUID)
+				{
+					fprintf(fp, "%s\n", m_vecMonster[i].name.c_str());
+					fprintf(fp, "%f %f %f\n", m_vecMonster[i].sphere.vCenter.x, m_vecMonster[i].sphere.vCenter.y, m_vecMonster[i].sphere.vCenter.z);
+				}
+			}
+
+
+			fprintf(fp, "%d\n", WORG);
+			for (int i = 0; i < m_vecMonster.size(); i++)
+			{
+				if (m_vecMonster[i].kind == WORG)
+				{
+					fprintf(fp, "%s\n", m_vecMonster[i].name.c_str());
+					fprintf(fp, "%f %f %f\n", m_vecMonster[i].sphere.vCenter.x, m_vecMonster[i].sphere.vCenter.y, m_vecMonster[i].sphere.vCenter.z);
+				}
+			}
+
+			fprintf(fp, "%d\n", LICHKING);
+			for (int i = 0; i < m_vecMonster.size(); i++)
+			{
+				if (m_vecMonster[i].kind == LICHKING)
+				{
+					fprintf(fp, "%s\n", m_vecMonster[i].name.c_str());
+					fprintf(fp, "%f %f %f\n", m_vecMonster[i].sphere.vCenter.x, m_vecMonster[i].sphere.vCenter.y, m_vecMonster[i].sphere.vCenter.z);
+				}
+			}
+
+			fprintf(fp, "%d\n", RAGNAROS);
+			for (int i = 0; i < m_vecMonster.size(); i++)
+			{
+				if (m_vecMonster[i].kind == RAGNAROS)
+				{
+					fprintf(fp, "%s\n", m_vecMonster[i].name.c_str());
+					fprintf(fp, "%f %f %f\n", m_vecMonster[i].sphere.vCenter.x, m_vecMonster[i].sphere.vCenter.y, m_vecMonster[i].sphere.vCenter.z);
+				}
+			}
+
+		}
 		fclose(fp);
 		m_UI->Setsave(false);
 		
@@ -756,7 +902,65 @@ void cMaptool::LOAD()
 		fscanf(fp, "%s\n", astr);
 		tex = std::string(astr);
 		SetTexture(tex);
+
+		char strr[1024];
+		int number = 0;
+		ENUMMONSTER em;
+		
+			
+			fscanf(fp, "%s\n", strr);
+			if (strr[0] == 'P')
+			{
+				fscanf(fp, "%f %f %f\n", &Playerpos.x, &Playerpos.y, &Playerpos.z);
+			}
+			fscanf(fp, "%s\n", strr);
+			if (strr[0] == 'M')
+			{
+				while (true)
+				{
+					//fscanf(fp, "%s\n", strr);
+					tagMonster tm;
+					fscanf(fp, "%d\n", &em);
+					if (feof(fp))
+						break;
+					tm.kind = em;
+					fscanf(fp, "%s\n", strr);
+					std::string s = std::string(strr);
+
+					tm.name = strr;
+					tm.number = number;
+					tm.sphere.fRadius = 2.0f;
+					tm.Translation = false;
+					tm.monster = new cMapToolObject;
+					tm.monster->Setup(strr);
+					D3DXVECTOR3 vc;
+					fscanf(fp, "%f %f %f\n", &vc.x, &vc.y, &vc.z);
+					tm.sphere.vCenter = vc;
+					D3DXMATRIXA16 matT, matS, matR, matW, matTT;
+					D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+					D3DXMatrixScaling(&matS, 0.01f, 0.01f, 0.01f);
+					D3DXMatrixTranslation(&matT, 0, 0, 0);
+					D3DXMatrixTranslation(&matTT, vc.x, vc.y, vc.z);
+					matW = matS * matR* matT;
+					tm.monster->Getmm() = matW;
+					tm.monster->Gettt() = matTT;
+					m_vecMonster.push_back(tm);
+				}
+			}
+		
 		fclose(fp);
+		m_player = new cMapToolObject;
+		m_isPlayerExist = true;
+		m_playerTranslation = false;
+		m_player->Setup("player");
+		D3DXMATRIXA16 matT, matS, matR, matW, matTT;
+		D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+		D3DXMatrixScaling(&matS, 0.01f, 0.01f, 0.01f);
+		D3DXMatrixTranslation(&matT, Playerpos.x, Playerpos.y, Playerpos.z);
+		D3DXMatrixTranslation(&matTT, 0, 0, 0);
+		matW = matS * matR*matTT;
+		m_player->Getmm() = matW;
+		m_player->Gettt() = matT;
 
 		void* vp;
 		m_vb->Lock(0, _col*_row * sizeof(ST_PTN_VERTEX), (void**)&vp, 0);
@@ -771,15 +975,31 @@ void cMaptool::LandScaping()
 {
 	if (m_UI->Getdownthow())
 	{
-		m_LandControl = -0.05f;
+		m_LandControl = -m_UpDown;
 	}
 	if (m_UI->Getupthow())
 	{
-		m_LandControl = 0.05f;
+		m_LandControl = m_UpDown;
 	}
 	if (m_UI->Getflat())
 	{
 		m_LandControl = 0;
+	}
+	if (g_pKeyManager->isOnceKeyDown(VK_NUMPAD8))
+	{
+		m_UpDown += 0.05f;
+	}
+	if (g_pKeyManager->isOnceKeyDown(VK_NUMPAD2))
+	{
+		m_UpDown -= 0.05f;
+	}
+	if (g_pKeyManager->isStayKeyDown(VK_ADD))
+	{
+		m_radius += 0.1f;
+	}
+	if (g_pKeyManager->isStayKeyDown(VK_SUBTRACT))
+	{
+		m_radius -= 0.1f;
 	}
 }
 
@@ -833,24 +1053,185 @@ void cMaptool::Object()
 {
 	if (m_UI->Getobject())
 	{
-		if (g_pKeyManager->isOnceKeyDown('P'))
-		{
-			if(!m_isPlayerExist)
-				m_player = new cMapToolObject;
+		
+	}
 
-			m_isPlayerExist = true;
-			m_playerTranslation = true;
-			m_player->Setup();
-			D3DXMATRIXA16 matT,matS,matR, matW;
-			D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
-			D3DXMatrixScaling(&matS, 0.05f, 0.05f, 0.05f);
-			D3DXMatrixTranslation(&matT, 0, 0, 0);
-			matW = matS * matR*matT;
-			m_player->Getmm() = matW;
-			m_UI->Setobject(false);
+}
+
+void cMaptool::Unit()
+{
+	if (m_UI->Getplayer())
+	{
+		if (!m_isPlayerExist)
+			m_player = new cMapToolObject;
+
+		m_isPlayerExist = true;
+		m_playerTranslation = true;
+		m_player->Setup("player");
+		D3DXMATRIXA16 matT, matS, matR, matW;
+		D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+		D3DXMatrixScaling(&matS, 0.01f, 0.01f, 0.01f);
+		D3DXMatrixTranslation(&matT, 0, 0, 0);
+		matW = matS * matR*matT;
+		m_player->Getmm() = matW;
+
+		m_UI->Setplayer(false);
+	}
+	if (m_UI->Getspider())
+	{
+		int size = 1;
+		for each(auto p in m_vecMonster)
+		{
+			if (p.kind == BONESPIDER)
+				size++;
+		}
+		m_monsterTranslation = true;
+		std::string m = "bonespider";
+		tagMonster t;
+		t.kind = BONESPIDER;
+		t.monster = new cMapToolObject;
+		t.number = size;
+		t.Translation = true;
+		char st[512];
+		itoa(size,st,10);
+		std::string m2 = m + std::string(st);
+		t.name = m2;
+		t.monster->Setup(m2);
+		D3DXMATRIXA16 matT, matS, matR, matW;
+		D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+		D3DXMatrixScaling(&matS, 0.003f, 0.003f, 0.003f);
+		D3DXMatrixTranslation(&matT, 0, 0, 0);
+		matW = matS * matR* matT;
+		t.monster->Getmm() = matW;
+		t.sphere.fRadius = 0.8f;
+		t.sphere.vCenter = D3DXVECTOR3(0, 0, 0);
+		m_vecMonster.push_back(t);
+		m_UI->Setspider(false);
+	}
+
+	if (m_UI->Getworg())
+	{
+		int size = 1;
+
+		for each(auto p in m_vecMonster)
+		{
+			if (p.kind == WORG)
+				size++;
 		}
 
+		m_monsterTranslation = true;
+		std::string m = "worg";
+		tagMonster t;
+		t.kind = WORG;
+		t.monster = new cMapToolObject;
+		t.number = size;
+		t.Translation = true;
+		char st[512];
+		itoa(size, st, 10);
+		std::string m2 = m + std::string(st);
+		t.name = m2;
+		t.monster->Setup(m2);
+		D3DXMATRIXA16 matT, matS, matR, matW;
+		D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+		D3DXMatrixScaling(&matS, 0.006f, 0.006f, 0.006f);
+		D3DXMatrixTranslation(&matT, 0, 0, 0);
+		matW = matS * matR* matT;
+		t.monster->Getmm() = matW;
+		t.sphere.fRadius = 0.35;
+		t.sphere.vCenter = D3DXVECTOR3(0, 0, 0);
+		m_vecMonster.push_back(t);
+		
+		m_UI->Setworg(false);
 	}
+
+	if (m_UI->Getlichking())
+	{
+		
+		m_monsterTranslation = true;
+		std::string m = "lichking";
+		tagMonster t;
+		t.kind = LICHKING;
+		t.monster = new cMapToolObject;
+		t.Translation = true;
+		t.name = m;
+		char st[512];
+		t.monster->Setup(m);
+		D3DXMATRIXA16 matT, matS, matR, matW;
+		D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+		D3DXMatrixScaling(&matS, 0.015f, 0.015f, 0.015f);
+		D3DXMatrixTranslation(&matT, 0, 0, 0);
+		matW = matS * matR* matT;
+		t.monster->Getmm() = matW;
+		t.sphere.fRadius = 0.5;
+		t.sphere.vCenter = D3DXVECTOR3(0, 0, 0);
+		m_vecMonster.push_back(t);
+
+		m_UI->Setlichking(false);
+	}
+
+	if (m_UI->Getdruid())
+	{
+		int size = 1;
+
+		for each(auto p in m_vecMonster)
+		{
+			if (p.kind == DRUID)
+				size++;
+		}
+
+		m_monsterTranslation = true;
+		std::string m = "druid";
+		tagMonster t;
+		t.kind = DRUID;
+		t.monster = new cMapToolObject;
+		t.number = size;
+		t.Translation = true;
+		char st[512];
+		itoa(size, st, 10);
+		std::string m2 = m + std::string(st);
+		t.name = m2;
+		t.monster->Setup(m2);
+		D3DXMATRIXA16 matT, matS, matR, matW;
+		D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+		D3DXMatrixScaling(&matS, 0.003f, 0.003f, 0.003f);
+		D3DXMatrixTranslation(&matT, 0, 0, 0);
+		matW = matS * matR* matT;
+		t.monster->Getmm() = matW;
+		t.sphere.fRadius = 0.35;
+		t.sphere.vCenter = D3DXVECTOR3(0, 0, 0);
+		m_vecMonster.push_back(t);
+
+		m_UI->Setdruid(false);
+	}
+
+	if (m_UI->Getrag())
+	{
+
+		m_monsterTranslation = true;
+		std::string m = "rag";
+		tagMonster t;
+		t.kind = RAGNAROS;
+		t.monster = new cMapToolObject;
+		t.Translation = true;
+		char st[512];
+		t.name = m;
+		t.monster->Setup(m);
+		D3DXMATRIXA16 matT, matS, matR, matW;
+		D3DXMatrixRotationX(&matR, D3DX_PI / -2.0f);
+		D3DXMatrixScaling(&matS, 0.002f, 0.002f, 0.002f);
+		D3DXMatrixTranslation(&matT, 0, 0, 0);
+		matW = matS * matR* matT;
+		t.monster->Getmm() = matW;
+		t.sphere.fRadius = 0.5;
+		t.sphere.vCenter = D3DXVECTOR3(0, 0, 0);
+		m_vecMonster.push_back(t);
+
+		m_UI->Setrag(false);
+	}
+}
+
+void cMaptool::loadMonster()
+{
 
 }
 

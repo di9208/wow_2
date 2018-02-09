@@ -215,3 +215,13 @@ void cBossRagController::skillRender2()
 	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALEENABLE, false);
 	g_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 }
+
+D3DXVECTOR3 cBossRagController::getOBBCenter()
+{
+	return m_pBossRagOBB->GetCenterPos();
+}
+
+float cBossRagController::getOBBhalf()
+{
+	return m_pBossRagOBB->getMax();
+}

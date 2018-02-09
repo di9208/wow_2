@@ -6,6 +6,7 @@
 #include "cObjLoader.h"
 #include "cGroup.h"
 #include "cMapToolObject.h"
+#include "cUnit.h"
 
 class cFrustum;
 class cUIObject;
@@ -23,6 +24,28 @@ private:
 	cMapToolObject* m_player;
 	bool m_isPlayerExist;
 	bool m_playerTranslation;
+	bool m_monsterTranslation;
+	D3DXVECTOR3 Playerpos;
+	POINT p;
+	struct tagMonster
+	{
+		std::string name;
+		
+		int number;
+		bool Translation;
+		cMapToolObject* monster;
+		ST_SPHERE sphere;
+		ENUMMONSTER kind;
+		tagMonster()
+			: number(0)
+			,Translation(false)
+			, monster(nullptr)
+		{
+		}
+	};
+	bool m_isMonsterExist;
+	std::vector<tagMonster> m_vecMonster;
+
 private:
 	int _col ; //Column
 	int _row ; //Row
@@ -49,6 +72,7 @@ private:
 	
 
 	float m_LandControl;
+	float m_UpDown;
 private:
 	std::vector<int> vecCulIndex;			//No More using This Vector
 
@@ -90,5 +114,8 @@ public:
 	void SkyBoxT();
 	void Terrain();
 	void Object();
+	void Unit();
+
+	void loadMonster();
 };
 

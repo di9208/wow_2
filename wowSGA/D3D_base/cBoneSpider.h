@@ -37,6 +37,7 @@ class cBoneSpider : public cUnit
 		bool		Damage;
 		float		Damage_time;
 		float		TimeCheck;
+		bool		Hurt;
 
 		//몬스터 인식용
 		D3DXVECTOR3					m_vPos;
@@ -75,11 +76,12 @@ private:
 	D3DXVECTOR3	m_vPlayerPos;
 	//폰트
 	LPD3DXFONT	m_pFont;
+	LPD3DXFONT	m_pFont2;
 
 	//아이템창 ui
 	LPD3DXSPRITE				m_pSprite;
 	LPD3DXSPRITE				m_pInvectory;
-
+	size_t						m_MonsterItem;
 
 public:
 	void SetUp();
@@ -89,13 +91,14 @@ public:
 	void MonsterInsic(D3DXVECTOR3 d);
 
 	void addMonster(float x, float y, float z);
+	void addMonster(std::string key,float x, float y, float z);
 	void HarmDamage(int Damage, size_t i);
 	void MonsterAI(size_t i);
 	void MonsterStatus(size_t i);
 	void MonsterDeath(size_t i);
 
 	void SetupUI(size_t j);
-	void RenderUI();
+	void RenderUI(size_t i);
 
 	void SphereRender(size_t i, D3DXMATRIXA16& matWorld);
 
@@ -124,6 +127,7 @@ public:
 	float getMonsterMaxHP(int i) { return m_vecSkinnedMesh[i].MaxHP; }
 
 	void getWeaponHit(int i, cOBB * PlayerWeapon);
+	void setHurt(int i, bool check) { m_vecSkinnedMesh[i].Hurt = check; };
 
 	cBoneSpider();
 	~cBoneSpider();

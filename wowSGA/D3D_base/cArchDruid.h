@@ -87,6 +87,8 @@ private:
 	D3DXVECTOR3	m_vPlayerPos;
 	//폰트
 	LPD3DXFONT	m_pFont;
+	LPD3DXFONT	m_pFont2;
+	size_t		m_MonsterItem;
 
 	//아이템창 ui
 	LPD3DXSPRITE				m_pSprite;
@@ -100,13 +102,14 @@ public:
 	void MonsterInsic(D3DXVECTOR3 d);
 
 	void addMonster(float x, float y, float z);
+	void addMonster(std::string key, float x, float y, float z);
 	void HarmDamage(int Damage, size_t i);
 	void MonsterAI(size_t i);
 	void MonsterStatus(size_t i);
 	void MonsterDeath(size_t i);
 
 	void SetupUI(size_t j);
-	void RenderUI();
+	void RenderUI(size_t i);
 
 	void SphereRender(size_t i);
 	void RangeSphere(size_t i);
@@ -140,6 +143,8 @@ public:
 
 	int getVectorSize() { return m_vecSkinnedMesh.size(); }
 	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].MonsterOBB; }
+
+	cOBB* getBULLET(int i) { return m_vecSkinnedMesh[i].MonsterAttackOBB; }
 
 	cArchDruid();
 	~cArchDruid();

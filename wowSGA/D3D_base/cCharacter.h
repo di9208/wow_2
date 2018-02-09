@@ -5,7 +5,7 @@ class iMap;
 class cCharacter : public cGameObject
 {
 protected:
-	float			m_fRotY;
+	SYNTHESIZE(float, m_fRotY, RotY);
 	D3DXMATRIXA16	m_matWorld;
 	float			speed;
 	float			speed_max;

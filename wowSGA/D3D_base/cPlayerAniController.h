@@ -9,11 +9,12 @@ class cPlayerAniController
 	SYNTHESIZE(condition, cPlayer_condition, condition);
 	SYNTHESIZE(cSkinnedMesh*, m_pSkinnedMesh, SkinnedMesh);
 	SYNTHESIZE_REF(D3DXMATRIXA16, m_World, World);
+	D3DXVECTOR3 initPos;
 public:
 	cPlayerAniController();
 	~cPlayerAniController();
 
-	void Setup();
+	void Setup(float x, float y, float z);
 	void Update(condition* pCondition);
 	void Render(D3DXMATRIXA16* m_wolrd);
 
