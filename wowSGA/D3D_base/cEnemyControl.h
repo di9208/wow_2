@@ -144,7 +144,7 @@ public:
 	//-------------------------------------------------------------------------------
 	int getWolfVectorSize();
 	cOBB* getWolfOBB(int i);
-
+	float getWolfATK(int i);
 	MONSTER_STATUS getWolfCondition(int i);
 
 	void setWolfDamageCheck(int i, bool check);
@@ -158,7 +158,7 @@ public:
 	//===============================================================================
 	int getSpiderVectorSize();
 	cOBB* getSpiderOBB(int i);
-
+	float getSpiderATK(int i);
 	MONSTER_STATUS getSpiderCondition(int i);
 
 	void setSpiderDamageCheck(int i, bool check);
@@ -173,6 +173,7 @@ public:
 	int getDruidVectorSize();
 	cOBB* getDruidOBB(int i);
 	cOBB* getBulletOBB(int i);
+	float getDruidATK(int i);
 	MONSTER_STATUS getDruidCondition(int i);
 
 	void setDruidDamageCheck(int i, bool check);
@@ -199,9 +200,10 @@ public:
 	std::vector<Enemy_Sphere> getALLEnemyCenter();
 
 	//무기충돌----------------------------------------------------
-	void WeaponHit(cOBB * PlayerWeapon);
+	void WeaponHit(cOBB * PlayerWeapon, float damage);
 	void getWeaponHitBOSS(cOBB * PlayerWeapon);
 	void WeaponHit_AFTER(cOBB * PlayerWeapon);
 	void getWeaponHitBOSS_After();
+	float Boss_ATK();
 };
 

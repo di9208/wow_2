@@ -37,7 +37,7 @@ cLightningWorg::~cLightningWorg()
 	}
 }
 
-void cLightningWorg::getWeaponHit(int i, cOBB * PlayerWeapon)
+void cLightningWorg::getWeaponHit(int i, cOBB * PlayerWeapon,float damage)
 {
 	if (m_vecSkinnedMesh[i].Hurt == false)
 	{
@@ -47,7 +47,7 @@ void cLightningWorg::getWeaponHit(int i, cOBB * PlayerWeapon)
 			{
 				if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
 				{
-					m_vecSkinnedMesh[i].t.HP -= 10;
+					m_vecSkinnedMesh[i].t.HP -= damage;
 					m_vecSkinnedMesh[i].Hurt = true;
 				}
 			}
@@ -221,10 +221,10 @@ void cLightningWorg::Update(iMap* map) {
 		MonsterAI(i);						//몬스터의 패턴, 스킬
 		MonsterStatus(i); 					//몬스터 상태, 애니메이션
 	}
-	if (Root)
+	/*if (Root)
 	{
 		Root->Update();
-	}
+	}*/
 }
 
 
@@ -242,9 +242,9 @@ void cLightningWorg::Render() {
 		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, nullptr, nullptr);
 
 		//죽었을 때
-		if (m_vecSkinnedMesh[i].death) {
+		/*if (m_vecSkinnedMesh[i].death) {
 			RenderUI(i);
-		}
+		}*/
 	}
 }
 
@@ -361,7 +361,7 @@ void cLightningWorg::MonsterDeath(size_t i) {
 	}
 	//죽는 모션 후 일정시간이 지나면 해당 애니메이션은 정지시킨다.
 	else {
-		if (m_vecSkinnedMesh[i].deathTime > 1000) {
+		if (m_vecSkinnedMesh[i].deathTime > 100) {
 			SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
 			SAFE_DELETE(m_vecSkinnedMesh[i].m);
 			m_vecSkinnedMesh.erase(m_vecSkinnedMesh.begin() + i);

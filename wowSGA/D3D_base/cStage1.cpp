@@ -30,7 +30,11 @@ void cStage1::SetMap()
 {
 	int size;
 	FILE * fp;
+<<<<<<< HEAD
 	fp = fopen("final.txt", "r");
+=======
+	fp = fopen("Map.txt", "r");
+>>>>>>> 69932da309c29d8439d322f60ef93107ca267a06
 	//m_pTexture = g_pTextureManager->GetTexture("HeightMapData/selectblend.png");
 
 	fscanf(fp, "%d", &size);

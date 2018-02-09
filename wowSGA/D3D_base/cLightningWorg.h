@@ -108,7 +108,7 @@ public:
 	D3DXVECTOR3 getOBBCenter(int i);
 	float getOBBhalf(int i);
 	MONSTER_STATUS getCondition(int i) { return m_vecSkinnedMesh[i].ENUM_MONSTER; }
-
+	float getATK(int i) { return m_vecSkinnedMesh[i].t.ATK; }
 	void setDamageCheck(int i, bool check) { m_vecSkinnedMesh[i].Damage = check; }
 	bool getDamageCheck(int i) { return m_vecSkinnedMesh[i].Damage; }
 
@@ -123,7 +123,7 @@ public:
 	float getMonsterHP(int i) { return m_vecSkinnedMesh[i].t.HP; }
 	float getMonsterMaxHP(int i) { return m_vecSkinnedMesh[i].MaxHP; }
 
-	void getWeaponHit(int i, cOBB * PlayerWeapon);
+	void getWeaponHit(int i, cOBB * PlayerWeapon,float damage);
 	void setHurt(int i, bool check) { m_vecSkinnedMesh[i].Hurt = check; };
 
 	cLightningWorg();

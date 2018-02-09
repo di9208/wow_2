@@ -106,6 +106,7 @@ public:
 
 	int getVectorSize() { return m_vecSkinnedMesh.size(); }
 	cOBB* getOBB(int i) { return m_vecSkinnedMesh[i].MonsterOBB; }
+	float getATK(int i) { return m_vecSkinnedMesh[i].t.ATK; }
 
 	D3DXVECTOR3 getOBBCenter(int i);
 	float getOBBhalf(int i);
@@ -126,7 +127,7 @@ public:
 	float getMonsterHP(int i) { return m_vecSkinnedMesh[i].t.HP; }
 	float getMonsterMaxHP(int i) { return m_vecSkinnedMesh[i].MaxHP; }
 
-	void getWeaponHit(int i, cOBB * PlayerWeapon);
+	void getWeaponHit(int i, cOBB * PlayerWeapon,float Damage);
 	void setHurt(int i, bool check) { m_vecSkinnedMesh[i].Hurt = check; };
 
 	cBoneSpider();

@@ -12,7 +12,8 @@ class cUIButton;
 class cPlayerInFo
 {
 private:
-	TagUnit						m_PlayerInFo;
+	//TagUnit						m_PlayerInFo;
+	SYNTHESIZE(TagUnit, m_PlayerInFo, PlayerInFo);
 	int							curATK;
 	int							curDEF;
 	LPD3DXFONT					m_pFont;
@@ -89,7 +90,7 @@ public:
 	void Render(D3DXMATRIXA16* playerWorld, D3DXMATRIXA16* pMatWorld);
 	void RenderPlayerStat();
 
-	void Collsion(cOBB* EnemyBox);
+	void Collsion(cOBB* EnemyBox, int Damage);
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 	void setRC();

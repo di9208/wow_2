@@ -50,7 +50,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 	if (m_Player)
 	{
 		m_Player->Update(pMap);
-		m_Player->Collsion(m_EnemyControl->getRagOBB());
+		//m_Player->Collsion(m_EnemyControl->getRagOBB());
 		//드루
 		for (int i = 0; i < m_EnemyControl->getDruidVectorSize(); i++)
 		{
@@ -65,7 +65,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 				{
 					if (m_EnemyControl->getDruidDamageTimeCheck(i) + 0.3f < g_pTimeManager->GetLastUpdateTime())
 					{
-						m_Player->Collsion(m_EnemyControl->getBulletOBB(i));
+						m_Player->Collsion(m_EnemyControl->getBulletOBB(i),m_EnemyControl->getDruidATK(i));
 						m_EnemyControl->setDruidDamageCheck(i, true);
 					}
 				}
@@ -77,55 +77,55 @@ void cPlayer_Enemy::Update(iMap* pMap)
 			}
 		}
 		////늑대
-		//for (int i = 0; i < m_EnemyControl->getWolfVectorSize(); i++)
-		//{
-		//	if (m_EnemyControl->getWolfCondition(i) == MONSTER_ATTACK || m_EnemyControl->getWolfCondition(i) == MONSTER_ATTACK)
-		//	{
-		//		if (m_EnemyControl->getWolfTimeCheck(i) == false)
-		//		{
-		//			m_EnemyControl->setWolfDamageTimeCheck(i, g_pTimeManager->GetLastUpdateTime());
-		//			m_EnemyControl->setWolfTimeCheck(i, true);
-		//		}
-		//		if (m_EnemyControl->getWolfDamageCheck(i) == false)
-		//		{
-		//			if (m_EnemyControl->getWolfDamageTimeCheck(i) + 0.3f < g_pTimeManager->GetLastUpdateTime())
-		//			{
-		//				m_Player->Collsion(m_EnemyControl->getWolfOBB(i));
-		//				m_EnemyControl->setWolfDamageCheck(i, true);
-		//			}
-		//		}
-		//	}
-		//	else
-		//	{
-		//		m_EnemyControl->setWolfDamageCheck(i, false);
-		//		m_EnemyControl->setWolfTimeCheck(i, false);
-		//	}
-		//}
+		for (int i = 0; i < m_EnemyControl->getWolfVectorSize(); i++)
+		{
+			if (m_EnemyControl->getWolfCondition(i) == MONSTER_ATTACK || m_EnemyControl->getWolfCondition(i) == MONSTER_ATTACK)
+			{
+				if (m_EnemyControl->getWolfTimeCheck(i) == false)
+				{
+					m_EnemyControl->setWolfDamageTimeCheck(i, g_pTimeManager->GetLastUpdateTime());
+					m_EnemyControl->setWolfTimeCheck(i, true);
+				}
+				if (m_EnemyControl->getWolfDamageCheck(i) == false)
+				{
+					if (m_EnemyControl->getWolfDamageTimeCheck(i) + 0.3f < g_pTimeManager->GetLastUpdateTime())
+					{
+						m_Player->Collsion(m_EnemyControl->getWolfOBB(i),m_EnemyControl->getWolfATK(i));
+						m_EnemyControl->setWolfDamageCheck(i, true);
+					}
+				}
+			}
+			else
+			{
+				m_EnemyControl->setWolfDamageCheck(i, false);
+				m_EnemyControl->setWolfTimeCheck(i, false);
+			}
+		}
 		////거미
-		//for (int i = 0; i < m_EnemyControl->getSpiderVectorSize(); i++)
-		//{
-		//	if (m_EnemyControl->getSpiderCondition(i) == MONSTER_ATTACK || m_EnemyControl->getSpiderCondition(i) == MONSTER_ATTACK)
-		//	{
-		//		if (m_EnemyControl->getSpiderTimeCheck(i) == false)
-		//		{
-		//			m_EnemyControl->setSpiderDamageTimeCheck(i, g_pTimeManager->GetLastUpdateTime());
-		//			m_EnemyControl->setSpiderTimeCheck(i, true);
-		//		}
-		//		if (m_EnemyControl->getSpiderDamageCheck(i) == false)
-		//		{
-		//			if (m_EnemyControl->getSpiderDamageTimeCheck(i) + 0.3f < g_pTimeManager->GetLastUpdateTime())
-		//			{
-		//				m_Player->Collsion(m_EnemyControl->getSpiderOBB(i));
-		//				m_EnemyControl->setSpiderDamageCheck(i, true);
-		//			}
-		//		}
-		//	}
-		//	else
-		//	{
-		//		m_EnemyControl->setSpiderDamageCheck(i, false);
-		//		m_EnemyControl->setSpiderTimeCheck(i, false);
-		//	}
-		//}
+		for (int i = 0; i < m_EnemyControl->getSpiderVectorSize(); i++)
+		{
+			if (m_EnemyControl->getSpiderCondition(i) == MONSTER_ATTACK || m_EnemyControl->getSpiderCondition(i) == MONSTER_ATTACK)
+			{
+				if (m_EnemyControl->getSpiderTimeCheck(i) == false)
+				{
+					m_EnemyControl->setSpiderDamageTimeCheck(i, g_pTimeManager->GetLastUpdateTime());
+					m_EnemyControl->setSpiderTimeCheck(i, true);
+				}
+				if (m_EnemyControl->getSpiderDamageCheck(i) == false)
+				{
+					if (m_EnemyControl->getSpiderDamageTimeCheck(i) + 0.3f < g_pTimeManager->GetLastUpdateTime())
+					{
+						m_Player->Collsion(m_EnemyControl->getSpiderOBB(i), m_EnemyControl->getSpiderATK(i));
+						m_EnemyControl->setSpiderDamageCheck(i, true);
+					}
+				}
+			}
+			else
+			{
+				m_EnemyControl->setSpiderDamageCheck(i, false);
+				m_EnemyControl->setSpiderTimeCheck(i, false);
+			}
+		}
 		//드루이드
 
 		////리치왕
@@ -143,7 +143,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 			{
 				if (RichKingTime + cool < g_pTimeManager->GetLastUpdateTime())
 				{
-					m_Player->Collsion(m_EnemyControl->getBossOBB());
+					m_Player->Collsion(m_EnemyControl->getBossOBB(),m_EnemyControl->Boss_ATK());
 					RichKing = true;
 				}
 			}
@@ -157,7 +157,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 		//플레이어-------------------------------------
 		if (m_Player->Getchractor_condition() == ATTACK || m_Player->Getchractor_condition() == SKILL_2)
 		{
-			m_EnemyControl->WeaponHit(m_Player->getWeapon());
+			m_EnemyControl->WeaponHit(m_Player->getWeapon(), m_Player->getPlayerATK());
 		}
 		else
 		{

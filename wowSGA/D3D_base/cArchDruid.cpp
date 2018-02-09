@@ -39,7 +39,7 @@ cArchDruid::~cArchDruid()
 	}
 }
 
-void cArchDruid::getWeaponHit(int i, cOBB * PlayerWeapon)
+void cArchDruid::getWeaponHit(int i, cOBB * PlayerWeapon,float Damage)
 {
 	if (m_vecSkinnedMesh[i].Hurt == false)
 	{
@@ -49,7 +49,7 @@ void cArchDruid::getWeaponHit(int i, cOBB * PlayerWeapon)
 			{
 				if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
 				{
-					m_vecSkinnedMesh[i].t.HP -= 10;
+					m_vecSkinnedMesh[i].t.HP -= Damage;
 					m_vecSkinnedMesh[i].Hurt = true;
 				}
 			}
@@ -66,9 +66,9 @@ void cArchDruid::addMonster(float x, float y, float z){
 	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::KIND_DRUID;
 	Monster.m_vPos = D3DXVECTOR3(x, y + 1, z);
 	Monster.m_vDir = D3DXVECTOR3(0, 0, 1);
-	Monster.t.HP = 100;
+	Monster.t.HP = 200;
 	Monster.MaxHP = 100;
-	Monster.t.ATK = 20;
+	Monster.t.ATK = 10;
 	Monster.t.DEF = 10;
 	Monster.t.Speed = 0.03f;
 	Monster.attackSpeed = 150;
@@ -85,7 +85,9 @@ void cArchDruid::addMonster(float x, float y, float z){
 	Monster.deathTime = 0;
 	Monster.attackTime = 100;
 	Monster.termCount = 0;
+	Monster.m_bombcount = 0;
 	Monster.RunCount = rand() % 250 + 10;
+	Monster.m_bomb = false;
 	Monster.m_rangeCheck = false;
 	Monster.m_rangeSphere.vCenter = D3DXVECTOR3(x, y + 3, z);
 	Monster.m_rangeSphere.fRadius = 0.2f;
@@ -93,6 +95,10 @@ void cArchDruid::addMonster(float x, float y, float z){
 
 	Monster.Particle = new cMonsterParticle(512, 40);
 	Monster.Particle->init("Particle/alpha_tex.tga");
+	Monster.cBombParticle = new cMonsterBombParticle(128);
+	Monster.cBombParticle->init("Particle/alpha_tex.tga");
+
+
 	D3DXMatrixIdentity(&Monster.matWorld);
 	D3DXMATRIXA16 matTT, matSS;
 	D3DXMatrixScaling(&matSS, 0.0f, 0.0f, 0.0f);
@@ -141,7 +147,7 @@ void cArchDruid::addMonster(float x, float y, float z){
 void cArchDruid::addMonster(std::string key, float x, float y, float z)
 {
 	Monster.m = g_pSkinnedMeshManager->Find(key);
-	
+
 	//Monster.m->Setup("Monster/archdruid", "1.x");
 	Monster.ENUM_MONSTER = MONSTER_STATUS::MONSTER_STAND;
 	Monster.ENUM_MONSTER_KIND = MONSTER_KIND::KIND_DRUID;
@@ -164,6 +170,8 @@ void cArchDruid::addMonster(std::string key, float x, float y, float z)
 	Monster.time = 0;
 	Monster.death = false;
 	Monster.deathTime = 0;
+	Monster.m_bomb = false;
+	Monster.m_bombcount = 0;
 	Monster.attackTime = 100;
 	Monster.termCount = 0;
 	Monster.RunCount = rand() % 250 + 10;
@@ -174,6 +182,9 @@ void cArchDruid::addMonster(std::string key, float x, float y, float z)
 
 	Monster.Particle = new cMonsterParticle(512, 40);
 	Monster.Particle->init("Particle/alpha_tex.tga");
+	Monster.cBombParticle = new cMonsterBombParticle(128);
+	Monster.cBombParticle->init("Particle/alpha_tex.tga");
+
 	D3DXMatrixIdentity(&Monster.matWorld);
 	D3DXMATRIXA16 matTT, matSS;
 	D3DXMatrixScaling(&matSS, 0.0f, 0.0f, 0.0f);
@@ -254,15 +265,22 @@ void cArchDruid::Update(iMap* pMap){
 		m_vecSkinnedMesh[i].m->Update();
 		m_vecSkinnedMesh[i].b->Update();
 		m_vecSkinnedMesh[i].Particle->update(3.0f);
+		
+		if (m_vecSkinnedMesh[i].m_bomb) {
+			m_vecSkinnedMesh[i].m_bombcount++;
+			m_vecSkinnedMesh[i].cBombParticle->update(1);
+		}
+		if (m_vecSkinnedMesh[i].m_bombcount > 30)
+			m_vecSkinnedMesh[i].m_bomb = false;
 		m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
 		m_vecSkinnedMesh[i].MonsterAttackOBB->Update(&m_vecSkinnedMesh[i].matRTAttack);
 		MonsterAI(i);						//몬스터의 패턴, 스킬
 		MonsterStatus(i); 					//몬스터 상태, 애니메이션
 	}
-	if (Root)
+	/*if (Root)
 	{
 		Root->Update();
-	}
+	}*/
 }
 
 
@@ -275,14 +293,17 @@ void cArchDruid::Render(){
 		m_vecSkinnedMesh[i].Particle->render();
 		D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
-
+		if (m_vecSkinnedMesh[i].m_bomb) {
+			g_pD3DDevice->SetTransform(D3DTS_WORLD, &(m_vecSkinnedMesh[i].matRTAttack));
+			m_vecSkinnedMesh[i].cBombParticle->render();
+		}
 		//g_pD3DDevice->SetTransform(D3DTS_WORLD, &(matWorld));
 		m_vecSkinnedMesh[i].MonsterAttackOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
 		if (m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked) RangeSphere(i);
 		SphereRender(i);
-		if (m_vecSkinnedMesh[i].death){
+		/*if (m_vecSkinnedMesh[i].death){
 			RenderUI(i);
-		}
+		}*/
 	}
 }
 
@@ -396,7 +417,7 @@ void cArchDruid::MonsterDeath(size_t i){
 	//죽는 모션 후 일정시간이 지나면 해당 애니메이션은 정지시킨다.
 	else {
 
-		if (m_vecSkinnedMesh[i].deathTime > 1000) {
+		if (m_vecSkinnedMesh[i].deathTime > 100) {
 
 			SAFE_RELEASE(m_vecSkinnedMesh[i].m_pMeshSphere);
 			SAFE_DELETE(m_vecSkinnedMesh[i].m);
@@ -545,6 +566,8 @@ void cArchDruid::MonsterAI(size_t i){
 			if (m_vecSkinnedMesh[i].m_rangeCheck &&
 				m_vecSkinnedMesh[i].attackTime > 45 &&
 				m_vecSkinnedMesh[i].attackTime < 50){
+				m_vecSkinnedMesh[i].cBombParticle->reset();
+				m_vecSkinnedMesh[i].m_bomb = false;
 				m_vecSkinnedMesh[i].m_rangeSphere.vCenter = m_vecSkinnedMesh[i].m_vPos;
 				m_vecSkinnedMesh[i].m_rangeDir = m_vecSkinnedMesh[i].m_vDir;
 				m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked = true;
@@ -600,11 +623,12 @@ void cArchDruid::MonsterAI(size_t i){
 	//몬스터와 몬스터의 공격(스피어)의 거리가 멀어지거나, 플레이어와 몬스터의 공격이 충돌하면 스피어 삭제
 	if (m_vecSkinnedMesh[i].m_rangeDistance <= 1.5f &&
 		m_vecSkinnedMesh[i].ENUM_MONSTER == MONSTER_ATTACK){
-			g_pSoundManager->play("DruidBomb", 1.0f);
+		
 		m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked = false;
 		m_vecSkinnedMesh[i].m_rangeCheck = true;
 	}
-	if (fEnemyRange > 20) {
+	if (fEnemyRange > 10) {
+		m_vecSkinnedMesh[i].m_bomb = true;
 		m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked = false;
 		m_vecSkinnedMesh[i].m_rangeCheck = true;
 	}

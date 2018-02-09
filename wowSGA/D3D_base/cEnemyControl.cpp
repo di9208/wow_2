@@ -31,7 +31,8 @@ cEnemyControl::cEnemyControl()
 	g_pSoundManager->addSound("arthas_whirlwind", "sound/boss/arthas_whirlwind.wav", true, false);
 	g_pSoundManager->addSound("ragnaros_att", "sound/boss/ragnaros_att.wav", true, false);
 	g_pSoundManager->addSound("ragnaros_death", "sound/boss/ragnaros_death.ogg", true, false);
-
+	g_pSoundManager->addSound("ragnaros_start", "sound/boss/ragnaros_start.wav", true, false);
+	g_pSoundManager->addSound("arthas_att2", "sound/boss/arthas_att2.mp3", true, false);
 }
 
 cEnemyControl::~cEnemyControl()
@@ -55,6 +56,11 @@ int cEnemyControl::getWolfVectorSize()
 cOBB * cEnemyControl::getWolfOBB(int i)
 {
 	return m_pWorg->getOBB(i);
+}
+
+float cEnemyControl::getWolfATK(int i)
+{
+	return m_pWorg->getATK(i);
 }
 
 MONSTER_STATUS cEnemyControl::getWolfCondition(int i)
@@ -100,6 +106,11 @@ int cEnemyControl::getSpiderVectorSize()
 cOBB * cEnemyControl::getSpiderOBB(int i)
 {
 	return m_pSpider->getOBB(i);
+}
+
+float cEnemyControl::getSpiderATK(int i)
+{
+	return m_pSpider->getATK(i);
 }
 
 MONSTER_STATUS cEnemyControl::getSpiderCondition(int i)
@@ -150,6 +161,11 @@ cOBB * cEnemyControl::getDruidOBB(int i)
 cOBB * cEnemyControl::getBulletOBB(int i)
 {
 	return m_pDruid->getBULLET(i);
+}
+
+float cEnemyControl::getDruidATK(int i)
+{
+	return m_pDruid->getATK(i);
 }
 
 MONSTER_STATUS cEnemyControl::getDruidCondition(int i)
@@ -231,6 +247,16 @@ std::vector<Enemy_Sphere> cEnemyControl::getALLEnemyCenter()
 		m_sphre.Max_HP = m_pSpider->getMonsterMaxHP(i);
 		ALL_Mon.push_back(m_sphre);
 	}
+	for (int i = 0; i < getDruidVectorSize(); i++)
+	{
+		m_sphre.vCenter = m_pDruid->getOBBCenter(i);
+		m_sphre.bIsPicked = false;
+		m_sphre.fRadius = m_pDruid->getOBBhalf(i);
+		m_sphre.Mons = m_pDruid->getMonsterKind();
+		m_sphre.HP = m_pDruid->getMonsterHP(i);
+		m_sphre.Max_HP = m_pDruid->getMonsterMaxHP(i);
+		ALL_Mon.push_back(m_sphre);
+	}
 	m_sphre.vCenter = m_pBossAniController->getOBBCenter();
 	m_sphre.bIsPicked = false;
 	m_sphre.fRadius = m_pBossAniController->getOBBhalf();
@@ -241,15 +267,19 @@ std::vector<Enemy_Sphere> cEnemyControl::getALLEnemyCenter()
 	return ALL_Mon;
 }
 
-void cEnemyControl::WeaponHit(cOBB * PlayerWeapon)
+void cEnemyControl::WeaponHit(cOBB * PlayerWeapon, float damage)
 {
 	for (int i = 0; i < getSpiderVectorSize(); i++)
 	{
-		m_pSpider->getWeaponHit(i, PlayerWeapon);
+		m_pSpider->getWeaponHit(i, PlayerWeapon,damage);
 	}
 	for (int i = 0; i < getWolfVectorSize(); i++)
 	{
-		m_pWorg->getWeaponHit(i, PlayerWeapon);
+		m_pWorg->getWeaponHit(i, PlayerWeapon, damage);
+	}
+	for (int i = 0; i < getDruidVectorSize(); i++)
+	{
+		m_pDruid->getWeaponHit(i, PlayerWeapon,damage);
 	}
 	getWeaponHitBOSS(PlayerWeapon);
 }
@@ -288,6 +318,11 @@ void cEnemyControl::WeaponHit_AFTER(cOBB * PlayerWeapon)
 void cEnemyControl::getWeaponHitBOSS_After()
 {
 	m_vecBoss[0].stat.Hurt = false;
+}
+
+float cEnemyControl::Boss_ATK()
+{
+	return m_vecBoss[0].stat.ATK;
 }
 
 
@@ -389,7 +424,7 @@ void cEnemyControl::Render() {
 	}
 	if (m_pFont)
 	{
-		char str[128];
+		/*char str[128];
 		sprintf(str, "bossHP : %f ", m_vecBoss[0].stat.HP);
 
 		std::string sText(str);
@@ -401,7 +436,7 @@ void cEnemyControl::Render() {
 			sText.length(),
 			&rc,
 			DT_LEFT | DT_TOP | DT_NOCLIP,
-			D3DCOLOR_XRGB(255, 255, 255));
+			D3DCOLOR_XRGB(255, 255, 255));*/
 	}
 
 }
@@ -417,7 +452,7 @@ void cEnemyControl::BossSetup(std::vector<tagMon> Monster)
 	m_pBossSkill = new cBossSkill;
 	stBoss		stBoss1;
 	stBoss1.count = 0;
-	stBoss1.stat.ATK = 100;
+	stBoss1.stat.ATK = 20;
 	stBoss1.stat.DEF = 20;
 	stBoss1.stat.HP = 500;
 	stBoss1.stat.Max_HP = 500;
@@ -637,6 +672,7 @@ void cEnemyControl::BossPlayerCheck()
 					m_vecBoss[0].count += 5;
 					if (m_vecBoss[0].count > 6)
 					{
+						g_pSoundManager->play("arthas_att2", 1.f);
 						m_vecBoss[0].e_boss_state = E_BOSS_ATT2;
 					}
 					if (m_vecBoss[0].stat.HP <= 100)
@@ -658,142 +694,6 @@ void cEnemyControl::BossPlayerCheck()
 		}
 
 	}
-	/*if (m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
-	{
-	m_pBossAniController->SetBossDir(dv);
-	}*/
-	//if (m_vPlayerPos != D3DXVECTOR3(0, 0, 0) && m_vecBoss[0].e_boss_state != E_BOSS_DEATH)
-	//{
-	//	for (size_t i = 0; i < m_vecBoss.size(); i++)
-	//	{
-	//		m_vecBoss[i].m_vPos = m_pBossAniController->GetvBossPos();
-	//		
-	//		
-	//		m_vecBoss[i].pb = m_vPlayerPos - m_vecBoss[i].m_vPos;
-	//		m_vecBoss[i].dist = fabs(D3DXVec3Length(&m_vecBoss[i].pb));
-	//		D3DXVECTOR3 vDir = m_vPlayerPos - m_vecBoss[i].m_vPos;
-
-	//		//vDir.y = m_vecBoss[i].m_vDir.y = 0.f;
-
-	//		D3DXVec3Normalize(&vDir, &vDir);
-
-	//		if (m_vecBoss[i].dist <= 7.f)
-	//		{
-	//			m_vecBoss[i].count++;
-	//			if (m_vecBoss[i].count > 100)
-	//			{
-	//				m_vecBoss[i].chk = true;	
-	//				
-	//				m_vecBoss[i].e_boss_state = E_BOSS_WALK;
-	//			}
-	//		}
-	//		else
-	//		{
-	//			if (m_vecBoss[i].chk)
-	//			{
-	//				D3DXVec3Normalize(&v, &m_vecBoss[i].pb);
-	//			}
-	//			m_vecBoss[i].chk = false;
-	//			//m_vecBoss[i].chkDist = false;
-	//		}
-	//		if (!m_vecBoss[i].chk && m_vecBoss[i].dist > 7.f)
-	//		{
-	//			//if (m_vecBoss[i].chkDist)
-	//			{
-	//				m_pBossAniController->SetBossDir(v);
-	//				return; 
-	//			}
-
-	//		}
-	//		if (m_vecBoss[i].chk)
-	//		{
-	//			//if (!m_vecBoss[i].chk) return;
-
-	//			//m_vecBoss[i].chkDist = true;
-	//			D3DXMATRIXA16 matT, matR;
-	//			D3DXMatrixIdentity(&matT);
-	//			D3DXMatrixIdentity(&matR);
-
-	//			
-	//			//D3DXVec3Normalize(&m_vecBoss[i].m_vDir, &m_vecBoss[i].m_vDir);
-
-	//			//float fDot = D3DXVec3Dot(&vDir, &m_vecBoss[i].m_vDir);
-
-	//			if (m_vecBoss[i].dist <= 2.f)
-	//			{
-	//				m_vecBoss[i].count = 0;
-	//				skillDelay++;
-	//				if (skillDelay > 5)
-	//				{
-	//					delay1 = rand() % 15;
-	//					delay2 = rand() % 15;
-	//					if (delay1 > 1 && delay1 < 7)
-	//					{
-	//						m_vecBoss[i].e_boss_state = E_BOSS_ATT;
-	//						if (m_vecBoss[i].stat.HP <= 50)
-	//						{
-	//							m_vecBoss[i].e_boss_state = E_BOSS_WHIRLWIND;
-	//						}
-	//						m_vecBoss[i].chk = false;
-	//					}
-	//					if (delay2 > 8 && delay2 < 15)
-	//					{
-	//						m_vecBoss[i].e_boss_state = E_BOSS_ATT2;
-	//						if (m_vecBoss[i].stat.HP <= 100)
-	//						{
-	//							m_vecBoss[i].e_boss_state = E_BOSS_SPELL2;
-	//						}
-	//						m_vecBoss[i].chk = false;
-	//					}
-	//					skillDelay = 0;
-	//				}
-	//				return;
-
-	//			}
-	//			else
-	//			{
-	//				m_vecBoss[i].m_vPos = m_vecBoss[i].m_vPos +(vDir * 0.1f);
-	//				m_pBossAniController->SetvBossPos(m_vecBoss[i].m_vPos);
-	//			/*	if (fDot <= 0.95f)
-	//				{
-	//					D3DXVECTOR3 vCross;
-	//					D3DXVec3Cross(&vCross, &m_vecBoss[i].m_vDir, &vDir);
-	//					D3DXVec3Normalize(&vCross, &vCross);
-
-	//					if (vCross.y > 0.f)
-	//					{
-	//						D3DXMATRIXA16 matR;
-	//						D3DXMatrixIdentity(&matR);
-	//						D3DXMatrixRotationY(&matR, 1.f);
-	//						D3DXVec3TransformNormal(&m_vecBoss[i].m_vDir, &m_vecBoss[i].m_vDir, &matR);
-	//					}
-	//					else
-	//					{
-	//						D3DXMATRIXA16 matR;
-	//						D3DXMatrixIdentity(&matR);
-	//						D3DXMatrixRotationY(&matR, -1.f);
-	//						D3DXVec3TransformNormal(&m_vecBoss[i].m_vDir, &m_vecBoss[i].m_vDir, &matR);
-	//					}
-	//				}
-	//				else
-	//				{
-	//					m_vecBoss[i].m_vDir = vDir;
-	//				}*/
-
-	//			}
-
-	//			m_pBossAniController->SetBossDir(vDir);
-	//		}
-
-	//		//D3DXVECTOR3 boss_playerPos;
-	//		//boss_playerPos = m_vPlayerPos - m_vecBoss[i].m_vPos;
-	//		//D3DXVec3Normalize(&boss_playerPos, &boss_playerPos);
-	//		
-
-	//		//D3DXVec3TransformNormal(&m_vecBoss[i].m_vDir, &m_vecBoss[i].m_vDir, &matR);
-
-	//	}
-	//}
 }
 
 void cEnemyControl::BossPlayerRot(D3DXVECTOR3 d)
@@ -941,6 +841,7 @@ void cEnemyControl::BossRagPlayerCheck()
 
 		if (Distance < 5.0f)
 		{
+			
 			skillDelay++;
 
 			if (skillDelay > 70)
@@ -967,6 +868,7 @@ void cEnemyControl::BossRagPlayerCheck()
 					{
 						m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_MERGE;
 					}
+					
 					//m_vecBoss_rag[0].chk = false;
 				}
 				if (delay2 > 8 && delay2 < 15)
@@ -982,6 +884,7 @@ void cEnemyControl::BossRagPlayerCheck()
 						m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_ATT;
 						m_vecBoss_rag[0].count = 0;
 					}
+					
 					//m_vecBoss_rag[0].chk = false;
 				}
 				skillDelay = 0;

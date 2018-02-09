@@ -33,7 +33,7 @@ public:
 	void Update(iMap* m_map);
 	void Render();
 	void UpdatePicking(MONSTER_KIND monster);
-	void Collsion(cOBB* EnemyBox);
+	void Collsion(cOBB* EnemyBox,float Damage);
 
 	void setEnemyPos(D3DXVECTOR3 EnemyPos) { m_EnemyPos = EnemyPos; }
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -46,4 +46,5 @@ public:
 
 	cOBB* getWeapon();
 	void checkUI();
+	float getPlayerATK();
 };

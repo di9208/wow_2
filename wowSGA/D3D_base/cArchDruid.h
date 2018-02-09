@@ -4,6 +4,7 @@
 #include "cMonsterParticle.h"
 #include "cEnemyHitEffect.h"
 #include "cUIObject.h"
+#include "cMonsterBombParticle.h"
 
 class iMap;
 class cSkinnedMesh;
@@ -35,6 +36,8 @@ class cArchDruid : public cUnit
 		int			attackTime;
 		int			termCount;
 		int			RunCount;
+		int			m_bombcount;
+		bool		m_bomb;
 
 		bool		Damage;
 		float		Damage_time;
@@ -60,6 +63,7 @@ class cArchDruid : public cUnit
 		float						m_rangeDistance;
 		D3DXMATRIXA16				m_matR;
 		bool						m_rangeCheck;
+		cParticle*					cBombParticle;
 
 		//몬스터 아이템 ㅠ 0ㅠ
 		ST_MONSTER_ITEM						m_StItemSprite;
@@ -103,6 +107,7 @@ public:
 
 	void addMonster(float x, float y, float z);
 	void addMonster(std::string key, float x, float y, float z);
+
 	void HarmDamage(int Damage, size_t i);
 	void MonsterAI(size_t i);
 	void MonsterStatus(size_t i);
@@ -118,7 +123,7 @@ public:
 
 	D3DXVECTOR3 getOBBCenter(int i);
 	float getOBBhalf(int i);
-
+	float getATK(int i) { return m_vecSkinnedMesh[i].t.ATK; }
 	MONSTER_STATUS getCondition(int i) { return m_vecSkinnedMesh[i].ENUM_MONSTER; }
 
 	void setDamageCheck(int i, bool check) { m_vecSkinnedMesh[i].Damage = check; }
@@ -137,7 +142,7 @@ public:
 
 	//==========================================================================================
 
-	void getWeaponHit(int i, cOBB * PlayerWeapon);
+	void getWeaponHit(int i, cOBB * PlayerWeapon, float Damage);
 	void setHurt(int i, bool check) { m_vecSkinnedMesh[i].Hurt = check; };
 
 
