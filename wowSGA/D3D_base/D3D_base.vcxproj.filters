@@ -250,10 +250,17 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>소스파일</Filter>
     </ClCompile>
-    <ClCompile Include="cSkyBox.cpp" />
     <ClCompile Include="cMonsterBombParticle.cpp">
       <Filter>unit\enemyManager\쫄몹</Filter>
     </ClCompile>
+    <ClCompile Include="cStage2.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cSkyBox.cpp">
+      <Filter>소스파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cScene2.cpp" />
+    <ClCompile Include="cSceneChange.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cCamera.h">
@@ -517,10 +524,17 @@
     <ClInclude Include="soundManager.h">
       <Filter>헤더파일</Filter>
     </ClInclude>
-    <ClInclude Include="cSkyBox.h" />
     <ClInclude Include="cMonsterBombParticle.h">
       <Filter>unit\enemyManager\쫄몹</Filter>
     </ClInclude>
+    <ClInclude Include="cStage2.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cSkyBox.h">
+      <Filter>헤더파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cScene2.h" />
+    <ClInclude Include="cSceneChange.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3D_base.ico">

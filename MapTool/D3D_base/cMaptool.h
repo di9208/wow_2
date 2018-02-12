@@ -25,6 +25,7 @@ private:
 	bool m_isPlayerExist;
 	bool m_playerTranslation;
 	bool m_monsterTranslation;
+	bool m_objectTranslation;
 
 	cMapToolObject* m_NPC;
 	bool m_isNPCExist;
@@ -50,9 +51,24 @@ private:
 		{
 		}
 	};
+	struct tagObject
+	{
+		std::string name;
+
+		int number;
+		bool Translation;
+		cMapToolObject* object;
+		ST_SPHERE sphere;
+		tagObject()
+			: number(0)
+			, Translation(false)
+			, object(nullptr)
+		{
+		}
+	};
 	bool m_isMonsterExist;
 	std::vector<tagMonster> m_vecMonster;
-
+	std::vector<tagObject> m_vecObject;
 private:
 	int _col ; //Column
 	int _row ; //Row

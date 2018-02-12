@@ -1,5 +1,7 @@
 #pragma once
 #include "cScene1.h"
+#include "cScene2.h"
+#include "cSceneChange.h"
 #include "cMainLoading.h"
 
 class cMainGame
@@ -11,6 +13,7 @@ public:
 	~cMainGame();
 
 	void Setup();
+	void Destroy();
 	void Update();
 	void Render();
 

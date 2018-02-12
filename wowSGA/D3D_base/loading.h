@@ -10,7 +10,7 @@ enum LOAD_KIND
 };
 struct tagresource
 {
-	std::string keyname;
+	char* keyname;
 	char* folder;
 	char* filename;
 };
@@ -24,7 +24,7 @@ public:
 	loaditem();
 	~loaditem();
 
-	void initforSkinnedMesh(std::string  Name, IN char * szFolder, IN char * szFile);
+	void initforSkinnedMesh(IN char *  Name, IN char * szFolder, IN char * szFile);
 	LOAD_KIND getloadkind() { return _kind; }
 
 	tagresource getimageresource() { return _resource; }
@@ -50,11 +50,12 @@ public:
 	void render();
 	void Destroy();
 	
-	void loadingSkinnedMesh(std::string  Name, IN char * szFolder, IN char * szFile);
+	void loadingSkinnedMesh(char * Name, IN char * szFolder, IN char * szFile);
 	bool loadingdone();
 
 	std ::vector<loaditem*> getloaditem() { return _vloaditem; }
 
+	
 	int getloaditemSize() { return _currentgauge; }
 };
 

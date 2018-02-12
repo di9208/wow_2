@@ -49922,54 +49922,60 @@
 0.976744 0.992248
 0.984496 0.992248
 0.992248 0.992248
-D:\Team_Po\20-09\wow_2(1000)\MapTool\D3D_base\SkyBox\sky4\sky4front.png
-D:\Team_Po\20-09\wow_2(1000)\MapTool\D3D_base\SkyBox\sky4\sky4back.png
-D:\Team_Po\20-09\wow_2(1000)\MapTool\D3D_base\SkyBox\sky4\sky4left.png
-D:\Team_Po\20-09\wow_2(1000)\MapTool\D3D_base\SkyBox\sky4\sky4right.png
-D:\Team_Po\20-09\wow_2(1000)\MapTool\D3D_base\SkyBox\sky4\sky4top.png
-D:\Team_Po\20-09\wow_2(1000)\MapTool\D3D_base\SkyBox\sky4\sky4bottom.png
-D:\Team_Po\20-09\wow_2(1000)\MapTool\D3D_base\Map\tawe.png
+D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4front.png
+D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4back.png
+D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4left.png
+D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4right.png
+D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4top.png
+D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4bottom.png
+D:\Team_Po\02-10\wow_2\MapTool\D3D_base\Map\tawe.png
 P
 -14.330713 0.000000 59.535164
 N
--6.384459 0.000000 62.275398
+-5.028996 0.000000 57.711666
 M
 0
 bonespider1
--27.127039 0.000000 43.443710
+-19.002579 0.600000 24.873079
+0
 bonespider2
--26.848389 -0.000002 50.125946
+-25.572159 0.000000 24.836937
+0
 bonespider3
--13.881939 0.000000 33.627171
+-38.537819 -0.000002 28.508875
+0
 bonespider4
-16.784410 0.000000 -20.320042
+-35.734852 0.000000 15.676060
+0
 bonespider5
-20.343048 0.000000 -16.473755
+-0.261206 0.300000 -35.876823
+0
 bonespider6
-22.547724 0.000000 -9.537975
+1.874250 0.242968 -33.935638
 2
 druid1
--3.584345 0.000000 39.489902
+-42.970123 -0.000002 -5.870182
+2
 druid2
--27.132778 0.000002 16.502594
+-19.358686 0.000002 -37.811245
+2
 druid3
--26.526955 0.939734 -16.605507
+26.684593 0.000000 6.236153
+2
 druid4
--45.233562 -0.000002 18.221348
-druid5
--8.430037 0.000000 -23.156902
+25.222292 0.000002 -23.756369
 4
 worg1
--31.533358 -0.000002 8.338371
+5.314760 0.000000 -20.694115
+4
 worg2
--36.531696 0.000000 27.134022
+7.493235 0.000000 -21.319927
+4
 worg3
--26.336908 0.000000 36.180206
+8.362370 0.000000 42.986084
+4
 worg4
-5.780334 0.000004 -26.622246
+-1.603521 0.000000 39.014553
 1
 lichking
-41.138420 0.000000 38.211349
-3
-rag
-41.138420 0.000000 38.211349
+39.342796 0.000000 40.549778

@@ -118,17 +118,23 @@ private:
 	int						delay2;
 
 	bool isboss;
+	bool israg;
+	SYNTHESIZE(bool, m_Change, Change);
 
 public:
 	void SetUp(std::vector<tagMon> Monster);
-	void Update(D3DXVECTOR3 d, iMap* pMap);
+	void Update(D3DXVECTOR3 d, iMap* pMap, std::vector<tagMon> Monster);
 	void Render();
 
 
 	//boss
+	void ragSetup(std::vector<tagMon> Monster);
 	void BossSetup(std::vector<tagMon> Monster);						//보스 세팅 (x파일 등)
-	void BossUpdate();						//보스 업데이트 (스킬 등)
-	void BossRender();						//렌더
+	void BossUpdate(std::vector<tagMon> Monster);						//보스 업데이트 (스킬 등)
+	void BossRender();	//렌더
+	void ragRender();
+	void ragUpdate();
+
 	void BossPlayerCheck();					//플레이어와의 체크
 	void BossPlayerRot(D3DXVECTOR3 d);		//플레이어 좌표받아오기
 	void BossRagPlayerCheck();				//플레이어와 라그와의 체크
@@ -210,5 +216,9 @@ public:
 
 	float Boss_ATK();
 	float Rag_ATK();
+
+	void setState(E_BOSS_STATE s) { m_vecBoss[0].e_boss_state = s; }
+
+
 };
 

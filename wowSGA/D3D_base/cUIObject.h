@@ -24,6 +24,7 @@ protected:
 	SYNTHESIZE(int, m_nTag, Tag);
 
 	SYNTHESIZE(D3DXVECTOR3, MatS, Scal);
+	SYNTHESIZE(int, m_alpha, alpha);
 
 public:
 	cUIObject();

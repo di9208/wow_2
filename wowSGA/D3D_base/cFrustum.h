@@ -1,6 +1,6 @@
 #pragma once
 
-#define EPSILON 1.0f		//User Range of Frustum
+#define EPSILON 2.5f		//User Range of Frustum
 class cFrustum
 {
 private:

@@ -20,7 +20,7 @@ void loading::Destroy()
 {
 }
 
-void loading::loadingSkinnedMesh(std::string Name, IN char * szFolder, IN char * szFile)
+void loading::loadingSkinnedMesh(char * Name, IN char * szFolder, IN char * szFile)
 {
 	loaditem* item = new loaditem;
 	item->initforSkinnedMesh(Name, szFolder, szFile);
@@ -40,8 +40,12 @@ bool loading::loadingdone()
 	switch (item->getloadkind())
 	{
 	case LOAD_KIND_SKINNDEDMESH:
-		g_pSkinnedMeshManager->Setup(img.keyname, img.folder, img.filename);
-		break;
+	{
+		std::string key = std::string(img.keyname);
+		g_pSkinnedMeshManager->Setup(key, img.folder, img.filename);
+		
+	}
+	break;
 	}
 	_currentgauge++;
 	return false;
@@ -55,7 +59,7 @@ loaditem::~loaditem()
 {
 }
 
-void loaditem::initforSkinnedMesh(std::string Name, IN char * szFolder, IN char * szFile)
+void loaditem::initforSkinnedMesh(IN char * Name, IN char * szFolder, IN char * szFile)
 {
 	_kind = LOAD_KIND_SKINNDEDMESH;
 	ZeroMemory(&_resource, sizeof(tagresource));

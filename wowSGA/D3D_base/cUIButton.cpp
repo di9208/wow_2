@@ -11,6 +11,7 @@ cUIButton::cUIButton()
 
 cUIButton::~cUIButton()
 {
+
 }
 
 void cUIButton::SetTexture(IN char * szUp, IN char * szOver, IN char * szDown)

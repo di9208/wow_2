@@ -23,7 +23,7 @@
     <ProjectGuid>{DF3DCD04-F9E1-4763-895D-3CA5373AB3EE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>D3D_base</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -201,11 +201,14 @@
     <ClInclude Include="cRagPaticle.h" />
     <ClInclude Include="cRay.h" />
     <ClInclude Include="cScene1.h" />
+    <ClInclude Include="cScene2.h" />
+    <ClInclude Include="cSceneChange.h" />
     <ClInclude Include="cSceneManager.h" />
     <ClInclude Include="cSkinnedMesh.h" />
     <ClInclude Include="cSkinnedMeshManager.h" />
     <ClInclude Include="cSkyBox.h" />
     <ClInclude Include="cStage1.h" />
+    <ClInclude Include="cStage2.h" />
     <ClInclude Include="cTextureManager.h" />
     <ClInclude Include="cTimeManager.h" />
     <ClInclude Include="cUIButton.h" />
@@ -291,11 +294,14 @@
     <ClCompile Include="cRagPaticle.cpp" />
     <ClCompile Include="cRay.cpp" />
     <ClCompile Include="cScene1.cpp" />
+    <ClCompile Include="cScene2.cpp" />
+    <ClCompile Include="cSceneChange.cpp" />
     <ClCompile Include="cSceneManager.cpp" />
     <ClCompile Include="cSkinnedMesh.cpp" />
     <ClCompile Include="cSkinnedMeshManager.cpp" />
     <ClCompile Include="cSkyBox.cpp" />
     <ClCompile Include="cStage1.cpp" />
+    <ClCompile Include="cStage2.cpp" />
     <ClCompile Include="cTextureManager.cpp" />
     <ClCompile Include="cTimeManager.cpp" />
     <ClCompile Include="cUIButton.cpp" />

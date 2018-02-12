@@ -25,7 +25,7 @@ private:
 	SYNTHESIZE(D3DXVECTOR3, Playerpos, playerpos);
 	SYNTHESIZE(D3DXVECTOR3, NPCpos, npcpos);
 	SYNTHESIZE_REF(std::vector<tagMon>, m_vecMonster, Monster);
-
+	SYNTHESIZE_REF(std::vector<tagobject>, m_vecObjec, Object);
 private:
 	cQuadTree * m_QuadTree;
 	LPDIRECT3DTEXTURE9			m_pTexture;

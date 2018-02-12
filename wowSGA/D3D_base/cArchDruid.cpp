@@ -78,7 +78,7 @@ void cArchDruid::addMonster(float x, float y, float z){
 	Monster.m_Sphere.bIsPicked = false;
 	Monster.b = new cSkinnedMesh;
 	Monster.b->Setup("Monster/archdruid", "1.x");
-	Monster.MaxRange = 16.f;
+	Monster.MaxRange = 7.f;
 	Monster.range = 2.f;
 	Monster.time = 0;
 	Monster.death = false;
@@ -165,7 +165,7 @@ void cArchDruid::addMonster(std::string key, float x, float y, float z)
 	Monster.m_Sphere.bIsPicked = false;
 	Monster.b = new cSkinnedMesh;
 	Monster.b->Setup("Monster/archdruid", "1.x");
-	Monster.MaxRange = 16.f;
+	Monster.MaxRange = 7.f;
 	Monster.range = 2.f;
 	Monster.time = 0;
 	Monster.death = false;
@@ -257,25 +257,28 @@ void cArchDruid::SetUp(){
 
 void cArchDruid::Update(iMap* pMap){
 	//거미 업데이트
-	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
-		//몬스터 죽음
-		if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
+	if (m_vecSkinnedMesh.size() != 0)
+	{
+		for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
+			//몬스터 죽음
+			if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
 
-		matUpdate(i, pMap);
-		m_vecSkinnedMesh[i].m->Update();
-		m_vecSkinnedMesh[i].b->Update();
-		m_vecSkinnedMesh[i].Particle->update(3.0f);
-		
-		if (m_vecSkinnedMesh[i].m_bomb) {
-			m_vecSkinnedMesh[i].m_bombcount++;
-			m_vecSkinnedMesh[i].cBombParticle->update(1);
+			matUpdate(i, pMap);
+			m_vecSkinnedMesh[i].m->Update();
+			m_vecSkinnedMesh[i].b->Update();
+			m_vecSkinnedMesh[i].Particle->update(3.0f);
+
+			if (m_vecSkinnedMesh[i].m_bomb) {
+				m_vecSkinnedMesh[i].m_bombcount++;
+				m_vecSkinnedMesh[i].cBombParticle->update(1);
+			}
+			if (m_vecSkinnedMesh[i].m_bombcount > 30)
+				m_vecSkinnedMesh[i].m_bomb = false;
+			m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
+			m_vecSkinnedMesh[i].MonsterAttackOBB->Update(&m_vecSkinnedMesh[i].matRTAttack);
+			MonsterAI(i);						//몬스터의 패턴, 스킬
+			MonsterStatus(i); 					//몬스터 상태, 애니메이션
 		}
-		if (m_vecSkinnedMesh[i].m_bombcount > 30)
-			m_vecSkinnedMesh[i].m_bomb = false;
-		m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
-		m_vecSkinnedMesh[i].MonsterAttackOBB->Update(&m_vecSkinnedMesh[i].matRTAttack);
-		MonsterAI(i);						//몬스터의 패턴, 스킬
-		MonsterStatus(i); 					//몬스터 상태, 애니메이션
 	}
 	/*if (Root)
 	{
@@ -285,25 +288,28 @@ void cArchDruid::Update(iMap* pMap){
 
 
 void cArchDruid::Render(){
-	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++){
-		m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
-		D3DXMATRIXA16 matT;
-		D3DXMatrixTranslation(&matT, 1, 0, 0);
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &(m_vecSkinnedMesh[i].matWorld*matT));
-		m_vecSkinnedMesh[i].Particle->render();
-		D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
-		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
-		if (m_vecSkinnedMesh[i].m_bomb) {
-			g_pD3DDevice->SetTransform(D3DTS_WORLD, &(m_vecSkinnedMesh[i].matRTAttack));
-			m_vecSkinnedMesh[i].cBombParticle->render();
+	if (m_vecSkinnedMesh.size() != 0)
+	{
+		for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
+			m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
+			D3DXMATRIXA16 matT;
+			D3DXMatrixTranslation(&matT, 1, 0, 0);
+			g_pD3DDevice->SetTransform(D3DTS_WORLD, &(m_vecSkinnedMesh[i].matWorld*matT));
+			m_vecSkinnedMesh[i].Particle->render();
+			D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
+			m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
+			if (m_vecSkinnedMesh[i].m_bomb) {
+				g_pD3DDevice->SetTransform(D3DTS_WORLD, &(m_vecSkinnedMesh[i].matRTAttack));
+				m_vecSkinnedMesh[i].cBombParticle->render();
+			}
+			//g_pD3DDevice->SetTransform(D3DTS_WORLD, &(matWorld));
+			m_vecSkinnedMesh[i].MonsterAttackOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
+			if (m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked) RangeSphere(i);
+			SphereRender(i);
+			/*if (m_vecSkinnedMesh[i].death){
+				RenderUI(i);
+			}*/
 		}
-		//g_pD3DDevice->SetTransform(D3DTS_WORLD, &(matWorld));
-		m_vecSkinnedMesh[i].MonsterAttackOBB->Render_Debug(c, &m_vecSkinnedMesh[i].matWorld, &matWorld);
-		if (m_vecSkinnedMesh[i].m_rangeSphere.bIsPicked) RangeSphere(i);
-		SphereRender(i);
-		/*if (m_vecSkinnedMesh[i].death){
-			RenderUI(i);
-		}*/
 	}
 }
 

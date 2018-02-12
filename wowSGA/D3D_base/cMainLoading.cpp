@@ -6,6 +6,7 @@
 
 
 cMainLoading::cMainLoading()
+	:m_time(0)
 {
 }
 
@@ -49,15 +50,14 @@ void cMainLoading::Destroy()
 void cMainLoading::Update()
 {
 	g_pTimeManager->Update();
+	//14.3457
+	m_time = (m_loading->getloaditemSize() / (float)m_loading->getloaditem().size())*14.4f;
+	Root->GetChild()[0]->SetScal(D3DXVECTOR3(m_time,1,0));
 	Root->Update();
-	static float j = 0.0f;
-	 j += g_pTimeManager->GetEllapsedTime()/2.0f;
-	Root->GetChild()[0]->SetScal(D3DXVECTOR3(j,1,0));
-	
+	  
 	m_loading->update();
 	if (m_loading->loadingdone())
 	{
-		
 		g_pSceneManager->changescene("Scene1");
 	}
 }
@@ -69,45 +69,45 @@ void cMainLoading::Render()
 
 void cMainLoading::Loading()
 {
-	g_pSkinnedMeshManager->Setup("player", "player", "player.x");
-	g_pSkinnedMeshManager->Setup("NPC", "tawo", "testtawoo.X");
-	////
-	g_pSkinnedMeshManager->Setup("리치왕", "Monster/boss/Arthaslichking", "arthas2.x");
-	g_pSkinnedMeshManager->Setup("스킬", "Monster/boss/Arthaslichking", "skill.x");
-	g_pSkinnedMeshManager->Setup("아이스노바", "Monster/boss/Arthaslichking", "icenova.x");
-	g_pSkinnedMeshManager->Setup("라그나로스", "Monster/boss/ragnaros", "ragnaros2.X");
-	g_pSkinnedMeshManager->Setup("스킬1", "Monster/boss/ragnaros", "ragSkill1.x");
-	g_pSkinnedMeshManager->Setup("스킬2", "Monster/boss/ragnaros", "ragSkill2.x");
-	////
-	g_pSkinnedMeshManager->Setup("druid1", "Monster/archdruid", "1.x");
-	g_pSkinnedMeshManager->Setup("druid2", "Monster/archdruid", "1.x");
-	g_pSkinnedMeshManager->Setup("druid3", "Monster/archdruid", "1.x");
-	g_pSkinnedMeshManager->Setup("druid4", "Monster/archdruid", "1.x");
-	g_pSkinnedMeshManager->Setup("druid5", "Monster/archdruid", "1.x");
-	g_pSkinnedMeshManager->Setup("druid6", "Monster/archdruid", "1.x");
-	g_pSkinnedMeshManager->Setup("druid7", "Monster/archdruid", "1.x");
-	g_pSkinnedMeshManager->Setup("druid8", "Monster/archdruid", "1.x");
-	//g_pSkinnedMeshManager->Setup("druid1", "Monster/archdruid", "1.x");
-	////
-	g_pSkinnedMeshManager->Setup("bonespider1", "Monster/bonespider", "1.x");
-	g_pSkinnedMeshManager->Setup("bonespider2", "Monster/bonespider", "1.x");
-	g_pSkinnedMeshManager->Setup("bonespider3", "Monster/bonespider", "1.x");
-	g_pSkinnedMeshManager->Setup("bonespider4", "Monster/bonespider", "1.x");
-	g_pSkinnedMeshManager->Setup("bonespider5", "Monster/bonespider", "1.x");
-	g_pSkinnedMeshManager->Setup("bonespider6", "Monster/bonespider", "1.x");
-	g_pSkinnedMeshManager->Setup("bonespider7", "Monster/bonespider", "1.x");
-	g_pSkinnedMeshManager->Setup("bonespider8", "Monster/bonespider", "1.x");
-	g_pSkinnedMeshManager->Setup("bonespider9", "Monster/bonespider", "1.x");
-	g_pSkinnedMeshManager->Setup("bonespider10", "Monster/bonespider", "1.x");
-	//g_pSkinnedMeshManager->Setup("bonespider1", "Monster/bonespider", "1.x");
-	g_pSkinnedMeshManager->Setup("worg1", "Monster/lightningworg", "1.x");
-	g_pSkinnedMeshManager->Setup("worg2", "Monster/lightningworg", "1.x");
-	g_pSkinnedMeshManager->Setup("worg3", "Monster/lightningworg", "1.x");
-	g_pSkinnedMeshManager->Setup("worg4", "Monster/lightningworg", "1.x");
-	g_pSkinnedMeshManager->Setup("worg5", "Monster/lightningworg", "1.x");
-	g_pSkinnedMeshManager->Setup("worg6", "Monster/lightningworg", "1.x");
-	g_pSkinnedMeshManager->Setup("worg7", "Monster/lightningworg", "1.x");
-	g_pSkinnedMeshManager->Setup("worg8", "Monster/lightningworg", "1.x");
+	m_loading->loadingSkinnedMesh("player", "player", "player.x");
+	//g_pSkinnedMeshManager->Setup("player", "player", "player.x");
+	m_loading->loadingSkinnedMesh("NPC", "tawo", "testtawoo.X");
+	//
+	m_loading->loadingSkinnedMesh("리치왕", "Monster/boss/Arthaslichking", "arthas2.x");
+	m_loading->loadingSkinnedMesh("스킬", "Monster/boss/Arthaslichking", "skill.x");
+	m_loading->loadingSkinnedMesh("아이스노바", "Monster/boss/Arthaslichking", "icenova.x");
+	m_loading->loadingSkinnedMesh("라그나로스", "Monster/boss/ragnaros", "ragnarosF.X");
+	m_loading->loadingSkinnedMesh("스킬1", "Monster/boss/ragnaros", "ragSkill1.x");
+	m_loading->loadingSkinnedMesh("스킬2", "Monster/boss/ragnaros", "ragSkill2.x");
+	//
+	m_loading->loadingSkinnedMesh("druid1", "Monster/archdruid", "1.x");
+	m_loading->loadingSkinnedMesh("druid2", "Monster/archdruid", "1.x");
+	m_loading->loadingSkinnedMesh("druid3", "Monster/archdruid", "1.x");
+	m_loading->loadingSkinnedMesh("druid4", "Monster/archdruid", "1.x");
+	m_loading->loadingSkinnedMesh("druid5", "Monster/archdruid", "1.x");
+	m_loading->loadingSkinnedMesh("druid6", "Monster/archdruid", "1.x");
+	m_loading->loadingSkinnedMesh("druid7", "Monster/archdruid", "1.x");
+	m_loading->loadingSkinnedMesh("druid8", "Monster/archdruid", "1.x");
+	
+	m_loading->loadingSkinnedMesh("bonespider1", "Monster/bonespider", "1.x");
+	m_loading->loadingSkinnedMesh("bonespider2", "Monster/bonespider", "1.x");
+	m_loading->loadingSkinnedMesh("bonespider3", "Monster/bonespider", "1.x");
+	m_loading->loadingSkinnedMesh("bonespider4", "Monster/bonespider", "1.x");
+	m_loading->loadingSkinnedMesh("bonespider5", "Monster/bonespider", "1.x");
+	m_loading->loadingSkinnedMesh("bonespider6", "Monster/bonespider", "1.x");
+	m_loading->loadingSkinnedMesh("bonespider7", "Monster/bonespider", "1.x");
+	m_loading->loadingSkinnedMesh("bonespider8", "Monster/bonespider", "1.x");
+	m_loading->loadingSkinnedMesh("bonespider9", "Monster/bonespider", "1.x");
+	m_loading->loadingSkinnedMesh("bonespider10", "Monster/bonespider", "1.x");
+
+	m_loading->loadingSkinnedMesh("worg1", "Monster/lightningworg", "1.x");
+	m_loading->loadingSkinnedMesh("worg2", "Monster/lightningworg", "1.x");
+	m_loading->loadingSkinnedMesh("worg3", "Monster/lightningworg", "1.x");
+	m_loading->loadingSkinnedMesh("worg4", "Monster/lightningworg", "1.x");
+	m_loading->loadingSkinnedMesh("worg5", "Monster/lightningworg", "1.x");
+	m_loading->loadingSkinnedMesh("worg6", "Monster/lightningworg", "1.x");
+	m_loading->loadingSkinnedMesh("worg7", "Monster/lightningworg", "1.x");
+	m_loading->loadingSkinnedMesh("worg8", "Monster/lightningworg", "1.x");
 	///
 }
 

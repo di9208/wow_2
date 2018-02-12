@@ -8,6 +8,7 @@ cUIObject::cUIObject()
 	, m_vPos(0, 0, 0)
 	, m_isHidden(false)
 	, MatS(1, 1, 1)
+	, m_alpha(255)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 }
@@ -29,6 +30,7 @@ void cUIObject::Destroy()
 	{
 		child->Destroy();
 	}
+	if(this)
 	this->Release();
 }
 

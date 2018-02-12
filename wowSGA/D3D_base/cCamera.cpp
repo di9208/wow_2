@@ -40,14 +40,18 @@ void cCamera::Setup(D3DXVECTOR3* pvTarget, float roty)
 
 void cCamera::Update()
 {
-	D3DXMATRIXA16	matView, matR, matRX, matRY, matRR;
+	D3DXMATRIXA16	matView, matR, matRX, matRY, matRR, matRYY;
 	D3DXMatrixRotationX(&matRX, m_vCamRotAngle.x);
 	D3DXMatrixRotationY(&matRY, m_vCamRotAngle.y);
 
 	matR = matRX * matRY;
 
 	m_vEye = D3DXVECTOR3(0, 3, -m_fCamDist);
+	
+
 	D3DXVec3TransformCoord(&m_vEye, &m_vEye, &matR);
+	D3DXMatrixRotationY(&matRYY, D3DX_PI);
+	D3DXVec3TransformCoord(&m_vEye, &m_vEye, &matRYY);
 	D3DXMatrixRotationY(&matRR, RotY);
 	D3DXVec3TransformCoord(&m_vEye, &m_vEye, &matRR);
 

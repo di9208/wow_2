@@ -2,6 +2,7 @@
 #include "cBossAniController.h"
 #include "cSkinnedMesh.h"
 #include "cOBB.h"
+#include "cParticle.h"
 
 
 cBossAniController::cBossAniController()
@@ -20,9 +21,9 @@ cBossAniController::cBossAniController()
 
 cBossAniController::~cBossAniController()
 {
-	SAFE_DELETE(m_pSkinnedMesh);
-	SAFE_DELETE(m_pSkinnedMeshSkill);
-	SAFE_DELETE(m_pSkinnedMeshSkill2);
+	//SAFE_DELETE(m_pSkinnedMesh);
+	//SAFE_DELETE(m_pSkinnedMeshSkill);
+	//SAFE_DELETE(m_pSkinnedMeshSkill2);
 	SAFE_DELETE(m_pBossOBB);
 }
 
@@ -181,13 +182,13 @@ void cBossAniController::skillRender()
 	g_pD3DDevice->SetRenderState(D3DRS_POINTSPRITEENABLE, true);
 	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALEENABLE, true);
 
-	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALE_A, 0.0f);
-	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALE_B, 0.0f);
-	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALE_C, 1.0f);
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALE_A, cParticle::FtoDw(0.0f));
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALE_B, cParticle::FtoDw(0.0f));
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSCALE_C, cParticle::FtoDw(1.0f));
 
-	g_pD3DDevice->SetRenderState(D3DRS_POINTSIZE, 1);
-	g_pD3DDevice->SetRenderState(D3DRS_POINTSIZE_MIN, 0.2f);
-	g_pD3DDevice->SetRenderState(D3DRS_POINTSIZE_MAX, 20.0f);
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSIZE, cParticle::FtoDw(0.5f));
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSIZE_MIN, cParticle::FtoDw(0.2f));
+	g_pD3DDevice->SetRenderState(D3DRS_POINTSIZE_MAX, cParticle::FtoDw(20.0f));
 
 	g_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_MODULATE);
 	g_pD3DDevice->SetTextureStageState(0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE);

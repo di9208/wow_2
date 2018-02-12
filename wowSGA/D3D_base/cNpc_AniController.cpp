@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "cNpc_AniController.h"
-
 #include "cSkinnedMesh.h"
 
 cNpc_AniController::cNpc_AniController()
@@ -27,7 +26,7 @@ void cNpc_AniController::Update(NPC_State * Nstate)
 	if (m_NPC_SkinnedMesh)
 		m_NPC_SkinnedMesh->Update();
 	SetAnimation(Nstate);
-	m_NPC_SkinnedMesh->GetCheck() == true;
+	//m_NPC_SkinnedMesh->GetCheck() = true;
 }
 
 void cNpc_AniController::Render(D3DXMATRIXA16 * Update_world)

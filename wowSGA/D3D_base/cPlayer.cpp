@@ -46,8 +46,9 @@ void cPlayer::Setup(float x, float y, float z)
 	m_playerSkill->Setup();
 
 
-	D3DXMATRIXA16  matR, matS, World;
+	D3DXMATRIXA16  matR, matS, World, matRY ;
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
+	D3DXMatrixRotationY(&matRY, D3DX_PI / 2.0f);
 	D3DXMatrixScaling(&matS, 0.05f, 0.03f, 0.015f);
 	D3DXMatrixIdentity(&World);
 	World = matS * matR;
@@ -91,7 +92,8 @@ void cPlayer::Update(iMap* m_map)
 		
 		
 	}
-	D3DXMATRIXA16 mat, matR, matS;
+	D3DXMATRIXA16 mat, matR, matS, matRY;
+	
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
 	D3DXMatrixScaling(&matS, 0.15f, 0.15f, 0.15f);
 	mat = matR * m_matWorld;

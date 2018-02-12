@@ -19,7 +19,7 @@ cPlayerInFo::cPlayerInFo()
 	, m_statusUI(NULL)
 	, m_HP(NULL)
 	, m_status(false)
-	, ax(100)
+	, ax(1000)
 	, m_systemFont(NULL)
 	, m_HpFont(NULL)
 	, curATK(0)
@@ -58,14 +58,14 @@ cPlayerInFo::~cPlayerInFo()
 		SAFE_RELEASE(m_stats[i]);
 	}
 	SAFE_DELETE(m_playerOBB);
-	SAFE_DELETE(close_button);
+	//SAFE_DELETE(close_button);
 
 	for (int i = 0; i < 5; i++)
 	{
 		item_slot[i]->Destroy();
 	}
 
-	close_button->Destroy();
+	//close_button->Destroy();
 }
 
 void cPlayerInFo::Setup(cSkinnedMesh* playerSkinned, D3DXMATRIXA16* playerWorld)
@@ -75,8 +75,8 @@ void cPlayerInFo::Setup(cSkinnedMesh* playerSkinned, D3DXMATRIXA16* playerWorld)
 	SetFont();
 	SetUI();
 	setRC();
-	m_PlayerInFo.HP = 100;
-	m_PlayerInFo.Max_HP = 100;
+	m_PlayerInFo.HP = 1000;
+	m_PlayerInFo.Max_HP = 1000;
 	m_PlayerInFo.MP = 70;
 	m_PlayerInFo.ATK = 10;
 	m_PlayerInFo.DEF = 5;

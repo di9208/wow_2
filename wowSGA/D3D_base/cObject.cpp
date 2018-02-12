@@ -22,6 +22,7 @@ void cObject::Release()
 	m_ulRefCount--;
 	if (m_ulRefCount == 0)
 	{
-		delete this;
+		if(this)
+			delete this;
 	}
 }

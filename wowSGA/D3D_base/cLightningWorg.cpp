@@ -39,16 +39,19 @@ cLightningWorg::~cLightningWorg()
 
 void cLightningWorg::getWeaponHit(int i, cOBB * PlayerWeapon,float damage)
 {
-	if (m_vecSkinnedMesh[i].Hurt == false)
+	if (m_vecSkinnedMesh.size() != 0)
 	{
-		if (PlayerWeapon)
+		if (m_vecSkinnedMesh[i].Hurt == false)
 		{
-			if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
+			if (PlayerWeapon)
 			{
-				if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
+				if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
 				{
-					m_vecSkinnedMesh[i].t.HP -= damage;
-					m_vecSkinnedMesh[i].Hurt = true;
+					if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
+					{
+						m_vecSkinnedMesh[i].t.HP -= damage;
+						m_vecSkinnedMesh[i].Hurt = true;
+					}
 				}
 			}
 		}
@@ -75,7 +78,7 @@ void cLightningWorg::addMonster(float x, float y, float z) {
 	Monster.m_Sphere.vCenter = D3DXVECTOR3(x, y + 0.45, z);
 	Monster.m_Sphere.fRadius = 10.f;
 	Monster.m_Sphere.bIsPicked = false;
-	Monster.MaxRange = 18.f;
+	Monster.MaxRange = 10.f;
 	Monster.range = 1.f;
 	Monster.time = 0;
 	Monster.death = false;
@@ -138,7 +141,7 @@ void cLightningWorg::addMonster(std::string key, float x, float y, float z)
 	Monster.m_Sphere.vCenter = D3DXVECTOR3(x, y + 0.45, z);
 	Monster.m_Sphere.fRadius = 10.f;
 	Monster.m_Sphere.bIsPicked = false;
-	Monster.MaxRange = 18.f;
+	Monster.MaxRange = 10.f;
 	Monster.range = 1.f;
 	Monster.time = 0;
 	Monster.death = false;
@@ -209,17 +212,21 @@ void cLightningWorg::SetUp() {
 
 void cLightningWorg::Update(iMap* map) {
 	//거미 업데이트
-	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
-		//몬스터 죽음
-		if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
+
+	if (m_vecSkinnedMesh.size() != 0)
+	{
+		for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
+			//몬스터 죽음
+			if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
 
 
-		matUpdate(i, map);
-		m_vecSkinnedMesh[i].m->Update();
-		m_vecSkinnedMesh[i].Particle->update(3.0f);
-		m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
-		MonsterAI(i);						//몬스터의 패턴, 스킬
-		MonsterStatus(i); 					//몬스터 상태, 애니메이션
+			matUpdate(i, map);
+			m_vecSkinnedMesh[i].m->Update();
+			m_vecSkinnedMesh[i].Particle->update(3.0f);
+			m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
+			MonsterAI(i);						//몬스터의 패턴, 스킬
+			MonsterStatus(i); 					//몬스터 상태, 애니메이션
+		}
 	}
 	/*if (Root)
 	{
@@ -229,22 +236,26 @@ void cLightningWorg::Update(iMap* map) {
 
 
 void cLightningWorg::Render() {
-	for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
-		m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
-		D3DXMATRIXA16 matT;
-		D3DXMatrixTranslation(&matT, 0, 0.35f, 0);
-		g_pD3DDevice->SetTransform(D3DTS_WORLD, &(m_vecSkinnedMesh[i].matWorld*matT));
 
-		m_vecSkinnedMesh[i].Particle->render();
-		D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
+	if (m_vecSkinnedMesh.size() != 0)
+	{
+		for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
+			m_vecSkinnedMesh[i].m->Render(NULL, &m_vecSkinnedMesh[i].matWorld);
+			D3DXMATRIXA16 matT;
+			D3DXMatrixTranslation(&matT, 0, 0.35f, 0);
+			g_pD3DDevice->SetTransform(D3DTS_WORLD, &(m_vecSkinnedMesh[i].matWorld*matT));
 
-		SphereRender(i, m_vecSkinnedMesh[i].matWorld);
-		m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, nullptr, nullptr);
+			m_vecSkinnedMesh[i].Particle->render();
+			D3DCOLOR c = D3DCOLOR_XRGB(255, 255, 255);
 
-		//죽었을 때
-		/*if (m_vecSkinnedMesh[i].death) {
-			RenderUI(i);
-		}*/
+			SphereRender(i, m_vecSkinnedMesh[i].matWorld);
+			m_vecSkinnedMesh[i].MonsterOBB->Render_Debug(c, nullptr, nullptr);
+
+			//죽었을 때
+			/*if (m_vecSkinnedMesh[i].death) {
+				RenderUI(i);
+			}*/
+		}
 	}
 }
 

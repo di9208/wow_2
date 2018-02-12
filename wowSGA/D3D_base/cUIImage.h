@@ -5,7 +5,6 @@ class cUIImage : public cUIObject
 {
 protected:
 	LPDIRECT3DTEXTURE9	m_pTexture;
-
 public:
 	cUIImage();
 	virtual ~cUIImage();

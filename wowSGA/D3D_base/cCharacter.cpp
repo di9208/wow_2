@@ -76,7 +76,7 @@ void cCharacter::Update(iMap* pMap, bool animCheck)
 	D3DXMATRIXA16 matR, matT;
 	D3DXMatrixIdentity(&matT);
 	D3DXMatrixRotationY(&matR, m_fRotY);
-	m_vDir = D3DXVECTOR3(1, 0, 0);
+	m_vDir = D3DXVECTOR3(0, 0, -1);
 	D3DXVec3TransformNormal(&m_vDir, &m_vDir, &matR);
 
 	if (pMap)
@@ -100,7 +100,9 @@ void cCharacter::Update(iMap* pMap, bool animCheck)
 	}
 
 	D3DXMatrixTranslation(&matT, m_vPos.x, m_vPos.y, m_vPos.z);
-	m_matWorld = matR * matT;
+	D3DXMATRIXA16 matRY;
+	D3DXMatrixRotationY(&matRY, D3DX_PI / 2.0f);
+	m_matWorld = matR* matRY * matT;
 }
 
 void cCharacter::setSpeed()

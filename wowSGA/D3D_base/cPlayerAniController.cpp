@@ -12,7 +12,7 @@ cPlayerAniController::cPlayerAniController()
 
 cPlayerAniController::~cPlayerAniController()
 {
-	SAFE_DELETE(m_pSkinnedMesh);
+	//SAFE_DELETE(m_pSkinnedMesh);
 }
 
 void cPlayerAniController::Setup(float x, float y, float z)
@@ -45,10 +45,11 @@ void cPlayerAniController::Update(condition * pCondition)
 
 void cPlayerAniController::Render(D3DXMATRIXA16 * m_wolrd)
 {
-	D3DXMATRIXA16  matR, matS, World;
+	D3DXMATRIXA16  matR, matS, World,matRY;
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
+	D3DXMatrixRotationY(&matRY, D3DX_PI / 2.0f);
 	D3DXMatrixScaling(&matS, 0.1f, 0.1f, 0.1f);
-	m_World = matR * matS;
+	m_World = matS* matR;
 	m_pSkinnedMesh->updateSetting(m_pSkinnedMesh->GetRoot(), &m_World);
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Render(NULL, m_wolrd);

@@ -9,7 +9,6 @@ enum ENUMMONSTER
 	WORG
 };
 
-
 class cUnit
 {
 public:

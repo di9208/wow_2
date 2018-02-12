@@ -11,11 +11,17 @@ cMainGame::~cMainGame()
 {
 
 }
+void cMainGame::Destroy()
+{
+	g_pSceneManager->Destroy();
+}
 
 void cMainGame::Setup()
 {
 	g_pSceneManager->addscene("Loading", new cMainLoading);
 	g_pSceneManager->addscene("Scene1", new cScene1);
+	g_pSceneManager->addscene("Scene2", new cScene2);
+	g_pSceneManager->addscene("Change", new cSceneChange);
 	g_pSceneManager->changescene("Loading");
 
 }

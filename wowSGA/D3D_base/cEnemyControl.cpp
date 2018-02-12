@@ -22,6 +22,8 @@ cEnemyControl::cEnemyControl()
 	, m_pFont(NULL)
 	, m_pBossRagController(NULL)
 	, isboss(false)
+	, m_Change(false)
+	, israg(false)
 {
 	D3DXMatrixIdentity(&m_world);
 	D3DXMatrixIdentity(&matR);
@@ -409,6 +411,13 @@ void cEnemyControl::SetUp(std::vector<tagMon> Monster) {
 			isboss = true;
 		}
 	}
+	for (int i = 0; i < Monster.size(); i++)
+	{
+		if (Monster[i].kind == KIND_BOSS_RAGNALOS)
+		{
+			israg = true;
+		}
+	}
 	
 	BossSetup(Monster);
 	D3DXFONT_DESC stFD;
@@ -430,11 +439,16 @@ void cEnemyControl::SetUp(std::vector<tagMon> Monster) {
 
 }
 
-void cEnemyControl::Update(D3DXVECTOR3 d, iMap* pMap) {
+void cEnemyControl::Update(D3DXVECTOR3 d, iMap* pMap, std::vector<tagMon> Monster) {
 	if (isboss)
 	{
-		BossUpdate();
+		BossUpdate(Monster);
 		BossPlayerRot(d);
+		//BossRagPlayerRot(d);
+	}
+	if (israg)
+	{
+		ragUpdate();
 		BossRagPlayerRot(d);
 	}
 	//enemy
@@ -464,6 +478,10 @@ void cEnemyControl::Render() {
 	{
 		BossRender();
 	}
+	if (israg)
+	{
+		ragRender();
+	}
 	if (m_pFont)
 	{
 		/*char str[128];
@@ -483,13 +501,31 @@ void cEnemyControl::Render() {
 
 }
 
+void cEnemyControl::ragSetup(std::vector<tagMon> Monster)
+{
+	m_pBossRagController = new cBossRagController();
+	m_pBossRagController->SetUp(Monster);
+
+	stBoss_rag.count = 0;
+	stBoss_rag.stat.ATK = 100;
+	stBoss_rag.stat.DEF = 20;
+	stBoss_rag.stat.HP = 1000;
+	stBoss_rag.stat.Max_HP = 1000;
+	stBoss_rag.chk = false;
+	stBoss_rag.kind = KIND_BOSS_RAGNALOS;
+	stBoss_rag.e_boss_rag_state = E_BOSS_RAG_STAND;
+	stBoss_rag.particle = new cRagPaticle(500, 20);
+	stBoss_rag.particle->init("Particle/T_VFX_SWIRL64B_A_CONTRAST2.png");
+
+	m_vecBoss_rag.push_back(stBoss_rag);
+}
+
 void cEnemyControl::BossSetup(std::vector<tagMon> Monster)
 {
 	m_pBossAniController = new cBossAniController();
 	m_pBossAniController->SetUp(Monster);
 
-	m_pBossRagController = new cBossRagController();
-	m_pBossRagController->SetUp(Monster);
+	
 
 	m_pBossSkill = new cBossSkill;
 	stBoss		stBoss1;
@@ -505,9 +541,9 @@ void cEnemyControl::BossSetup(std::vector<tagMon> Monster)
 	stBoss1.particle->init("Particle/T_VFX_SWIRL64B_A_CONTRAST2.png");
 
 	m_vecBoss.push_back(stBoss1);
-
+	ragSetup(Monster);
 	//===============================위가 리치왕, 아래가 라그나로스 스탯//
-	stBoss_rag.count = 0;
+	/*stBoss_rag.count = 0;
 	stBoss_rag.stat.ATK = 100;
 	stBoss_rag.stat.DEF = 20;
 	stBoss_rag.stat.HP = 500;
@@ -518,10 +554,10 @@ void cEnemyControl::BossSetup(std::vector<tagMon> Monster)
 	stBoss_rag.particle = new cRagPaticle(500,20);
 	stBoss_rag.particle->init("Particle/T_VFX_SWIRL64B_A_CONTRAST2.png");
 
-	m_vecBoss_rag.push_back(stBoss_rag);
+	m_vecBoss_rag.push_back(stBoss_rag);*/
 }
 
-void cEnemyControl::BossUpdate()
+void cEnemyControl::BossUpdate(std::vector<tagMon> Monster)
 {
 	cEnemyManager::Update();
 
@@ -532,11 +568,7 @@ void cEnemyControl::BossUpdate()
 	m_vecBoss[0].particle->update(1.0001f);
 
 	//라그나로스 업데이트
-	if (m_pBossRagController)
-		m_pBossRagController->Update(&m_vecBoss_rag[0].e_boss_rag_state);
-
-	m_vecBoss_rag[0].particle->update(1.0f);
-
+	
 	if (m_pBossSkill)
 		m_pBossSkill->Update(&m_vecBoss[0].e_boss_state, &m_vecBoss_rag[0].e_boss_rag_state);
 
@@ -548,8 +580,8 @@ void cEnemyControl::BossUpdate()
 
 			if (nCount > 7)
 			{
-				nMonsterX = rand() % 15;
-				nMonsterY = rand() % 15;
+				nMonsterX = m_vecBoss[0].m_vPos.x +(((rand() % 1000*0.0001f) *-8.0f)+4.0f);
+				nMonsterY = m_vecBoss[0].m_vPos.z + (((rand() % 1000 * 0.0001f) *-8.0f) + 4.0f);
 				m_pSpider->addMonster(nMonsterX, 0, nMonsterY);
 				nCount = 0;
 			}
@@ -559,30 +591,11 @@ void cEnemyControl::BossUpdate()
 			m_pBossAniController->Skill();
 		}
 	}
-	if (!m_vecBoss_rag[0].chk)
-	{
-		if (m_vecBoss_rag[0].e_boss_rag_state == E_BOSS_RAG_SPELL)
-		{
-			nCount++;
-
-			if (nCount > 8)
-			{
-				nMonsterX = rand() % 15;
-				nMonsterY = rand() % 15;
-				m_pWorg->addMonster(nMonsterX, 0, nMonsterY);
-				nCount = 0;
-			}
-		}
-		
-	}
+	
 
 	BossPlayerCheck();
 
-	if (m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
-	{
-
-		BossRagPlayerCheck();
-	}
+	
 
 	// 체력 테스트
 	if (g_pKeyManager->isOnceKeyDown('L'))
@@ -604,14 +617,11 @@ void cEnemyControl::BossUpdate()
 		m_vecBoss[0].e_boss_state = E_BOSS_DEATH;
 		a++;
 	}
-	if (m_vecBoss_rag[0].stat.HP <= 0)
+	
+	if (m_vecBoss[0].e_boss_state == E_BOSS_DEATH && a == 40 )
 	{
-		m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_DEATH;
-		g_pSoundManager->play("ragnaros_death", 1.f);
-	}
-	if (m_vecBoss[0].e_boss_state == E_BOSS_DEATH&& a <= 50)
-	{
-		m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_START;
+		//m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_START;
+		m_Change = true;
 	}
 }
 
@@ -635,17 +645,61 @@ void cEnemyControl::BossRender()
 	/*D3DXMATRIXA16 matT2;
 	D3DXMatrixTranslation(&matT2, 5, 0, 0);
 	D3DXMATRIXA16 world2 =  matT2;*/
-	D3DXMATRIXA16 matW2;
+	
 
 	
-	if (m_pBossRagController && m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
-		m_pBossRagController->Render(matW2);
 	//D3DXMatrixIdentity(&matW2);
 	
-	g_pD3DDevice->SetTransform(D3DTS_WORLD, &matW2);
+	//g_pD3DDevice->SetTransform(D3DTS_WORLD, &matW2);
 	//m_vecBoss_rag[0].particle->render();
 
 
+}
+
+void cEnemyControl::ragRender()
+{
+	D3DXMATRIXA16 matW2;
+	if (m_pBossRagController && m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
+		m_pBossRagController->Render(matW2);
+}
+
+void cEnemyControl::ragUpdate()
+{
+	if (m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
+	{
+		if (m_pBossRagController)
+			m_pBossRagController->Update(&m_vecBoss_rag[0].e_boss_rag_state);
+
+		m_vecBoss_rag[0].particle->update(1.0f);
+	}
+
+	if (!m_vecBoss_rag[0].chk)
+	{
+		if (m_vecBoss_rag[0].e_boss_rag_state == E_BOSS_RAG_SPELL)
+		{
+			nCount++;
+
+			if (nCount > 15)
+			{
+				nMonsterX = m_vecBoss_rag[0].m_vPos.x + (((rand() % 1000 * 0.0001f) *-10.0f) + 5.0f);
+				nMonsterY = m_vecBoss_rag[0].m_vPos.z + (((rand() % 1000 * 0.0001f) *-10.0f) + 5.0f);
+				m_pWorg->addMonster(nMonsterX, 0, nMonsterY);
+				nCount = 0;
+			}
+		}
+
+	}
+
+	if (m_vecBoss[0].e_boss_state == E_BOSS_DEATH)
+	{
+
+		BossRagPlayerCheck();
+	}
+	if (m_vecBoss_rag[0].stat.HP <= 0)
+	{
+		m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_DEATH;
+		g_pSoundManager->play("ragnaros_death", 1.f);
+	}
 }
 
 void cEnemyControl::BossPlayerCheck()
@@ -701,7 +755,7 @@ void cEnemyControl::BossPlayerCheck()
 						m_vecBoss[0].count = 0;
 						
 					}
-					if (m_vecBoss[0].stat.HP <= 50)
+					if (m_vecBoss[0].stat.HP <= 200)
 					{
 						m_vecBoss[0].e_boss_state = E_BOSS_WHIRLWIND;
 						if(m_vecBoss[0].e_boss_state == E_BOSS_WHIRLWIND)
@@ -746,115 +800,7 @@ void cEnemyControl::BossPlayerRot(D3DXVECTOR3 d)
 
 void cEnemyControl::BossRagPlayerCheck()
 {
-	//	if (m_vPlayerPos != D3DXVECTOR3(0, 0, 0) && m_vecBoss_rag[0].e_boss_rag_state != E_BOSS_RAG_DEATH)
-	//	{
-	//		for (size_t i = 0; i < m_vecBoss_rag.size(); i++)
-	//		{
-	//			m_vecBoss_rag[i].m_vPos = m_pBossRagController->GetvBossPos();
-	//			if (m_vPlayerPos < m_vecBoss_rag[i].m_vPos)
-	//			{
-	//				m_vecBoss_rag[i].pb = m_vecBoss_rag[i].m_vPos - m_vPlayerPos;
-	//			}
-	//			else
-	//			{
-	//				m_vecBoss_rag[i].pb = m_vPlayerPos - m_vecBoss_rag[i].m_vPos;
-	//				m_vecBoss_rag[i].dist = D3DXVec3Length(&m_vecBoss_rag[i].pb);
-	//			}
-	//
-	//			if (m_vecBoss_rag[i].dist < 5.f)
-	//			{
-	//				m_vecBoss_rag[i].count++;
-	//				if (m_vecBoss_rag[i].count > 100)
-	//				{
-	//					m_vecBoss_rag[i].chk = true;
-	//				}
-	//			}
-	//			else m_vecBoss_rag[i].chk = false;
-	//
-	//			if (m_vecBoss_rag[i].chk)
-	//			{
-	//				//if (!m_vecBoss_rag[i].chk) return;
-	//
-	//				/*D3DXMATRIXA16 matT, matR;
-	//				D3DXMatrixIdentity(&matT);
-	//				D3DXMatrixIdentity(&matR);
-	//*/
-	//				/*D3DXVECTOR3 vDir = m_vPlayerPos - m_vecBoss_rag[i].m_vPos;
-	//
-	//				vDir.y = m_vecBoss_rag[i].m_vDir.y = 0.f;
-	//
-	//				D3DXVec3Normalize(&vDir, &vDir);
-	//				D3DXVec3Normalize(&m_vecBoss_rag[i].m_vDir, &m_vecBoss_rag[i].m_vDir);
-	//
-	//				float fDot = D3DXVec3Dot(&vDir, &m_vecBoss_rag[i].m_vDir);*/
-	//
-	//				if (m_vecBoss_rag[i].dist <= 2.f)
-	//				{
-	//					m_vecBoss_rag[i].count = 0;
-	//					skillDelay++;
-	//					if (skillDelay > 5)
-	//					{
-	//						delay1 = rand() % 15;
-	//						delay2 = rand() % 15;
-	//						if (delay1 > 1 && delay1 < 7)
-	//						{
-	//							m_vecBoss_rag[i].e_boss_rag_state = E_BOSS_RAG_ATT;
-	//							m_vecBoss_rag[i].chk = false;
-	//						}
-	//						if (delay2 > 8 && delay2 < 15)
-	//						{
-	//							m_vecBoss_rag[i].e_boss_rag_state = E_BOSS_RAG_SPELL;
-	//							m_vecBoss_rag[i].chk = false;
-	//						}
-	//						skillDelay = 0;
-	//					}
-	//					return;
-	//
-	//				}
-	//				/*else
-	//				{
-	//					m_vecBoss_rag[i].m_vPos += m_vecBoss_rag[i].m_vDir * 0.1f;
-	//
-	//					if (fDot <= 0.95f)
-	//					{
-	//						D3DXVECTOR3 vCross;
-	//						D3DXVec3Cross(&vCross, &m_vecBoss_rag[i].m_vDir, &vDir);
-	//						D3DXVec3Normalize(&vCross, &vCross);
-	//
-	//						if (vCross.y > 0.f)
-	//						{
-	//							D3DXMATRIXA16 matR;
-	//							D3DXMatrixIdentity(&matR);
-	//							D3DXMatrixRotationY(&matR, 1.f);
-	//							D3DXVec3TransformNormal(&m_vecBoss_rag[i].m_vDir, &m_vecBoss_rag[i].m_vDir, &matR);
-	//						}
-	//						else
-	//						{
-	//							D3DXMATRIXA16 matR;
-	//							D3DXMatrixIdentity(&matR);
-	//							D3DXMatrixRotationY(&matR, -1.f);
-	//							D3DXVec3TransformNormal(&m_vecBoss_rag[i].m_vDir, &m_vecBoss_rag[i].m_vDir, &matR);
-	//						}
-	//					}
-	//					else
-	//					{
-	//						m_vecBoss_rag[i].m_vDir = vDir;
-	//					}
-	//				}*/
-	//
-	//				m_pBossRagController->SetvBossPos(m_vecBoss_rag[i].m_vPos);
-	//			}
-	//
-	//			/*D3DXVECTOR3 boss_playerPos;
-	//			boss_playerPos = m_vPlayerPos - m_vecBoss_rag[i].m_vPos;
-	//			D3DXVec3Normalize(&boss_playerPos, &boss_playerPos);
-	//			m_pBossRagController->SetBossDir(boss_playerPos);*/
-	//
-	//			//D3DXVec3TransformNormal(&m_vecBoss[i].m_vDir, &m_vecBoss[i].m_vDir, &matR);
-	//
-	//		}
-	//	}
-
+	
 	if (m_vecBoss_rag[0].e_boss_rag_state != E_BOSS_RAG_DEATH && m_vecBoss_rag[0].e_boss_rag_state != E_BOSS_RAG_START)
 	{
 		m_vecBoss_rag[0].m_vPos = m_pBossRagController->GetvBossPos();
@@ -863,26 +809,26 @@ void cEnemyControl::BossRagPlayerCheck()
 		float Distance;
 		D3DXVec3Normalize(&Dir, &(m_vPlayerPos - m_vecBoss_rag[0].m_vPos));
 		Distance = fabs(D3DXVec3Length(&(m_vPlayerPos - m_vecBoss_rag[0].m_vPos)));
-		if (Distance <= 7.0f &&
+		if (
 			m_vecBoss_rag[0].e_boss_rag_state == E_BOSS_RAG_STAND)
 		{
 			m_vecBoss_rag[0].count++;
-			if (m_vecBoss_rag[0].count > 80)
+			if (m_vecBoss_rag[0].count > 50)
 			{
 				m_vecBoss_rag[0].chk = true;
 			}
 
-			//m_pBossRagController->SetvBossPos(m_vecBoss_rag[0].m_vPos);
-			//m_pBossRagController->SetBossDir(Dir);
+			m_pBossRagController->SetvBossPos(m_vecBoss_rag[0].m_vPos);
+			m_pBossRagController->SetBossDir(Dir);
 		}
 
-		if (Distance > 7.0f)
+		if (Distance > 10.0f)
 		{
 			m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_STAND;
 			m_vecBoss_rag[0].chk = false;
 		}
 
-		if (Distance < 5.0f)
+		if (Distance < 10.0f)
 		{
 			
 			skillDelay++;
@@ -890,46 +836,23 @@ void cEnemyControl::BossRagPlayerCheck()
 			if (skillDelay > 70)
 			{
 				delay1 = rand() % 15;
-				delay2 = rand() % 15;
-				if (delay1 > 1 && delay1 < 7)
-				{
-					m_vecBoss_rag[0].count += 5;
-					if (m_vecBoss_rag[0].count > 5)
-					{
-						if (m_vecBoss_rag[0].e_boss_rag_state != E_BOSS_RAG_MERGE)
-						{
-							g_pSoundManager->play("ragnaros_att", 1.f);
-							m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_ATT;
-						}
-						if (m_vecBoss_rag[0].e_boss_rag_state == E_BOSS_RAG_MERGE)
-						{
-							m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_START;
-						}
-						m_vecBoss_rag[0].count = 0;
-					}
-					if (m_vecBoss_rag[0].stat.HP <= 50)
-					{
-						m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_MERGE;
-					}
-					
-					//m_vecBoss_rag[0].chk = false;
-				}
-				if (delay2 > 8 && delay2 < 15)
-				{
+				delay2 = rand() % 1000;
+				
 					m_vecBoss_rag[0].count += 1;
-					if (m_vecBoss_rag[0].count > 6)
+					if (delay2 >= 800 && delay2 < 1000)
 					{
 						m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_SPELL;
 					}
-					if (m_vecBoss_rag[0].stat.HP <= 100)
+
+					if (delay2 >= 0 && delay2 < 800)
 					{
 						g_pSoundManager->play("ragnaros_att", 1.f);
 						m_vecBoss_rag[0].e_boss_rag_state = E_BOSS_RAG_ATT;
 						m_vecBoss_rag[0].count = 0;
 					}
 					
-					//m_vecBoss_rag[0].chk = false;
-				}
+					m_vecBoss_rag[0].chk = false;
+				
 				skillDelay = 0;
 			}
 		}

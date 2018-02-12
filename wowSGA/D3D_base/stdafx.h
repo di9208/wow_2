@@ -153,6 +153,7 @@ struct ST_BONE : public D3DXFRAME
 {
 	D3DXMATRIXA16	matCombinedTransformMatrix;
 };
+
 #include "cDeviceManager.h"
 #include "cTimeManager.h"
 #include "cTextureManager.h"

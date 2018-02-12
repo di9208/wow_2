@@ -6,8 +6,9 @@
 #include "cSkinnedMesh.h"
 class cSkinnedMeshManager
 {
+private:
 	SINGLETONE(cSkinnedMeshManager);
-
+private:
 	std::map<std::string, cSkinnedMesh*> m_mapSkinnedMesh;
 public:
 	/*cSkinnedMeshManager();

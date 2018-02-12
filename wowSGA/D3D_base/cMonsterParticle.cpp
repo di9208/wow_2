@@ -4,7 +4,7 @@
 
 cMonsterParticle::cMonsterParticle(int num, int size)
 {
-	_size = 0.5f;
+	_size = 0.2f;
 	_vbSize = 2048;
 	_vbOffset = 0;
 	_vbBatchSize = 512;

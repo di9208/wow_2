@@ -10,6 +10,7 @@ private:
 	cUIObject * Root;
 	LPD3DXSPRITE m_pSprite;
 	loading * m_loading;
+	float m_time;
 public:
 	cMainLoading();
 	virtual ~cMainLoading();

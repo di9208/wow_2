@@ -209,6 +209,14 @@ void cMapTool_UI::SetupTab2()
 	temp7->SetDelegate(this);
 	temp7->SetPos(temp7->GetPos() + D3DXVECTOR3(100, 180, 0));
 	Root2->AddChild(temp7);
+
+	cUIButton* temp8 = new cUIButton;
+	temp8->SetTexture("MapTool_UI/Tree_Up.png", "MapTool_UI/Tree_Over.png", "MapTool_UI/Tree_Down.png");
+	temp8->SetTag(TAG_TREE);
+	temp8->SetDelegate(this);
+	temp8->SetPos(temp8->GetPos() + D3DXVECTOR3(200, 180, 0));
+	Root2->AddChild(temp8);
+	
 	/*cUIButton* temp1 = new cUIButton;
 	temp1->SetTexture("t1", "MapTool_UI/Flattening_Up.png", "MapTool_UI/Flattening_Over.png", "MapTool_UI/Flattening_Down.png");
 	temp1->SetTag(TAG_FLATTENING);

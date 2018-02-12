@@ -31,8 +31,6 @@ cPlayer_Enemy::~cPlayer_Enemy()
 {
 	SAFE_RELEASE(m_Player);
 	SAFE_RELEASE(m_EnemyControl);
-	SAFE_DELETE(m_Stage1);
-	SAFE_DELETE(m_Frustum);
 }
 
 void cPlayer_Enemy::Setup(float x, float y, float z, std::vector<tagMon> Monster)
@@ -45,11 +43,9 @@ void cPlayer_Enemy::Setup(float x, float y, float z, std::vector<tagMon> Monster
 
 	//m_Stage1 = new cStage1();
 	//m_Stage1->Setup();
-
-	m_Frustum = new cFrustum();
 }
 
-void cPlayer_Enemy::Update(iMap* pMap)
+void cPlayer_Enemy::Update(iMap* pMap, std::vector<tagMon> Monster)
 {
 	if (m_Player)
 	{
@@ -191,7 +187,7 @@ void cPlayer_Enemy::Update(iMap* pMap)
 		}
 	}
 	if (m_EnemyControl)
-		m_EnemyControl->Update(m_Player->GetPosition(), pMap);
+		m_EnemyControl->Update(m_Player->GetPosition(), pMap, Monster);
 
 	if (Enemy_NUM != 999)
 	{
@@ -251,3 +247,15 @@ float cPlayer_Enemy::Getrot()
 {
 	return m_Player->GetRotY();
 }
+
+bool cPlayer_Enemy::isChange()
+{
+	return m_EnemyControl->GetChange();
+}
+
+void cPlayer_Enemy::setState(E_BOSS_STATE s)
+{
+	m_EnemyControl->setState(s);
+}
+
+

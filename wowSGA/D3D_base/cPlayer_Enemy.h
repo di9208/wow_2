@@ -32,7 +32,7 @@ public:
 	~cPlayer_Enemy();
 
 	void Setup(float x, float y, float z, std::vector<tagMon> Monster);
-	void Update(iMap* pMap);
+	void Update(iMap* pMap, std::vector<tagMon> Monster);
 	void Render();
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -40,5 +40,9 @@ public:
 
 	D3DXVECTOR3 Getpos();
 	float Getrot();
+
+	bool isChange();
+	void setState(E_BOSS_STATE s);
+
 };
 

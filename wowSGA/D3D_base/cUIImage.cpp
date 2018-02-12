@@ -46,7 +46,7 @@ void cUIImage::Render(LPD3DXSPRITE pSprite)
 		NULL, //&rc,
 		&D3DXVECTOR3(0, 0, 0),
 		&D3DXVECTOR3(0, 0, 0),
-		D3DCOLOR_ARGB(255, 255, 255, 255));
+		D3DCOLOR_ARGB(m_alpha, 255, 255, 255));
 
 	pSprite->End();
 

@@ -168,8 +168,8 @@ void cStage1::Draw(cFrustum * f)
 void cStage1::Render()
 {
 	SetMaterial();
-	float strat = 30.0f;
-	float end = 80.0f;
+	float strat = 80.0f;
+	float end = 100.0f;
 	float den = 0.07f;
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 

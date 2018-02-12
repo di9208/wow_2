@@ -21,6 +21,7 @@ cScene1::cScene1()
 
 cScene1::~cScene1()
 {
+	Destroy();
 }
 
 void cScene1::SetLight()
@@ -68,9 +69,8 @@ void cScene1::Destroy()
 	SAFE_DELETE(m_shop_TEST_CLASS);
 	SAFE_DELETE(m_Stage1);
 	SAFE_DELETE(m_Frustum);
-	g_pFontManager->Destroy();
-	g_pTextureManager->Destroy();
-	g_pDeviceManager->Destroy();
+	//g_pFontManager->Destroy();
+	//g_pTextureManager->Destroy();
 }
 
 void cScene1::Update()
@@ -87,12 +87,15 @@ void cScene1::Update()
 		m_shop_TEST_CLASS->Update();
 
 	if (m_Player_Enemy)
-		m_Player_Enemy->Update(m_Stage1);
+		m_Player_Enemy->Update(m_Stage1, m_Stage1->GetMonster());
 		m_Player_Enemy->connet_shop(m_shop_TEST_CLASS);
 
-
-
 	m_Frustum->SetupVertex();
+
+	if (m_Player_Enemy->isChange())
+	{
+		g_pSceneManager->changescene("Change");
+	}
 }
 
 void cScene1::Render()
@@ -101,8 +104,8 @@ void cScene1::Render()
 	if (m_Stage1)
 		m_Stage1->SkyRender(m_pCamera->GetEye());
 
-	if (m_pGrid)
-		m_pGrid->Render();
+	/*if (m_pGrid)
+		m_pGrid->Render();*/
 
 	if (m_Player_Enemy)
 		m_Player_Enemy->Render();

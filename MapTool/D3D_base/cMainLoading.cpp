@@ -70,6 +70,32 @@ void cMainLoading::Render()
 
 void cMainLoading::Loading()
 {
+	g_pSkinnedMeshManager->Setup("Tree1", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree2", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree3", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree4", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree5", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree6", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree7", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree8", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree9", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree10", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree11", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree12", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree13", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree14", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree15", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree16", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree17", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree18", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree19", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree20", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree21", "MapTool_Unit", "Tree11.X");
+	g_pSkinnedMeshManager->Setup("Tree22", "MapTool_Unit", "Tree11.X");
+
+	g_pSkinnedMeshManager->Setup("Tree16", "MapTool_Unit", "Tree11.X");
+
+
 	g_pSkinnedMeshManager->Setup("NPC", "MapTool_Unit", "testtawoo.X");
 	g_pSkinnedMeshManager->Setup("player", "MapTool_Unit", "player.X");
 	g_pSkinnedMeshManager->Setup("lichking", "MapTool_Unit", "arthas.X");

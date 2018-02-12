@@ -96,6 +96,11 @@ struct tagMon
 	D3DXVECTOR3 pos;
 	std::string name;
 };
+struct tagobject
+{
+	D3DXVECTOR3 pos;
+	std::string name;
+};
 enum NPC_State
 {
 	NOTHING,
