@@ -28,10 +28,8 @@ inventory::~inventory()
 
 void inventory::Setup()
 {
-	Money = 1000;
-
 	item_loader loader;
-	loader.items_loader(V_INVEN, "shop_data/invenFILE.txt");
+	loader.inven_loader(V_INVEN, Money, "shop_data/invenFILE.txt");
 
 	Setting_invenUI();
 
