@@ -84,7 +84,7 @@ void shop_TEST_CLASS::Update()
 
 	if (_npc->GetRAYPICK())
 	{
-		g_pSoundManager->play("shopopend", 1.0f);
+		if (!g_pSoundManager->isPlaySound("shopopend"))g_pSoundManager->play("shopopend", 1.0f);
 		_shops->GetSHOP()->Sethidden(false);
 		_invens->GetINVEN()->Sethidden(false);
 		player_info_page->GetEquite_window()->Sethidden(true);
