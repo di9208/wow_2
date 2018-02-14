@@ -127,6 +127,10 @@ private:
 	bool israg;
 	SYNTHESIZE(bool, m_Change, Change);
 
+	bool spiderChk;		//몹소환스킬 체크 불값
+	bool wolfChk;		//몹소환스킬 체크 불값
+
+
 public:
 	void SetUp(std::vector<tagMon> Monster);
 	void Update(D3DXVECTOR3 d, iMap* pMap, std::vector<tagMon> Monster);

@@ -99,7 +99,7 @@ void cLightningWorg::addMonster(float x, float y, float z) {
 	Monster.termCount = 0;
 	Monster.RunCount = rand() % 250 + 10;
 
-	Monster.Particle = new cMonsterParticle(512, 25);
+	Monster.Particle = new cMonsterParticle(50, 25);
 	Monster.Particle->init("Particle/alpha_tex.tga");
 	D3DXMatrixIdentity(&Monster.matWorld);
 	D3DXMATRIXA16 matTT, matSS;
