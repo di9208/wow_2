@@ -6,6 +6,15 @@ class cPlayerSound
 	float attack_time;
 	bool swing;
 
+	bool attack2;
+	float attack_time2;
+	bool swing2;
+
+	bool attack3;
+	float attack_time3;
+	bool swing3;
+
+
 public:
 	cPlayerSound();
 	~cPlayerSound();

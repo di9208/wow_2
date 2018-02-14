@@ -10,7 +10,7 @@ cParticle::cParticle()
 cParticle::~cParticle()
 {
 	SAFE_RELEASE(_vb);
-	SAFE_RELEASE(_tex);
+	//SAFE_RELEASE(_tex);
 }
 
 bool cParticle::init(char * FileName)

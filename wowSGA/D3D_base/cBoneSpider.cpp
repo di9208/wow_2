@@ -74,7 +74,6 @@ void cBoneSpider::getWeaponHit(int i, cOBB * PlayerWeapon,float Damage)
 void cBoneSpider::addMonster(float x, float y, float z) {
 	//몬스터를 생성해줌
 
-	EnemySkinnedMesh Monster;
 	Monster.m = new cSkinnedMesh;
 	Monster.m->Setup("Monster/bonespider", "1.x");
 	Monster.ENUM_MONSTER = MONSTER_STATUS::MONSTER_STAND;
@@ -144,8 +143,6 @@ void cBoneSpider::addMonster(float x, float y, float z) {
 
 void cBoneSpider::addMonster(std::string key, float x, float y, float z)
 {
-	EnemySkinnedMesh Monster;
-
 	Monster.m = g_pSkinnedMeshManager->Find(key);
 	
 	Monster.ENUM_MONSTER = MONSTER_STATUS::MONSTER_STAND;

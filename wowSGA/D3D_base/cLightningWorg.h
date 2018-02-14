@@ -61,6 +61,7 @@ private:
 	SYNTHESIZE(std::vector<EnemySkinnedMesh>, m_vecSkinnedMesh, vecSkinnedMesh);
 
 	D3DXMATRIXA16 matWorld;
+	EnemySkinnedMesh Monster;
 
 	//∏ÛΩ∫≈Õ Ω∫≈»
 	int			nXAlpha;
