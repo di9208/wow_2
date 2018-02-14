@@ -22,6 +22,7 @@ cScene1::cScene1()
 cScene1::~cScene1()
 {
 	Destroy();
+	
 }
 
 void cScene1::SetLight()
@@ -59,6 +60,11 @@ void cScene1::Setup()
 	m_shop_TEST_CLASS->Setup(m_Stage1->Getnpcpos());
 
 	m_Frustum = new cFrustum();
+
+	g_pSoundManager->Setup();
+	g_pSoundManager->addSound("stage1_bgm", "sound/bgm/stage1.mp3", true, false);
+	g_pSoundManager->play("stage1_bgm", 0.1f);
+
 }
 
 void cScene1::Destroy()
@@ -95,7 +101,9 @@ void cScene1::Update()
 	if (m_Player_Enemy->isChange())
 	{
 		g_pSceneManager->changescene("Change");
+		g_pSoundManager->stop("stage1_bgm");
 	}
+	
 }
 
 void cScene1::Render()

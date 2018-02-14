@@ -12,6 +12,7 @@ cScene2::cScene2()
 	, m_Stage2(NULL)
 	, m_Frustum(NULL)
 {
+	
 }
 
 
@@ -38,8 +39,6 @@ void cScene2::Setup()
 {
 	SetLight();
 
-	
-
 	m_pCamera = new cCamera;
 	m_pCamera->Setup(NULL, 0);
 
@@ -51,6 +50,10 @@ void cScene2::Setup()
 	m_Player_Enemy->setState(E_BOSS_DEATH);
 	
 	m_Frustum = new cFrustum();
+
+	g_pSoundManager->Setup();
+	g_pSoundManager->addSound("stage2_bgm", "sound/bgm/stage2.mp3", true, false);
+	g_pSoundManager->play("stage2_bgm",0.1f);
 }
 
 void cScene2::Destroy()

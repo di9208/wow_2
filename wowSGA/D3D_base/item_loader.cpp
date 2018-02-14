@@ -28,9 +28,22 @@ void item_loader::items_loader(OUT std::vector<item_class*> & result_vi, IN char
 	}
 }
 
-void item_loader::store_loader(OUT std::vector<item_class*> & result_vi, IN char * loadertext)
+void item_loader::inven_loader(OUT std::vector<item_class*> & result_vi, OUT int & sett_ing_money, IN char * loadertext)
 {
+	fopen_s(&fp, loadertext, "r");
 
+	while (char* szToken = GetToken())
+	{
+		if (IsEqual(szToken, "*MONEY"))
+		{
+			sett_ing_money = GetInt();
+		}
+
+		else if (IsEqual(szToken, "*ITEM_LIST"))
+		{
+			Item_setting(result_vi);
+		}
+	}
 }
 
 void item_loader::Item_setting(std::vector<item_class*> & result_vi)
