@@ -6,6 +6,12 @@ cPlayerSound::cPlayerSound()
 	:attack(false)
 	, attack_time(0.0f)
 	, swing(false)
+	, attack2(false)
+	, attack_time2(0.0f)
+	, swing2(false)
+	, attack3(false)
+	, attack_time3(0.0f)
+	, swing3(false)
 {
 }
 
@@ -47,6 +53,58 @@ void cPlayerSound::Update(condition * pCondition)
 	{
 		attack = false;
 		swing = false;
+	}
+
+	if (*pCondition == SKILL_2)
+	{
+		if (!attack2)
+		{
+			attack_time2 = g_pTimeManager->GetLastUpdateTime();
+			attack2 = true;
+		}
+		if (attack2)
+		{
+			if (!swing2)
+			{
+				if (attack_time2 + 0.6f < g_pTimeManager->GetLastUpdateTime())
+				{
+					g_pSoundManager->play("attack", 0.7f);
+					g_pSoundManager->play("SWING", 1.0f);
+					swing2 = true;
+				}
+			}
+		}
+	}
+	else
+	{
+		attack2 = false;
+		swing2 = false;
+	}
+
+	if (*pCondition == SKILL_3)
+	{
+		if (!attack3)
+		{
+			attack_time3 = g_pTimeManager->GetLastUpdateTime();
+			attack3 = true;
+		}
+		if (attack3)
+		{
+			if (!swing3)
+			{
+				if (attack_time3 + 0.6f < g_pTimeManager->GetLastUpdateTime())
+				{
+					g_pSoundManager->play("attack", 0.7f);
+					g_pSoundManager->play("SWING", 1.0f);
+					swing3= true;
+				}
+			}
+		}
+	}
+	else
+	{
+		attack3 = false;
+		swing3 = false;
 	}
 
 }
