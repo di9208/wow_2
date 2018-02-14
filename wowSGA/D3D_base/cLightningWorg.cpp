@@ -216,15 +216,14 @@ void cLightningWorg::Update(iMap* map) {
 	if (m_vecSkinnedMesh.size() != 0)
 	{
 		for (size_t i = 0; i < m_vecSkinnedMesh.size(); i++) {
-			//몬스터 죽음
-			if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
-
-
 			matUpdate(i, map);
 			m_vecSkinnedMesh[i].m->Update();
 			m_vecSkinnedMesh[i].Particle->update(3.0f);
 			m_vecSkinnedMesh[i].MonsterOBB->Update(&m_vecSkinnedMesh[i].matRT);
 			MonsterAI(i);						//몬스터의 패턴, 스킬
+
+			//몬스터 죽음
+			if (m_vecSkinnedMesh[i].t.HP <= 0) m_vecSkinnedMesh[i].ENUM_MONSTER = MONSTER_STATUS::MONSTER_DEATH;
 			MonsterStatus(i); 					//몬스터 상태, 애니메이션
 		}
 	}
