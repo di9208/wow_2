@@ -1,0 +1,555 @@
+﻿  stdafx.cpp
+  wordManager.cpp
+  textparsing_class.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\textparsing_class.cpp(63): warning C4244: 'return': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  soundManager.cpp
+  shop_TEST_CLASS.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_test_class.cpp(48): warning C4316: 'cNpc': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_test_class.cpp(73): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_test_class.cpp(74): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  shop_class.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(58): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(60): warning C4316: 'cUIText': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(64): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(65): warning C4316: 'cUIText': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(68): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(69): warning C4316: 'cUIText': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(79): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(86): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(135): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(155): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(167): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(171): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(181): warning C4244: '-=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(189): warning C4316: 'cUIObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(195): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(200): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(205): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(210): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(215): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(220): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(230): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(233): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(237): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(242): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(247): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(252): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(257): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(262): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(267): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(272): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(277): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(282): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(290): warning C4316: 'cUIText': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(305): warning C4316: 'cUIText': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(310): warning C4316: 'cUIText': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(318): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(325): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(330): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(335): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(340): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(345): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(350): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(355): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(360): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(365): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(370): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(375): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(380): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(386): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(456): warning C4316: 'cUIObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(462): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(467): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(472): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(477): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(482): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(485): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(489): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(494): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(499): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(504): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(509): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(514): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(519): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(524): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(529): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(534): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(539): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(544): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(549): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(554): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(561): warning C4316: 'cUIText': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(566): warning C4316: 'cUIText': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(571): warning C4316: 'cUIText': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(580): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(587): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(592): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(597): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(602): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(607): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(612): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(617): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(622): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(627): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(632): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(637): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(642): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(647): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(652): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(668): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(673): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(728): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(736): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(733): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(765): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(780): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(794): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(814): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(813): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(812): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\shop_class.cpp(811): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  loading.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\loading.cpp(32): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+  keyManager.cpp
+  item_loader.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\item_loader.cpp(232): warning C4244: 'return': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  item_class.cpp
+  inventory.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(38): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(39): warning C4316: 'cUIText': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(44): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(84): warning C4316: 'cUIObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(88): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(93): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(107): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(118): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(111): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(140): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(159): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(177): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(201): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(226): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(225): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(224): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\inventory.cpp(223): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  iMap.cpp
+  DragAndDrob.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\draganddrob.cpp(16): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\draganddrob.cpp(17): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\draganddrob.cpp(18): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\draganddrob.cpp(19): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\draganddrob.cpp(28): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  D3D_base.cpp
+  cWeapon.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cweapon.cpp(33): warning C4316: 'cSkinnedMesh': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cweapon.cpp(50): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cweapon.cpp(118): warning C4316: 'cSkinnedMesh': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cUnit.cpp
+  cUIText.cpp
+  cUIObject.cpp
+  cUIImage.cpp
+  cUIButton.cpp
+  cTimeManager.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  cTextureManager.cpp
+  cStage2.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(40): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(41): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(34): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: 'fopen' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(38): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(47): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(53): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(59): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(65): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(68): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(71): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(74): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(77): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(80): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(83): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(89): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(92): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(94): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(101): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(106): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(110): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(207): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(208): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(210): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage2.cpp(212): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cStage1.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(42): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(43): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(34): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: 'fopen' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(40): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(49): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(55): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(61): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(67): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(70): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(73): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(76): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(79): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(82): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(85): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(91): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(94): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(96): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(99): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(101): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(108): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(113): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(117): warning C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1195): note: 'fscanf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(216): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(217): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(219): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cstage1.cpp(221): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cSkyBox.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cskybox.cpp(135): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cSkinnedMeshManager.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cskinnedmeshmanager.cpp(19): warning C4316: 'cSkinnedMesh': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cSkinnedMesh.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cskinnedmesh.cpp(260): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cSceneManager.cpp
+  cSceneChange.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cscenechange.cpp(20): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cScene2.cpp
+  cScene1.cpp
+  cRay.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cray.cpp(25): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cray.cpp(26): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cRagPaticle.cpp
+  cQuadTree.cpp
+  cPlayer_Enemy.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer_enemy.cpp(38): warning C4316: 'cPlayer': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer_enemy.cpp(41): warning C4316: 'cEnemyControl': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cPlayerSound.cpp
+  cPlayerSkill.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerskill.cpp(55): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerskill.cpp(81): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerskill.cpp(107): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerskill.cpp(133): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerskill.cpp(180): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerskill.cpp(202): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cPlayerInFo.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(88): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(156): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(198): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(204): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(205): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(210): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(211): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(221): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(245): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(245): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(245): warning C4838: 'UINT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(248): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(249): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(260): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(306): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(310): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(338): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(359): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(360): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(384): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(417): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(455): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(460): warning C4316: 'cUIButton': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(497): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(512): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(520): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(516): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(527): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(532): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(533): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(538): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayerinfo.cpp(541): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cPlayerAniController.cpp
+  cPlayer.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer.cpp(33): warning C4150: 불완전한 형식 'cPlayerPicking'에 대한 포인터를 삭제했습니다. 소멸자가 호출되지 않습니다.
+  c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer.h(9): note: 'cPlayerPicking' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer.cpp(43): warning C4316: 'cPlayerAniController': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer.cpp(57): warning C4316: 'cWeapon': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer.cpp(131): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cplayer.cpp(159): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cParticle.cpp
+  코드를 생성하고 있습니다...
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cquadtree.cpp(533): warning C4715: 'cQuadTree::SetChild': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  cObjMap.cpp
+  cObjLoader.cpp
+  cObject.cpp
+  cOBB.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cobb.cpp(176): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  cNpc_AniController.cpp
+  cNpcInfo.cpp
+  cNpc.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cnpc.cpp(27): warning C4316: 'cNpc_AniController': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cMtlTex.cpp
+  cMonsterParticle.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cmonsterparticle.cpp(29): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cmonsterparticle.cpp(30): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cmonsterparticle.cpp(31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cmonsterparticle.cpp(32): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cmonsterparticle.cpp(33): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cMonsterBombParticle.cpp
+  cMaptool.cpp
+  cMap.cpp
+  cMainLoading.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cmainloading.cpp(24): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cmainloading.cpp(29): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cmainloading.cpp(34): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cMainGame.cpp
+  cLightningWorg.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(77): warning C4316: 'cSkinnedMesh': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(81): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(89): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(90): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(107): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(124): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(127): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(144): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(152): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(153): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(170): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(187): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(190): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(203): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(315): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(322): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(332): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(324): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdlib.h(1334): note: 'itoa' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(334): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdlib.h(1334): note: 'itoa' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(348): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(477): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(486): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(487): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(488): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(489): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(565): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\clightningworg.cpp(601): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cHeightMap.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cheightmap.cpp(41): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cheightmap.cpp(40): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cheightmap.cpp(145): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cheightmap.cpp(146): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cGroup.cpp
+  cGrid.cpp
+  cGameObject.cpp
+  cGameManager.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  cFrustum.cpp
+  cFontManager.cpp
+  cEnemySkinnedMesh.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemyskinnedmesh.cpp(54): warning C4244: '초기화 중': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemyskinnedmesh.cpp(128): warning C4244: '초기화 중': 'DOUBLE'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cEnemyPicking.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(241): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(245): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(279): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(280): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(285): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(286): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(291): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(292): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(297): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(297): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(297): warning C4838: 'UINT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(300): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemypicking.cpp(301): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cEnemyManager.cpp
+  cEnemyHitEffect.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemyhiteffect.cpp(17): warning C4316: 'cSkinnedMesh': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemyhiteffect.cpp(22): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cEnemyControl.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(244): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(245): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(254): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(255): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(264): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(265): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(272): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(273): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(280): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(281): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(410): warning C4316: 'cBoneSpider': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(411): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(419): warning C4316: 'cArchDruid': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(420): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(428): warning C4316: 'cLightningWorg': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(429): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(442): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(449): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(541): warning C4316: 'cBossRagController': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(560): warning C4316: 'cBossAniController': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(617): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(618): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(619): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(718): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(719): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(720): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(919): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(920): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cenemycontrol.cpp(921): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cDeviceManager.cpp
+  cCubePTN.cpp
+  cCubeNode.cpp
+  cCube.cpp
+  cCharacter.cpp
+  cCamera.cpp
+  cBossSkill.cpp
+  cBossRagController.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbossragcontroller.cpp(30): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbossragcontroller.cpp(56): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbossragcontroller.cpp(199): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbossragcontroller.cpp(200): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbossragcontroller.cpp(201): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbossragcontroller.cpp(204): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbossragcontroller.cpp(205): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cBossAniController.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbossanicontroller.cpp(34): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbossanicontroller.cpp(58): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cBoneSpider.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(78): warning C4316: 'cSkinnedMesh': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(82): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(90): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(91): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(111): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(128): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(131): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(153): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(161): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(162): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(182): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(199): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(202): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(217): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(269): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(324): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(331): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(341): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(333): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdlib.h(1334): note: 'itoa' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(343): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdlib.h(1334): note: 'itoa' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(357): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(486): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(496): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(497): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(498): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(499): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(569): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\cbonespider.cpp(605): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cAseNode.cpp
+  cAseLoader.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\caseloader.cpp(184): warning C4316: 'cAseNode': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cArthasPaticle.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carthaspaticle.cpp(24): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carthaspaticle.cpp(25): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  cArchDruid.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(78): warning C4316: 'cSkinnedMesh': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(90): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(94): warning C4316: 'cSkinnedMesh': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(120): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(137): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(140): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(147): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(150): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(177): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(181): warning C4316: 'cSkinnedMesh': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(206): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(223): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(226): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(233): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(236): warning C4316: 'cOBB': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(251): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(370): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(377): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(387): warning C4316: 'cUIImage': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(379): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdlib.h(1334): note: 'itoa' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(389): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _itoa. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdlib.h(1334): note: 'itoa' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(404): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(531): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(543): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(544): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(545): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(546): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(730): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(767): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\carchdruid.cpp(768): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  cAllocateHierarchy.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\callocatehierarchy.cpp(18): warning C4316: 'ST_BONE': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  cActionSeq.cpp
+  cActionRepeat.cpp
+  cActionLinear.cpp
+  cActionBezier.cpp
+  cAction.cpp
+  Button_delegate.cpp
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\button_delegate.cpp(16): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+c:\users\준\documents\github\wow_2\wowsga\d3d_base\button_delegate.cpp(21): warning C4390: ';': 제어된 빈 문이 있습니다. 이 문이 필요합니까?
+  코드를 생성하고 있습니다...
+  D3D_base.vcxproj -> C:\Users\준\Documents\GitHub\wow_2\wowSGA\Debug\D3D_base.exe

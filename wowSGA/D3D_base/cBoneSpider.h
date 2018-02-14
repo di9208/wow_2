@@ -83,6 +83,8 @@ private:
 	LPD3DXSPRITE				m_pInvectory;
 	size_t						m_MonsterItem;
 
+	float	attack_time;
+	bool	hit_on;
 public:
 	void SetUp();
 	void Update(iMap* pMap);

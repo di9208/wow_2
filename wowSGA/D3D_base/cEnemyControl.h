@@ -92,6 +92,12 @@ private:
 	//
 	D3DXVECTOR3 dv;
 	float	m_fDeathDir;
+
+	float	RAG_attack_time;
+	bool	RAG_hit_on;
+
+	float	BOSS_attack_time;
+	bool	BOSS_hit_on;
 private:
 	cBossAniController * m_pBossAniController;
 	cBossRagController * m_pBossRagController;

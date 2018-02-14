@@ -12,6 +12,8 @@ cArchDruid::cArchDruid()
 , m_pFont2(NULL)
 , m_pSprite(NULL)
 , Root(nullptr)
+, attack_time(0.0f)
+, hit_on(false)
 {
 	g_pSoundManager->Setup();
 	g_pSoundManager->addSound("DruidBomb", "sound/monster/archdruide/treebomb.mp3", false, false);
@@ -49,9 +51,22 @@ void cArchDruid::getWeaponHit(int i, cOBB * PlayerWeapon,float Damage)
 			{
 				if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
 				{
-					m_vecSkinnedMesh[i].t.HP -= Damage;
+					attack_time = g_pTimeManager->GetLastUpdateTime();
+					hit_on = true;
 					m_vecSkinnedMesh[i].Hurt = true;
 				}
+			}
+		}
+	}
+	else
+	{
+		if (hit_on)
+		{
+			if (attack_time + 0.5f < g_pTimeManager->GetLastUpdateTime())
+			{
+				g_pSoundManager->play("HAMMER", 2.0f);
+				hit_on = false;
+				m_vecSkinnedMesh[i].t.HP -= Damage;
 			}
 		}
 	}

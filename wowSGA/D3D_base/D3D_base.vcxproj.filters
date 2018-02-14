@@ -261,6 +261,9 @@
     </ClCompile>
     <ClCompile Include="cScene2.cpp" />
     <ClCompile Include="cSceneChange.cpp" />
+    <ClCompile Include="cPlayerSound.cpp">
+      <Filter>unit\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cCamera.h">
@@ -535,6 +538,9 @@
     </ClInclude>
     <ClInclude Include="cScene2.h" />
     <ClInclude Include="cSceneChange.h" />
+    <ClInclude Include="cPlayerSound.h">
+      <Filter>unit\player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="D3D_base.ico">
