@@ -9,6 +9,7 @@
 #include "iMap.h"
 #include "shop_TEST_CLASS.h"
 #include "cEnemyPicking.h"
+#include "cPlayerSound.h"
 
 cPlayer::cPlayer()
 	:m_playerAnimController(NULL),
@@ -46,7 +47,7 @@ void cPlayer::Setup(float x, float y, float z)
 	m_playerSkill->Setup();
 
 
-	D3DXMATRIXA16  matR, matS, World, matRY ;
+	D3DXMATRIXA16  matR, matS, World, matRY;
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
 	D3DXMatrixRotationY(&matRY, D3DX_PI / 2.0f);
 	D3DXMatrixScaling(&matS, 0.05f, 0.03f, 0.015f);
@@ -61,6 +62,9 @@ void cPlayer::Setup(float x, float y, float z)
 
 	m_EnemyPicking = new cEnemyPicking();
 	m_EnemyPicking->Setup();
+
+	m_playerSound = new cPlayerSound();
+	m_playerSound->Setup();
 }
 
 void cPlayer::Update(iMap* m_map)
@@ -75,7 +79,7 @@ void cPlayer::Update(iMap* m_map)
 		if (m_playerInFo)
 		{
 			m_playerInFo->Update(&m_chractor_condition, &m_matWorld);
-			if(m_playerInFo->Getchange_weapon())
+			if (m_playerInFo->Getchange_weapon())
 			{
 				m_Weapon->change(m_playerInFo->findItemNUM());
 				m_playerInFo->Setchange_weapon(false);
@@ -87,16 +91,19 @@ void cPlayer::Update(iMap* m_map)
 		m_playerSkill->Update(&m_chractor_condition, m_playerAnimController->GetAniCheck());
 
 	if (m_Weapon)
-	{	
+	{
 		m_Weapon->Update(&m_matWorld, m_playerAnimController->GetFindBONE("character_human_male_humanmale_hd_bone_110"));
-		
-		
 	}
 	D3DXMATRIXA16 mat, matR, matS, matRY;
-	
+
+	weaponNUM = m_Weapon->GetWeaponNum();
+
 	D3DXMatrixRotationX(&matR, D3DX_PI / 2.0f);
 	D3DXMatrixScaling(&matS, 0.15f, 0.15f, 0.15f);
 	mat = matR * m_matWorld;
+
+	if (m_playerSound)
+		m_playerSound->Update(&m_chractor_condition);
 }
 
 void cPlayer::Render()
@@ -119,7 +126,7 @@ void cPlayer::UpdatePicking(MONSTER_KIND monster)
 }
 
 
-void cPlayer::Collsion(cOBB * EnemyBox,float Damage)
+void cPlayer::Collsion(cOBB * EnemyBox, float Damage)
 {
 	m_playerInFo->Collsion(EnemyBox, Damage);
 }

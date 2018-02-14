@@ -98,6 +98,8 @@ private:
 	LPD3DXSPRITE				m_pSprite;
 	LPD3DXSPRITE				m_pInvectory;
 
+	float	attack_time;
+	bool	hit_on;
 public:
 	void SetUp();
 	void Update(iMap* pMap);

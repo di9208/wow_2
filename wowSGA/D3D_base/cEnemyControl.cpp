@@ -24,8 +24,15 @@ cEnemyControl::cEnemyControl()
 	, isboss(false)
 	, m_Change(false)
 	, israg(false)
+<<<<<<< HEAD
 	, spiderChk(false)
 	, wolfChk(false)
+=======
+	, RAG_attack_time(0.0f)
+	, RAG_hit_on(false)
+	, BOSS_attack_time(0.0f)
+	, BOSS_hit_on(false)
+>>>>>>> 3fcdcc9d6e87f3c96a371d6be21345c14ad7ef56
 {
 	D3DXMatrixIdentity(&m_world);
 	D3DXMatrixIdentity(&matR);
@@ -38,6 +45,7 @@ cEnemyControl::cEnemyControl()
 	g_pSoundManager->addSound("ragnaros_start", "sound/boss/ragnaros_start.wav", true, false);
 	g_pSoundManager->addSound("arthas_att2", "sound/boss/arthas_att2.mp3", true, false);
 
+	g_pSoundManager->addSound("HAMMER", "player/Sound/HAMMER.mp3", false, false);
 }
 
 cEnemyControl::~cEnemyControl()
@@ -308,9 +316,23 @@ void cEnemyControl::getWeaponHitBOSS(cOBB * PlayerWeapon,float damage)
 			{
 				if (PlayerWeapon->IsCollision(m_pBossAniController->GetBossOBB(), PlayerWeapon))
 				{
-					m_vecBoss[0].stat.HP -= damage;
+					BOSS_attack_time = g_pTimeManager->GetLastUpdateTime();
+					BOSS_hit_on = true;
+
 					m_vecBoss[0].stat.Hurt = true;
 				}
+			}
+		}
+	}
+	else
+	{
+		if (BOSS_hit_on)
+		{
+			if (BOSS_attack_time + 0.5f < g_pTimeManager->GetLastUpdateTime())
+			{
+				BOSS_hit_on = false;
+				g_pSoundManager->play("HAMMER", 2.0f);
+				m_vecBoss[0].stat.HP -= damage;
 			}
 		}
 	}
@@ -349,9 +371,24 @@ void cEnemyControl::getWeaponHitRag(cOBB * PlayerWeapon, float damage)
 			{
 				if (PlayerWeapon->IsCollision(m_pBossRagController->getOBB(), PlayerWeapon))
 				{
-					m_vecBoss_rag[0].stat.HP -= damage;
+					/*		g_pSoundManager->play("HAMMER", 2.0f);
+					m_vecBoss_rag[0].stat.HP -= damage;*/
+					RAG_attack_time = g_pTimeManager->GetLastUpdateTime();
+					RAG_hit_on = true;
 					m_vecBoss_rag[0].stat.Hurt = true;
 				}
+			}
+		}
+	}
+	else
+	{
+		if (RAG_hit_on)
+		{
+			if (RAG_attack_time + 0.5f < g_pTimeManager->GetLastUpdateTime())
+			{
+				g_pSoundManager->play("HAMMER", 2.0f);
+				RAG_hit_on = false;
+				m_vecBoss_rag[0].stat.HP -= damage;
 			}
 		}
 	}

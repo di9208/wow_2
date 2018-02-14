@@ -11,6 +11,7 @@ class cOBB;
 class cEnemyPicking;
 class iMap;
 class shop_TEST_CLASS;
+class cPlayerSound;
 
 class cPlayer :public cCharacter
 {
@@ -21,10 +22,13 @@ class cPlayer :public cCharacter
 	//cPlayerInFo*			m_playerInFo;
 	SYNTHESIZE(cPlayerInFo*, m_playerInFo, playerInFo);
 	cEnemyPicking*			m_EnemyPicking;
+	cPlayerSound*			m_playerSound;
 	D3DXVECTOR3				m_EnemyPos;
-	
-	int weaponNUM;
+
+	//int weaponNUM;
 	int WeaponNUMCheck;
+
+	SYNTHESIZE(int, weaponNUM, wNUM);
 public:
 	cPlayer();
 	~cPlayer();
@@ -33,7 +37,7 @@ public:
 	void Update(iMap* m_map);
 	void Render();
 	void UpdatePicking(MONSTER_KIND monster);
-	void Collsion(cOBB* EnemyBox,float Damage);
+	void Collsion(cOBB* EnemyBox, float Damage);
 
 	void setEnemyPos(D3DXVECTOR3 EnemyPos) { m_EnemyPos = EnemyPos; }
 	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

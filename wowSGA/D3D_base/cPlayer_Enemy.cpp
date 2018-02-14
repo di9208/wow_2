@@ -170,6 +170,10 @@ void cPlayer_Enemy::Update(iMap* pMap, std::vector<tagMon> Monster)
 				}
 			}
 		}
+		else if (m_EnemyControl->getBossCondition() == E_BOSS_WHIRLWIND)
+		{
+			m_Player->Collsion(m_EnemyControl->getBossOBB(), 1);
+		}
 		else
 		{
 			RichKing = false;

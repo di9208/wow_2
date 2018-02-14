@@ -11,6 +11,8 @@ cLightningWorg::cLightningWorg()
 	, m_pFont(NULL)
 	, m_pSprite(NULL)
 	, Root(nullptr)
+	, attack_time(0.0f)
+	, hit_on(false)
 {
 	g_pSoundManager->Setup();
 	g_pSoundManager->addSound("WorgHit", "sound/monster/litningworg/wound.mp3", false, false);
@@ -39,20 +41,30 @@ cLightningWorg::~cLightningWorg()
 
 void cLightningWorg::getWeaponHit(int i, cOBB * PlayerWeapon,float damage)
 {
-	if (m_vecSkinnedMesh.size() != 0)
+	if (m_vecSkinnedMesh[i].Hurt == false)
 	{
-		if (m_vecSkinnedMesh[i].Hurt == false)
+		if (PlayerWeapon)
 		{
-			if (PlayerWeapon)
+			if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
 			{
-				if (PlayerWeapon->getCheck(0).x != -431602080 && PlayerWeapon->getCheck(0).x != -431602080)
+				if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
 				{
-					if (PlayerWeapon->IsCollision(m_vecSkinnedMesh[i].MonsterOBB, PlayerWeapon))
-					{
-						m_vecSkinnedMesh[i].t.HP -= damage;
-						m_vecSkinnedMesh[i].Hurt = true;
-					}
+					attack_time = g_pTimeManager->GetLastUpdateTime();
+					hit_on = true;
+					m_vecSkinnedMesh[i].Hurt = true;
 				}
+			}
+		}
+	}
+	else
+	{
+		if (hit_on)
+		{
+			if (attack_time + 0.5f < g_pTimeManager->GetLastUpdateTime())
+			{
+				g_pSoundManager->play("HAMMER", 2.0f);
+				hit_on = false;
+				m_vecSkinnedMesh[i].t.HP -= damage;
 			}
 		}
 	}
