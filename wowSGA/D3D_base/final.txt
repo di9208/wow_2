@@ -49922,13 +49922,13 @@
 0.976744 0.992248
 0.984496 0.992248
 0.992248 0.992248
-D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4front.png
-D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4back.png
-D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4left.png
-D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4right.png
-D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4top.png
-D:\Team_Po\02-10\wow_2\MapTool\D3D_base\SkyBox\sky4\sky4bottom.png
-D:\Team_Po\02-10\wow_2\MapTool\D3D_base\Map\tawe.png
+SkyBox/sky4/sky4front.png
+SkyBox/sky4/sky4back.png
+SkyBox/sky4/sky4left.png
+SkyBox/sky4/sky4right.png
+SkyBox/sky4/sky4top.png
+SkyBox/sky4/sky4bottom.png
+Map/tawe.png
 P
 -14.330713 0.000000 59.535164
 N
