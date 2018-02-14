@@ -24,15 +24,12 @@ cEnemyControl::cEnemyControl()
 	, isboss(false)
 	, m_Change(false)
 	, israg(false)
-<<<<<<< HEAD
 	, spiderChk(false)
 	, wolfChk(false)
-=======
 	, RAG_attack_time(0.0f)
 	, RAG_hit_on(false)
 	, BOSS_attack_time(0.0f)
 	, BOSS_hit_on(false)
->>>>>>> 3fcdcc9d6e87f3c96a371d6be21345c14ad7ef56
 {
 	D3DXMatrixIdentity(&m_world);
 	D3DXMatrixIdentity(&matR);
