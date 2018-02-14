@@ -35,6 +35,7 @@ cEnemyControl::cEnemyControl()
 	g_pSoundManager->addSound("ragnaros_death", "sound/boss/ragnaros_death.ogg", true, false);
 	g_pSoundManager->addSound("ragnaros_start", "sound/boss/ragnaros_start.wav", true, false);
 	g_pSoundManager->addSound("arthas_att2", "sound/boss/arthas_att2.mp3", true, false);
+
 }
 
 cEnemyControl::~cEnemyControl()
@@ -525,7 +526,6 @@ void cEnemyControl::BossSetup(std::vector<tagMon> Monster)
 	m_pBossAniController = new cBossAniController();
 	m_pBossAniController->SetUp(Monster);
 
-	
 
 	m_pBossSkill = new cBossSkill;
 	stBoss		stBoss1;

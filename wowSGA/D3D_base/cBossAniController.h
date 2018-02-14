@@ -11,6 +11,7 @@ class cBossAniController
 	//cSkinnedMesh*		m_pSkinnedMesh;
 	cSkinnedMesh*		m_pSkinnedMeshSkill;		//리치왕스킬 // 가시 솟아오르기
 	cSkinnedMesh*		m_pSkinnedMeshSkill2;		//리치왕스킬 // 아이스노바
+	cSkinnedMesh*		m_Wind;
 	E_BOSS_STATE		cBoss_STATE;
 //	cOBB*				m_pBossOBB;
 	SYNTHESIZE(cOBB*, m_pBossOBB, BossOBB);

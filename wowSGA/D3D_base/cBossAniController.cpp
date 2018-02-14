@@ -25,6 +25,7 @@ cBossAniController::~cBossAniController()
 	//SAFE_DELETE(m_pSkinnedMeshSkill);
 	//SAFE_DELETE(m_pSkinnedMeshSkill2);
 	SAFE_DELETE(m_pBossOBB);
+	SAFE_DELETE(m_Wind);
 }
 
 void cBossAniController::SetUp(std::vector<tagMon> Monster)
@@ -40,7 +41,9 @@ void cBossAniController::SetUp(std::vector<tagMon> Monster)
 	m_pSkinnedMesh = g_pSkinnedMeshManager->Find("리치왕");
 	m_pSkinnedMeshSkill = g_pSkinnedMeshManager->Find("스킬");
 	m_pSkinnedMeshSkill2 = g_pSkinnedMeshManager->Find("아이스노바");
+	
 
+	m_Wind = g_pSkinnedMeshManager->Find("휠윈드");
 
 	D3DXMATRIXA16 matT;
 	D3DXMatrixIdentity(&matT);
@@ -61,6 +64,9 @@ void cBossAniController::Update(E_BOSS_STATE* pState)
 {
 	if (m_pSkinnedMesh)
 		m_pSkinnedMesh->Update();
+
+	//if (*pState == E_BOSS_WHIRLWIND)
+		m_Wind->Update();
 
 	m_pSkinnedMeshSkill2->Update();
 
@@ -114,8 +120,20 @@ void cBossAniController::Render(D3DXMATRIXA16  &m_world)
 	if(cBoss_STATE == E_BOSS_SPELL1)
 	m_pSkinnedMeshSkill->Render(NULL, &World);
 
-	m_pBossOBB->Render_Debug(D3DCOLOR_XRGB(192, 0, 0),nullptr , nullptr);
+	D3DXMATRIXA16 matRRR, matWWW, matR1;
+	D3DXMatrixRotationX(&matRRR, D3DX_PI / 2.0f);
+	static float hh = 0.1f;
 
+	D3DXMatrixRotationY(&matR1, hh);
+	hh += 0.3f;
+	matWWW = matS * matRRR*matR1*matT;
+	m_Wind->setAnimationSpeed(100.0f);
+	if (cBoss_STATE == E_BOSS_WHIRLWIND)
+	m_Wind->Render(NULL, &matWWW);
+
+
+	m_pBossOBB->Render_Debug(D3DCOLOR_XRGB(192, 0, 0),nullptr , nullptr);
+	
 	skillRender();
 }
 
@@ -140,6 +158,7 @@ void cBossAniController::SetAnimation(E_BOSS_STATE * pState)
 			break;
 		case E_BOSS_WHIRLWIND:
 			m_pSkinnedMesh->Play("WHIRLWIND", 0.3f);
+			m_Wind->Play("WIND", 0.3f);
 			break;
 		case E_BOSS_SPELL1:
 			m_bSKill = true;
@@ -206,6 +225,8 @@ void cBossAniController::skillRender()
 	m_pSkinnedMeshSkill2->setAnimationSpeed(0.1f);
 	m_pSkinnedMeshSkill2->Render(NULL, &World);
 
+	//if (cBoss_STATE == E_BOSS_WHIRLWIND)
+		
 
 	g_pD3DDevice->SetRenderState(D3DRS_LIGHTING, true);
 	g_pD3DDevice->SetRenderState(D3DRS_POINTSPRITEENABLE, false);

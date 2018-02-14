@@ -12,7 +12,7 @@ public:
 	~item_loader();
 
 	void items_loader(OUT std::vector<item_class*> & result_vi, IN char * loadertext);
-	void store_loader(OUT std::vector<item_class*> & result_vi, IN char * loadertext);
+	void inven_loader(OUT std::vector<item_class*> & result_vi, OUT int & sett_ing_money, IN char * loadertext);
 
 	void Item_setting(std::vector<item_class*> & result_vi);
 	void Item_main_setting(std::vector<item_class*> & result_vi);
