@@ -76,7 +76,9 @@ void cMainLoading::Loading()
 	m_loading->loadingSkinnedMesh("리치왕", "Monster/boss/Arthaslichking", "arthas2.x");
 	m_loading->loadingSkinnedMesh("스킬", "Monster/boss/Arthaslichking", "skill.x");
 	m_loading->loadingSkinnedMesh("아이스노바", "Monster/boss/Arthaslichking", "icenova.x");
+	m_loading->loadingSkinnedMesh("휠윈드", "Monster/boss/Arthaslichking", "whirlwind.X");
 	m_loading->loadingSkinnedMesh("라그나로스", "Monster/boss/ragnaros", "ragnarosF.X");
+
 	m_loading->loadingSkinnedMesh("스킬1", "Monster/boss/ragnaros", "ragSkill1.x");
 	m_loading->loadingSkinnedMesh("스킬2", "Monster/boss/ragnaros", "ragSkill2.x");
 	//
